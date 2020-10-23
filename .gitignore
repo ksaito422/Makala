@@ -1,0 +1,5 @@
+.DS_STORE
+.env
+
+/docker/db/data
+!/docker/db/data/makala
