@@ -82099,8 +82099,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.HomePage = void 0;
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 var Header_1 = __webpack_require__(/*! ../organisms/Header */ "./resources/ts/containers/organisms/Header.tsx");
+var core_1 = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
 exports.HomePage = function () {
     return (react_1.default.createElement(react_1.default.Fragment, null,
+        react_1.default.createElement(core_1.CssBaseline, null),
         react_1.default.createElement(Header_1.Header, { title: 'makala' })));
 };
 
