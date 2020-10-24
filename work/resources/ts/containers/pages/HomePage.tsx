@@ -1,9 +1,13 @@
 import React from 'react';
+import { Header } from '../organisms/Header';
+
 
 export const HomePage: React.FC = () => {
   return (
     <>
-      <p>Hello TypeScript</p>
+      <Header
+        title={'makala'}
+      />
     </>
   )
 }
