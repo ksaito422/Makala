@@ -8,7 +8,7 @@ type Props = {
 export const Title: React.FC<Props> = (props) => {
   return (
       <Typography
-        color={'primary'}
+        color={'inherit'}
         component={'h1'}
         variant={'h3'}
       >

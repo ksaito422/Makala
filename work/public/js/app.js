@@ -82069,7 +82069,7 @@ exports.Title = void 0;
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 var core_1 = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
 exports.Title = function (props) {
-    return (react_1.default.createElement(core_1.Typography, { color: 'primary', component: 'h1', variant: 'h3' }, props.title));
+    return (react_1.default.createElement(core_1.Typography, { color: 'inherit', component: 'h1', variant: 'h3' }, props.title));
 };
 
 
