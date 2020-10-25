@@ -82021,11 +82021,29 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 var react_dom_1 = __importDefault(__webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js"));
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+var core_1 = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
+var colors_1 = __webpack_require__(/*! @material-ui/core/colors */ "./node_modules/@material-ui/core/esm/colors/index.js");
 var HomePage_1 = __webpack_require__(/*! ./containers/pages/HomePage */ "./resources/ts/containers/pages/HomePage.tsx");
+// ページ全体で使うテーマカラーの定義
+var theme = core_1.createMuiTheme({
+    palette: {
+        primary: {
+            light: colors_1.deepPurple[300],
+            main: colors_1.deepPurple[500],
+            dark: colors_1.deepPurple[700],
+        },
+        secondary: {
+            light: colors_1.blue[300],
+            main: colors_1.blue[500],
+            dark: colors_1.blue[700],
+        },
+    }
+});
 var App = function () {
     return (react_1.default.createElement(react_router_dom_1.BrowserRouter, null,
         react_1.default.createElement(react_router_dom_1.Switch, null,
-            react_1.default.createElement(react_router_dom_1.Route, { exact: true, path: '/', component: HomePage_1.HomePage }))));
+            react_1.default.createElement(core_1.MuiThemeProvider, { theme: theme },
+                react_1.default.createElement(react_router_dom_1.Route, { exact: true, path: '/', component: HomePage_1.HomePage })))));
 };
 if (document.getElementById('app')) {
     react_dom_1.default.render(react_1.default.createElement(App, null), document.getElementById('app'));
@@ -82075,7 +82093,7 @@ var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/r
 var Title_1 = __webpack_require__(/*! ../../components/atoms/Title */ "./resources/ts/components/atoms/Title.tsx");
 var core_1 = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
 exports.Header = function (props) {
-    return (react_1.default.createElement(core_1.AppBar, { color: 'transparent', position: 'sticky' },
+    return (react_1.default.createElement(core_1.AppBar, { color: 'primary', position: 'sticky' },
         react_1.default.createElement(core_1.Toolbar, null,
             react_1.default.createElement(Title_1.Title, { title: props.title }))));
 };
