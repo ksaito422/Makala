@@ -8,7 +8,7 @@ import {
 import { blue, deepPurple } from '@material-ui/core/colors';
 import { HomePage } from './containers/pages/HomePage';
 
-// ページ全体で使うテーマカラーの定義
+// ページ全体で使うテーマカラー, フォントの定義
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -21,8 +21,16 @@ const theme = createMuiTheme({
       main: blue[500],
       dark: blue[700],
     },
-  }
-})
+  },
+  typography: {
+    fontFamily: [
+      'fantasy',
+      'Comic Sans MS',
+      'arial',
+      'sans-serif',
+    ].join(','),
+  },
+});
 
 const App: React.FC = () => {
     return (

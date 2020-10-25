@@ -82024,7 +82024,7 @@ var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_mod
 var core_1 = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
 var colors_1 = __webpack_require__(/*! @material-ui/core/colors */ "./node_modules/@material-ui/core/esm/colors/index.js");
 var HomePage_1 = __webpack_require__(/*! ./containers/pages/HomePage */ "./resources/ts/containers/pages/HomePage.tsx");
-// ページ全体で使うテーマカラーの定義
+// ページ全体で使うテーマカラー, フォントの定義
 var theme = core_1.createMuiTheme({
     palette: {
         primary: {
@@ -82037,7 +82037,15 @@ var theme = core_1.createMuiTheme({
             main: colors_1.blue[500],
             dark: colors_1.blue[700],
         },
-    }
+    },
+    typography: {
+        fontFamily: [
+            'fantasy',
+            'Comic Sans MS',
+            'arial',
+            'sans-serif',
+        ].join(','),
+    },
 });
 var App = function () {
     return (react_1.default.createElement(react_router_dom_1.BrowserRouter, null,
