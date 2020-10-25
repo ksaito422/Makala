@@ -28,7 +28,7 @@ export const Device: React.FC = () => {
   })
   const [state, setState] = useState({ items: initial });
 
-  const onDragEnd = result => {
+  const onDragEnd = (result: any) => {
     if (!result.destination) {
       return;
     }
