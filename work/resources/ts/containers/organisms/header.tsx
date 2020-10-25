@@ -2,7 +2,7 @@ import React from 'react';
 import { Title } from '../../components/atoms/Title';
 import {
   AppBar,
-  Toolbar
+  Toolbar,
 } from '@material-ui/core';
 
 type Props = {
@@ -11,7 +11,7 @@ type Props = {
 
 export const Header: React.FC<Props> = (props) => {
   return (
-    <AppBar color='transparent' position='sticky'>
+    <AppBar color='primary' position='sticky'>
       <Toolbar>
         <Title
           title={props.title}
