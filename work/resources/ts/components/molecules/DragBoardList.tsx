@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { DeleteIcon } from '../atoms/DeleteIcon';
 import { AddIcon } from '../atoms/AddIcon';
+import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import {
   Card,
   CardHeader,
@@ -9,7 +10,16 @@ import {
   Typography,
 } from '@material-ui/core';
 
-export const Item = ({ item, index }: {item: any, index: any}) => {
+type Props = {
+  item: any,
+  index: any,
+}
+
+export const Item: React.FC<Props> = ({ item, index }) => {
+  // classNameのインポート
+  const { useStyles } = useContext<any>(StylesContext);
+  const classes = useStyles()
+
   return (
     <Draggable draggableId={item.id} index={index}>
         {provided => (
@@ -17,6 +27,7 @@ export const Item = ({ item, index }: {item: any, index: any}) => {
             ref={provided.innerRef}
             {...provided.draggableProps}
             {...provided.dragHandleProps}
+            className={classes.drag_card}
           >
             <CardHeader
               title={item.id}
@@ -35,11 +46,13 @@ export const Item = ({ item, index }: {item: any, index: any}) => {
   )
 }
 
-export const DragBoardList = React.memo<{ items: any }> (({ items }) => (
-  <>
-    {items.map((item: any, index: number) => (
-      <Item item={item} index={index} key={item.id} />
-    ))}
-    <AddIcon />
-  </>
-));
+export const DragBoardList = React.memo<{ items: any }> (({ items }) => {
+  return (
+    <div>
+      {items.map((item: any, index: number) => (
+        <Item item={item} index={index} key={item.id} />
+      ))}
+      <AddIcon />
+    </div>
+  )
+});
