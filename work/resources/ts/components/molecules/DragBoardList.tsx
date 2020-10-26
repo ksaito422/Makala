@@ -34,7 +34,7 @@ export const Item = ({ item, index }: {item: any, index: any}) => {
   )
 }
 
-export const List = React.memo<{ items: any }> (({ items }) => (
+export const DragBoardList = React.memo<{ items: any }> (({ items }) => (
   <>
     {items.map((item: any, index: number) => (
       <Item item={item} index={index} key={item.id} />

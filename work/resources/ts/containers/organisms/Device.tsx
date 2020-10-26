@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import { List } from '../../components/molecules/List';
+import { DragBoardList } from '../../components/molecules/DragBoardList';
 
 type ItemType = {
   id: string;
@@ -52,7 +52,7 @@ export const Device: React.FC = () => {
         <Droppable droppableId="list">
           {provided => (
             <div ref={provided.innerRef} {...provided.droppableProps}>
-              <List items={state.items} />
+              <DragBoardList items={state.items} />
               {provided.placeholder}
             </div>
           )}
