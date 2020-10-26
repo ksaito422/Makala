@@ -16,7 +16,18 @@ export const HomePage: React.FC = () => {
         title={'makala'}
       />
       <Container maxWidth='xl'>
-        <Device />
+        <Grid container spacing={2}>
+          <Grid item xs={6}>
+            <Container maxWidth='xl'>
+              <Device />
+            </Container>
+          </Grid>
+          <Grid item xs={6}>
+            <Container maxWidth='xl'>
+              <p>プレビュー画面が入ります</p>
+            </Container>
+          </Grid>
+        </Grid>
       </Container>
     </>
   )
