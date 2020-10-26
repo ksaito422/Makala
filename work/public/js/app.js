@@ -93521,9 +93521,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.List = exports.Item = void 0;
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 var react_beautiful_dnd_1 = __webpack_require__(/*! react-beautiful-dnd */ "./node_modules/react-beautiful-dnd/dist/react-beautiful-dnd.esm.js");
+var core_1 = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
 exports.Item = function (_a) {
     var item = _a.item, index = _a.index;
-    return (react_1.default.createElement(react_beautiful_dnd_1.Draggable, { draggableId: item.id, index: index }, function (provided) { return (react_1.default.createElement("p", __assign({ ref: provided.innerRef }, provided.draggableProps, provided.dragHandleProps), item.content)); }));
+    return (react_1.default.createElement(react_beautiful_dnd_1.Draggable, { draggableId: item.id, index: index }, function (provided) { return (react_1.default.createElement(core_1.Card, __assign({ ref: provided.innerRef }, provided.draggableProps, provided.dragHandleProps),
+        react_1.default.createElement(core_1.CardHeader, { title: item.id }),
+        react_1.default.createElement(core_1.CardContent, null,
+            react_1.default.createElement(core_1.Typography, null, item.content)))); }));
 };
 exports.List = react_1.default.memo(function (_a) {
     var items = _a.items;

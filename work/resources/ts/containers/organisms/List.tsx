@@ -1,17 +1,30 @@
 import React from "react";
 import { Draggable } from "react-beautiful-dnd";
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  Typography,
+} from '@material-ui/core';
 
 export const Item = ({ item, index }: {item: any, index: any}) => {
   return (
     <Draggable draggableId={item.id} index={index}>
-      {provided => (
-        <p
-          ref={provided.innerRef}
-          {...provided.draggableProps}
-          {...provided.dragHandleProps}
-        >
-          {item.content}
-        </p>
+        {provided => (
+          <Card
+            ref={provided.innerRef}
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+          >
+            <CardHeader
+              title={item.id}
+            />
+            <CardContent>
+              <Typography>
+                {item.content}
+              </Typography>
+            </CardContent>
+          </Card>
         )}
     </Draggable>
   )
