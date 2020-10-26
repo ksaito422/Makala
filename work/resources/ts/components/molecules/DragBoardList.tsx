@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { Draggable } from "react-beautiful-dnd";
+import React, { useContext } from 'react';
+import { Draggable } from 'react-beautiful-dnd';
 import { DeleteIcon } from '../atoms/DeleteIcon';
 import { AddIcon } from '../atoms/AddIcon';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
@@ -48,11 +48,11 @@ export const Item: React.FC<Props> = ({ item, index }) => {
 
 export const DragBoardList = React.memo<{ items: any }> (({ items }) => {
   return (
-    <div>
+    <>
       {items.map((item: any, index: number) => (
         <Item item={item} index={index} key={item.id} />
       ))}
       <AddIcon />
-    </div>
+    </>
   )
 });
