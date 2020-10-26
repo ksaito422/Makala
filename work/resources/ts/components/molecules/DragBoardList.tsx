@@ -1,6 +1,7 @@
 import React from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { DeleteIcon } from '../atoms/DeleteIcon';
+import { AddIcon } from '../atoms/AddIcon';
 import {
   Card,
   CardHeader,
@@ -39,5 +40,6 @@ export const DragBoardList = React.memo<{ items: any }> (({ items }) => (
     {items.map((item: any, index: number) => (
       <Item item={item} index={index} key={item.id} />
     ))}
+    <AddIcon />
   </>
 ));
