@@ -4,7 +4,7 @@ import { AddCircle } from '@material-ui/icons';
 
 export const AddIcon = () => {
   return (
-    <IconButton component='span'>
+    <IconButton>
       <AddCircle color='secondary' />
     </IconButton>
   )
