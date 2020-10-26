@@ -1,5 +1,6 @@
 import React from "react";
 import { Draggable } from "react-beautiful-dnd";
+import { DeleteIcon } from '../atoms/DeleteIcon';
 import {
   Card,
   CardHeader,
@@ -18,6 +19,9 @@ export const Item = ({ item, index }: {item: any, index: any}) => {
           >
             <CardHeader
               title={item.id}
+              action={
+                <DeleteIcon />
+              }
             />
             <CardContent>
               <Typography>

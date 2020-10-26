@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import { List } from './List';
+import { List } from '../../components/molecules/List';
 
 type ItemType = {
   id: string;
