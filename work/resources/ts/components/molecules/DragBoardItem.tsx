@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import { DeleteIcon } from '../atoms/DeleteIcon';
-import { AddIcon } from '../atoms/AddIcon';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import {
   Card,
@@ -15,7 +14,7 @@ type Props = {
   index: any,
 }
 
-export const Item: React.FC<Props> = ({ item, index }) => {
+export const DragBoardItem: React.FC<Props> = ({ item, index }) => {
   // classNameのインポート
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles()
@@ -45,14 +44,3 @@ export const Item: React.FC<Props> = ({ item, index }) => {
     </Draggable>
   )
 }
-
-export const DragBoardList = React.memo<{ items: any }> (({ items }) => {
-  return (
-    <>
-      {items.map((item: any, index: number) => (
-        <Item item={item} index={index} key={item.id} />
-      ))}
-      <AddIcon />
-    </>
-  )
-});

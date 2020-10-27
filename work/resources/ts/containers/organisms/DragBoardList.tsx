@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import { DragBoardList } from '../../components/molecules/DragBoardList';
+import { DragBoardItem } from '../../components/molecules/DragBoardItem';
+import { AddIcon } from '../../components/atoms/AddIcon';
 
 type ItemType = {
   id: string;
@@ -19,7 +20,7 @@ const reorder = (
   return result;
 };
 
-export const Device: React.FC = () => {
+export const DragBoardList = React.memo<{ items?: any }> (({ items }) => {
   const initial: ItemType[] = Array.from({ length: 10 }, (v, k) => k).map(k => {
     return {
       id: `id-${k}`,
@@ -52,7 +53,10 @@ export const Device: React.FC = () => {
         <Droppable droppableId="list">
           {provided => (
             <div ref={provided.innerRef} {...provided.droppableProps}>
-              <DragBoardList items={state.items} />
+              {state.items.map((item: any, index: number) => (
+                <DragBoardItem item={item} index={index} key={item.id} />
+              ))}
+              <AddIcon />
               {provided.placeholder}
             </div>
           )}
@@ -60,4 +64,4 @@ export const Device: React.FC = () => {
       </DragDropContext>
     </>
   )
-}
+});

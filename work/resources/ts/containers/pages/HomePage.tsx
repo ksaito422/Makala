@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Header } from '../organisms/Header';
-import { Device } from '../organisms/Device';
+import { DragBoardList } from '../organisms/DragBoardList';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import {
   Container,
@@ -23,7 +23,7 @@ export const HomePage: React.FC = () => {
         <Grid container spacing={2}>
           <Grid item xs={6}>
             <Container maxWidth='xl'>
-              <Device />
+              <DragBoardList />
             </Container>
           </Grid>
           <Grid item xs={6}>
