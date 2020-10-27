@@ -3,6 +3,7 @@ import { Draggable } from 'react-beautiful-dnd';
 import { DeleteIcon } from '../atoms/DeleteIcon';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import {
+  Button,
   Card,
   CardHeader,
   CardContent,
@@ -34,11 +35,13 @@ export const DragBoardItem: React.FC<Props> = ({ item, index }) => {
                 <DeleteIcon />
               }
             />
-            <CardContent>
-              <Typography>
-                {item.content}
-              </Typography>
-            </CardContent>
+            <Button variant='text' fullWidth>
+              <CardContent>
+                <Typography>
+                  {item.content}
+                </Typography>
+              </CardContent>
+            </Button>
           </Card>
         )}
     </Draggable>
