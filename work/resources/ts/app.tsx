@@ -6,6 +6,7 @@ import {
   MuiThemeProvider,
 } from '@material-ui/core';
 import { blue, deepPurple } from '@material-ui/core/colors';
+import { TotalContextProvider } from './contexts/TotalContext';
 import { HomePage } from './containers/pages/HomePage';
 
 // ページ全体で使うテーマカラー, フォントの定義
@@ -35,11 +36,13 @@ const theme = createMuiTheme({
 const App: React.FC = () => {
     return (
       <Router>
-        <Switch>
-          <MuiThemeProvider theme={theme}>
-            <Route exact path='/' component={HomePage}></Route>
-          </MuiThemeProvider>
-        </Switch>
+        <TotalContextProvider>
+          <Switch>
+            <MuiThemeProvider theme={theme}>
+              <Route exact path='/' component={HomePage}></Route>
+            </MuiThemeProvider>
+          </Switch>
+        </TotalContextProvider>
       </Router>
     )
 }
