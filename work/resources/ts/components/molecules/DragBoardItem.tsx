@@ -3,6 +3,7 @@ import { Draggable } from 'react-beautiful-dnd';
 import { DeleteIcon } from '../atoms/DeleteIcon';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import {
+  Button,
   Card,
   CardHeader,
   CardContent,
@@ -12,9 +13,14 @@ import {
 type Props = {
   item: any,
   index: any,
+  onClick: (event: any) => void,
 }
 
-export const DragBoardItem: React.FC<Props> = ({ item, index }) => {
+export const DragBoardItem: React.FC<Props> = ({
+  item,
+  index,
+  onClick,
+}) => {
   // classNameのインポート
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles()
@@ -34,11 +40,17 @@ export const DragBoardItem: React.FC<Props> = ({ item, index }) => {
                 <DeleteIcon />
               }
             />
-            <CardContent>
-              <Typography>
-                {item.content}
-              </Typography>
-            </CardContent>
+            <Button
+              variant='text'
+              fullWidth
+              onClick={onClick}
+            >
+              <CardContent>
+                <Typography>
+                  {item.content}
+                </Typography>
+              </CardContent>
+            </Button>
           </Card>
         )}
     </Draggable>

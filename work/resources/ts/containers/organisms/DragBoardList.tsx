@@ -2,10 +2,17 @@ import React, { useState } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { DragBoardItem } from '../../components/molecules/DragBoardItem';
 import { AddIcon } from '../../components/atoms/AddIcon';
+import { ModalWindow } from '../../components/molecules/ModalWindow';
 
 type ItemType = {
   id: string;
   content: string;
+}
+type BoardListProps = {
+  items?: any,
+  onClick: (event: any) => void,
+  onClose: (event: any) => void,
+  modalOpen: boolean,
 }
 
 const reorder = (
@@ -20,7 +27,12 @@ const reorder = (
   return result;
 };
 
-export const DragBoardList = React.memo<{ items?: any }> (({ items }) => {
+export const DragBoardList = React.memo<BoardListProps> (({
+  items,
+  onClick,
+  onClose,
+  modalOpen
+}) => {
   const initial: ItemType[] = Array.from({ length: 10 }, (v, k) => k).map(k => {
     return {
       id: `id-${k}`,
@@ -54,7 +66,12 @@ export const DragBoardList = React.memo<{ items?: any }> (({ items }) => {
           {provided => (
             <div ref={provided.innerRef} {...provided.droppableProps}>
               {state.items.map((item: any, index: number) => (
-                <DragBoardItem item={item} index={index} key={item.id} />
+                <DragBoardItem
+                  item={item}
+                  index={index}
+                  key={item.id}
+                  onClick={onClick}
+                />
               ))}
               <AddIcon />
               {provided.placeholder}
@@ -62,6 +79,11 @@ export const DragBoardList = React.memo<{ items?: any }> (({ items }) => {
           )}
         </Droppable>
       </DragDropContext>
+      <ModalWindow
+        modalOpen={modalOpen}
+        onClose={onClose}
+      >
+      </ModalWindow>
     </>
   )
 });
