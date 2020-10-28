@@ -7,6 +7,12 @@ type ItemType = {
   id: string;
   content: string;
 }
+type BoardListProps = {
+  items?: any,
+  onClick: (event: any) => void,
+  onClose: (event: any) => void,
+  modalOpen: boolean,
+}
 
 const reorder = (
   list: ItemType[],
@@ -20,7 +26,12 @@ const reorder = (
   return result;
 };
 
-export const DragBoardList = React.memo<{ items?: any, onClick: (event: any) => void }> (({ items, onClick }) => {
+export const DragBoardList = React.memo<BoardListProps> (({
+  items,
+  onClick,
+  onClose,
+  modalOpen
+}) => {
   const initial: ItemType[] = Array.from({ length: 10 }, (v, k) => k).map(k => {
     return {
       id: `id-${k}`,
@@ -58,7 +69,10 @@ export const DragBoardList = React.memo<{ items?: any, onClick: (event: any) => 
                   item={item}
                   index={index}
                   key={item.id}
-                  onClick={onClick} />
+                  onClick={onClick}
+                  onClose={onClose}
+                  modalOpen={modalOpen}
+                />
               ))}
               <AddIcon />
               {provided.placeholder}

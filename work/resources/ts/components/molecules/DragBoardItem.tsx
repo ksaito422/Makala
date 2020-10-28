@@ -7,6 +7,7 @@ import {
   Card,
   CardHeader,
   CardContent,
+  Modal,
   Typography,
 } from '@material-ui/core';
 
@@ -14,9 +15,17 @@ type Props = {
   item: any,
   index: any,
   onClick: (event: any) => void,
+  onClose: (event: any) => void,
+  modalOpen: boolean,
 }
 
-export const DragBoardItem: React.FC<Props> = ({ item, index, onClick }) => {
+export const DragBoardItem: React.FC<Props> = ({
+  item,
+  index,
+  onClick,
+  onClose,
+  modalOpen
+}) => {
   // classNameのインポート
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles()
@@ -47,6 +56,12 @@ export const DragBoardItem: React.FC<Props> = ({ item, index, onClick }) => {
                 </Typography>
               </CardContent>
             </Button>
+            <Modal
+              open={modalOpen}
+              onClose={onClose}
+            >
+              <p>aa</p>
+            </Modal>
           </Card>
         )}
     </Draggable>
