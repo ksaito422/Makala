@@ -9,7 +9,7 @@ type TextFieldProps = {
 export const TextField: React.FC<TextFieldProps> = ({
   variant,
   component,
-  children
+  children,
 }) => {
   return (
     <Typography
