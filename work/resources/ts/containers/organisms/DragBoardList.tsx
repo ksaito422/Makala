@@ -20,7 +20,7 @@ const reorder = (
   return result;
 };
 
-export const DragBoardList = React.memo<{ items?: any }> (({ items }) => {
+export const DragBoardList = React.memo<{ items?: any, onClick: (event: any) => void }> (({ items, onClick }) => {
   const initial: ItemType[] = Array.from({ length: 10 }, (v, k) => k).map(k => {
     return {
       id: `id-${k}`,
@@ -54,7 +54,11 @@ export const DragBoardList = React.memo<{ items?: any }> (({ items }) => {
           {provided => (
             <div ref={provided.innerRef} {...provided.droppableProps}>
               {state.items.map((item: any, index: number) => (
-                <DragBoardItem item={item} index={index} key={item.id} />
+                <DragBoardItem
+                  item={item}
+                  index={index}
+                  key={item.id}
+                  onClick={onClick} />
               ))}
               <AddIcon />
               {provided.placeholder}

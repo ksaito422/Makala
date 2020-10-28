@@ -23,7 +23,9 @@ export const HomePage: React.FC = () => {
         <Grid container spacing={2}>
           <Grid item xs={6}>
             <Container maxWidth='xl'>
-              <DragBoardList />
+              <DragBoardList
+                onClick={() => {console.log('バケツリレー')}}
+              />
             </Container>
           </Grid>
           <Grid item xs={6}>

@@ -13,9 +13,10 @@ import {
 type Props = {
   item: any,
   index: any,
+  onClick: (event: any) => void,
 }
 
-export const DragBoardItem: React.FC<Props> = ({ item, index }) => {
+export const DragBoardItem: React.FC<Props> = ({ item, index, onClick }) => {
   // classNameのインポート
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles()
@@ -35,7 +36,11 @@ export const DragBoardItem: React.FC<Props> = ({ item, index }) => {
                 <DeleteIcon />
               }
             />
-            <Button variant='text' fullWidth>
+            <Button
+              variant='text'
+              fullWidth
+              onClick={onClick}
+            >
               <CardContent>
                 <Typography>
                   {item.content}
