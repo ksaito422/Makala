@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { DragBoardItem } from '../../components/molecules/DragBoardItem';
 import { AddIcon } from '../../components/atoms/AddIcon';
+import { TextField } from '../../components/atoms/TextField';
+import {
+  Modal,
+} from '@material-ui/core';
 
 type ItemType = {
   id: string;
@@ -70,8 +74,6 @@ export const DragBoardList = React.memo<BoardListProps> (({
                   index={index}
                   key={item.id}
                   onClick={onClick}
-                  onClose={onClose}
-                  modalOpen={modalOpen}
                 />
               ))}
               <AddIcon />
@@ -80,6 +82,12 @@ export const DragBoardList = React.memo<BoardListProps> (({
           )}
         </Droppable>
       </DragDropContext>
+      <Modal
+        open={modalOpen}
+        onClose={onClose}
+      >
+        <p>aaa</p>
+      </Modal>
     </>
   )
 });
