@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { TextField } from '../atoms/TextField';
+import { TextForm } from '../atoms/TextForm';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import {
   Modal,
@@ -35,18 +35,18 @@ export const ModalWindow: React.FC<ModalProps> = ({
   // モーダルの中身
   const modalBody = (
     <div style={modalStyle} className={classes.modal}>
-      <TextField
-        variant='subtitle1'
-        component='h3'
-      >
-        aaa
-      </TextField>
-      <TextField
-        variant='body1'
-        component='p'
-      >
-        aaa
-      </TextField>
+      <TextForm
+        multiline={true}
+        fullWidth={true}
+        rowsMax={1}
+        defaultValue={'textだよ'}
+      />
+      <TextForm
+        multiline
+        fullWidth
+        rows={8}
+        defaultValue={'textだよ'}
+      />
     </div>
   )
 
