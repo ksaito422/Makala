@@ -14,6 +14,16 @@ export const StylesContextProvider: React.FC = props => {
     drag_card: {
       marginBottom: theme.spacing(2),
     },
+    // modalの表示サイズ
+    modal: {
+      position: 'absolute',
+      width: `60%`,
+      height: `60%`,
+      backgroundColor: theme.palette.background.paper,
+      border: '2px solid #000',
+      boxShadow: theme.shadows[5],
+      padding: theme.spacing(2, 4, 3),
+    }
   }));
 
   return (
