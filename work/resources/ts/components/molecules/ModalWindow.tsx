@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { TextField } from '../atoms/TextField';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import {
@@ -28,11 +28,14 @@ export const ModalWindow: React.FC<ModalProps> = ({
   onClose,
   modalOpen,
 }) => {
+  // classNameのインポート
+  const { useStyles } = useContext<any>(StylesContext);
+  const classes = useStyles()
   const [modalStyle] = useState(getModalStyle);
 
   // モーダルの中身
   const modalBody = (
-    <div style={modalStyle}>
+    <div style={modalStyle} className={classes.modal}>
       <TextField
         variant='subtitle1'
         component='h3'
