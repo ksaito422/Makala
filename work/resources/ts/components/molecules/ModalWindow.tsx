@@ -10,12 +10,11 @@ type ModalProps = {
   modalOpen: boolean,
 }
 
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
+// モーダルの表示位置を決める
 function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
+  // 0~100%の間で真ん中を指定
+  const top = 50;
+  const left = 50;
 
   return {
     top: `${top}%`,
