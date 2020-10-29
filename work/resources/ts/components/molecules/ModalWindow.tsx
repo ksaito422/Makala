@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TextField } from '../atoms/TextField';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import {
@@ -10,13 +10,29 @@ type ModalProps = {
   modalOpen: boolean,
 }
 
+function rand() {
+  return Math.round(Math.random() * 20) - 10;
+}
+function getModalStyle() {
+  const top = 50 + rand();
+  const left = 50 + rand();
+
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`,
+  };
+}
+
 export const ModalWindow: React.FC<ModalProps> = ({
   onClose,
   modalOpen,
 }) => {
+  const [modalStyle] = useState(getModalStyle);
+
   // モーダルの中身
   const modalBody = (
-    <div>
+    <div style={modalStyle}>
       <TextField
         variant='subtitle1'
         component='h3'
