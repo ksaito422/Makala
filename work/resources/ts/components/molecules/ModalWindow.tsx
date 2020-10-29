@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { TextForm } from '../atoms/TextForm';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import {
+  Grid,
   Modal,
 } from '@material-ui/core';
 
@@ -35,18 +36,24 @@ export const ModalWindow: React.FC<ModalProps> = ({
   // モーダルの中身
   const modalBody = (
     <div style={modalStyle} className={classes.modal}>
-      <TextForm
-        multiline={true}
-        fullWidth={true}
-        rowsMax={1}
-        defaultValue={'textだよ'}
-      />
-      <TextForm
-        multiline
-        fullWidth
-        rows={8}
-        defaultValue={'textだよ'}
-      />
+      <Grid container spacing={4}>
+        <Grid item xs={12}>
+          <TextForm
+            multiline={true}
+            fullWidth={true}
+            rowsMax={1}
+            defaultValue={'textだよ'}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <TextForm
+            multiline
+            fullWidth
+            rows={8}
+            defaultValue={'textだよ'}
+          />
+        </Grid>
+      </Grid>
     </div>
   )
 
