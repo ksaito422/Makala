@@ -39,8 +39,8 @@ export const ModalWindow: React.FC<ModalProps> = ({
       <Grid container spacing={4}>
         <Grid item xs={12}>
           <TextForm
-            multiline={true}
-            fullWidth={true}
+            multiline
+            fullWidth
             rowsMax={1}
             defaultValue={'textだよ'}
           />
