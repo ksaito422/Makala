@@ -11,8 +11,11 @@ import {
 } from '@material-ui/core';
 
 type Props = {
-  item: any,
-  index: any,
+  item: {
+    id: string,
+    content: string,
+  },
+  index: number,
   onClick: (event: any) => void,
 }
 
