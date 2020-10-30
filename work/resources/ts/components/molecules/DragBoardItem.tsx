@@ -10,13 +10,16 @@ import {
   Typography,
 } from '@material-ui/core';
 
-type Props = {
-  item: any,
-  index: any,
+type BoardItemProps = {
+  item: {
+    id: string,
+    content: string,
+  },
+  index: number,
   onClick: (event: any) => void,
 }
 
-export const DragBoardItem: React.FC<Props> = ({
+export const DragBoardItem: React.FC<BoardItemProps> = ({
   item,
   index,
   onClick,

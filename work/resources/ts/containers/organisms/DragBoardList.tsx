@@ -65,7 +65,13 @@ export const DragBoardList = React.memo<BoardListProps> (({
         <Droppable droppableId="list">
           {provided => (
             <div ref={provided.innerRef} {...provided.droppableProps}>
-              {state.items.map((item: any, index: number) => (
+              {state.items.map((
+                item: {
+                  id: string,
+                  content: string,
+                },
+                index: number
+                ) => (
                 <DragBoardItem
                   item={item}
                   index={index}
