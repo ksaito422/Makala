@@ -33,6 +33,7 @@ export const DragBoardItem: React.FC<BoardItemProps> = ({
         {provided => (
           <Card
             ref={provided.innerRef}
+            // ドラッグするためのプロパティ draggableProps & dragHandleProps
             {...provided.draggableProps}
             {...provided.dragHandleProps}
             className={classes.drag_card}

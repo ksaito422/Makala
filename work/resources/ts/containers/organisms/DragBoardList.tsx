@@ -64,7 +64,7 @@ export const DragBoardList = React.memo<BoardListProps> (({
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId="list">
           {provided => (
-            <div ref={provided.innerRef} {...provided.droppableProps}>
+            <div ref={provided.innerRef}>
               {state.items.map((
                 item: {
                   id: string,
@@ -88,8 +88,7 @@ export const DragBoardList = React.memo<BoardListProps> (({
       <ModalWindow
         modalOpen={modalOpen}
         onClose={onClose}
-      >
-      </ModalWindow>
+      />
     </>
   )
 });
