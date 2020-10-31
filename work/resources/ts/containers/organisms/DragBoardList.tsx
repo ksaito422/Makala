@@ -48,6 +48,8 @@ export const DragBoardList = React.memo<BoardListProps> (({
       <ModalWindow
         modalOpen={modalOpen}
         onClose={onClose}
+        defaultValueTitle={'タイトルだよ'}
+        defaultValueContent={'中身だよ'}
       />
     </>
   )
