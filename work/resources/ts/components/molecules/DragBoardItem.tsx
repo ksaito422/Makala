@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useRef, forwardRef, useImperativeHandle } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import { DeleteIcon } from '../atoms/DeleteIcon';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
@@ -20,11 +20,13 @@ type BoardItemProps = {
   onClick: (event: any) => void,
 }
 
-export const DragBoardItem: React.FC<BoardItemProps> = ({
+export const DragBoardItem =  React.forwardRef<HTMLButtonElement, BoardItemProps> (({
   item,
   index,
   onClick,
-}) => {
+},
+  ref
+) => {
   // classNameのインポート
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles()
@@ -46,6 +48,7 @@ export const DragBoardItem: React.FC<BoardItemProps> = ({
               }
             />
             <Button
+              ref={ref}
               variant='text'
               fullWidth
               onClick={onClick}
@@ -60,4 +63,4 @@ export const DragBoardItem: React.FC<BoardItemProps> = ({
         )}
     </Draggable>
   )
-}
+})

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, createRef } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { DragBoardItem } from '../../components/molecules/DragBoardItem';
 import { AddIcon } from '../../components/atoms/AddIcon';
@@ -13,14 +13,21 @@ export const DragBoardList = React.memo<BoardListProps> (({
   items,
   onDragEnd,
 }) => {
-// モーダル表示のon/off切り替え
+  // 
+  const ref: any = createRef();
+  // const el: any = useRef(null);
+
+  // モーダル表示のon/off切り替え
   const [modalOpenState, setModalOpenState] = useState<boolean>(false);
   const modalOpen = () => {
     setModalOpenState(true);
+    console.log(ref.current);
   };
   const modalClose = () => {
     setModalOpenState(false);
   };
+
+
 
   return (
     <>
@@ -37,6 +44,7 @@ export const DragBoardList = React.memo<BoardListProps> (({
                 index: number
                 ) => (
                 <DragBoardItem
+                  ref={ref}
                   item={item}
                   index={index}
                   key={item.id}
