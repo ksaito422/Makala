@@ -28,6 +28,7 @@ export const DragBoardList = React.memo<BoardListProps> (({
               {items.map((
                 item: {
                   id: string,
+                  title: string,
                   content: string,
                 },
                 index: number
@@ -49,7 +50,7 @@ export const DragBoardList = React.memo<BoardListProps> (({
         modalOpen={modalOpen}
         onClose={onClose}
         // 押したボタンの番号によって、表示内容を変えたい
-        defaultValueTitle={items[0].id}
+        defaultValueTitle={items[0].title}
         defaultValueContent={items[0].content}
       />
     </>

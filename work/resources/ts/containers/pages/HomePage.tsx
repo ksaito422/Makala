@@ -42,7 +42,8 @@ export const HomePage = React.memo (() => {
   // dragitemのデータ
   const initial: ItemType[] = Array.from({ length: 5 }, (v, k) => k).map(k => {
     return {
-      id: `id-${k}`,
+      id: `${k}`,
+      title: `id-${k}`,
       content: `Item ${k}`
     }
   })
