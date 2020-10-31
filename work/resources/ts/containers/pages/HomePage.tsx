@@ -30,15 +30,6 @@ export const HomePage = React.memo (() => {
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
 
-  // モーダル表示のon/off切り替え
-  const [modalopen, setModalOpen] = useState<boolean>(false);
-  const modalOpen = () => {
-    setModalOpen(true);
-  };
-  const modalClose = () => {
-    setModalOpen(false);
-  };
-
   // dragitemのデータ
   const initial: ItemType[] = Array.from({ length: 5 }, (v, k) => k).map(k => {
     return {
@@ -80,13 +71,6 @@ export const HomePage = React.memo (() => {
               <DragBoardList
                 items={state.items}
                 onDragEnd={onDragEnd}
-                onClick={() => {
-                  modalOpen();
-                }}
-                onClose={() => {
-                  modalClose();
-                }}
-                modalOpen={modalopen}
               />
             </Container>
           </Grid>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { DragBoardItem } from '../../components/molecules/DragBoardItem';
 import { AddIcon } from '../../components/atoms/AddIcon';
@@ -6,19 +6,22 @@ import { ModalWindow } from '../../components/molecules/ModalWindow';
 
 type BoardListProps = {
   items?: any,
-  onClick: (event: any) => void,
-  onClose: (event: any) => void,
-  modalOpen: boolean,
   onDragEnd: any,
 }
 
 export const DragBoardList = React.memo<BoardListProps> (({
   items,
-  onClick,
-  onClose,
-  modalOpen,
   onDragEnd,
 }) => {
+// モーダル表示のon/off切り替え
+  const [modalOpenState, setModalOpenState] = useState<boolean>(false);
+  const modalOpen = () => {
+    setModalOpenState(true);
+  };
+  const modalClose = () => {
+    setModalOpenState(false);
+  };
+
   return (
     <>
       <DragDropContext onDragEnd={onDragEnd}>
@@ -37,7 +40,7 @@ export const DragBoardList = React.memo<BoardListProps> (({
                   item={item}
                   index={index}
                   key={item.id}
-                  onClick={onClick}
+                  onClick={modalOpen}
                 />
               ))}
               <AddIcon />
@@ -47,8 +50,8 @@ export const DragBoardList = React.memo<BoardListProps> (({
         </Droppable>
       </DragDropContext>
       <ModalWindow
-        modalOpen={modalOpen}
-        onClose={onClose}
+        modalOpen={modalOpenState}
+        onClose={modalClose}
         // 押したボタンの番号によって、表示内容を変えたい
         defaultValueTitle={items[0].title}
         defaultValueContent={items[0].content}
