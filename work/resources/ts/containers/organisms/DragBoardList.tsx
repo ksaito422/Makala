@@ -4,59 +4,22 @@ import { DragBoardItem } from '../../components/molecules/DragBoardItem';
 import { AddIcon } from '../../components/atoms/AddIcon';
 import { ModalWindow } from '../../components/molecules/ModalWindow';
 
-type ItemType = {
-  id: string;
-  content: string;
-}
 type BoardListProps = {
   items?: any,
-  onClick: (event: any) => void,
-  onClose: (event: any) => void,
-  modalOpen: boolean,
+  onDragEnd: any,
 }
-
-const reorder = (
-  list: ItemType[],
-  startIndex: number,
-  endIndex: number
-): ItemType[] => {
-  const result = Array.from(list);
-  const [removed] = result.splice(startIndex, 1);
-  result.splice(endIndex, 0, removed);
-
-  return result;
-};
 
 export const DragBoardList = React.memo<BoardListProps> (({
   items,
-  onClick,
-  onClose,
-  modalOpen
+  onDragEnd,
 }) => {
-  const initial: ItemType[] = Array.from({ length: 10 }, (v, k) => k).map(k => {
-    return {
-      id: `id-${k}`,
-      content: `Item ${k}`
-    }
-  })
-  const [state, setState] = useState({ items: initial });
-
-  const onDragEnd = (result: any) => {
-    if (!result.destination) {
-      return;
-    }
-
-    if (result.destination.index === result.source.index) {
-      return;
-    }
-
-    const items = reorder(
-      state.items,
-      result.source.index,
-      result.destination.index
-    );
-
-    setState({ items });
+// モーダル表示のon/off切り替え
+  const [modalOpenState, setModalOpenState] = useState<boolean>(false);
+  const modalOpen = () => {
+    setModalOpenState(true);
+  };
+  const modalClose = () => {
+    setModalOpenState(false);
   };
 
   return (
@@ -64,10 +27,11 @@ export const DragBoardList = React.memo<BoardListProps> (({
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId="list">
           {provided => (
-            <div ref={provided.innerRef} {...provided.droppableProps}>
-              {state.items.map((
+            <div ref={provided.innerRef}>
+              {items.map((
                 item: {
                   id: string,
+                  title: string,
                   content: string,
                 },
                 index: number
@@ -76,7 +40,7 @@ export const DragBoardList = React.memo<BoardListProps> (({
                   item={item}
                   index={index}
                   key={item.id}
-                  onClick={onClick}
+                  onClick={modalOpen}
                 />
               ))}
               <AddIcon />
@@ -86,10 +50,12 @@ export const DragBoardList = React.memo<BoardListProps> (({
         </Droppable>
       </DragDropContext>
       <ModalWindow
-        modalOpen={modalOpen}
-        onClose={onClose}
-      >
-      </ModalWindow>
+        modalOpen={modalOpenState}
+        onClose={modalClose}
+        // 押したボタンの番号によって、表示内容を変えたい
+        defaultValueTitle={items[0].title}
+        defaultValueContent={items[0].content}
+      />
     </>
   )
 });

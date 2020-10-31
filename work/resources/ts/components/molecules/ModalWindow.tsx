@@ -9,6 +9,8 @@ import {
 type ModalProps = {
   onClose: (event: any) => void,
   modalOpen: boolean,
+  defaultValueTitle: string,
+  defaultValueContent: string,
 }
 
 // モーダルの表示位置を決める
@@ -27,6 +29,8 @@ function getModalStyle() {
 export const ModalWindow: React.FC<ModalProps> = ({
   onClose,
   modalOpen,
+  defaultValueTitle,
+  defaultValueContent,
 }) => {
   // classNameのインポート
   const { useStyles } = useContext<any>(StylesContext);
@@ -42,7 +46,7 @@ export const ModalWindow: React.FC<ModalProps> = ({
             multiline
             fullWidth
             rowsMax={1}
-            defaultValue={'textだよ'}
+            defaultValue={defaultValueTitle}
           />
         </Grid>
         <Grid item xs={12}>
@@ -50,7 +54,7 @@ export const ModalWindow: React.FC<ModalProps> = ({
             multiline
             fullWidth
             rows={8}
-            defaultValue={'textだよ'}
+            defaultValue={defaultValueContent}
           />
         </Grid>
       </Grid>
