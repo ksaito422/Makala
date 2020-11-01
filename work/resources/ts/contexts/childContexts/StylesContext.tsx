@@ -24,9 +24,11 @@ export const StylesContextProvider: React.FC = props => {
       boxShadow: theme.shadows[5],
       padding: theme.spacing(2, 4, 3),
     },
-    // 
     iconCenter: {
       textAlign: 'center'
+    },
+    iconRight: {
+      textAlign: 'right'
     },
   }));
 
