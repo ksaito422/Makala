@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { TextForm } from '../atoms/TextForm';
 import { CloseIcon } from '../atoms/CloseIcon';
-
+import { UpdateIcon } from '../atoms/UpdateIcon';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import {
   Grid,
@@ -63,6 +63,11 @@ export const ModalWindow: React.FC<ModalProps> = ({
             fullWidth
             rows={8}
             defaultValue={defaultValueContent}
+          />
+        </Grid>
+        <Grid item xs={12} className={classes.iconCenter}>
+          <UpdateIcon
+            onClick={onClose}
           />
         </Grid>
       </Grid>
