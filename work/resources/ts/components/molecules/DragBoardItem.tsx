@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
-import { DeleteIcon } from '../atoms/DeleteIcon';
+import { CloseIcon } from '../atoms/CloseIcon';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import {
   Button,
@@ -42,7 +42,9 @@ export const DragBoardItem: React.FC<BoardItemProps> = ({
             <CardHeader
               title={item.title}
               action={
-                <DeleteIcon />
+                <CloseIcon
+                  onClick={() => console.log('test')}
+                />
               }
             />
             <Button
