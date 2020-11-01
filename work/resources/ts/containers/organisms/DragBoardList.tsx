@@ -1,4 +1,4 @@
-import React, { useState, useRef, createRef } from 'react';
+import React, { useState } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { DragBoardItem } from '../../components/molecules/DragBoardItem';
 import { AddIcon } from '../../components/atoms/AddIcon';
@@ -13,23 +13,18 @@ export const DragBoardList = React.memo<BoardListProps> (({
   items,
   onDragEnd,
 }) => {
-  // 
-  const ref: any = useRef([]);
-  items.map((item: any) => {
-    ref.current[item.id] = createRef();
-  })
+  // モーダルに渡す表示内容
+  const [modalValueState, setmodalValueState] = useState<any>({
+    id: null,
+    title: null,
+    content: null
+  });
 
   // モーダル表示のon/off切り替え
   const [modalOpenState, setModalOpenState] = useState<boolean>(false);
-  // const modalOpen = () => {
-  //   setModalOpenState(true);
-  //   console.log(ref.current[item.id]);
-  // };
   const modalClose = () => {
     setModalOpenState(false);
   };
-  let modalDefaultValueId = 1;
-
 
   return (
     <>
@@ -46,16 +41,17 @@ export const DragBoardList = React.memo<BoardListProps> (({
                 index: number
                 ) => (
                 <DragBoardItem
-                  ref={ref.current[item.id]}
                   item={item}
                   index={index}
                   key={item.id}
                   onClick={() => {
                     setModalOpenState(true);
-                    console.log(ref);
-                    console.log(ref.current[item.id].current.ariaLabel);
-                    modalDefaultValueId = ref.current[item.id].current.ariaLabel
-                    console.log(modalDefaultValueId);
+                    setmodalValueState({
+                      ...modalValueState,
+                      id: item.id,
+                      title: item.title,
+                      content: item.content,
+                    })
                   }}
                 />
               ))}
@@ -64,9 +60,9 @@ export const DragBoardList = React.memo<BoardListProps> (({
               <ModalWindow
                 modalOpen={modalOpenState}
                 onClose={modalClose}
-                // 押したボタンの番号によって、表示内容を変えたい
-                defaultValueTitle={items[modalDefaultValueId].title}
-                defaultValueContent={items[modalDefaultValueId].content}
+                // 押したボタンの番号によって、表示内容を変える
+                defaultValueTitle={modalValueState.title}
+                defaultValueContent={modalValueState.content}
               />
             </div>
           )}

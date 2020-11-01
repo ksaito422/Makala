@@ -20,13 +20,11 @@ type BoardItemProps = {
   onClick: (event: any) => void,
 }
 
-export const DragBoardItem =  React.forwardRef<HTMLButtonElement, BoardItemProps> (({
+export const DragBoardItem: React.FC<BoardItemProps> = ({
   item,
   index,
   onClick,
-},
-  ref
-) => {
+}) => {
   // classNameのインポート
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles()
@@ -48,9 +46,6 @@ export const DragBoardItem =  React.forwardRef<HTMLButtonElement, BoardItemProps
               }
             />
             <Button
-              ref={ref}
-              // 仮定義
-              aria-label={item.id}
               variant='text'
               fullWidth
               onClick={onClick}
@@ -65,4 +60,4 @@ export const DragBoardItem =  React.forwardRef<HTMLButtonElement, BoardItemProps
         )}
     </Draggable>
   )
-})
+}
