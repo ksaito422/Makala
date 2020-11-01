@@ -42,7 +42,9 @@ export const DragBoardItem: React.FC<BoardItemProps> = ({
             <CardHeader
               title={item.title}
               action={
-                <CloseIcon />
+                <CloseIcon
+                  onClick={() => console.log('test')}
+                />
               }
             />
             <Button
