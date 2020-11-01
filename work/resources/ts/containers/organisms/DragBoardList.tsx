@@ -55,19 +55,19 @@ export const DragBoardList = React.memo<BoardListProps> (({
                   }}
                 />
               ))}
-              <AddIcon />
               {provided.placeholder}
-              <ModalWindow
-                modalOpen={modalOpenState}
-                onClose={modalClose}
-                // 押したボタンの番号によって、表示内容を変える
-                defaultValueTitle={modalValueState.title}
-                defaultValueContent={modalValueState.content}
-              />
             </div>
           )}
         </Droppable>
       </DragDropContext>
+      <AddIcon />
+      <ModalWindow
+        modalOpen={modalOpenState}
+        onClose={modalClose}
+        // 押したボタンの番号によって、表示内容を変える
+        defaultValueTitle={modalValueState.title}
+        defaultValueContent={modalValueState.content}
+      />
     </>
   )
 });
