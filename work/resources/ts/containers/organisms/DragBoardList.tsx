@@ -13,11 +13,15 @@ export const DragBoardList = React.memo<BoardListProps> (({
   items,
   onDragEnd,
 }) => {
-// モーダル表示のon/off切り替え
+  // モーダルに渡す表示内容
+  const [modalValueState, setmodalValueState] = useState<any>({
+    id: null,
+    title: null,
+    content: null
+  });
+
+  // モーダル表示のon/off切り替え
   const [modalOpenState, setModalOpenState] = useState<boolean>(false);
-  const modalOpen = () => {
-    setModalOpenState(true);
-  };
   const modalClose = () => {
     setModalOpenState(false);
   };
@@ -40,22 +44,30 @@ export const DragBoardList = React.memo<BoardListProps> (({
                   item={item}
                   index={index}
                   key={item.id}
-                  onClick={modalOpen}
+                  onClick={() => {
+                    setModalOpenState(true);
+                    setmodalValueState({
+                      ...modalValueState,
+                      id: item.id,
+                      title: item.title,
+                      content: item.content,
+                    })
+                  }}
                 />
               ))}
               <AddIcon />
               {provided.placeholder}
+              <ModalWindow
+                modalOpen={modalOpenState}
+                onClose={modalClose}
+                // 押したボタンの番号によって、表示内容を変える
+                defaultValueTitle={modalValueState.title}
+                defaultValueContent={modalValueState.content}
+              />
             </div>
           )}
         </Droppable>
       </DragDropContext>
-      <ModalWindow
-        modalOpen={modalOpenState}
-        onClose={modalClose}
-        // 押したボタンの番号によって、表示内容を変えたい
-        defaultValueTitle={items[0].title}
-        defaultValueContent={items[0].content}
-      />
     </>
   )
 });
