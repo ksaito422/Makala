@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { DragBoardItem } from '../../components/molecules/DragBoardItem';
 import { AddIcon } from '../../components/atoms/AddIcon';
 import { ModalWindow } from '../../components/molecules/ModalWindow';
+import { StylesContext } from '../../contexts/childContexts/StylesContext';
 
 type BoardListProps = {
   items?: any,
@@ -13,6 +14,10 @@ export const DragBoardList = React.memo<BoardListProps> (({
   items,
   onDragEnd,
 }) => {
+  // classNameのインポート
+  const { useStyles } = useContext<any>(StylesContext);
+  const classes = useStyles()
+
   // モーダルに渡す表示内容
   const [modalValueState, setmodalValueState] = useState<any>({
     id: null,
@@ -60,7 +65,9 @@ export const DragBoardList = React.memo<BoardListProps> (({
           )}
         </Droppable>
       </DragDropContext>
-      <AddIcon />
+      <div className={classes.iconCenter}>
+        <AddIcon />
+      </div>
       <ModalWindow
         modalOpen={modalOpenState}
         onClose={modalClose}
