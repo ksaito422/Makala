@@ -7,6 +7,7 @@ type TextFormProps = {
   rowsMax?: number,
   rows?: number,
   defaultValue?: string,
+  onChange: (event: any) => void,
 }
 
 export const TextForm: React.FC<TextFormProps> = ({
@@ -15,6 +16,7 @@ export const TextForm: React.FC<TextFormProps> = ({
   rowsMax,
   rows,
   defaultValue,
+  onChange
 }) => {
   return (
     <TextField
@@ -24,6 +26,7 @@ export const TextForm: React.FC<TextFormProps> = ({
       rows={rows}
       defaultValue={defaultValue}
       variant='filled'
+      onChange={onChange}
     />
   )
 }

@@ -3,6 +3,7 @@ import { TextForm } from '../atoms/TextForm';
 import { CloseIcon } from '../atoms/CloseIcon';
 import { UpdateIcon } from '../atoms/UpdateIcon';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
+import { BoardItemContext } from '../../contexts/childContexts/BoardItemContext';
 import {
   Grid,
   Modal,
@@ -39,6 +40,8 @@ export const ModalWindow: React.FC<ModalProps> = ({
   const classes = useStyles()
   const [modalStyle] = useState(getModalStyle);
 
+  const { BoardItemState, setBoardItemState } = useContext<any>(BoardItemContext);
+
   // モーダルの中身
   const modalBody = (
     <div style={modalStyle} className={classes.modal}>
@@ -54,6 +57,10 @@ export const ModalWindow: React.FC<ModalProps> = ({
             fullWidth
             rowsMax={1}
             defaultValue={defaultValueTitle}
+            onChange={(e) => {
+              setBoardItemState(BoardItemState.items[0].title, e.target.value )
+              console.log(BoardItemState.items[0].title)
+            }}
           />
         </Grid>
         <Grid item xs={12}>
@@ -62,6 +69,9 @@ export const ModalWindow: React.FC<ModalProps> = ({
             fullWidth
             rows={8}
             defaultValue={defaultValueContent}
+            onChange={(e) => {
+              setBoardItemState({ ...BoardItemState, content: e.target.value })
+            }}
           />
         </Grid>
         <Grid item xs={12} className={classes.iconCenter}>
