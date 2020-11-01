@@ -1,5 +1,9 @@
 import React from 'react';
-import { Typography } from '@material-ui/core';
+import {
+  createMuiTheme,
+  MuiThemeProvider,
+  Typography,
+} from '@material-ui/core';
 
 type Props = {
   title: string;
