@@ -1,11 +1,11 @@
 import React from 'react';
 import { IconButton } from '@material-ui/core';
-import { DeleteForever } from '@material-ui/icons';
+import { Close  } from '@material-ui/icons';
 
-export const DeleteIcon = () => {
+export const CloseIcon = () => {
   return (
     <IconButton component='span'>
-      <DeleteForever />
+      <Close  />
     </IconButton>
   )
 }

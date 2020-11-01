@@ -1,5 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { TextForm } from '../atoms/TextForm';
+import { CloseIcon } from '../atoms/CloseIcon';
+
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import {
   Grid,
@@ -40,6 +42,7 @@ export const ModalWindow: React.FC<ModalProps> = ({
   // モーダルの中身
   const modalBody = (
     <div style={modalStyle} className={classes.modal}>
+      <CloseIcon />
       <Grid container spacing={4}>
         <Grid item xs={12}>
           <TextForm
