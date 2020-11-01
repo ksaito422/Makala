@@ -14,19 +14,21 @@ export const DragBoardList = React.memo<BoardListProps> (({
   onDragEnd,
 }) => {
   // 
-  const ref: any = createRef();
-  // const el: any = useRef(null);
+  const ref: any = useRef([]);
+  items.map((item: any) => {
+    ref.current[item.id] = createRef();
+  })
 
   // モーダル表示のon/off切り替え
   const [modalOpenState, setModalOpenState] = useState<boolean>(false);
-  const modalOpen = () => {
-    setModalOpenState(true);
-    console.log(ref.current);
-  };
+  // const modalOpen = () => {
+  //   setModalOpenState(true);
+  //   console.log(ref.current[item.id]);
+  // };
   const modalClose = () => {
     setModalOpenState(false);
   };
-
+  let modalDefaultValueId = 1;
 
 
   return (
@@ -44,26 +46,32 @@ export const DragBoardList = React.memo<BoardListProps> (({
                 index: number
                 ) => (
                 <DragBoardItem
-                  ref={ref}
+                  ref={ref.current[item.id]}
                   item={item}
                   index={index}
                   key={item.id}
-                  onClick={modalOpen}
+                  onClick={() => {
+                    setModalOpenState(true);
+                    console.log(ref);
+                    console.log(ref.current[item.id].current.ariaLabel);
+                    modalDefaultValueId = ref.current[item.id].current.ariaLabel
+                    console.log(modalDefaultValueId);
+                  }}
                 />
               ))}
               <AddIcon />
               {provided.placeholder}
+              <ModalWindow
+                modalOpen={modalOpenState}
+                onClose={modalClose}
+                // 押したボタンの番号によって、表示内容を変えたい
+                defaultValueTitle={items[modalDefaultValueId].title}
+                defaultValueContent={items[modalDefaultValueId].content}
+              />
             </div>
           )}
         </Droppable>
       </DragDropContext>
-      <ModalWindow
-        modalOpen={modalOpenState}
-        onClose={modalClose}
-        // 押したボタンの番号によって、表示内容を変えたい
-        defaultValueTitle={items[0].title}
-        defaultValueContent={items[0].content}
-      />
     </>
   )
 });

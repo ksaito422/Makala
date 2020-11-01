@@ -1,4 +1,4 @@
-import React, { useContext, useRef, forwardRef, useImperativeHandle } from 'react';
+import React, { useContext } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import { DeleteIcon } from '../atoms/DeleteIcon';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
@@ -49,6 +49,8 @@ export const DragBoardItem =  React.forwardRef<HTMLButtonElement, BoardItemProps
             />
             <Button
               ref={ref}
+              // 仮定義
+              aria-label={item.id}
               variant='text'
               fullWidth
               onClick={onClick}
