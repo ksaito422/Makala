@@ -43,7 +43,8 @@ export const ModalWindow: React.FC<ModalProps> = ({
   const modalBody = (
     <div style={modalStyle} className={classes.modal}>
       <Grid container spacing={4}>
-        <Grid item xs={12}>
+        <Grid item xs={11}></Grid>
+        <Grid item xs={1}>
           <CloseIcon
             onClick={onClose}
           />
