@@ -63,7 +63,12 @@ export const DragBoardList = React.memo<BoardListProps> (({
                     })
                   }}
                   onClickClose={() => {
-                    console.log('onClickClose')
+                    //  今のBoardItemの配列を受け取り、[index]を基にカードを削除
+                    let newBoardItemState = { ...BoardItemState };
+                    newBoardItemState.items.splice(index, 1);
+                    setBoardItemState(
+                      newBoardItemState,
+                    );
                   }}
                 />
               ))}
