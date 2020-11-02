@@ -62,6 +62,9 @@ export const DragBoardList = React.memo<BoardListProps> (({
                       content: item.content,
                     })
                   }}
+                  onClickClose={() => {
+                    console.log('onClickClose')
+                  }}
                 />
               ))}
               {provided.placeholder}
