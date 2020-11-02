@@ -3,7 +3,6 @@ import { TextForm } from '../atoms/TextForm';
 import { CloseIcon } from '../atoms/CloseIcon';
 import { UpdateIcon } from '../atoms/UpdateIcon';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
-import { BoardItemContext } from '../../contexts/childContexts/BoardItemContext';
 import {
   Grid,
   Modal,
@@ -14,6 +13,9 @@ type ModalProps = {
   modalOpen: boolean,
   defaultValueTitle: string,
   defaultValueContent: string,
+  onChangeTitle: (event: any) => void,
+  onChangeContent: (event: any) => void,
+  onClick: (event: any) => void,
 }
 
 // モーダルの表示位置を決める
@@ -34,13 +36,14 @@ export const ModalWindow: React.FC<ModalProps> = ({
   modalOpen,
   defaultValueTitle,
   defaultValueContent,
+  onChangeTitle,
+  onChangeContent,
+  onClick,
 }) => {
   // classNameのインポート
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles()
   const [modalStyle] = useState(getModalStyle);
-
-  const { BoardItemState, setBoardItemState } = useContext<any>(BoardItemContext);
 
   // モーダルの中身
   const modalBody = (
@@ -57,10 +60,7 @@ export const ModalWindow: React.FC<ModalProps> = ({
             fullWidth
             rowsMax={1}
             defaultValue={defaultValueTitle}
-            onChange={(e) => {
-              setBoardItemState(BoardItemState.items[0].title, e.target.value )
-              console.log(BoardItemState.items[0].title)
-            }}
+            onChange={onChangeTitle}
           />
         </Grid>
         <Grid item xs={12}>
@@ -69,14 +69,12 @@ export const ModalWindow: React.FC<ModalProps> = ({
             fullWidth
             rows={8}
             defaultValue={defaultValueContent}
-            onChange={(e) => {
-              setBoardItemState({ ...BoardItemState, content: e.target.value })
-            }}
+            onChange={onChangeContent}
           />
         </Grid>
         <Grid item xs={12} className={classes.iconCenter}>
           <UpdateIcon
-            onClick={onClose}
+            onClick={onClick}
           />
         </Grid>
       </Grid>
