@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { Header } from '../organisms/Header';
 import { DragBoardList } from '../organisms/DragBoardList';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
+import { BoardItemContext } from '../../contexts/childContexts/BoardItemContext';
 import {
   Container,
   CssBaseline,
@@ -30,15 +31,8 @@ export const HomePage = React.memo (() => {
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
 
-  // dragitemのデータ
-  const initial: ItemType[] = Array.from({ length: 5 }, (v, k) => k).map(k => {
-    return {
-      id: `${k}`,
-      title: `id-${k}`,
-      content: `Item ${k}`
-    }
-  })
-  const [state, setState] = useState({ items: initial });
+  // dragItemのデータ 表示する内容のstateをBoardItemContextから読み取る
+  const { BoardItemState, setBoardItemState } = useContext<any>(BoardItemContext);
 
   const onDragEnd = (result: any) => {
     if (!result.destination) {
@@ -50,12 +44,12 @@ export const HomePage = React.memo (() => {
     }
 
     const items = reorder(
-      state.items,
+      BoardItemState.items,
       result.source.index,
       result.destination.index
     );
 
-    setState({ items });
+    setBoardItemState({ items });
   };
 
   return (
@@ -69,7 +63,7 @@ export const HomePage = React.memo (() => {
           <Grid item xs={6}>
             <Container maxWidth='xl'>
               <DragBoardList
-                items={state.items}
+                items={BoardItemState.items}
                 onDragEnd={onDragEnd}
               />
             </Container>
