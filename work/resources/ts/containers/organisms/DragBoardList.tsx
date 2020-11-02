@@ -78,7 +78,11 @@ export const DragBoardList = React.memo<BoardListProps> (({
         </Droppable>
       </DragDropContext>
       <div className={classes.iconCenter}>
-        <AddIcon />
+        <AddIcon
+          onClickAdd={() => {
+            console.log('onClickAdd');
+          }}
+        />
       </div>
       <ModalWindow
         modalOpen={modalOpenState}
