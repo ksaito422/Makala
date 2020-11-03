@@ -10,6 +10,10 @@ export const StylesContextProvider: React.FC = props => {
     main_container: {
       marginTop: theme.spacing(4),
     },
+    drop_able: {
+      maxHeight: `80vh`,
+      overflowY: 'scroll',
+    },
     // Draggable内の要素の間隔をとるため
     drag_card: {
       marginBottom: theme.spacing(2),
