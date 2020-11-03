@@ -117,6 +117,11 @@ export const DragBoardList = React.memo<BoardListProps> (({
           setBoardItemState(
             { ...BoardItemState, numberMade: BoardItemState.numberMade + 1 }
           )
+          setmodalValueState({
+            id: null,
+            title: null,
+            content: null
+          });
           modalClose();
         }}
       />
