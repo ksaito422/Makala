@@ -97,9 +97,12 @@ export const DragBoardList = React.memo<BoardListProps> (({
           setmodalValueState({ ...modalValueState, content: e.target.value })
         }}
         onClick={() => {
-          //  今のBoardItemの配列を受け取り、更新部分だけ新しい値に入れ替える
-          let newBoardItemState = { ...BoardItemState };
-          newBoardItemState.items[modalValueState.id] = modalValueState;
+          /** 今のBoardItemの配列を受け取り、更新部分だけ新しい値に入れ替える
+            / indexNumberに格納位置のindexを入れる
+          */
+          const newBoardItemState = { ...BoardItemState };
+          const indexNumber = newBoardItemState.items.findIndex(({id}: any) => id == modalValueState.id)
+          newBoardItemState.items[indexNumber] = modalValueState;
           setBoardItemState(
             newBoardItemState,
           );
