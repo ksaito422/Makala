@@ -17,7 +17,8 @@ export const BoardItemContextProvider: React.FC = props => {
     }
   })
 
-  const [BoardItemState, setBoardItemState] = useState({ items: initial });
+  // { items: ボードアイテムで表示するデータ, numberMade: 今までにカードを作った総数 }
+  const [BoardItemState, setBoardItemState] = useState({ items: initial, numberMade: initial.length });
 
   return (
     <BoardItemContext.Provider value={{BoardItemState, setBoardItemState}}>

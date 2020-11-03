@@ -9,6 +9,10 @@ import {
 } from '@material-ui/core';
 
 type ModalProps = {
+  errorTitle?: boolean,
+  helperTextTitle?: string,
+  errorContent?: boolean,
+  helperTextContent?: string,
   onClose: (event: any) => void,
   modalOpen: boolean,
   defaultValueTitle: string,
@@ -32,6 +36,10 @@ function getModalStyle() {
 }
 
 export const ModalWindow: React.FC<ModalProps> = ({
+  errorTitle,
+  helperTextTitle,
+  errorContent,
+  helperTextContent,
   onClose,
   modalOpen,
   defaultValueTitle,
@@ -56,6 +64,8 @@ export const ModalWindow: React.FC<ModalProps> = ({
         </Grid>
         <Grid item xs={12}>
           <TextForm
+            error={errorTitle}
+            helperText={helperTextTitle}
             multiline
             fullWidth
             rowsMax={1}
@@ -65,6 +75,8 @@ export const ModalWindow: React.FC<ModalProps> = ({
         </Grid>
         <Grid item xs={12}>
           <TextForm
+            error={errorContent}
+            helperText={helperTextContent}
             multiline
             fullWidth
             rows={8}

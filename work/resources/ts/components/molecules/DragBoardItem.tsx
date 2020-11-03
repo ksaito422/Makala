@@ -18,12 +18,14 @@ type BoardItemProps = {
   },
   index: number,
   onClick: (event: any) => void,
+  onClickClose: (event: any) => void,
 }
 
 export const DragBoardItem: React.FC<BoardItemProps> = ({
   item,
   index,
   onClick,
+  onClickClose,
 }) => {
   // classNameのインポート
   const { useStyles } = useContext<any>(StylesContext);
@@ -43,7 +45,7 @@ export const DragBoardItem: React.FC<BoardItemProps> = ({
               title={item.title}
               action={
                 <CloseIcon
-                  onClick={() => console.log('test')}
+                  onClick={onClickClose}
                 />
               }
             />
