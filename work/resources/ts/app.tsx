@@ -23,6 +23,16 @@ const theme = createMuiTheme({
       dark: blue[700],
     },
   },
+  overrides: {
+    MuiButton: {
+      root: {
+        textTransform: `none`,
+      },
+      label: {
+        justifyContent: `none`,
+      }
+    }
+  }
 });
 
 const App: React.FC = () => {
