@@ -31,8 +31,14 @@ export const DragBoardList = React.memo<BoardListProps> (({
 
   // モーダル表示のon/off切り替え
   const [modalOpenState, setModalOpenState] = useState<boolean>(false);
+  // モーダルを閉じるとき、入力値をクリア
   const modalClose = () => {
     setModalOpenState(false);
+    setmodalValueState({
+      id: null,
+      title: null,
+      content: null
+    });
   };
 
   // 正規表現でフォームの空欄不可にする
@@ -128,11 +134,6 @@ const regularExpressions = /^.+/;
           setBoardItemState(
             { ...BoardItemState, numberMade: BoardItemState.numberMade + 1 }
           )
-          setmodalValueState({
-            id: null,
-            title: null,
-            content: null
-          });
           modalClose();
         }}
       />
