@@ -80,7 +80,12 @@ export const DragBoardList = React.memo<BoardListProps> (({
       <div className={classes.iconCenter}>
         <AddIcon
           onClickAdd={() => {
-            console.log('onClickAdd');
+            // 重複してるため、後で一箇所にまとめる setModalOpenState(true);
+            setModalOpenState(true);
+            setmodalValueState({
+              ...modalValueState,
+              id: String(BoardItemState.numberMade),
+            });
           }}
         />
       </div>
@@ -98,14 +103,20 @@ export const DragBoardList = React.memo<BoardListProps> (({
         }}
         onClick={() => {
           /** 今のBoardItemの配列を受け取り、更新部分だけ新しい値に入れ替える
-            / indexNumberに格納位置のindexを入れる
+            * updateなら既存のindexに格納
+            * addならnewBoardItemState.items.lengthで最後の位置に格納
+            * indexNumberに格納位置のindexを入れる
           */
           const newBoardItemState = { ...BoardItemState };
-          const indexNumber = newBoardItemState.items.findIndex(({id}: any) => id == modalValueState.id)
+          const searchIndex = newBoardItemState.items.findIndex(({id}: any) => id == modalValueState.id)
+          const indexNumber = searchIndex > -1 ? searchIndex : newBoardItemState.items.length;
           newBoardItemState.items[indexNumber] = modalValueState;
           setBoardItemState(
             newBoardItemState,
           );
+          setBoardItemState(
+            { ...BoardItemState, numberMade: BoardItemState.numberMade + 1 }
+          )
           modalClose();
         }}
       />
