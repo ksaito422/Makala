@@ -49,7 +49,7 @@ const regularExpressions = /^.+/;
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId="list">
           {provided => (
-            <div ref={provided.innerRef}>
+            <div ref={provided.innerRef} className={classes.drop_able}>
               {items.map((
                 item: {
                   id: string,
