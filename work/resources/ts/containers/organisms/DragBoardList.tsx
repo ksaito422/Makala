@@ -35,6 +35,9 @@ export const DragBoardList = React.memo<BoardListProps> (({
     setModalOpenState(false);
   };
 
+  // 正規表現でフォームの空欄不可にする
+const regularExpressions = /^.+/;
+
   return (
     <>
       <DragDropContext onDragEnd={onDragEnd}>
@@ -90,6 +93,14 @@ export const DragBoardList = React.memo<BoardListProps> (({
         />
       </div>
       <ModalWindow
+        errorTitle={regularExpressions.test(modalValueState.title) ? false : true}
+        helperTextTitle={
+          regularExpressions.test(modalValueState.title) ? undefined : 'タイトルを入力してください'
+        }
+        errorContent={regularExpressions.test(modalValueState.content) ? false : true}
+        helperTextContent={
+          regularExpressions.test(modalValueState.content) ? undefined : '内容を入力してください'
+        }
         modalOpen={modalOpenState}
         onClose={modalClose}
         // 押したボタンの番号によって、表示内容を変える
