@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Header } from '../organisms/Header';
 import { DragBoardList } from '../organisms/DragBoardList';
-import { Demo } from '../organisms/MarkdownPreview';
+import { Preview } from '../organisms/Preview';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import { BoardItemContext } from '../../contexts/childContexts/BoardItemContext';
 import {
@@ -71,7 +71,9 @@ export const HomePage = React.memo (() => {
           </Grid>
           <Grid item xs={6}>
             <Container maxWidth='xl'>
-              <Demo />
+              <Preview
+                items={BoardItemState.items}
+              />
             </Container>
           </Grid>
         </Grid>
