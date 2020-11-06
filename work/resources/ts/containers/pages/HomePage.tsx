@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import { ButtonGroup } from '../../components/molecules/ButtonGroup';
 import { Header } from '../organisms/Header';
 import { DragBoardList } from '../organisms/DragBoardList';
 import { Preview } from '../organisms/Preview';
@@ -8,6 +9,7 @@ import {
   Container,
   CssBaseline,
   Grid,
+  useMediaQuery,
 } from '@material-ui/core';
 
 type ItemType = {
@@ -31,6 +33,9 @@ export const HomePage = React.memo (() => {
   // classNameのインポート
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
+
+  // iPad Pro(1024px) < PC(1025px以上)を基準にレスポンシブ対応
+  const matches = useMediaQuery('(min-width: 1025px)');
 
   // dragItemのデータ 表示する内容のstateをBoardItemContextから読み取る
   const { BoardItemState, setBoardItemState } = useContext<any>(BoardItemContext);
@@ -60,23 +65,38 @@ export const HomePage = React.memo (() => {
         title={'makala'}
       />
       <Container maxWidth='xl' className={classes.main_container}>
-        <Grid container spacing={2}>
-          <Grid item xs={6}>
-            <Container maxWidth='xl'>
-              <DragBoardList
-                items={BoardItemState.items}
-                onDragEnd={onDragEnd}
-              />
-            </Container>
+        {matches ? (
+          <Grid container spacing={2}>
+            <Grid item xs={6}>
+              <Container maxWidth='xl'>
+                <DragBoardList
+                  items={BoardItemState.items}
+                  onDragEnd={onDragEnd}
+                />
+              </Container>
+            </Grid>
+            <Grid item xs={6}>
+              <Container maxWidth='xl'>
+                <Preview
+                  items={BoardItemState.items}
+                />
+              </Container>
+            </Grid>
           </Grid>
-          <Grid item xs={6}>
-            <Container maxWidth='xl'>
-              <Preview
-                items={BoardItemState.items}
-              />
-            </Container>
-          </Grid>
-        </Grid>
+        ) : (
+          <Container maxWidth='xl'>
+            <ButtonGroup
+              onClick={() => {console.log(1)}}
+            />
+            <DragBoardList
+              items={BoardItemState.items}
+              onDragEnd={onDragEnd}
+            />
+            <Preview
+              items={BoardItemState.items}
+            />
+          </Container>
+        )}
       </Container>
     </>
   )

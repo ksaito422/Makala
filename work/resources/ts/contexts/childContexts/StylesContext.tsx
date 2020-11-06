@@ -34,6 +34,13 @@ export const StylesContextProvider: React.FC = props => {
     iconRight: {
       textAlign: 'right'
     },
+    // MarkdownPreview Paperのスタイル
+    preview: {
+      height: `80vh`,
+      maxHeight: `80vh`,
+      overflowY: 'scroll',
+      padding: `16px`,
+    },
   }));
 
   return (

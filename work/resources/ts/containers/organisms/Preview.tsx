@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import MarkdownPreview from '@uiw/react-markdown-preview';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
+import {
+  Paper
+} from '@material-ui/core';
 
 type props = {
   items: [
@@ -15,14 +18,17 @@ type props = {
 export const Preview: React.FC<props> = ({
   items
 }) => {
+  const { useStyles } = useContext<any>(StylesContext);
+  const classes = useStyles();
+
   let previewText: string = '';
   const tmp = items.forEach(key => {
     previewText += key.title + key.content + '<br>'
   })
 
   return (
-    <MarkdownPreview
-      source={previewText}
-    />
+    <Paper elevation={3} className={classes.preview}>
+      <MarkdownPreview source={previewText} />
+    </ Paper>
   );
 }
