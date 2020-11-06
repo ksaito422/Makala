@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import { ButtonGroup } from '../../components/molecules/ButtonGroup';
 import { Header } from '../organisms/Header';
 import { DragBoardList } from '../organisms/DragBoardList';
 import { Preview } from '../organisms/Preview';
@@ -84,6 +85,9 @@ export const HomePage = React.memo (() => {
           </Grid>
         ) : (
           <Container maxWidth='xl'>
+            <ButtonGroup
+              onClick={() => {console.log(1)}}
+            />
             <DragBoardList
               items={BoardItemState.items}
               onDragEnd={onDragEnd}
