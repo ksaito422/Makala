@@ -20,6 +20,7 @@ type ModalProps = {
   onChangeTitle: (event: any) => void,
   onChangeContent: (event: any) => void,
   onClick: (event: any) => void,
+  disabled?: boolean,
 }
 
 // モーダルの表示位置を決める
@@ -47,6 +48,7 @@ export const ModalWindow: React.FC<ModalProps> = ({
   onChangeTitle,
   onChangeContent,
   onClick,
+  disabled,
 }) => {
   // classNameのインポート
   const { useStyles } = useContext<any>(StylesContext);
@@ -87,6 +89,7 @@ export const ModalWindow: React.FC<ModalProps> = ({
         <Grid item xs={12} className={classes.iconCenter}>
           <UpdateIcon
             onClick={onClick}
+            disabled={disabled}
           />
         </Grid>
       </Grid>

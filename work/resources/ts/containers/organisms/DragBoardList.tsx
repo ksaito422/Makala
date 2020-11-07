@@ -136,6 +136,10 @@ const regularExpressions = /^.+/;
           )
           modalClose();
         }}
+        disabled={
+          // クソコードだから整理したい
+          modalValueState.title === null || modalValueState.content === null ? (true) : (
+          regularExpressions.test(modalValueState.title) && regularExpressions.test(modalValueState.content) ? (false) : (true))}
       />
     </>
   )
