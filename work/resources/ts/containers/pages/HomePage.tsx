@@ -59,7 +59,10 @@ export const HomePage = React.memo (() => {
   };
 
   // width 1024px以下での表示レイアウト切り替え定義
-  const [previewState, setPreviewState] = useState<boolean>(false);
+  const [previewState, setPreviewState] = useState<{
+    card: boolean,
+    preview: boolean,
+  }>({card: true, preview: false });
 
   return (
     <>
@@ -90,22 +93,25 @@ export const HomePage = React.memo (() => {
           <Container maxWidth='xl'>
             <ButtonGroup
               cardOnClick={() => {
-                setPreviewState(false)
+                setPreviewState({ ...previewState, card: true, preview: false})
               }}
               previewOnClick={() => {
-                setPreviewState(true)
+                setPreviewState({ ...previewState, card: false, preview: true})
               }}
             />
-            {!previewState ? (
+            {/* cardOnClickでカード表示したら */}
+            {previewState.card &&
               <DragBoardList
                 items={BoardItemState.items}
                 onDragEnd={onDragEnd}
               />
-            ) : (
+            }
+            {/* previewOnClickでプレビュー表示したら */}
+            {previewState.preview &&
               <Preview
                 items={BoardItemState.items}
               />
-            )}
+            }
           </Container>
         )}
       </Container>

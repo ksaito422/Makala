@@ -13,13 +13,13 @@ export const ButtonGroup: React.FC<Props> = (props: Props) => {
         color='primary'
         onClick={props.cardOnClick}
       >
-        1
+        CARD
       </Button>
       <Button
         color='primary'
         onClick={props.previewOnClick}
       >
-        2
+        PREVIEW
       </Button>
     </>
   )
