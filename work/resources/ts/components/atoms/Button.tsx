@@ -5,6 +5,7 @@ import {
 
 type Props = {
   color: any,
+  disabled?: boolean,
   onClick: () => void,
   children: string,
 }
@@ -14,6 +15,7 @@ export const Button: React.FC<Props> = (props: Props) => {
     <MuiButton
       variant='contained'
       color={props.color}
+      disabled={props.disabled}
       onClick={props.onClick}
     >
       {props.children}

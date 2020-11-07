@@ -92,6 +92,9 @@ export const HomePage = React.memo (() => {
         ) : (
           <Container maxWidth='xl'>
             <ButtonGroup
+              // アクティブならボタンを非表示にする
+              disabledCard={previewState.card && true}
+              disabledPreview={previewState.preview && true}
               cardOnClick={() => {
                 setPreviewState({ ...previewState, card: true, preview: false})
               }}
