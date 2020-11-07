@@ -72,6 +72,7 @@ export const HomePage = React.memo (() => {
       />
       <Container maxWidth='xl' className={classes.main_container}>
         {matches ? (
+          // PCレイアウト width >= 1025px
           <Grid container spacing={2}>
             <Grid item xs={6}>
               <Container maxWidth='xl'>
@@ -90,28 +91,38 @@ export const HomePage = React.memo (() => {
             </Grid>
           </Grid>
         ) : (
+          // タブレット・スマホレイアウト width <= 1024px
           <Container maxWidth='xl'>
-            <ButtonGroup
-              cardOnClick={() => {
-                setPreviewState({ ...previewState, card: true, preview: false})
-              }}
-              previewOnClick={() => {
-                setPreviewState({ ...previewState, card: false, preview: true})
-              }}
-            />
-            {/* cardOnClickでカード表示したら */}
-            {previewState.card &&
-              <DragBoardList
-                items={BoardItemState.items}
-                onDragEnd={onDragEnd}
-              />
-            }
-            {/* previewOnClickでプレビュー表示したら */}
-            {previewState.preview &&
-              <Preview
-                items={BoardItemState.items}
-              />
-            }
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <ButtonGroup
+                  // アクティブならボタンを非表示にする
+                  disabledCard={previewState.card && true}
+                  disabledPreview={previewState.preview && true}
+                  cardOnClick={() => {
+                    setPreviewState({ ...previewState, card: true, preview: false})
+                  }}
+                  previewOnClick={() => {
+                    setPreviewState({ ...previewState, card: false, preview: true})
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                {/* cardOnClickでカード表示したら */}
+                {previewState.card &&
+                  <DragBoardList
+                    items={BoardItemState.items}
+                    onDragEnd={onDragEnd}
+                  />
+                }
+                {/* previewOnClickでプレビュー表示したら */}
+                {previewState.preview &&
+                  <Preview
+                    items={BoardItemState.items}
+                  />
+                }
+              </Grid>
+            </Grid>
           </Container>
         )}
       </Container>
