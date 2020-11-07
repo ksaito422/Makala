@@ -2,7 +2,8 @@ import React from 'react';
 import { Button } from '../atoms/Button';
 
 type Props = {
-  onClick: () => void,
+  cardOnClick: () => void,
+  previewOnClick: () => void,
 }
 
 export const ButtonGroup: React.FC<Props> = (props: Props) => {
@@ -10,13 +11,13 @@ export const ButtonGroup: React.FC<Props> = (props: Props) => {
     <>
       <Button
         color='primary'
-        onClick={props.onClick}
+        onClick={props.cardOnClick}
       >
         1
       </Button>
       <Button
         color='primary'
-        onClick={props.onClick}
+        onClick={props.previewOnClick}
       >
         2
       </Button>
