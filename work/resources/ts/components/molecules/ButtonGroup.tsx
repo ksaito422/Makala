@@ -4,24 +4,24 @@ import { Button } from '../atoms/Button';
 type Props = {
   disabledCard: boolean,
   disabledPreview: boolean,
-  cardOnClick: () => void,
-  previewOnClick: () => void,
+  CardOnClick: () => void,
+  PreviewOnClick: () => void,
 }
 
 export const ButtonGroup: React.FC<Props> = (props: Props) => {
   return (
     <>
       <Button
-        color='primary'
+        color='secondary'
         disabled={props.disabledCard}
-        onClick={props.cardOnClick}
+        onClick={props.CardOnClick}
       >
         CARD
       </Button>
       <Button
-        color='primary'
+        color='secondary'
         disabled={props.disabledPreview}
-        onClick={props.previewOnClick}
+        onClick={props.PreviewOnClick}
       >
         PREVIEW
       </Button>

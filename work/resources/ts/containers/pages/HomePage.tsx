@@ -99,10 +99,10 @@ export const HomePage = React.memo (() => {
                   // アクティブならボタンを非表示にする
                   disabledCard={previewState.card && true}
                   disabledPreview={previewState.preview && true}
-                  cardOnClick={() => {
+                  CardOnClick={() => {
                     setPreviewState({ ...previewState, card: true, preview: false})
                   }}
-                  previewOnClick={() => {
+                  PreviewOnClick={() => {
                     setPreviewState({ ...previewState, card: false, preview: true})
                   }}
                 />
