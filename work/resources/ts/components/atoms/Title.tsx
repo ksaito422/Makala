@@ -18,19 +18,19 @@ const theme = createMuiTheme({
 });
 
 type Props = {
-  title: string;
+  title: string,
 }
 
-export const Title: React.FC<Props> = (props) => {
+export const Title: React.FC<Props> = (props: Props) => {
   return (
-      <MuiThemeProvider theme={theme}>
-        <Typography
-          color={'inherit'}
-          component={'h1'}
-          variant={'h3'}
-        >
-          {props.title}
-        </Typography>
-      </MuiThemeProvider>
-  )
+    <MuiThemeProvider theme={theme}>
+      <Typography
+        color='inherit'
+        component='h1'
+        variant='h3'
+      >
+        {props.title}
+      </Typography>
+    </MuiThemeProvider>
+  );
 }

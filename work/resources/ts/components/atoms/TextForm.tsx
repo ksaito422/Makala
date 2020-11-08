@@ -25,5 +25,5 @@ export const TextForm: React.FC<Props> = (props: Props) => {
       variant='filled'
       onChange={props.onChange}
     />
-  )
+  );
 }

@@ -19,5 +19,5 @@ export const Button: React.FC<Props> = (props: Props) => {
     >
       {props.children}
     </MuiButton>
-  )
+  );
 }

@@ -13,5 +13,5 @@ export const CloseIcon: React.FC<Props> = (props: Props) => {
     >
       <Close />
     </IconButton>
-  )
+  );
 }
