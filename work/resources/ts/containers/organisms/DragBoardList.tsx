@@ -86,7 +86,7 @@ const regularExpressions = /^.+/;
           )}
         </Droppable>
       </DragDropContext>
-      <div className={classes.iconCenter}>
+      <div className={classes.centerPlacement}>
         <AddIcon
           onClick={() => {
             // 重複してるため、後で一箇所にまとめる setModalOpenState(true);

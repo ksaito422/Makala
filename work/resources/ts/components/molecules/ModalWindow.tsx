@@ -47,7 +47,7 @@ export const ModalWindow: React.FC<Props> = (props: Props) => {
   const modalBody = (
     <div style={modalStyleState} className={classes.modal}>
       <Grid container spacing={4}>
-        <Grid item xs={12} className={classes.iconRight}>
+        <Grid item xs={12} className={classes.rightPlacement}>
           <CloseIcon
             onClick={props.modalOnClose}
           />
@@ -74,7 +74,7 @@ export const ModalWindow: React.FC<Props> = (props: Props) => {
             onChange={props.contentOnChange}
           />
         </Grid>
-        <Grid item xs={12} className={classes.iconCenter}>
+        <Grid item xs={12} className={classes.centerPlacement}>
           <UpdateIcon
             onClick={props.postOnClick}
             disabled={props.disabled}
