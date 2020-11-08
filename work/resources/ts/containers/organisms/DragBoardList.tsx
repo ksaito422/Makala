@@ -88,7 +88,7 @@ const regularExpressions = /^.+/;
       </DragDropContext>
       <div className={classes.iconCenter}>
         <AddIcon
-          onClickAdd={() => {
+          AddOnClick={() => {
             // 重複してるため、後で一箇所にまとめる setModalOpenState(true);
             setModalOpenState(true);
             setmodalValueState({

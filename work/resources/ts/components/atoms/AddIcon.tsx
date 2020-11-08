@@ -2,16 +2,14 @@ import React from 'react';
 import { IconButton } from '@material-ui/core';
 import { AddCircle } from '@material-ui/icons';
 
-type AddIconProps = {
-  onClickAdd: (event:any) => void,
+type Props = {
+  AddOnClick: () => void,
 }
 
-export const AddIcon: React.FC<AddIconProps> = ({
-  onClickAdd,
-}) => {
+export const AddIcon: React.FC<Props> = (props: Props) => {
   return (
     <IconButton
-      onClick={onClickAdd}
+      onClick={props.AddOnClick}
     >
       <AddCircle color='secondary' />
     </IconButton>
