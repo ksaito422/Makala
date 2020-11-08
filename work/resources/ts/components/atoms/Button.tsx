@@ -6,7 +6,7 @@ import {
 type Props = {
   disabled?: boolean,
   children: string,
-  ButtonOnClick: () => void,
+  onClick: () => void,
 }
 
 export const Button: React.FC<Props> = (props: Props) => {
@@ -15,7 +15,7 @@ export const Button: React.FC<Props> = (props: Props) => {
       variant='contained'
       color='secondary'
       disabled={props.disabled}
-      onClick={props.ButtonOnClick}
+      onClick={props.onClick}
     >
       {props.children}
     </MuiButton>

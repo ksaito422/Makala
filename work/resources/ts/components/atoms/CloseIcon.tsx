@@ -2,17 +2,14 @@ import React from 'react';
 import { IconButton } from '@material-ui/core';
 import { Close } from '@material-ui/icons';
 
-type CloseIconProps = {
-  onClick: (event: any) => void,
+type Props = {
+  onClick: () => void,
 }
 
-export const CloseIcon: React.FC<CloseIconProps> = ({
-  onClick,
-}) => {
+export const CloseIcon: React.FC<Props> = (props: Props) => {
   return (
     <IconButton
-      component='span'
-      onClick={onClick}
+      onClick={props.onClick}
     >
       <Close />
     </IconButton>
