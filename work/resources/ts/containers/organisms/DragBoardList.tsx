@@ -108,17 +108,17 @@ const regularExpressions = /^.+/;
           regularExpressions.test(modalValueState.content) ? undefined : '内容を入力してください'
         }
         modalOpen={modalOpenState}
-        onCloseModal={modalClose}
+        ModalOnClose={modalClose}
         // 押したボタンの番号によって、表示内容を変える
         defaultValueTitle={modalValueState.title}
         defaultValueContent={modalValueState.content}
-        onChangeTitle={(e) => {
+        TitleOnChange={(e) => {
           setmodalValueState({ ...modalValueState, title: e.target.value })
         }}
-        onChangeContent={(e) => {
+        ContentOnChange={(e) => {
           setmodalValueState({ ...modalValueState, content: e.target.value })
         }}
-        onClickPost={() => {
+        PostOnClick={() => {
           /** 今のBoardItemの配列を受け取り、更新部分だけ新しい値に入れ替える
             * updateなら既存のindexに格納
             * addならnewBoardItemState.items.lengthで最後の位置に格納
