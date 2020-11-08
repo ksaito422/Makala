@@ -62,7 +62,7 @@ const regularExpressions = /^.+/;
                   item={item}
                   index={index}
                   key={item.id}
-                  onClick={() => {
+                  OpenOnClick={() => {
                     setModalOpenState(true);
                     setmodalValueState({
                       ...modalValueState,
@@ -71,7 +71,7 @@ const regularExpressions = /^.+/;
                       content: item.content,
                     })
                   }}
-                  onClickClose={() => {
+                  DeleteOnClick={() => {
                     //  今のBoardItemの配列を受け取り、[index]を基にカードを削除
                     let newBoardItemState = { ...BoardItemState };
                     newBoardItemState.items.splice(index, 1);
