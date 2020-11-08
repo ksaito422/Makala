@@ -6,10 +6,10 @@ import {
 } from '@material-ui/core';
 
 type Props = {
-  title: string;
+  title: string,
 }
 
-export const Header: React.FC<Props> = (props) => {
+export const Header: React.FC<Props> = (props: Props) => {
   return (
     <AppBar color='primary' position='sticky'>
       <Toolbar>
@@ -18,5 +18,5 @@ export const Header: React.FC<Props> = (props) => {
         />
       </Toolbar>
     </AppBar>
-  )
+  );
 }

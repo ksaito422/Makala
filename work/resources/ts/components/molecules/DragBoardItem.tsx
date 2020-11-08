@@ -10,29 +10,24 @@ import {
   Typography,
 } from '@material-ui/core';
 
-type BoardItemProps = {
+type Props = {
   item: {
     id: string,
     title: string,
     content: string,
   },
   index: number,
-  onClick: (event: any) => void,
-  onClickClose: (event: any) => void,
+  openOnClick: () => void,
+  deleteOnClick: () => void,
 }
 
-export const DragBoardItem: React.FC<BoardItemProps> = ({
-  item,
-  index,
-  onClick,
-  onClickClose,
-}) => {
+export const DragBoardItem: React.FC<Props> = (props: Props) => {
   // classNameのインポート
   const { useStyles } = useContext<any>(StylesContext);
-  const classes = useStyles()
+  const classes = useStyles();
 
   return (
-    <Draggable draggableId={item.id} index={index}>
+    <Draggable draggableId={props.item.id} index={props.index}>
         {provided => (
           <Card
             ref={provided.innerRef}
@@ -42,26 +37,26 @@ export const DragBoardItem: React.FC<BoardItemProps> = ({
             className={classes.drag_card}
           >
             <CardHeader
-              title={item.title}
+              title={props.item.title}
               action={
                 <CloseIcon
-                  onClick={onClickClose}
+                  onClick={props.deleteOnClick}
                 />
               }
             />
             <Button
               variant='text'
               fullWidth
-              onClick={onClick}
+              onClick={props.openOnClick}
             >
               <CardContent>
                 <Typography>
-                  {item.content}
+                  {props.item.content}
                 </Typography>
               </CardContent>
             </Button>
           </Card>
         )}
     </Draggable>
-  )
+  );
 }

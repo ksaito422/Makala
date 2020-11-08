@@ -10,6 +10,7 @@ export const StylesContextProvider: React.FC = props => {
     main_container: {
       marginTop: theme.spacing(4),
     },
+    // dragBoradの高さとスクロール可否
     drop_able: {
       maxHeight: `80vh`,
       overflowY: 'scroll',
@@ -28,11 +29,20 @@ export const StylesContextProvider: React.FC = props => {
       boxShadow: theme.shadows[5],
       padding: theme.spacing(2, 4, 3),
     },
-    iconCenter: {
+    // アイコンを中央に
+    centerPlacement: {
       textAlign: 'center'
     },
-    iconRight: {
+    // アイコンを右に
+    rightPlacement: {
       textAlign: 'right'
+    },
+    // MarkdownPreview Paperのスタイル
+    preview: {
+      height: `80vh`,
+      maxHeight: `80vh`,
+      overflowY: 'scroll',
+      padding: `16px`,
     },
   }));
 

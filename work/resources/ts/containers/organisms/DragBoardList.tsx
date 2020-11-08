@@ -62,7 +62,7 @@ const regularExpressions = /^.+/;
                   item={item}
                   index={index}
                   key={item.id}
-                  onClick={() => {
+                  openOnClick={() => {
                     setModalOpenState(true);
                     setmodalValueState({
                       ...modalValueState,
@@ -71,7 +71,7 @@ const regularExpressions = /^.+/;
                       content: item.content,
                     })
                   }}
-                  onClickClose={() => {
+                  deleteOnClick={() => {
                     //  今のBoardItemの配列を受け取り、[index]を基にカードを削除
                     let newBoardItemState = { ...BoardItemState };
                     newBoardItemState.items.splice(index, 1);
@@ -86,9 +86,9 @@ const regularExpressions = /^.+/;
           )}
         </Droppable>
       </DragDropContext>
-      <div className={classes.iconCenter}>
+      <div className={classes.centerPlacement}>
         <AddIcon
-          onClickAdd={() => {
+          onClick={() => {
             // 重複してるため、後で一箇所にまとめる setModalOpenState(true);
             setModalOpenState(true);
             setmodalValueState({
@@ -108,17 +108,17 @@ const regularExpressions = /^.+/;
           regularExpressions.test(modalValueState.content) ? undefined : '内容を入力してください'
         }
         modalOpen={modalOpenState}
-        onClose={modalClose}
+        modalOnClose={modalClose}
         // 押したボタンの番号によって、表示内容を変える
         defaultValueTitle={modalValueState.title}
         defaultValueContent={modalValueState.content}
-        onChangeTitle={(e) => {
+        titleOnChange={(e) => {
           setmodalValueState({ ...modalValueState, title: e.target.value })
         }}
-        onChangeContent={(e) => {
+        contentOnChange={(e) => {
           setmodalValueState({ ...modalValueState, content: e.target.value })
         }}
-        onClick={() => {
+        postOnClick={() => {
           /** 今のBoardItemの配列を受け取り、更新部分だけ新しい値に入れ替える
             * updateなら既存のindexに格納
             * addならnewBoardItemState.items.lengthで最後の位置に格納
@@ -136,6 +136,10 @@ const regularExpressions = /^.+/;
           )
           modalClose();
         }}
+        disabled={
+          // クソコードだから整理したい
+          modalValueState.title === null || modalValueState.content === null ? (true) : (
+          regularExpressions.test(modalValueState.title) && regularExpressions.test(modalValueState.content) ? (false) : (true))}
       />
     </>
   )

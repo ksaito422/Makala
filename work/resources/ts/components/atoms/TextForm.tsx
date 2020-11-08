@@ -1,7 +1,7 @@
 import React from 'react';
 import { TextField } from '@material-ui/core';
 
-type TextFormProps = {
+type Props = {
   error?: boolean,
   helperText?: string,
   multiline?: boolean,
@@ -9,30 +9,21 @@ type TextFormProps = {
   rowsMax?: number,
   rows?: number,
   defaultValue?: string,
-  onChange: (event: any) => void,
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
 }
 
-export const TextForm: React.FC<TextFormProps> = ({
-  error,
-  helperText,
-  multiline,
-  fullWidth,
-  rowsMax,
-  rows,
-  defaultValue,
-  onChange
-}) => {
+export const TextForm: React.FC<Props> = (props: Props) => {
   return (
     <TextField
-      error={error}
-      helperText={helperText}
-      multiline={multiline}
-      fullWidth={fullWidth}
-      rowsMax={rowsMax}
-      rows={rows}
-      defaultValue={defaultValue}
+      error={props.error}
+      helperText={props.helperText}
+      multiline={props.multiline}
+      fullWidth={props.fullWidth}
+      rowsMax={props.rowsMax}
+      rows={props.rows}
+      defaultValue={props.defaultValue}
       variant='filled'
-      onChange={onChange}
+      onChange={props.onChange}
     />
-  )
+  );
 }
