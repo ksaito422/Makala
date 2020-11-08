@@ -12,16 +12,14 @@ export const ButtonGroup: React.FC<Props> = (props: Props) => {
   return (
     <>
       <Button
-        color='secondary'
         disabled={props.disabledCard}
-        onClick={props.CardOnClick}
+        ButtonOnClick={props.CardOnClick}
       >
         CARD
       </Button>
       <Button
-        color='secondary'
         disabled={props.disabledPreview}
-        onClick={props.PreviewOnClick}
+        ButtonOnClick={props.PreviewOnClick}
       >
         PREVIEW
       </Button>

@@ -1,22 +1,21 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import {
   Button as MuiButton
 } from '@material-ui/core';
 
 type Props = {
-  color: any,
   disabled?: boolean,
-  onClick: () => void,
   children: string,
+  ButtonOnClick: () => void,
 }
 
 export const Button: React.FC<Props> = (props: Props) => {
   return (
     <MuiButton
       variant='contained'
-      color={props.color}
+      color='secondary'
       disabled={props.disabled}
-      onClick={props.onClick}
+      onClick={props.ButtonOnClick}
     >
       {props.children}
     </MuiButton>
