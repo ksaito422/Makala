@@ -8,19 +8,19 @@ import {
   Modal,
 } from '@material-ui/core';
 
-type ModalProps = {
+type Props = {
   errorTitle?: boolean,
   helperTextTitle?: string,
   errorContent?: boolean,
   helperTextContent?: string,
-  onClose: (event: any) => void,
   modalOpen: boolean,
   defaultValueTitle: string,
   defaultValueContent: string,
-  onChangeTitle: (event: any) => void,
-  onChangeContent: (event: any) => void,
-  onClick: (event: any) => void,
   disabled?: boolean,
+  onChangeTitle: (event: React.ChangeEvent<HTMLInputElement>) => void,
+  onChangeContent: (event: React.ChangeEvent<HTMLInputElement>) => void,
+  onClickPost: () => void,
+  onCloseModal: () => void,
 }
 
 // モーダルの表示位置を決める
@@ -36,72 +36,60 @@ function getModalStyle() {
   };
 }
 
-export const ModalWindow: React.FC<ModalProps> = ({
-  errorTitle,
-  helperTextTitle,
-  errorContent,
-  helperTextContent,
-  onClose,
-  modalOpen,
-  defaultValueTitle,
-  defaultValueContent,
-  onChangeTitle,
-  onChangeContent,
-  onClick,
-  disabled,
-}) => {
+export const ModalWindow: React.FC<Props> = (props: Props) => {
   // classNameのインポート
+  // モーダルの位置を指定したstate
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles()
-  const [modalStyle] = useState(getModalStyle);
+  const [modalStyleState] = useState(getModalStyle);
 
-  // モーダルの中身
+  // モーダルに表示する内容の定義
   const modalBody = (
-    <div style={modalStyle} className={classes.modal}>
+    <div style={modalStyleState} className={classes.modal}>
       <Grid container spacing={4}>
         <Grid item xs={12} className={classes.iconRight}>
           <CloseIcon
-            onClick={onClose}
+            onClick={props.onCloseModal}
           />
         </Grid>
         <Grid item xs={12}>
           <TextForm
-            error={errorTitle}
-            helperText={helperTextTitle}
+            error={props.errorTitle}
+            helperText={props.helperTextTitle}
             multiline
             fullWidth
             rowsMax={1}
-            defaultValue={defaultValueTitle}
-            onChange={onChangeTitle}
+            defaultValue={props.defaultValueTitle}
+            onChange={props.onChangeTitle}
           />
         </Grid>
         <Grid item xs={12}>
           <TextForm
-            error={errorContent}
-            helperText={helperTextContent}
+            error={props.errorContent}
+            helperText={props.helperTextContent}
             multiline
             fullWidth
             rows={8}
-            defaultValue={defaultValueContent}
-            onChange={onChangeContent}
+            defaultValue={props.defaultValueContent}
+            onChange={props.onChangeContent}
           />
         </Grid>
         <Grid item xs={12} className={classes.iconCenter}>
           <UpdateIcon
-            onClick={onClick}
-            disabled={disabled}
+            onClick={props.onClickPost}
+            disabled={props.disabled}
           />
         </Grid>
       </Grid>
     </div>
-  )
+  );
 
   return (
     <Modal
-      open={modalOpen}
-      onClose={onClose}
+      open={props.modalOpen}
+      onClose={props.onCloseModal}
     >
       {modalBody}
     </Modal>
-  )
+  );
 }
