@@ -17,10 +17,10 @@ type Props = {
   defaultValueTitle: string,
   defaultValueContent: string,
   disabled?: boolean,
-  TitleOnChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
-  ContentOnChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
-  PostOnClick: () => void,
-  ModalOnClose: () => void,
+  titleOnChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
+  contentOnChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
+  postOnClick: () => void,
+  modalOnClose: () => void,
 }
 
 // モーダルの表示位置を決める
@@ -49,7 +49,7 @@ export const ModalWindow: React.FC<Props> = (props: Props) => {
       <Grid container spacing={4}>
         <Grid item xs={12} className={classes.iconRight}>
           <CloseIcon
-            onClick={props.ModalOnClose}
+            onClick={props.modalOnClose}
           />
         </Grid>
         <Grid item xs={12}>
@@ -60,7 +60,7 @@ export const ModalWindow: React.FC<Props> = (props: Props) => {
             fullWidth
             rowsMax={1}
             defaultValue={props.defaultValueTitle}
-            onChange={props.TitleOnChange}
+            onChange={props.titleOnChange}
           />
         </Grid>
         <Grid item xs={12}>
@@ -71,12 +71,12 @@ export const ModalWindow: React.FC<Props> = (props: Props) => {
             fullWidth
             rows={8}
             defaultValue={props.defaultValueContent}
-            onChange={props.ContentOnChange}
+            onChange={props.contentOnChange}
           />
         </Grid>
         <Grid item xs={12} className={classes.iconCenter}>
           <UpdateIcon
-            onClick={props.PostOnClick}
+            onClick={props.postOnClick}
             disabled={props.disabled}
           />
         </Grid>
@@ -87,7 +87,7 @@ export const ModalWindow: React.FC<Props> = (props: Props) => {
   return (
     <Modal
       open={props.modalOpen}
-      onClose={props.ModalOnClose}
+      onClose={props.modalOnClose}
     >
       {modalBody}
     </Modal>

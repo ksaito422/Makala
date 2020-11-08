@@ -17,8 +17,8 @@ type Props = {
     content: string,
   },
   index: number,
-  OpenOnClick: () => void,
-  DeleteOnClick: () => void,
+  openOnClick: () => void,
+  deleteOnClick: () => void,
 }
 
 export const DragBoardItem: React.FC<Props> = (props: Props) => {
@@ -40,14 +40,14 @@ export const DragBoardItem: React.FC<Props> = (props: Props) => {
               title={props.item.title}
               action={
                 <CloseIcon
-                  onClick={props.DeleteOnClick}
+                  onClick={props.deleteOnClick}
                 />
               }
             />
             <Button
               variant='text'
               fullWidth
-              onClick={props.OpenOnClick}
+              onClick={props.openOnClick}
             >
               <CardContent>
                 <Typography>

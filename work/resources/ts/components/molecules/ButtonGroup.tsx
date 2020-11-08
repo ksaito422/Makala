@@ -4,8 +4,8 @@ import { Button } from '../atoms/Button';
 type Props = {
   disabledCard: boolean,
   disabledPreview: boolean,
-  CardOnClick: () => void,
-  PreviewOnClick: () => void,
+  cardOnClick: () => void,
+  previewOnClick: () => void,
 }
 
 export const ButtonGroup: React.FC<Props> = (props: Props) => {
@@ -13,13 +13,13 @@ export const ButtonGroup: React.FC<Props> = (props: Props) => {
     <>
       <Button
         disabled={props.disabledCard}
-        onClick={props.CardOnClick}
+        onClick={props.cardOnClick}
       >
         CARD
       </Button>
       <Button
         disabled={props.disabledPreview}
-        onClick={props.PreviewOnClick}
+        onClick={props.previewOnClick}
       >
         PREVIEW
       </Button>

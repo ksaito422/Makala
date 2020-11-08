@@ -62,7 +62,7 @@ const regularExpressions = /^.+/;
                   item={item}
                   index={index}
                   key={item.id}
-                  OpenOnClick={() => {
+                  openOnClick={() => {
                     setModalOpenState(true);
                     setmodalValueState({
                       ...modalValueState,
@@ -71,7 +71,7 @@ const regularExpressions = /^.+/;
                       content: item.content,
                     })
                   }}
-                  DeleteOnClick={() => {
+                  deleteOnClick={() => {
                     //  今のBoardItemの配列を受け取り、[index]を基にカードを削除
                     let newBoardItemState = { ...BoardItemState };
                     newBoardItemState.items.splice(index, 1);
@@ -108,17 +108,17 @@ const regularExpressions = /^.+/;
           regularExpressions.test(modalValueState.content) ? undefined : '内容を入力してください'
         }
         modalOpen={modalOpenState}
-        ModalOnClose={modalClose}
+        modalOnClose={modalClose}
         // 押したボタンの番号によって、表示内容を変える
         defaultValueTitle={modalValueState.title}
         defaultValueContent={modalValueState.content}
-        TitleOnChange={(e) => {
+        titleOnChange={(e) => {
           setmodalValueState({ ...modalValueState, title: e.target.value })
         }}
-        ContentOnChange={(e) => {
+        contentOnChange={(e) => {
           setmodalValueState({ ...modalValueState, content: e.target.value })
         }}
-        PostOnClick={() => {
+        postOnClick={() => {
           /** 今のBoardItemの配列を受け取り、更新部分だけ新しい値に入れ替える
             * updateなら既存のindexに格納
             * addならnewBoardItemState.items.lengthで最後の位置に格納
