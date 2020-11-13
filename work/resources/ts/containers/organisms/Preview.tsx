@@ -27,15 +27,22 @@ export const Preview: React.FC<Props> = (props: Props) => {
     previewText += key.title + key.content + '<br>'
   });
 
+  const downloadFile = () => {
+    const element = document.createElement("a");
+    const file = new Blob([previewText], {type: 'text/plain'});
+    element.href = URL.createObjectURL(file);
+    element.download = "myFile.md";
+    document.body.appendChild(element); // Required for this to work in FireFox
+    element.click();
+  }
+
   return (
     <>
       <Paper elevation={3} className={classes.preview}>
         <MarkdownPreview source={previewText} />
       </ Paper>
       <DownloadIcon
-        onClick={() => {
-          console.log('download!');
-        }}
+        onClick={downloadFile}
       />
     </>
   );
