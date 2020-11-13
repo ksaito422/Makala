@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import MarkdownPreview from '@uiw/react-markdown-preview';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import { Paper } from '@material-ui/core';
+import { DownloadIcon } from '../../components/atoms/DownloadIcon';
 
 type Props = {
   items: [
@@ -27,8 +28,15 @@ export const Preview: React.FC<Props> = (props: Props) => {
   });
 
   return (
-    <Paper elevation={3} className={classes.preview}>
-      <MarkdownPreview source={previewText} />
-    </ Paper>
+    <>
+      <Paper elevation={3} className={classes.preview}>
+        <MarkdownPreview source={previewText} />
+      </ Paper>
+      <DownloadIcon
+        onClick={() => {
+          console.log('download!');
+        }}
+      />
+    </>
   );
 }
