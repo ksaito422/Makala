@@ -3,7 +3,6 @@ import { TextForm } from '../atoms/TextForm';
 import { CloseIcon } from '../atoms/CloseIcon';
 import { UpdateIcon } from '../atoms/UpdateIcon';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
-import MDEditor from '@uiw/react-md-editor';
 import {
   Grid,
   Modal,
@@ -65,7 +64,7 @@ export const ModalWindow: React.FC<Props> = (props: Props) => {
           />
         </Grid>
         <Grid item xs={12}>
-          {/* <TextForm
+          <TextForm
             error={props.errorContent}
             helperText={props.helperTextContent}
             multiline
@@ -73,11 +72,6 @@ export const ModalWindow: React.FC<Props> = (props: Props) => {
             rows={8}
             defaultValue={props.defaultValueContent}
             onChange={props.contentOnChange}
-          /> */}
-          <MDEditor
-            value={props.defaultValueContent}
-            // onChange={props.contentOnChange}
-            // previewOptions={false}
           />
         </Grid>
         <Grid item xs={12} className={classes.centerPlacement}>
