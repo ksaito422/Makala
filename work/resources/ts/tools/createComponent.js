@@ -14,6 +14,7 @@ if (!program.component) {
   program.help();
 }
 
+// '/'ごとに分けて配列にする    例:[coponents, atoms, originalComponent]
 const argument = program.component.split("/");
 const dir = argument[0];
 const granularity = argument[1];
@@ -38,36 +39,25 @@ if (["containers"].includes(dir)){
   }
 }
 
-// If the directory is not yet created, create it.
-// if (!fs.existsSync(`./src/components/${dir}`)) {
-//   fs.mkdirSync(`./src/components/${dir}`);
-// }
+// ディレクトリがなかったら作る
+if (!fs.existsSync(`./resources/ts/${dir}/${granularity}`)) {
+  fs.mkdirSync(`./resources/ts/${dir}/${granularity}`);
+}
 
 // コピー元となるファイル
 const template = "./resources/ts/tools/componentTemplates/Component.tsx";
 // コピー先のディレクトリ
 const dests = `./resources/ts/${dir}/${granularity}/${component}.tsx`;
 
+// 既にファイルが存在する場合は上書きしないようにリターンする
+if (fs.existsSync(dests)) {
+  console.log(`There are already files in that ${dests}`);
+  return;
+}
+
+// コンポーネントを作成
 fs.copyFileSync(
   template,
   dests
 );
 console.log(`✨ Create component template ${dests}`);
-// console.log(dests);
-
-// fs.mkdirSync(`./resources/ts/components/${dir}/${granularity}/${component}`);
-
-// Error when a component already exists
-// templates.forEach((template, index) => {
-//   fs.copyFileSync(
-//     template,
-//     dests[index],
-//     fs.constants.COPYFILE_EXCL,
-//     (error) => {
-//       if (error) {
-//         throw error;
-//       }
-//     }
-//   );
-  // console.log(`✨ Create component template ${dests[index]}`);
-// });
