@@ -24,7 +24,8 @@ export const Preview: React.FC<Props> = (props: Props) => {
   // 最後にpreviewTextをMarkdownPreviewで表示する
   let previewText: string = '';
   const tmp = props.items.forEach(key => {
-    previewText += key.title + key.content + '<br>'
+    // プレビューに表示するテキスト内容をカスタマイズしている
+    previewText += '# ' + key.title + '\n' + key.content + '\n\n'
   });
 
   const downloadFile = () => {
