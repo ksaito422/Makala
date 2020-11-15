@@ -13,7 +13,16 @@ class Card extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('card', function(Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->bigInteger('board_id')->unsigned();
+            $table->text('title');
+            $table->text('content');
+
+            $table->foreign('board_id')
+                  ->references('id')
+                  ->on('board_list');
+        });
     }
 
     /**
@@ -23,6 +32,6 @@ class Card extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('card');
     }
 }
