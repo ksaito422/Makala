@@ -13,7 +13,16 @@ class BoardList extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('board_list', function(Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->bigInteger('user_id')->unsigned();
+            $table->text('board_name');
+            $table->timestamps();
+
+            $table->foreign('user_id')
+                  ->references('id')
+                  ->on('users');
+        });
     }
 
     /**
@@ -23,6 +32,6 @@ class BoardList extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('board_list');
     }
 }
