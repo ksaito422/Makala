@@ -18,6 +18,7 @@ class Cards extends Migration
             $table->bigInteger('board_id')->unsigned();
             $table->text('title');
             $table->text('content');
+            $table->timestamps();
 
             $table->foreign('board_id')
                   ->references('id')
