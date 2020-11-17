@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class BoardList extends Migration
+class Boards extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class BoardList extends Migration
      */
     public function up()
     {
-        Schema::create('board_list', function(Blueprint $table) {
+        Schema::create('boards', function(Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned();
             $table->text('board_name');
@@ -32,6 +32,6 @@ class BoardList extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('board_list');
+        Schema::dropIfExists('boards');
     }
 }
