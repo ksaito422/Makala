@@ -31,7 +31,11 @@ class BoardController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $board = new Board();
+        $board->user_id = $request->user_id;
+        $board->board_name = $request->board_name;
+        $board->save();
+        return response()->json(['message' => '新しいボードを作成しました。']);
     }
 
     /**
