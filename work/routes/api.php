@@ -16,3 +16,14 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group(['middoleware' => 'api'], function() {
+    Route::apiResource('/v1/boards', 'Api\BoardController')
+        ->names([
+            'index' => 'board.index',
+            'store' => 'board.store',
+            'show' => 'board.show',
+            'update' => 'board.update',
+            'destroy' => 'board.destroy'
+        ]);
+});
