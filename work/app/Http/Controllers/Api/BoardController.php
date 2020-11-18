@@ -47,7 +47,10 @@ class BoardController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $board = Board::find($id);
+        $board->board_name = $request->board_name;
+        $board->save();
+        return response()->json(['message' => 'ボード名を変更しました。']);
     }
 
     /**
