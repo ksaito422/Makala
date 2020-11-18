@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Model\Board;
 
 class BoardController extends Controller
 {
@@ -14,7 +15,12 @@ class BoardController extends Controller
      */
     public function index()
     {
-        //
+        // とりあえずuser_idを1に固定した
+        $boards = Board::where('user_id', 1)
+                        ->get();
+        return response()->json([
+            'boards' => $boards
+        ], 200, [], JSON_UNESCAPED_UNICODE);
     }
 
     /**
