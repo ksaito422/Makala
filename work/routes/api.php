@@ -18,11 +18,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::group(['middoleware' => 'api'], function() {
-    Route::apiResource('/v1/boards', 'Api\BoardController')
+    Route::apiResource('/v1/boards', 'Api\BoardController', ['except' => 'show'])
         ->names([
             'index' => 'board.index',
             'store' => 'board.store',
-            'show' => 'board.show',
             'update' => 'board.update',
             'destroy' => 'board.destroy'
         ]);
