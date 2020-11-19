@@ -61,6 +61,8 @@ class BoardController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $board = Board::find($id)
+                        ->delete();
+        return response()->json(['message' => 'ボードを削除しました。']);
     }
 }
