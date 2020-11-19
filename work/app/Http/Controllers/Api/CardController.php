@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Model\Card;
 
 class CardController extends Controller
 {
@@ -25,7 +26,14 @@ class CardController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $cards = new Card();
+        $cards->board_id = $request->board_id;
+        $cards->title = $request->title;
+        $cards->content = $request->content;
+        $cards->save();
+        return response()->json([
+            'message' => '新しいカードを作成しました。'
+        ], 201, [], JSON_UNESCAPED_UNICODE);
     }
 
     /**
