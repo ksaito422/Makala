@@ -18,19 +18,20 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::group(['middleware' => 'api'], function() {
-    Route::apiResource('/v1/boards', 'Api\BoardController', ['except' => 'show'])
+    Route::get('/v1/boards/{user}', 'Api\BoardController@index');
+
+    Route::apiResource('/v1/boards', 'Api\BoardController', ['except' => 'index', 'show'])
         ->names([
-            'index' => 'board.index',
             'store' => 'board.store',
             'update' => 'board.update',
             'destroy' => 'board.destroy'
         ]);
 
-        Route::apiResource('/v1/cards', 'Api\CardController', ['except' => 'index'])
-        ->names([
-            'store' => 'cards.store',
-            'show' => 'cards.show',
-            'update' => 'cards.update',
-            'destroy' => 'cards.destroy'
-        ]);
+    Route::apiResource('/v1/cards', 'Api\CardController', ['except' => 'index'])
+    ->names([
+        'store' => 'cards.store',
+        'show' => 'cards.show',
+        'update' => 'cards.update',
+        'destroy' => 'cards.destroy'
+    ]);
 });
