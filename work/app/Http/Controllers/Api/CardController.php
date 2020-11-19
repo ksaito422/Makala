@@ -44,7 +44,11 @@ class CardController extends Controller
      */
     public function show($id)
     {
-        //
+        $cards = Card::where('board_id', $id)
+                    ->get();
+        return response()->json([
+            'cards' => $cards
+        ], 200, [], JSON_UNESCAPED_UNICODE);
     }
 
     /**
