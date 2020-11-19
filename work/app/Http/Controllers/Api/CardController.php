@@ -60,7 +60,13 @@ class CardController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $card = Card::find($id);
+        $card->title = $request->title;
+        $card->content = $request->content;
+        $card->save();
+        return response()->json([
+            'message' => 'カードの内容を変更しました。'
+        ], 200, [], JSON_UNESCAPED_UNICODE);
     }
 
     /**
