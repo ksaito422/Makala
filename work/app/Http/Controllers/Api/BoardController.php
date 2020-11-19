@@ -13,10 +13,9 @@ class BoardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        // とりあえずuser_idを1に固定した
-        $boards = Board::where('user_id', 1)
+        $boards = Board::where('user_id', $id)
                         ->get();
         return response()->json([
             'boards' => $boards
