@@ -24,11 +24,12 @@ class BoardControllerTest extends TestCase
      */
     public function indexメソッドで自分の投稿だけ取得できる()
     {
-        $url = route('board.index', ['user' => 1]);
+        $url = route('board.index', ['user' => $this->user->id]);
 
         $this->get($url)
             ->assertOk()
             ->assertSeeText('boards')
+            ->assertJsonFragment(['user_id' => $this->user->id])
             ->assertHeader('Content-Type', 'application/json');;
     }
 
