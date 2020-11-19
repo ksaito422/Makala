@@ -77,6 +77,10 @@ class CardController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $card = Card::find($id)
+                    ->delete();
+        return response()->json([
+            'message' => 'カードを削除しました。'
+        ], 200, [], JSON_UNESCAPED_UNICODE);
     }
 }
