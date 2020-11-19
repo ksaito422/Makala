@@ -25,4 +25,12 @@ Route::group(['middoleware' => 'api'], function() {
             'update' => 'board.update',
             'destroy' => 'board.destroy'
         ]);
+
+        Route::apiResource('/v1/cards', 'Api\CardController', ['except' => 'index'])
+        ->names([
+            'store' => 'cards.store',
+            'show' => 'cards.show',
+            'update' => 'cards.update',
+            'destroy' => 'cards.destroy'
+        ]);
 });
