@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\User;
+use App\Model\Board;
 
 class BoardControllerTest extends TestCase
 {
@@ -17,6 +18,7 @@ class BoardControllerTest extends TestCase
         parent::setUp();
         $this->artisan('migrate:fresh --seed --env=testing');
         $this->user = User::first();
+        $this->board = Board::first();
     }
 
     /**
@@ -48,6 +50,24 @@ class BoardControllerTest extends TestCase
         $this->post($url, $data)
             ->assertOk()
             ->assertJsonFragment(['message' => '新しいボードを作成しました。'])
+            ->assertJsonCount(1)
+            ->assertHeader('Content-Type', 'application/json');
+    }
+
+    /**
+     * @test
+     */
+    public function updateメソッドでボード名を更新できる()
+    {
+        $url = route('board.update', ['board' => $this->board->id]);
+
+        $data = [
+            'board_name' => 'test update'
+        ];
+
+        $this->put($url, $data)
+            ->assertOk()
+            ->assertJsonFragment(['message' => 'ボード名を変更しました。'])
             ->assertJsonCount(1)
             ->assertHeader('Content-Type', 'application/json');
     }
