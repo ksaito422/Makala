@@ -17,4 +17,24 @@ class CardControllerTest extends TestCase
         $this->user = User::first();
         $this->board = Card::first();
     }
+
+    /**
+     * @test
+     */
+    public function storeメソッドでカードを保存できる()
+    {
+        $url = route('cards.store');
+
+        $data = [
+            'board_id' => 1,
+            'title' => 'test',
+            'content' => 'test'
+        ];
+
+        $this->post($url, $data)
+            ->assertStatus(201)
+            ->assertJsonFragment(['message' => '新しいカードを作成しました。'])
+            ->assertJsonCount(1)
+            ->assertHeader('Content-Type', 'application/json');
+    }
 }
