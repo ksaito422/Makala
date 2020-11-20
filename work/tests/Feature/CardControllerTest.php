@@ -17,7 +17,7 @@ class CardControllerTest extends TestCase
         $this->artisan('migrate:fresh --seed --env=testing');
         $this->user = User::first();
         $this->board = Board::first();
-        $this->board = Card::first();
+        $this->card = Card::first();
     }
 
     /**
@@ -51,6 +51,25 @@ class CardControllerTest extends TestCase
             ->assertOk()
             ->assertSeeText('cards')
             ->assertJsonFragment(['board_id' => $this->board->id])
+            ->assertHeader('Content-Type', 'application/json');
+    }
+
+    /**
+     * @test
+     */
+    public function updateメソッドでカードを更新できる()
+    {
+        $url = route('cards.update', ['card' => $this->card->id]);
+
+        $data = [
+            'title' => 'title',
+            'content' => 'content'
+        ];
+
+        $this->put($url, $data)
+            ->assertOk()
+            ->assertJsonFragment(['message' => 'カードの内容を変更しました。'])
+            ->assertJsonCount(1)
             ->assertHeader('Content-Type', 'application/json');
     }
 }
