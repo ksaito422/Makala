@@ -22,7 +22,8 @@ class Cards extends Migration
 
             $table->foreign('board_id')
                   ->references('id')
-                  ->on('boards');
+                  ->on('boards')
+                  ->onDelete('cascade');
         });
     }
 
