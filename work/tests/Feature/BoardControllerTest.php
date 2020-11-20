@@ -71,4 +71,18 @@ class BoardControllerTest extends TestCase
             ->assertJsonCount(1)
             ->assertHeader('Content-Type', 'application/json');
     }
+
+    /**
+     * @test
+     */
+    public function destroyメソッドでボードを削除できる()
+    {
+        $url = route('board.destroy', ['board' => $this->board->id]);
+
+        $this->delete($url)
+            ->assertOk()
+            ->assertJsonFragment(['message' => 'ボードを削除しました。'])
+            ->assertJsonCount(1)
+            ->assertHeader('Content-Type', 'application/json');
+    }
 }
