@@ -72,4 +72,18 @@ class CardControllerTest extends TestCase
             ->assertJsonCount(1)
             ->assertHeader('Content-Type', 'application/json');
     }
+
+    /**
+     * @test
+     */
+    public function destroyメソッドでカードを削除できる()
+    {
+        $url = route('cards.destroy', ['card' => $this->card->id]);
+
+        $this->delete($url)
+            ->assertOk()
+            ->assertJsonFragment(['message' => 'カードを削除しました。'])
+            ->assertJsonCount(1)
+            ->assertHeader('Content-Type', 'application/json');
+    }
 }
