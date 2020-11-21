@@ -6,7 +6,8 @@ import {
 type Props = {
   disabled?: boolean,
   children: string,
-  onClick: () => void,
+  fullWidth?: boolean,
+  onClick?: () => void,
 }
 
 export const Button: React.FC<Props> = (props: Props) => {
@@ -15,6 +16,7 @@ export const Button: React.FC<Props> = (props: Props) => {
       variant='contained'
       color='secondary'
       disabled={props.disabled}
+      fullWidth={props.fullWidth}
       onClick={props.onClick}
     >
       {props.children}
