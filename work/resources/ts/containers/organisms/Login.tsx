@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Button } from '../../components/atoms/Button';
 import { TextForm } from '../../components/atoms/TextForm';
@@ -12,18 +12,20 @@ import {
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
 export const Login: React.FC = () => {
+  const { useStyles } = useContext<any>(StylesContext);
+  const classes = useStyles();
   const history = useHistory();
 
   return (
     <>
-      <Container maxWidth='sm'>
+      <Container maxWidth='sm' className={classes.auth}>
         <Avatar>
           <LockOutlinedIcon />
         </Avatar>
         <Typography>
           ログイン
         </Typography>
-        <form noValidate>
+        <form noValidate className={classes.auth_form}>
           <TextForm
             fullWidth
             required
@@ -43,7 +45,7 @@ export const Login: React.FC = () => {
             autoComplete="current-password"
           />
         </form>
-        <Grid container spacing={10}>
+        <Grid container spacing={10} className={classes.main_container}>
           <Grid item xs={6}>
             <Button
               fullWidth
