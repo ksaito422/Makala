@@ -44,6 +44,10 @@ export const StylesContextProvider: React.FC = props => {
       overflowY: 'scroll',
       padding: `16px`,
     },
+    // AccodionAreaのgif画の高さ
+    gif: {
+      height: `60vh`,
+    },
   }));
 
   return (
