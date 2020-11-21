@@ -9,7 +9,14 @@ type Props = {
   rowsMax?: number,
   rows?: number,
   defaultValue?: string,
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
+  margin?: "none" | "dense" | "normal",
+  label?: string,
+  name?: string,
+  type?: string,
+  autoComplete?: string,
+  required?: boolean,
+  autoFocus?: boolean,
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void,
 }
 
 export const TextForm: React.FC<Props> = (props: Props) => {
@@ -23,6 +30,13 @@ export const TextForm: React.FC<Props> = (props: Props) => {
       rows={props.rows}
       defaultValue={props.defaultValue}
       variant='filled'
+      margin={props.margin}
+      label={props.label}
+      name={props.name}
+      type={props.type}
+      autoComplete={props.autoComplete}
+      required={props.required}
+      autoFocus={props.autoFocus}
       onChange={props.onChange}
     />
   );
