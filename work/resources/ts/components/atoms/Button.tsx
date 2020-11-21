@@ -7,7 +7,7 @@ type Props = {
   disabled?: boolean,
   children: string,
   fullWidth?: boolean,
-  onClick?: () => void,
+  onClick: () => void,
 }
 
 export const Button: React.FC<Props> = (props: Props) => {
