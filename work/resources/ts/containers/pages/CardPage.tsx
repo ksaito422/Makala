@@ -29,7 +29,7 @@ const reorder = (
   return result;
 };
 
-export const HomePage = React.memo (() => {
+export const CardPage = React.memo (() => {
   // classNameのインポート
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
