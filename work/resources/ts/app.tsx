@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { TotalContextProvider } from './contexts/TotalContext';
 import { Top } from './containers/pages/Top';
-import { Login } from './containers/pages/Login';
+import { SignInPage } from './containers/pages/SignInPage';
 import { HomePage } from './containers/pages/HomePage';
 import { MuiTheme } from './theme/MuiTheme';
 import { MuiThemeProvider } from '@material-ui/core';
@@ -15,7 +15,7 @@ const App: React.FC = () => {
         <Switch>
           <MuiThemeProvider theme={MuiTheme}>
             <Route exact path='/' component={Top}></Route>
-            <Route exact path='/login' component={Login}></Route>
+            <Route exact path='/login' component={SignInPage}></Route>
             <Route exact path='/home' component={HomePage}></Route>
           </MuiThemeProvider>
         </Switch>
