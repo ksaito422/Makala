@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
-import { LinkButton } from '../../components/atoms/LinkButton';
+import { useHistory } from 'react-router-dom';
+import { Button } from '../../components/atoms/Button';
 import { AccordionArea } from '../../components/molecules/AccordionArea';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import {
@@ -11,6 +12,7 @@ import {
 export const Tutorial: React.FC = () => {
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
+  const history = useHistory();
 
   return (
     <>
@@ -32,20 +34,24 @@ export const Tutorial: React.FC = () => {
           <Grid item xs={5}>
             <Grid container spacing={4}>
               <Grid item xs={12}>
-                <LinkButton
-                  to={'/signin'}
+                <Button
                   fullWidth
+                  onClick={() => {
+                    history.push('/sign-in');
+                  }}
                 >
                   新規登録
-                </LinkButton>
+                </Button>
               </Grid>
               <Grid item xs={12}>
-                <LinkButton
-                  to={'/login'}
+                <Button
                   fullWidth
+                  onClick={() => {
+                    history.push('/login');
+                  }}
                 >
                   ログイン
-                </LinkButton>
+                </Button>
               </Grid>
             </Grid>
           </Grid>
