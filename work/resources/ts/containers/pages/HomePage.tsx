@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { Header } from '../organisms/Header';
 import { Boards } from '../organisms/Boards';
 import { GetBoardsContext } from '../../contexts/childContexts/GetBoardsContext';
+import { DeleteBoardContext } from '../../contexts/childContexts/DeleteBoardContext';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import {
   Container,
@@ -11,6 +12,7 @@ import {
 
 export const HomePage: React.FC = () => {
   const { boardsState, getBoards } = useContext<any>(GetBoardsContext);
+  const { deleteBoard } = useContext<any>(DeleteBoardContext);
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
 
@@ -31,6 +33,9 @@ export const HomePage: React.FC = () => {
           onClick={() => {
             // あとでポップアップメニューを表示する処理を書く
             console.log('hello');
+          }}
+          deleteOnClick={(id) => {
+            deleteBoard(id);
           }}
         />
       </Container>
