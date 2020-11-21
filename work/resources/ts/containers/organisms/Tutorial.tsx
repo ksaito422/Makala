@@ -12,7 +12,7 @@ type Props = {
 
 }
 
-export const Tutorial: React.FC<Props> = (props: Props) => {
+export const Tutorial: React.FC = () => {
   return (
     <>
       <p>トップ画面です</p>
