@@ -12,15 +12,8 @@ import {
  import DragIndicatorIcon from '@material-ui/icons/DragIndicator';
 
 type Props = {
-  data: any
-}
-
-function generate(element: React.ReactElement) {
-  return [0, 1, 2].map((value) =>
-    React.cloneElement(element, {
-      key: value,
-    }),
-  );
+  boards: any,
+  onClick: () => void,
 }
 
 export const Boards: React.FC<Props> = (props: Props) => {
@@ -29,18 +22,25 @@ export const Boards: React.FC<Props> = (props: Props) => {
       <Container maxWidth='sm'>
         <Paper elevation={3}>
           <List>
-            {generate(
-              <ListItem>
+            {props.boards.map((
+              board: {
+                board_name: string,
+              },
+              index: number
+              ) => (
+              <ListItem key={index}>
                 <ListItemIcon>
-                  <IconButton>
+                  <IconButton
+                    onClick={props.onClick}
+                  >
                     <DragIndicatorIcon />
                   </IconButton>
                 </ListItemIcon>
                 <ListItemText
-                  primary={props.data.boards[0].board_name}
+                  primary={board.board_name}
                 />
               </ListItem>
-            )}
+              ))}
           </List>
         </Paper>
       </Container>
