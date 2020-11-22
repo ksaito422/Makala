@@ -67,7 +67,6 @@ export const SignUp: React.FC = () => {
             <Button
               fullWidth
               onClick={() => {
-                // 新規登録api利用のロジックを書く
                 history.push('/sign-up/confirm');
               }}
             >
