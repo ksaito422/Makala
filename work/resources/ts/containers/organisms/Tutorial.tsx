@@ -37,7 +37,7 @@ export const Tutorial: React.FC = () => {
                 <Button
                   fullWidth
                   onClick={() => {
-                    history.push('/sign-in');
+                    history.push('/sign-up');
                   }}
                 >
                   新規登録
