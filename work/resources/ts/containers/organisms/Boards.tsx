@@ -4,6 +4,7 @@ import { CloseIcon } from '../../components/atoms/CloseIcon';
 import { ModalWindow } from '../../components/molecules/ModalWindow';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import {
+  Button,
   Container,
   IconButton,
   List,
@@ -21,6 +22,7 @@ type Props = {
   storeOnClick: (data: any) => void,
   postOnClick: (data: any) => void,
   deleteOnClick: (event: number) => void,
+  showOnClick: (data: number) => void,
 }
 
 export const Boards: React.FC<Props> = (props: Props) => {
@@ -72,9 +74,16 @@ export const Boards: React.FC<Props> = (props: Props) => {
                     <CreateIcon />
                   </IconButton>
                 </ListItemIcon>
-                <ListItemText
-                  primary={board.board_name}
-                />
+                <Button
+                  fullWidth
+                  onClick={() => {
+                    props.showOnClick(board.id)
+                  }}
+                >
+                  <ListItemText
+                    primary={board.board_name}
+                  />
+                </Button>
                 <ListItemSecondaryAction>
                   <CloseIcon
                     onClick={() => {

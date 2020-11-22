@@ -27,7 +27,7 @@ export const DragBoardItem: React.FC<Props> = (props: Props) => {
   const classes = useStyles();
 
   return (
-    <Draggable draggableId={props.item.id} index={props.index}>
+    <Draggable draggableId={String(props.item.id)} index={props.index}>
         {provided => (
           <Card
             ref={provided.innerRef}

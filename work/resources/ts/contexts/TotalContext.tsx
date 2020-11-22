@@ -4,6 +4,7 @@ import { GetBoardsContextProvider } from './childContexts/GetBoardsContext';
 import { StoreBoardContextProvider } from './childContexts/StoreBoardContext';
 import { UpdateBoardContextProvider } from './childContexts/UpdateBoardContext';
 import { DeleteBoardContextProvider } from './childContexts/DeleteBoardContext';
+import { ShowCardsContextProvider } from './childContexts/ShowCardsContext';
 import { BoardItemContextProvider } from './childContexts/BoardItemContext';
 
 export const TotalContext = createContext({});
@@ -15,9 +16,11 @@ export const TotalContextProvider: React.FC = props => {
         <StoreBoardContextProvider>
           <UpdateBoardContextProvider>
             <DeleteBoardContextProvider>
-              <BoardItemContextProvider>
-                {props.children}
-              </BoardItemContextProvider>
+              <ShowCardsContextProvider>
+                <BoardItemContextProvider>
+                  {props.children}
+                </BoardItemContextProvider>
+              </ShowCardsContextProvider>
             </DeleteBoardContextProvider>
           </UpdateBoardContextProvider>
         </StoreBoardContextProvider>
