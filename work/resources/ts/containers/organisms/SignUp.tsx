@@ -23,23 +23,40 @@ export const SignUp: React.FC = () => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography>
-          ログイン
+          アカウント作成
         </Typography>
         <form noValidate className={classes.auth_form}>
           <TextForm
             fullWidth
             required
             margin='normal'
-            label="Email Address"
-            name="email"
+            label="ユーザー名"
+            name="name"
             autoFocus
+            autoComplete="name"
+          />
+          <TextForm
+            fullWidth
+            required
+            margin='normal'
+            label="メールアドレス"
+            name="email"
             autoComplete="email"
           />
           <TextForm
             fullWidth
             required
             margin='normal'
-            label="Password"
+            label="パスワード"
+            name="password"
+            type='password'
+            autoComplete="current-password"
+          />
+          <TextForm
+            fullWidth
+            required
+            margin='normal'
+            label="パスワード再確認"
             name="password"
             type='password'
             autoComplete="current-password"
@@ -51,8 +68,7 @@ export const SignUp: React.FC = () => {
               fullWidth
               onClick={() => {
                 // 新規登録api利用のロジックを書く
-                console.log('sign in');
-                history.push('/home');
+                history.push('/sign-up/confirm');
               }}
             >
               新規登録
