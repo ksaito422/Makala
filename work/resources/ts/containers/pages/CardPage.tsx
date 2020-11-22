@@ -1,10 +1,10 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { ButtonGroup } from '../../components/molecules/ButtonGroup';
 import { Header } from '../organisms/Header';
 import { DragBoardList } from '../organisms/DragBoardList';
 import { Preview } from '../organisms/Preview';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
-import { BoardItemContext } from '../../contexts/childContexts/BoardItemContext';
+import { ShowCardsContext } from '../../contexts/childContexts/ShowCardsContext';
 import {
   Container,
   CssBaseline,
@@ -37,8 +37,12 @@ export const CardPage = React.memo (() => {
   // iPad Pro(1024px) < PC(1025px以上)を基準にレスポンシブ対応
   const matches = useMediaQuery('(min-width: 1025px)');
 
-  // dragItemのデータ 表示する内容のstateをBoardItemContextから読み取る
-  const { BoardItemState, setBoardItemState } = useContext<any>(BoardItemContext);
+  // dragItemのデータ 表示する内容のstateをShowCardsContextから読み取る
+  const { cardsState, showCards, setCardsState } = useContext<any>(ShowCardsContext);
+
+  useEffect(() => {
+    showCards(2);
+  }, []);
 
   const onDragEnd = (result: any) => {
     if (!result.destination) {
@@ -50,12 +54,13 @@ export const CardPage = React.memo (() => {
     }
 
     const items = reorder(
-      BoardItemState.items,
+      cardsState,
       result.source.index,
       result.destination.index
     );
-
-    setBoardItemState({ items });
+// バグあるから、あとでやる
+    setCardsState({ items });
+    console.log(items);
   };
 
   // width 1024px以下での表示レイアウト切り替え定義
@@ -77,7 +82,7 @@ export const CardPage = React.memo (() => {
             <Grid item xs={6}>
               <Container maxWidth='xl'>
                 <DragBoardList
-                  items={BoardItemState.items}
+                  items={cardsState}
                   onDragEnd={onDragEnd}
                 />
               </Container>
@@ -85,7 +90,7 @@ export const CardPage = React.memo (() => {
             <Grid item xs={6}>
               <Container maxWidth='xl'>
                 <Preview
-                  items={BoardItemState.items}
+                  items={cardsState}
                 />
               </Container>
             </Grid>
@@ -111,14 +116,14 @@ export const CardPage = React.memo (() => {
                 {/* cardOnClickでカード表示したら */}
                 {previewState.card &&
                   <DragBoardList
-                    items={BoardItemState.items}
+                    items={cardsState}
                     onDragEnd={onDragEnd}
                   />
                 }
                 {/* previewOnClickでプレビュー表示したら */}
                 {previewState.preview &&
                   <Preview
-                    items={BoardItemState.items}
+                    items={cardsState}
                   />
                 }
               </Grid>
