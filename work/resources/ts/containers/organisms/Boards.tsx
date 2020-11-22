@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { AddIcon } from '../../components/atoms/AddIcon';
 import { CloseIcon } from '../../components/atoms/CloseIcon';
 import { ModalWindow } from '../../components/molecules/ModalWindow';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
@@ -17,11 +18,15 @@ import CreateIcon from '@material-ui/icons/Create';
 type Props = {
   boards: any,
   // onClick: () => void,
+  storeOnClick: (data: any) => void,
   postOnClick: (data: any) => void,
   deleteOnClick: (event: number) => void,
 }
 
 export const Boards: React.FC<Props> = (props: Props) => {
+  // モーダルオープン時に新規作成か更新かを判別するstate
+  const [newModeState, setNewModeState] = useState<boolean>(false);
+
   // モーダルに渡す表示内容
   const [modalValueState, setmodalValueState] = useState<any>({
     id: null,
@@ -33,6 +38,8 @@ export const Boards: React.FC<Props> = (props: Props) => {
   const modalClose = () => {
     setModalOpenState(false);
     setmodalValueState({
+      // とりあえずuser_id 1で固定
+      user_id: 1,
       id: null,
       board_name: null
     });
@@ -83,7 +90,10 @@ export const Boards: React.FC<Props> = (props: Props) => {
           modalOpen={modalOpenState}
           modalOnClose={modalClose}
           postOnClick={() => {
-            props.postOnClick(modalValueState)
+            (newModeState?
+              props.storeOnClick(modalValueState) :
+              props.postOnClick(modalValueState)
+            )
           }}
           defaultValueTitle={modalValueState.board_name}
           // いらない
@@ -94,6 +104,12 @@ export const Boards: React.FC<Props> = (props: Props) => {
           // いらない
           contentOnChange={() => {
             console.log('hello')
+          }}
+        />
+        <AddIcon
+          onClick={() => {
+            setModalOpenState(true);
+            setNewModeState(true);
           }}
         />
       </Container>
