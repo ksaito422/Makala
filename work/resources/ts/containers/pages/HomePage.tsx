@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { Header } from '../organisms/Header';
 import { Boards } from '../organisms/Boards';
 import { GetBoardsContext } from '../../contexts/childContexts/GetBoardsContext';
+import { StoreBoardContext } from '../../contexts/childContexts/StoreBoardContext';
 import { UpdateBoardContext } from '../../contexts/childContexts/UpdateBoardContext';
 import { DeleteBoardContext } from '../../contexts/childContexts/DeleteBoardContext';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
@@ -13,6 +14,7 @@ import {
 
 export const HomePage: React.FC = () => {
   const { boardsState, getBoards } = useContext<any>(GetBoardsContext);
+  const { storeBoard } = useContext<any>(StoreBoardContext);
   const { updateBoard } = useContext<any>(UpdateBoardContext);
   const { deleteBoard } = useContext<any>(DeleteBoardContext);
   const { useStyles } = useContext<any>(StylesContext);
@@ -37,6 +39,10 @@ export const HomePage: React.FC = () => {
           //   // あとでポップアップメニューを表示する処理を書く
           //   console.log('hello');
           // }}
+          // 新しいボードの作成メソッド
+          storeOnClick={(data) => {
+            storeBoard(data);
+          }}
           // ボード名の更新メソッド
           postOnClick={(data) => {
             updateBoard(data.id, data);
