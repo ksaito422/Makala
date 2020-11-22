@@ -5,6 +5,7 @@ import { AddIcon } from '../../components/atoms/AddIcon';
 import { ModalWindow } from '../../components/molecules/ModalWindow';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import { BoardItemContext } from '../../contexts/childContexts/BoardItemContext';
+import { ShowCardsContext } from '../../contexts/childContexts/ShowCardsContext';
 
 type BoardListProps = {
   items?: any,
@@ -21,6 +22,7 @@ export const DragBoardList = React.memo<BoardListProps> (({
 
   // dragBoardItemのレンダーするデータを読み取り
   const { BoardItemState, setBoardItemState } = useContext<any>(BoardItemContext);
+  const { cardsState, setCardsState } = useContext<any>(ShowCardsContext);
 
   // モーダルに渡す表示内容
   const [modalValueState, setmodalValueState] = useState<any>({
@@ -73,9 +75,9 @@ const regularExpressions = /^.+/;
                   }}
                   deleteOnClick={() => {
                     //  今のBoardItemの配列を受け取り、[index]を基にカードを削除
-                    let newBoardItemState = { ...BoardItemState };
+                    let newBoardItemState = { ...cardsState };
                     newBoardItemState.items.splice(index, 1);
-                    setBoardItemState(
+                    setCardsState(
                       newBoardItemState,
                     );
                   }}
@@ -93,7 +95,7 @@ const regularExpressions = /^.+/;
             setModalOpenState(true);
             setmodalValueState({
               ...modalValueState,
-              id: String(BoardItemState.numberMade),
+              id: String(cardsState.numberMade),
             });
           }}
         />
@@ -124,15 +126,15 @@ const regularExpressions = /^.+/;
             * addならnewBoardItemState.items.lengthで最後の位置に格納
             * indexNumberに格納位置のindexを入れる
           */
-          const newBoardItemState = { ...BoardItemState };
+          const newBoardItemState = { ...cardsState };
           const searchIndex = newBoardItemState.items.findIndex(({id}: any) => id == modalValueState.id)
           const indexNumber = searchIndex > -1 ? searchIndex : newBoardItemState.items.length;
           newBoardItemState.items[indexNumber] = modalValueState;
-          setBoardItemState(
+          setCardsState(
             newBoardItemState,
           );
-          setBoardItemState(
-            { ...BoardItemState, numberMade: BoardItemState.numberMade + 1 }
+          setCardsState(
+            { ...cardsState, numberMade: cardsState.numberMade + 1 }
           )
           modalClose();
         }}
