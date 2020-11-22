@@ -11,7 +11,14 @@ import {
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
-export const SignUp: React.FC = () => {
+type Props = {
+  nameOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  mailOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  passwordOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  passConfirmOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+}
+
+export const SignUp: React.FC<Props> = props => {
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
   const history = useHistory();
@@ -34,6 +41,7 @@ export const SignUp: React.FC = () => {
             name="name"
             autoFocus
             autoComplete="name"
+            onChange={props.nameOnChange}
           />
           <TextForm
             fullWidth
@@ -42,6 +50,7 @@ export const SignUp: React.FC = () => {
             label="メールアドレス"
             name="email"
             autoComplete="email"
+            onChange={props.mailOnChange}
           />
           <TextForm
             fullWidth
@@ -51,6 +60,7 @@ export const SignUp: React.FC = () => {
             name="password"
             type='password'
             autoComplete="current-password"
+            onChange={props.passwordOnChange}
           />
           <TextForm
             fullWidth
@@ -60,6 +70,7 @@ export const SignUp: React.FC = () => {
             name="password"
             type='password'
             autoComplete="current-password"
+            onChange={props.passConfirmOnChange}
           />
         </form>
         <Grid container spacing={10} className={classes.main_container}>
@@ -67,7 +78,6 @@ export const SignUp: React.FC = () => {
             <Button
               fullWidth
               onClick={() => {
-                // 新規登録api利用のロジックを書く
                 history.push('/sign-up/confirm');
               }}
             >
