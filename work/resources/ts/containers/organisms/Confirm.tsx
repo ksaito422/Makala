@@ -11,7 +11,14 @@ import {
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
-export const Confirm: React.FC = () => {
+type Props = {
+  name: string,
+  email: string,
+  password: string,
+  pass_confirm: string
+}
+
+export const Confirm: React.FC<Props> = (props) => {
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
   const history = useHistory();
@@ -35,6 +42,7 @@ export const Confirm: React.FC = () => {
             autoFocus
             disabled
             autoComplete="name"
+            defaultValue={props.name}
           />
           <TextForm
             fullWidth
@@ -44,6 +52,7 @@ export const Confirm: React.FC = () => {
             name="email"
             disabled
             autoComplete="email"
+            defaultValue={props.email}
           />
           <TextForm
             fullWidth
@@ -54,6 +63,7 @@ export const Confirm: React.FC = () => {
             type='password'
             disabled
             autoComplete="current-password"
+            defaultValue={props.password}
           />
           <TextForm
             fullWidth
@@ -64,6 +74,7 @@ export const Confirm: React.FC = () => {
             type='password'
             disabled
             autoComplete="current-password"
+            defaultValue={props.pass_confirm}
           />
         </form>
         <Typography variant='body1'>上記の内容で登録しますか？</Typography>
