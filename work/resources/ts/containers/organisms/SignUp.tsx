@@ -4,12 +4,10 @@ import { Button } from '../../components/atoms/Button';
 import { TextForm } from '../../components/atoms/TextForm';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import {
-  Avatar,
   Container,
   Grid,
   Typography,
 } from '@material-ui/core';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
 type Props = {
   nameOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void
@@ -28,9 +26,6 @@ export const SignUp: React.FC<Props> = props => {
   return (
     <>
       <Container maxWidth='sm' className={classes.auth}>
-        <Avatar>
-          <LockOutlinedIcon />
-        </Avatar>
         <Typography>
           アカウント作成
         </Typography>
