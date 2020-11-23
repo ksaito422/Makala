@@ -21,7 +21,7 @@ type Props = {
   title: string,
 }
 
-export const Title: React.FC<Props> = (props: Props) => {
+export const Title: React.FC<Props> = (props) => {
   return (
     <MuiThemeProvider theme={theme}>
       <Typography

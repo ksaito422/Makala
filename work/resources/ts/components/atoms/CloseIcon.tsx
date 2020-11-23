@@ -6,7 +6,7 @@ type Props = {
   onClick: () => void,
 }
 
-export const CloseIcon: React.FC<Props> = (props: Props) => {
+export const CloseIcon: React.FC<Props> = (props) => {
   return (
     <IconButton
       onClick={props.onClick}

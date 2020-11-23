@@ -8,7 +8,7 @@ type Props = {
   previewOnClick: () => void,
 }
 
-export const ButtonGroup: React.FC<Props> = (props: Props) => {
+export const ButtonGroup: React.FC<Props> = (props) => {
   return (
     <>
       <Button

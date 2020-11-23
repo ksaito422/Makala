@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { useHistory } from 'react-router-dom';
 import { Button } from '../../components/atoms/Button';
 import { AccordionArea } from '../../components/molecules/AccordionArea';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
@@ -10,16 +9,19 @@ import {
   Typography,
 } from '@material-ui/core';
 
-export const Tutorial: React.FC = () => {
+type Props = {
+  signupOnClick: () => void,
+  loginOnClick: () => void,
+}
+
+export const Tutorial: React.FC<Props> = (props) => {
   // cssの定義
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
-  // react-router-dom URLルーティングに使う
-  const history = useHistory();
 
   return (
     <>
-      <Container maxWidth='xl'>
+      <Container maxWidth='lg'>
         <AccordionArea
           defaultExpanded={true}
         >
@@ -58,9 +60,7 @@ export const Tutorial: React.FC = () => {
                     <Grid item xs={12}>
                       <Button
                         size='large'
-                        onClick={() => {
-                          history.push('/sign-up');
-                        }}
+                        onClick={props.signupOnClick}
                       >
                         新規登録する
                       </Button>
@@ -68,9 +68,7 @@ export const Tutorial: React.FC = () => {
                     <Grid item xs={12}>
                       <Button
                         size='large'
-                        onClick={() => {
-                          history.push('/login');
-                        }}
+                        onClick={props.loginOnClick}
                       >
                         ログインする
                       </Button>

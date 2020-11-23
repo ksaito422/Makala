@@ -14,7 +14,7 @@ type Props = {
   ],
 }
 
-export const Preview: React.FC<Props> = (props: Props) => {
+export const Preview: React.FC<Props> = (props) => {
   // classNameのインポート
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();

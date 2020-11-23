@@ -20,7 +20,7 @@ type Props = {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void,
 }
 
-export const TextForm: React.FC<Props> = (props: Props) => {
+export const TextForm: React.FC<Props> = (props) => {
   return (
     <TextField
       error={props.error}

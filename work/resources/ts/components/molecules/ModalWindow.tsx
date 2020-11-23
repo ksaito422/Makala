@@ -36,8 +36,8 @@ function getModalStyle() {
   };
 }
 
-export const ModalWindow: React.FC<Props> = (props: Props) => {
-  // classNameのインポート
+export const ModalWindow: React.FC<Props> = (props) => {
+  // cssの定義
   // モーダルの位置を指定したstate
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles()

@@ -11,7 +11,7 @@ type Props = {
   children: React.ReactNode
 }
 
-export const AccordionArea: React.FC<Props> = (props: Props) => {
+export const AccordionArea: React.FC<Props> = (props) => {
   return (
     <>
       <Accordion

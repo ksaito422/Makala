@@ -21,8 +21,8 @@ type Props = {
   deleteOnClick: () => void,
 }
 
-export const DragBoardItem: React.FC<Props> = (props: Props) => {
-  // classNameのインポート
+export const DragBoardItem: React.FC<Props> = (props) => {
+  // cssの定義
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
 

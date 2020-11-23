@@ -9,13 +9,13 @@ import {
 } from '@material-ui/core';
 
 type Props = {
-  nameOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-  mailOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-  passwordOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-  passConfirmOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-  registerOnClick: () => void
-  cancelOnClick: () => void
-  error: string | null
+  nameOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+  mailOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+  passwordOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+  passConfirmOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+  registerOnClick: () => void,
+  cancelOnClick: () => void,
+  error: string | null,
 }
 
 export const SignUp: React.FC<Props> = props => {

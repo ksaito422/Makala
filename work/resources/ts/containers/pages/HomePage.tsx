@@ -11,7 +11,6 @@ import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import {
   Container,
   CssBaseline,
-  // useMediaQuery,
 } from '@material-ui/core';
 
 export const HomePage: React.FC = () => {

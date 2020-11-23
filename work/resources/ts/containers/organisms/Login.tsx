@@ -1,74 +1,71 @@
 import React, { useContext } from 'react';
-import { useHistory } from 'react-router-dom';
 import { Button } from '../../components/atoms/Button';
 import { TextForm } from '../../components/atoms/TextForm';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import {
-  Avatar,
   Container,
   Grid,
   Typography,
 } from '@material-ui/core';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
-export const Login: React.FC = () => {
+type Props = {
+  mailOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+  passwordOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  loginOnClick: () => void,
+  cancelOnClick: () => void,
+}
+
+export const Login: React.FC<Props> = (props) => {
+  // cssの定義
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
-  const history = useHistory();
 
   return (
     <>
       <Container maxWidth='sm' className={classes.auth}>
-        <Avatar>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography>
-          ログイン
-        </Typography>
+        <Typography variant='h4'>makalaにログイン</Typography>
         <form noValidate className={classes.auth_form}>
           <TextForm
             fullWidth
             required
             margin='normal'
-            label="Email Address"
+            label="メールアドレス"
             name="email"
             autoFocus
             autoComplete="email"
+            onChange={props.mailOnChange}
           />
           <TextForm
             fullWidth
             required
             margin='normal'
-            label="Password"
+            label="パスワード"
             name="password"
             type='password'
             autoComplete="current-password"
+            onChange={props.passwordOnChange}
           />
         </form>
-        <Grid container spacing={10} className={classes.main_container}>
-          <Grid item xs={6}>
-            <Button
-              fullWidth
-              onClick={() => {
-                // ログインapi利用のロジックを書く
-                console.log('sign in');
-                history.push('/home');
-              }}
-            >
-              ログイン
-           </Button>
-          </Grid>
-          <Grid item xs={6}>
-            <Button
-              fullWidth
-              onClick={() => {
-                history.push('/');
-              }}
-            >
-              キャンセル
+        <Container maxWidth='sm'>
+          <Grid container spacing={10} className={classes.main_container}>
+            <Grid item xs={6}>
+              <Button
+                fullWidth
+                onClick={props.loginOnClick}
+              >
+                ログインする
             </Button>
+            </Grid>
+            <Grid item xs={6}>
+              <Button
+                fullWidth
+                onClick={props.cancelOnClick}
+              >
+                キャンセル
+              </Button>
+            </Grid>
           </Grid>
-        </Grid>
+        </Container>
       </Container>
     </>
   );
