@@ -15,6 +15,7 @@ type Props = {
   passConfirmOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   registerOnClick: () => void
   cancelOnClick: () => void
+  error: string | null
 }
 
 export const SignUp: React.FC<Props> = props => {
@@ -61,13 +62,19 @@ export const SignUp: React.FC<Props> = props => {
             fullWidth
             required
             margin='normal'
-            label="パスワード再確認"
+            label="再確認パスワード"
             name="password"
             type='password'
             autoComplete="current-password"
             onChange={props.passConfirmOnChange}
           />
         </form>
+        {/* [登録する]時にエラーあれば、エラーメッセージを表示する */}
+        {props.error ? (
+          <Typography color='error'>{props.error}</Typography>
+          ) : (
+          null)
+        }
         <Container maxWidth='sm'>
           <Grid container spacing={10} className={classes.main_container}>
             <Grid item xs={6}>
