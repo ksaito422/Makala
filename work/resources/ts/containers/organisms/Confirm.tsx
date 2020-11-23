@@ -15,7 +15,6 @@ type Props = {
   name: string,
   email: string,
   password: string,
-  pass_confirm: string
 }
 
 export const Confirm: React.FC<Props> = (props) => {
@@ -64,17 +63,6 @@ export const Confirm: React.FC<Props> = (props) => {
             disabled
             autoComplete="current-password"
             defaultValue={props.password}
-          />
-          <TextForm
-            fullWidth
-            required
-            margin='normal'
-            label="パスワード再確認"
-            name="password"
-            type='password'
-            disabled
-            autoComplete="current-password"
-            defaultValue={props.pass_confirm}
           />
         </form>
         <Typography variant='body1'>上記の内容で登録しますか？</Typography>

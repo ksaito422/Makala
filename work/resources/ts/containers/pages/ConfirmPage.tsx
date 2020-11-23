@@ -25,7 +25,6 @@ export const ConfirmPage: React.FC = () => {
           name={authState.name}
           email={authState.email}
           password={authState.password}
-          pass_confirm={authState.pass_confirm}
         />
       </Container>
     </>
