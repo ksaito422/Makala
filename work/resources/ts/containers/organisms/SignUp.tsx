@@ -19,8 +19,10 @@ type Props = {
 }
 
 export const SignUp: React.FC<Props> = props => {
+  // cssの定義
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
+  // react-router-dom URLルーティングに使う
   const history = useHistory();
 
   return (
