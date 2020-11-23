@@ -16,6 +16,7 @@ type Props = {
 }
 
 export const Confirm: React.FC<Props> = (props) => {
+  // cssの定義
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
   const history = useHistory();
