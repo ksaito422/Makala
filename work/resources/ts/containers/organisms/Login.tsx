@@ -4,12 +4,10 @@ import { Button } from '../../components/atoms/Button';
 import { TextForm } from '../../components/atoms/TextForm';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import {
-  Avatar,
   Container,
   Grid,
   Typography,
 } from '@material-ui/core';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
 export const Login: React.FC = () => {
   const { useStyles } = useContext<any>(StylesContext);
@@ -19,9 +17,6 @@ export const Login: React.FC = () => {
   return (
     <>
       <Container maxWidth='sm' className={classes.auth}>
-        <Avatar>
-          <LockOutlinedIcon />
-        </Avatar>
         <Typography>
           ログイン
         </Typography>
