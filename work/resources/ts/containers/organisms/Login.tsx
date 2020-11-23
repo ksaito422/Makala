@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { useHistory } from 'react-router-dom';
 import { Button } from '../../components/atoms/Button';
 import { TextForm } from '../../components/atoms/TextForm';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
@@ -9,10 +8,14 @@ import {
   Typography,
 } from '@material-ui/core';
 
-export const Login: React.FC = () => {
+type Props = {
+  loginOnClick: () => void,
+  cancelOnClick: () => void,
+}
+
+export const Login: React.FC<Props> = (props) => {
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
-  const history = useHistory();
 
   return (
     <>
@@ -43,11 +46,7 @@ export const Login: React.FC = () => {
             <Grid item xs={6}>
               <Button
                 fullWidth
-                onClick={() => {
-                  // ログインapi利用のロジックを書く
-                  console.log('sign in');
-                  history.push('/home');
-                }}
+                onClick={props.loginOnClick}
               >
                 ログインする
             </Button>
@@ -55,9 +54,7 @@ export const Login: React.FC = () => {
             <Grid item xs={6}>
               <Button
                 fullWidth
-                onClick={() => {
-                  history.push('/');
-                }}
+                onClick={props.cancelOnClick}
               >
                 キャンセル
               </Button>
