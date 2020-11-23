@@ -6,6 +6,7 @@ import {
 type Props = {
   disabled?: boolean,
   fullWidth?: boolean,
+  size?: 'large' | 'medium' | 'small'
   onClick: () => void,
 }
 
@@ -17,6 +18,7 @@ export const Button: React.FC<Props> = (props) => {
       disabled={props.disabled}
       fullWidth={props.fullWidth}
       onClick={props.onClick}
+      size={props.size}
     >
       {props.children}
     </MuiButton>
