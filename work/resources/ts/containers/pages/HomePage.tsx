@@ -2,10 +2,9 @@ import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Header } from '../organisms/Header';
 import { Boards } from '../organisms/Boards';
-import { GetBoardsContext } from '../../contexts/childContexts/GetBoardsContext';
+import { ApiBoardsContext } from '../../contexts/childContexts/ApiBoardsContext';
 import { StoreBoardContext } from '../../contexts/childContexts/StoreBoardContext';
 import { UpdateBoardContext } from '../../contexts/childContexts/UpdateBoardContext';
-import { DeleteBoardContext } from '../../contexts/childContexts/DeleteBoardContext';
 import { ShowCardsContext } from '../../contexts/childContexts/ShowCardsContext';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import {
@@ -14,10 +13,9 @@ import {
 } from '@material-ui/core';
 
 export const HomePage: React.FC = () => {
-  const { boardsState, getBoards } = useContext<any>(GetBoardsContext);
+  const { boardsState, setBoardsState, getBoards, deleteBoard, deleteBoardState } = useContext<any>(ApiBoardsContext);
   const { storeBoard } = useContext<any>(StoreBoardContext);
   const { updateBoard } = useContext<any>(UpdateBoardContext);
-  const { deleteBoard } = useContext<any>(DeleteBoardContext);
   const { showCards, cardsState } = useContext<any>(ShowCardsContext);
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
@@ -27,6 +25,7 @@ export const HomePage: React.FC = () => {
   // 更新・削除のたびにgetBoards()を発動
   useEffect(() => {
     getBoards();
+    console.log('effect')
   }, []);
 
   return (
@@ -49,8 +48,10 @@ export const HomePage: React.FC = () => {
             updateBoard(data.id, data);
           }}
           // ボードの削除メソッド
-          deleteOnClick={(id) => {
+          // api利用とstate側の更新を個別に行っている
+          deleteOnClick={(id, index) => {
             deleteBoard(id);
+            deleteBoardState(index);
           }}
           // ボードと関連づいたカードを表示するメソッド
           showOnClick={() => {

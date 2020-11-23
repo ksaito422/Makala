@@ -25,7 +25,7 @@ export const ApiBoardsContextProvider: React.FC = props => {
   }
 
   // apiと通信して、ボードを削除するロジック
-  const deleteBoard: any = (id: number) => {
+  const deleteBoard = (id: number) => {
     axios({
       method: 'DELETE',
       url: `/api/v1/boards/${id}`,
@@ -42,12 +42,20 @@ export const ApiBoardsContextProvider: React.FC = props => {
     })
   }
 
+  // ボードの削除時にstateから削除して、再度stateにセットし直している
+  const deleteBoardState = (index: number) => {
+    const newBoardsState = [ ...boardsState ];
+    newBoardsState.splice(index, 1);
+    setBoardsState(newBoardsState);
+  }
+
   return (
     <ApiBoardsContext.Provider value={{
       boardsState,
       setBoardsState,
       getBoards,
       deleteBoard,
+      deleteBoardState,
       }}
     >
       {props.children}
