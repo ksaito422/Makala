@@ -24,9 +24,7 @@ export const Confirm: React.FC<Props> = (props) => {
   return (
     <>
       <Container maxWidth='sm' className={classes.auth}>
-        <Typography>
-          アカウント作成
-        </Typography>
+        <Typography variant='subtitle1'>アカウント登録情報の確認</Typography>
         <form noValidate className={classes.auth_form}>
           <TextForm
             fullWidth
