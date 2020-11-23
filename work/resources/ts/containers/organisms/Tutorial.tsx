@@ -7,11 +7,14 @@ import {
   Container,
   Grid,
   Paper,
+  Typography,
 } from '@material-ui/core';
 
 export const Tutorial: React.FC = () => {
+  // cssの定義
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
+  // react-router-dom URLルーティングに使う
   const history = useHistory();
 
   return (
@@ -23,8 +26,8 @@ export const Tutorial: React.FC = () => {
         <Grid
           container
           spacing={6}
-          justify="flex-end"
-          alignItems="center"
+          // justify="flex-end"
+          // alignItems="center"
         >
           <Grid item xs={7}>
             <Paper className={classes.gif}>
@@ -32,28 +35,52 @@ export const Tutorial: React.FC = () => {
             </Paper>
           </Grid>
           <Grid item xs={5}>
-            <Grid container spacing={4}>
-              <Grid item xs={12}>
-                <Button
-                  fullWidth
-                  onClick={() => {
-                    history.push('/sign-up');
-                  }}
-                >
-                  新規登録
-                </Button>
+            <Container maxWidth='xs'>
+              <Grid
+                container
+                spacing={4}
+                direction="column"
+              >
+                <Grid item xs={12}>
+                  <Typography variant='h4'>Welcome to makala.</Typography>
+                  <br />
+                  <Typography variant='subtitle1'>
+                    makalaは、文章構成を考案・構築するためのサービスです。<br />
+                    いつ・どこにいても、ブログや記事の内容をささっと書き残すことができます。
+                  </Typography>
+                </Grid>
+                <Grid item xs={12}>
+                  <Grid
+                    container
+                    spacing={4}
+                    direction="column"
+                    justify="flex-end"
+                    alignItems="center"
+                  >
+                    <Grid item xs={12}>
+                      <Button
+                        size='large'
+                        onClick={() => {
+                          history.push('/sign-up');
+                        }}
+                      >
+                        新規登録する
+                      </Button>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Button
+                        size='large'
+                        onClick={() => {
+                          history.push('/login');
+                        }}
+                      >
+                        ログインする
+                      </Button>
+                    </Grid>
+                  </Grid>
+                </Grid>
               </Grid>
-              <Grid item xs={12}>
-                <Button
-                  fullWidth
-                  onClick={() => {
-                    history.push('/login');
-                  }}
-                >
-                  ログイン
-                </Button>
-              </Grid>
-            </Grid>
+            </Container>
           </Grid>
         </Grid>
         </AccordionArea>
