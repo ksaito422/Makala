@@ -67,7 +67,7 @@ export const Confirm: React.FC<Props> = (props) => {
                 fullWidth
                 onClick={props.registerOnClick}
               >
-                新規登録
+                登録する
             </Button>
             </Grid>
             <Grid item xs={6}>
