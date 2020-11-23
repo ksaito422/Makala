@@ -69,28 +69,30 @@ export const SignUp: React.FC<Props> = props => {
             onChange={props.passConfirmOnChange}
           />
         </form>
-        <Grid container spacing={10} className={classes.main_container}>
-          <Grid item xs={6}>
-            <Button
-              fullWidth
-              onClick={() => {
-                history.push('/sign-up/confirm');
-              }}
-            >
-              登録する
-           </Button>
+        <Container maxWidth='sm'>
+          <Grid container spacing={10} className={classes.main_container}>
+            <Grid item xs={6}>
+              <Button
+                fullWidth
+                onClick={() => {
+                  history.push('/sign-up/confirm');
+                }}
+              >
+                登録する
+              </Button>
+            </Grid>
+            <Grid item xs={6}>
+              <Button
+                fullWidth
+                onClick={() => {
+                  history.push('/');
+                }}
+              >
+                キャンセル
+              </Button>
+            </Grid>
           </Grid>
-          <Grid item xs={6}>
-            <Button
-              fullWidth
-              onClick={() => {
-                history.push('/');
-              }}
-            >
-              キャンセル
-            </Button>
-          </Grid>
-        </Grid>
+        </Container>
       </Container>
     </>
   );
