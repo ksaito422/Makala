@@ -10,10 +10,13 @@ import {
 } from '@material-ui/core';
 
 export const ConfirmPage: React.FC = () => {
+  /** 認証関連のロジック
+   * cssの定義
+   * react-router-dom URLルーティングに使う
+   */
   const { authState } = useContext<any>(AuthContext);
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
-  // react-router-dom URLルーティングに使う
   const history = useHistory();
 
   return (
