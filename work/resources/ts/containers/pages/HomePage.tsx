@@ -33,7 +33,8 @@ export const HomePage: React.FC = () => {
           boards={boardsState}
           // 新しいボードの作成メソッド
           storeOnClick={(data) => {
-            storeBoard(data);
+            // storeBoard(data);
+            console.log('hello')
           }}
           // ボード名の更新メソッド
           postOnClick={(obj) => {

@@ -26,6 +26,9 @@ type Props = {
 }
 
 export const Boards: React.FC<Props> = (props) => {
+  // 新規作成か更新か判別するstate
+  const [createState, setCreateState] = useState<boolean>(false);
+
   // モーダルに渡す表示内容
   const [modalValueState, setmodalValueState] = useState<any>({
     id: null,
@@ -37,6 +40,7 @@ export const Boards: React.FC<Props> = (props) => {
   // モーダルを閉じるとき、入力値をクリア
   const modalClose = () => {
     setModalOpenState(false);
+    setCreateState(false);
     setmodalValueState({
       // とりあえずuser_id 1で固定
       user_id: 1,
@@ -105,7 +109,12 @@ export const Boards: React.FC<Props> = (props) => {
               setmodalValueState({ ...modalValueState, board_name: e.target.value })
             }}
             postOnClick={() => {
-              props.postOnClick(modalValueState)
+              // 新規作成か更新を判断してメソッドを使い分ける
+              createState ? (
+                  props.storeOnClick(modalValueState)
+                ) : (
+                  props.postOnClick(modalValueState)
+                );
             }}
             modalOnClose={modalClose}
           />
@@ -113,6 +122,7 @@ export const Boards: React.FC<Props> = (props) => {
         <AddIcon
           onClick={() => {
             setModalOpenState(true);
+            setCreateState(true);
           }}
         />
       </Container>
