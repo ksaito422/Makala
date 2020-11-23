@@ -20,7 +20,7 @@ type Props = {
   boards: any,
   storeOnClick: (data: any) => void,
   postOnClick: (data: any) => void,
-  deleteOnClick: (event: number) => void,
+  deleteOnClick: (id: number, index: number) => void,
   showOnClick: (data: number) => void,
 }
 
@@ -86,7 +86,7 @@ export const Boards: React.FC<Props> = (props) => {
                 <ListItemSecondaryAction>
                   <CloseIcon
                     onClick={() => {
-                      props.deleteOnClick(board.id)
+                      props.deleteOnClick(board.id, index)
                     }}
                   />
                 </ListItemSecondaryAction>
