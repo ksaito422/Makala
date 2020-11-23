@@ -26,9 +26,8 @@ export const SignUp: React.FC<Props> = props => {
   return (
     <>
       <Container maxWidth='sm' className={classes.auth}>
-        <Typography>
-          アカウント作成
-        </Typography>
+        <Typography variant='h4'>makalaへようこそ</Typography>
+        <Typography variant='subtitle1'>新規登録（無料）して利用を開始しましょう。</Typography>
         <form noValidate className={classes.auth_form}>
           <TextForm
             fullWidth
