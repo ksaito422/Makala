@@ -26,8 +26,6 @@ export const Tutorial: React.FC = () => {
         <Grid
           container
           spacing={6}
-          // justify="flex-end"
-          // alignItems="center"
         >
           <Grid item xs={7}>
             <Paper className={classes.gif}>
@@ -38,7 +36,7 @@ export const Tutorial: React.FC = () => {
             <Container maxWidth='xs'>
               <Grid
                 container
-                spacing={4}
+                spacing={10}
                 direction="column"
               >
                 <Grid item xs={12}>
