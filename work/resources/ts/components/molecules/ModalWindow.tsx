@@ -1,25 +1,9 @@
 import React, { useState, useContext } from 'react';
-import { TextForm } from '../atoms/TextForm';
-import { CloseIcon } from '../atoms/CloseIcon';
-import { UpdateIcon } from '../atoms/UpdateIcon';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
-import {
-  Grid,
-  Modal,
-} from '@material-ui/core';
+import { Modal } from '@material-ui/core';
 
 type Props = {
-  errorTitle?: boolean,
-  helperTextTitle?: string,
-  errorContent?: boolean,
-  helperTextContent?: string,
   modalOpen: boolean,
-  defaultValueTitle: string,
-  defaultValueContent: string,
-  disabled?: boolean,
-  titleOnChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
-  contentOnChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
-  postOnClick: () => void,
   modalOnClose: () => void,
 }
 
@@ -50,41 +34,7 @@ export const ModalWindow: React.FC<Props> = (props) => {
       onClose={props.modalOnClose}
     >
       <div style={modalStyleState} className={classes.modal}>
-        <Grid container spacing={4}>
-          <Grid item xs={12} className={classes.rightPlacement}>
-            <CloseIcon
-              onClick={props.modalOnClose}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextForm
-              error={props.errorTitle}
-              helperText={props.helperTextTitle}
-              multiline
-              fullWidth
-              rowsMax={1}
-              defaultValue={props.defaultValueTitle}
-              onChange={props.titleOnChange}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextForm
-              error={props.errorContent}
-              helperText={props.helperTextContent}
-              multiline
-              fullWidth
-              rows={8}
-              defaultValue={props.defaultValueContent}
-              onChange={props.contentOnChange}
-            />
-          </Grid>
-          <Grid item xs={12} className={classes.centerPlacement}>
-            <UpdateIcon
-              onClick={props.postOnClick}
-              disabled={props.disabled}
-            />
-          </Grid>
-        </Grid>
+        {props.children}
       </div>
     </Modal>
   );

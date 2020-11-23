@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { AddIcon } from '../../components/atoms/AddIcon';
 import { CloseIcon } from '../../components/atoms/CloseIcon';
-import { ModalWindow } from '../../components/molecules/ModalWindowCopy';
+import { ModalWindow } from '../../components/molecules/ModalWindow';
 import { ModalBoard } from '../../components/molecules/ModalBoard';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import {
