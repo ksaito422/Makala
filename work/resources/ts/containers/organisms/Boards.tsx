@@ -31,7 +31,8 @@ export const Boards: React.FC<Props> = (props) => {
   // モーダルに渡す表示内容
   const [modalValueState, setmodalValueState] = useState<any>({
     id: null,
-    board_name: null
+    board_name: null,
+    index: null
   });
   // モーダル表示のon/off切り替え
   const [modalOpenState, setModalOpenState] = useState<boolean>(false);
@@ -42,7 +43,8 @@ export const Boards: React.FC<Props> = (props) => {
       // とりあえずuser_id 1で固定
       user_id: 1,
       id: null,
-      board_name: null
+      board_name: null,
+      index: null
     });
   };
 
@@ -67,6 +69,7 @@ export const Boards: React.FC<Props> = (props) => {
                         ...modalValueState,
                         id: board.id,
                         board_name: board.board_name,
+                        index: index
                       })
                     }}
                   >

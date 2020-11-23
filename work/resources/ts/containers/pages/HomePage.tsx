@@ -12,7 +12,7 @@ import {
 } from '@material-ui/core';
 
 export const HomePage: React.FC = () => {
-  const { boardsState, setBoardsState, getBoards, updateBoard, deleteBoard, deleteBoardState } = useContext<any>(ApiBoardsContext);
+  const { boardsState, getBoards, updateBoard, updateBoardState,  deleteBoard, deleteBoardState } = useContext<any>(ApiBoardsContext);
   const { storeBoard } = useContext<any>(StoreBoardContext);
   const { showCards, cardsState } = useContext<any>(ShowCardsContext);
   const { useStyles } = useContext<any>(StylesContext);
@@ -40,8 +40,9 @@ export const HomePage: React.FC = () => {
             storeBoard(data);
           }}
           // ボード名の更新メソッド
-          postOnClick={(data) => {
-            updateBoard(data.id, data);
+          postOnClick={(obj) => {
+            updateBoard(obj);
+            updateBoardState(obj);
           }}
           // ボードの削除メソッド ApiBoardsContextに定義したメソッドを利用
           deleteOnClick={(id, index) => {

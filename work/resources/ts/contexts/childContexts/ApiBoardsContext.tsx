@@ -25,11 +25,14 @@ export const ApiBoardsContextProvider: React.FC = props => {
   }
 
   // apiと通信して、ボード名を更新するロジック
-  const updateBoard = (id: number, data: string) => {
+  const updateBoard = (
+    obj: {
+      id: number,
+    }) => {
     axios({
       method: 'PUT',
-      url: `/api/v1/boards/${id}`,
-      data: data,
+      url: `/api/v1/boards/${obj.id}`,
+      data: obj,
       headers: {
         'Content-Type': 'application/json',
       }
@@ -41,6 +44,17 @@ export const ApiBoardsContextProvider: React.FC = props => {
       // あとでやる エラー時はメッセージを表示して、ボード再取得
       getBoards();
     })
+  }
+
+  // ボードの更新時に、更新部分だけを再度stateにセットし直している
+  const updateBoardState = (
+    obj: {
+      index: number,
+      board_name: string
+    }) => {
+    const newBoardsState: any = [ ...boardsState ];
+    newBoardsState[obj.index].board_name = obj.board_name;
+    setBoardsState(newBoardsState);
   }
 
   // apiと通信して、ボードを削除するロジック
@@ -74,6 +88,7 @@ export const ApiBoardsContextProvider: React.FC = props => {
       setBoardsState,
       getBoards,
       updateBoard,
+      updateBoardState,
       deleteBoard,
       deleteBoardState,
       }}
