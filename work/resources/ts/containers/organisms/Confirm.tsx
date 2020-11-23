@@ -60,29 +60,31 @@ export const Confirm: React.FC<Props> = (props) => {
           />
         </form>
         <Typography variant='body1'>上記の内容で登録しますか？</Typography>
-        <Grid container spacing={10} className={classes.main_container}>
-          <Grid item xs={6}>
-            <Button
-              fullWidth
-              onClick={() => {
-                // 新規登録api利用のロジックを書く
-                history.push('/home');
-              }}
-            >
-              新規登録
-           </Button>
-          </Grid>
-          <Grid item xs={6}>
-            <Button
-              fullWidth
-              onClick={() => {
-                history.push('/');
-              }}
-            >
-              戻る
+        <Container maxWidth='sm'>
+          <Grid container spacing={10} className={classes.main_container}>
+            <Grid item xs={6}>
+              <Button
+                fullWidth
+                onClick={() => {
+                  // 新規登録api利用のロジックを書く
+                  history.push('/home');
+                }}
+              >
+                新規登録
             </Button>
+            </Grid>
+            <Grid item xs={6}>
+              <Button
+                fullWidth
+                onClick={() => {
+                  history.push('/');
+                }}
+              >
+                戻る
+              </Button>
+            </Grid>
           </Grid>
-        </Grid>
+        </Container>
       </Container>
     </>
   );
