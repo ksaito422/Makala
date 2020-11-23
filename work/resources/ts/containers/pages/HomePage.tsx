@@ -31,10 +31,6 @@ export const HomePage: React.FC = () => {
       <Container maxWidth='xl' className={classes.main_container}>
         <Boards
           boards={boardsState}
-          // onClick={() => {
-          //   // あとでポップアップメニューを表示する処理を書く
-          //   console.log('hello');
-          // }}
           // 新しいボードの作成メソッド
           storeOnClick={(data) => {
             storeBoard(data);
