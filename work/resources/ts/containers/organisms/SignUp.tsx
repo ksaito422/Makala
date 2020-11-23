@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { useHistory } from 'react-router-dom';
 import { Button } from '../../components/atoms/Button';
 import { TextForm } from '../../components/atoms/TextForm';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
@@ -14,14 +13,14 @@ type Props = {
   mailOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   passwordOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   passConfirmOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  registerOnClick: () => void
+  cancelOnClick: () => void
 }
 
 export const SignUp: React.FC<Props> = props => {
   // cssの定義
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
-  // react-router-dom URLルーティングに使う
-  const history = useHistory();
 
   return (
     <>
@@ -74,9 +73,7 @@ export const SignUp: React.FC<Props> = props => {
             <Grid item xs={6}>
               <Button
                 fullWidth
-                onClick={() => {
-                  history.push('/sign-up/confirm');
-                }}
+                onClick={props.registerOnClick}
               >
                 登録する
               </Button>
@@ -84,9 +81,7 @@ export const SignUp: React.FC<Props> = props => {
             <Grid item xs={6}>
               <Button
                 fullWidth
-                onClick={() => {
-                  history.push('/');
-                }}
+                onClick={props.cancelOnClick}
               >
                 キャンセル
               </Button>
