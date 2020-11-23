@@ -16,9 +16,7 @@ export const TopPage: React.FC = () => {
   return (
     <>
       <CssBaseline />
-      <Header
-        title='makala'
-      />
+      <Header />
       <Container maxWidth='xl' className={classes.main_container}>
         <Tutorial/>
       </Container>

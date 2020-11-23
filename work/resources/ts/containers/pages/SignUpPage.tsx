@@ -18,9 +18,7 @@ export const SignUpPage: React.FC = () => {
   return (
     <>
       <CssBaseline />
-      <Header
-        title='makala'
-      />
+      <Header />
       <Container maxWidth='xl' className={classes.main_container}>
         <SignUp
           // 認証情報をstateに保持していく

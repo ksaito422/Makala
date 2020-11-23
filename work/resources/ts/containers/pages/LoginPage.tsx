@@ -16,9 +16,7 @@ export const LoginPage: React.FC = () => {
   return (
     <>
       <CssBaseline />
-      <Header
-        title='makala'
-      />
+      <Header />
       <Container maxWidth='xl' className={classes.main_container}>
         <Login />
       </Container>
