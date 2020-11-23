@@ -9,7 +9,7 @@ import {
   // useMediaQuery,
 } from '@material-ui/core';
 
-export const Top: React.FC = () => {
+export const TopPage: React.FC = () => {
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
 

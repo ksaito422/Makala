@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { TotalContextProvider } from './contexts/TotalContext';
-import { Top } from './containers/pages/Top';
+import { TopPage } from './containers/pages/TopPage';
 import { LoginPage } from './containers/pages/LoginPage';
 import { SignUpPage } from './containers/pages/SignUpPage';
 import { ConfirmPage } from './containers/pages/ConfirmPage';
@@ -17,7 +17,7 @@ const App: React.FC = () => {
       <TotalContextProvider>
         <Switch>
           <MuiThemeProvider theme={MuiTheme}>
-            <Route exact path='/' component={Top}></Route>
+            <Route exact path='/' component={TopPage}></Route>
             <Route exact path='/login' component={LoginPage}></Route>
             <Route exact path='/sign-up' component={SignUpPage}></Route>
             <Route exact path='/sign-up/confirm' component={ConfirmPage}></Route>
