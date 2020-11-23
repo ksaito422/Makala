@@ -45,8 +45,7 @@ export const HomePage: React.FC = () => {
           postOnClick={(data) => {
             updateBoard(data.id, data);
           }}
-          // ボードの削除メソッド
-          // api利用とstate側の更新を個別に行っている
+          // ボードの削除メソッド ApiBoardsContextに定義したメソッドを利用
           deleteOnClick={(id, index) => {
             deleteBoard(id);
             deleteBoardState(index);

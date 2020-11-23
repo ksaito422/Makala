@@ -34,11 +34,11 @@ export const ApiBoardsContextProvider: React.FC = props => {
       }
     })
     .then((res) => {
-      console.log(res.data.message);
-      console.log(res.data);
+      return;
     })
     .catch((err) => {
-      return;
+      // あとでやる エラー時はメッセージを表示して、ボード再取得
+      getBoards();
     })
   }
 
