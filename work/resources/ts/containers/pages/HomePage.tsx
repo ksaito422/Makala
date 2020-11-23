@@ -21,11 +21,9 @@ export const HomePage: React.FC = () => {
   const classes = useStyles();
   const history = useHistory();
 
-  // 作成したボードを取得するロジック
-  // 更新・削除のたびにgetBoards()を発動
+  // 最初のレンダー時にボードを取得する
   useEffect(() => {
     getBoards();
-    console.log('effect')
   }, []);
 
   return (
