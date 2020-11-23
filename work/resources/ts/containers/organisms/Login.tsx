@@ -38,30 +38,32 @@ export const Login: React.FC = () => {
             autoComplete="current-password"
           />
         </form>
-        <Grid container spacing={10} className={classes.main_container}>
-          <Grid item xs={6}>
-            <Button
-              fullWidth
-              onClick={() => {
-                // ログインapi利用のロジックを書く
-                console.log('sign in');
-                history.push('/home');
-              }}
-            >
-              ログインする
-           </Button>
-          </Grid>
-          <Grid item xs={6}>
-            <Button
-              fullWidth
-              onClick={() => {
-                history.push('/');
-              }}
-            >
-              キャンセル
+        <Container maxWidth='sm'>
+          <Grid container spacing={10} className={classes.main_container}>
+            <Grid item xs={6}>
+              <Button
+                fullWidth
+                onClick={() => {
+                  // ログインapi利用のロジックを書く
+                  console.log('sign in');
+                  history.push('/home');
+                }}
+              >
+                ログインする
             </Button>
+            </Grid>
+            <Grid item xs={6}>
+              <Button
+                fullWidth
+                onClick={() => {
+                  history.push('/');
+                }}
+              >
+                キャンセル
+              </Button>
+            </Grid>
           </Grid>
-        </Grid>
+        </Container>
       </Container>
     </>
   );
