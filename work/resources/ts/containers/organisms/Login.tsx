@@ -17,9 +17,7 @@ export const Login: React.FC = () => {
   return (
     <>
       <Container maxWidth='sm' className={classes.auth}>
-        <Typography>
-          ログイン
-        </Typography>
+        <Typography variant='h4'>makalaにログイン</Typography>
         <form noValidate className={classes.auth_form}>
           <TextForm
             fullWidth
