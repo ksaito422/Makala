@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { useHistory } from 'react-router-dom';
 import { Button } from '../../components/atoms/Button';
 import { TextForm } from '../../components/atoms/TextForm';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
@@ -13,13 +12,14 @@ type Props = {
   name: string,
   email: string,
   password: string,
+  registerOnClick: () => void,
+  cancelonClick: () => void,
 }
 
 export const Confirm: React.FC<Props> = (props) => {
   // cssの定義
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
-  const history = useHistory();
 
   return (
     <>
@@ -65,10 +65,7 @@ export const Confirm: React.FC<Props> = (props) => {
             <Grid item xs={6}>
               <Button
                 fullWidth
-                onClick={() => {
-                  // 新規登録api利用のロジックを書く
-                  history.push('/home');
-                }}
+                onClick={props.registerOnClick}
               >
                 新規登録
             </Button>
@@ -76,9 +73,7 @@ export const Confirm: React.FC<Props> = (props) => {
             <Grid item xs={6}>
               <Button
                 fullWidth
-                onClick={() => {
-                  history.push('/');
-                }}
+                onClick={props.cancelonClick}
               >
                 戻る
               </Button>
