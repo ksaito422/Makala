@@ -9,6 +9,8 @@ import {
 } from '@material-ui/core';
 
 type Props = {
+  mailOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+  passwordOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   loginOnClick: () => void,
   cancelOnClick: () => void,
 }
@@ -30,6 +32,7 @@ export const Login: React.FC<Props> = (props) => {
             name="email"
             autoFocus
             autoComplete="email"
+            onChange={props.mailOnChange}
           />
           <TextForm
             fullWidth
@@ -39,6 +42,7 @@ export const Login: React.FC<Props> = (props) => {
             name="password"
             type='password'
             autoComplete="current-password"
+            onChange={props.passwordOnChange}
           />
         </form>
         <Container maxWidth='sm'>
