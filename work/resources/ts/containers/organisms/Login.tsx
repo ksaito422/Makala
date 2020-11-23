@@ -23,7 +23,7 @@ export const Login: React.FC = () => {
             fullWidth
             required
             margin='normal'
-            label="Email Address"
+            label="メールアドレス"
             name="email"
             autoFocus
             autoComplete="email"
@@ -32,7 +32,7 @@ export const Login: React.FC = () => {
             fullWidth
             required
             margin='normal'
-            label="Password"
+            label="パスワード"
             name="password"
             type='password'
             autoComplete="current-password"
@@ -48,7 +48,7 @@ export const Login: React.FC = () => {
                 history.push('/home');
               }}
             >
-              ログイン
+              ログインする
            </Button>
           </Grid>
           <Grid item xs={6}>
