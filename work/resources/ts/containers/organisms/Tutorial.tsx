@@ -19,7 +19,7 @@ export const Tutorial: React.FC = () => {
 
   return (
     <>
-      <Container maxWidth='xl'>
+      <Container maxWidth='lg'>
         <AccordionArea
           defaultExpanded={true}
         >
