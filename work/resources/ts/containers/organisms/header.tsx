@@ -5,16 +5,12 @@ import {
   Toolbar,
 } from '@material-ui/core';
 
-type Props = {
-  title: string,
-}
-
-export const Header: React.FC<Props> = (props: Props) => {
+export const Header: React.FC = () => {
   return (
     <AppBar color='primary' position='sticky'>
       <Toolbar>
         <Title
-          title={props.title}
+          title='makala'
         />
       </Toolbar>
     </AppBar>

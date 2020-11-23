@@ -5,7 +5,8 @@ type Props = {
     name: string | null,
     email: string | null,
     password: string | null,
-    pass_confirm: string | null,
+    passConfirm: string | null,
+    authError: string | null,
 }
 
 export const AuthContext = createContext({});
@@ -16,7 +17,8 @@ export const AuthContextProvider: React.FC = props => {
     name: null,
     email: null,
     password: null,
-    pass_confirm: null
+    passConfirm: null,
+    authError: null
   });
 
   return (

@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Header } from '../organisms/Header';
 import { SignUp } from '../organisms/SignUp';
 import { AuthContext } from '../../contexts/childContexts/AuthContext';
@@ -14,13 +15,13 @@ export const SignUpPage: React.FC = () => {
   const { authState, setAuthState } = useContext<any>(AuthContext);
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
+  // react-router-dom URLルーティングに使う
+  const history = useHistory();
 
   return (
     <>
       <CssBaseline />
-      <Header
-        title='makala'
-      />
+      <Header />
       <Container maxWidth='xl' className={classes.main_container}>
         <SignUp
           // 認証情報をstateに保持していく
@@ -34,8 +35,22 @@ export const SignUpPage: React.FC = () => {
             setAuthState({ ...authState, password: e.target.value });
           }}
           passConfirmOnChange={(e) => {
-            setAuthState({ ...authState, pass_confirm: e.target.value });
+            setAuthState({ ...authState, passConfirm: e.target.value });
           }}
+          registerOnClick={() => {
+            // パスワードが両方で合っているかの確認
+            authState.password === authState.passConfirm ? (
+              history.push('/sign-up/confirm')
+            ) : (
+              setAuthState({ ...authState, authError: 'パスワードが再確認パスワードと一致しません。' })
+            );
+          }}
+          cancelOnClick={() => {
+            // エラー内容が永続されるため、nullにしてから戻る
+            setAuthState({ ...authState, authError: null })
+            history.push('/');
+          }}
+          error={authState.authError}
         />
       </Container>
     </>

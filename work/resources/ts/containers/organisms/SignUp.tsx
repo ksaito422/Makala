@@ -1,37 +1,33 @@
 import React, { useContext } from 'react';
-import { useHistory } from 'react-router-dom';
 import { Button } from '../../components/atoms/Button';
 import { TextForm } from '../../components/atoms/TextForm';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import {
-  Avatar,
   Container,
   Grid,
   Typography,
 } from '@material-ui/core';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
 type Props = {
   nameOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   mailOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   passwordOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   passConfirmOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  registerOnClick: () => void
+  cancelOnClick: () => void
+  error: string | null
 }
 
 export const SignUp: React.FC<Props> = props => {
+  // cssの定義
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
-  const history = useHistory();
 
   return (
     <>
       <Container maxWidth='sm' className={classes.auth}>
-        <Avatar>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography>
-          アカウント作成
-        </Typography>
+        <Typography variant='h4'>makalaへようこそ</Typography>
+        <Typography variant='subtitle1'>新規登録（無料）して利用を開始しましょう。</Typography>
         <form noValidate className={classes.auth_form}>
           <TextForm
             fullWidth
@@ -66,35 +62,39 @@ export const SignUp: React.FC<Props> = props => {
             fullWidth
             required
             margin='normal'
-            label="パスワード再確認"
+            label="再確認パスワード"
             name="password"
             type='password'
             autoComplete="current-password"
             onChange={props.passConfirmOnChange}
           />
         </form>
-        <Grid container spacing={10} className={classes.main_container}>
-          <Grid item xs={6}>
-            <Button
-              fullWidth
-              onClick={() => {
-                history.push('/sign-up/confirm');
-              }}
-            >
-              新規登録
-           </Button>
+        {/* [登録する]時にエラーあれば、エラーメッセージを表示する */}
+        {props.error ? (
+          <Typography color='error'>{props.error}</Typography>
+          ) : (
+          null)
+        }
+        <Container maxWidth='sm'>
+          <Grid container spacing={10} className={classes.main_container}>
+            <Grid item xs={6}>
+              <Button
+                fullWidth
+                onClick={props.registerOnClick}
+              >
+                登録する
+              </Button>
+            </Grid>
+            <Grid item xs={6}>
+              <Button
+                fullWidth
+                onClick={props.cancelOnClick}
+              >
+                キャンセル
+              </Button>
+            </Grid>
           </Grid>
-          <Grid item xs={6}>
-            <Button
-              fullWidth
-              onClick={() => {
-                history.push('/');
-              }}
-            >
-              キャンセル
-            </Button>
-          </Grid>
-        </Grid>
+        </Container>
       </Container>
     </>
   );

@@ -21,7 +21,7 @@ export const MuiTheme = createMuiTheme({
         textTransform: `none`,
       },
       label: {
-        justifyContent: `none`,
+        // justifyContent: `none`,
       }
     }
   }

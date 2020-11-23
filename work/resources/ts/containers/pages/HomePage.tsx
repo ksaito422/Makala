@@ -33,9 +33,7 @@ export const HomePage: React.FC = () => {
   return (
     <>
       <CssBaseline />
-      <Header
-        title='makala'
-      />
+      <Header />
       <Container maxWidth='xl' className={classes.main_container}>
         <Boards
           boards={boardsState}

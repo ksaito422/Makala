@@ -5,12 +5,12 @@ import {
 
 type Props = {
   disabled?: boolean,
-  children: string,
   fullWidth?: boolean,
+  size?: 'large' | 'medium' | 'small'
   onClick: () => void,
 }
 
-export const Button: React.FC<Props> = (props: Props) => {
+export const Button: React.FC<Props> = (props) => {
   return (
     <MuiButton
       variant='contained'
@@ -18,6 +18,7 @@ export const Button: React.FC<Props> = (props: Props) => {
       disabled={props.disabled}
       fullWidth={props.fullWidth}
       onClick={props.onClick}
+      size={props.size}
     >
       {props.children}
     </MuiButton>

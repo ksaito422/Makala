@@ -18,9 +18,7 @@ export const ConfirmPage: React.FC = () => {
   return (
     <>
       <CssBaseline />
-      <Header
-        title='makala'
-      />
+      <Header />
       <Container maxWidth='xl' className={classes.main_container}>
         <Confirm
           // 認証情報の再確認のため表示するデータを渡す

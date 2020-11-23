@@ -72,9 +72,7 @@ export const CardPage = React.memo (() => {
   return (
     <>
       <CssBaseline />
-      <Header
-        title={'makala'}
-      />
+      <Header />
       <Container maxWidth='xl' className={classes.main_container}>
         {matches ? (
           // PCレイアウト width >= 1025px

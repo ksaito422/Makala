@@ -9,16 +9,14 @@ import {
   // useMediaQuery,
 } from '@material-ui/core';
 
-export const Top: React.FC = () => {
+export const TopPage: React.FC = () => {
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
 
   return (
     <>
       <CssBaseline />
-      <Header
-        title='makala'
-      />
+      <Header />
       <Container maxWidth='xl' className={classes.main_container}>
         <Tutorial/>
       </Container>
