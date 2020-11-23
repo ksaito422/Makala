@@ -7,15 +7,16 @@ import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import {
   Container,
   CssBaseline,
-  Grid,
-  // useMediaQuery,
 } from '@material-ui/core';
 
 export const SignUpPage: React.FC = () => {
+  /** 認証関連のロジック
+   * cssの定義
+   * react-router-dom URLルーティングに使う
+   */
   const { authState, setAuthState } = useContext<any>(AuthContext);
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
-  // react-router-dom URLルーティングに使う
   const history = useHistory();
 
   return (
@@ -38,7 +39,7 @@ export const SignUpPage: React.FC = () => {
             setAuthState({ ...authState, passConfirm: e.target.value });
           }}
           registerOnClick={() => {
-            // パスワードが両方で合っているかの確認
+            // パスワードが両方で合っているかの確認 違えばエラーメッセージを返す
             authState.password === authState.passConfirm ? (
               history.push('/sign-up/confirm')
             ) : (
