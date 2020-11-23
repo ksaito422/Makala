@@ -18,14 +18,13 @@ import CreateIcon from '@material-ui/icons/Create';
 
 type Props = {
   boards: any,
-  // onClick: () => void,
   storeOnClick: (data: any) => void,
   postOnClick: (data: any) => void,
   deleteOnClick: (event: number) => void,
   showOnClick: (data: number) => void,
 }
 
-export const Boards: React.FC<Props> = (props: Props) => {
+export const Boards: React.FC<Props> = (props) => {
   // モーダルオープン時に新規作成か更新かを判別するstate
   const [newModeState, setNewModeState] = useState<boolean>(false);
 
