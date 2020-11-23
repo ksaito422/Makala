@@ -4,7 +4,6 @@ import { Header } from '../organisms/Header';
 import { Boards } from '../organisms/Boards';
 import { ApiBoardsContext } from '../../contexts/childContexts/ApiBoardsContext';
 import { StoreBoardContext } from '../../contexts/childContexts/StoreBoardContext';
-import { UpdateBoardContext } from '../../contexts/childContexts/UpdateBoardContext';
 import { ShowCardsContext } from '../../contexts/childContexts/ShowCardsContext';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import {
@@ -13,9 +12,8 @@ import {
 } from '@material-ui/core';
 
 export const HomePage: React.FC = () => {
-  const { boardsState, setBoardsState, getBoards, deleteBoard, deleteBoardState } = useContext<any>(ApiBoardsContext);
+  const { boardsState, setBoardsState, getBoards, updateBoard, deleteBoard, deleteBoardState } = useContext<any>(ApiBoardsContext);
   const { storeBoard } = useContext<any>(StoreBoardContext);
-  const { updateBoard } = useContext<any>(UpdateBoardContext);
   const { showCards, cardsState } = useContext<any>(ShowCardsContext);
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();

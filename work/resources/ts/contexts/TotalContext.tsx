@@ -3,7 +3,6 @@ import { StylesContextProvider } from './childContexts/StylesContext';
 import { AuthContextProvider } from './childContexts/AuthContext';
 import { ApiBoardsContextProvider } from './childContexts/ApiBoardsContext';
 import { StoreBoardContextProvider } from './childContexts/StoreBoardContext';
-import { UpdateBoardContextProvider } from './childContexts/UpdateBoardContext';
 import { ShowCardsContextProvider } from './childContexts/ShowCardsContext';
 import { BoardItemContextProvider } from './childContexts/BoardItemContext';
 
@@ -15,13 +14,11 @@ export const TotalContextProvider: React.FC = props => {
       <AuthContextProvider>
         <ApiBoardsContextProvider>
           <StoreBoardContextProvider>
-            <UpdateBoardContextProvider>
-              <ShowCardsContextProvider>
-                <BoardItemContextProvider>
-                  {props.children}
-                </BoardItemContextProvider>
-              </ShowCardsContextProvider>
-            </UpdateBoardContextProvider>
+            <ShowCardsContextProvider>
+              <BoardItemContextProvider>
+                {props.children}
+              </BoardItemContextProvider>
+            </ShowCardsContextProvider>
           </StoreBoardContextProvider>
         </ApiBoardsContextProvider>
       </AuthContextProvider>
