@@ -77,7 +77,7 @@ export const SignUp: React.FC<Props> = props => {
                 history.push('/sign-up/confirm');
               }}
             >
-              新規登録
+              登録する
            </Button>
           </Grid>
           <Grid item xs={6}>
