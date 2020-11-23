@@ -44,52 +44,48 @@ export const ModalWindow: React.FC<Props> = (props) => {
   const [modalStyleState] = useState(getModalStyle);
 
   // モーダルに表示する内容の定義
-  const modalBody = (
-    <div style={modalStyleState} className={classes.modal}>
-      <Grid container spacing={4}>
-        <Grid item xs={12} className={classes.rightPlacement}>
-          <CloseIcon
-            onClick={props.modalOnClose}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextForm
-            error={props.errorTitle}
-            helperText={props.helperTextTitle}
-            multiline
-            fullWidth
-            rowsMax={1}
-            defaultValue={props.defaultValueTitle}
-            onChange={props.titleOnChange}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextForm
-            error={props.errorContent}
-            helperText={props.helperTextContent}
-            multiline
-            fullWidth
-            rows={8}
-            defaultValue={props.defaultValueContent}
-            onChange={props.contentOnChange}
-          />
-        </Grid>
-        <Grid item xs={12} className={classes.centerPlacement}>
-          <UpdateIcon
-            onClick={props.postOnClick}
-            disabled={props.disabled}
-          />
-        </Grid>
-      </Grid>
-    </div>
-  );
-
   return (
     <Modal
       open={props.modalOpen}
       onClose={props.modalOnClose}
     >
-      {modalBody}
+      <div style={modalStyleState} className={classes.modal}>
+        <Grid container spacing={4}>
+          <Grid item xs={12} className={classes.rightPlacement}>
+            <CloseIcon
+              onClick={props.modalOnClose}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextForm
+              error={props.errorTitle}
+              helperText={props.helperTextTitle}
+              multiline
+              fullWidth
+              rowsMax={1}
+              defaultValue={props.defaultValueTitle}
+              onChange={props.titleOnChange}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextForm
+              error={props.errorContent}
+              helperText={props.helperTextContent}
+              multiline
+              fullWidth
+              rows={8}
+              defaultValue={props.defaultValueContent}
+              onChange={props.contentOnChange}
+            />
+          </Grid>
+          <Grid item xs={12} className={classes.centerPlacement}>
+            <UpdateIcon
+              onClick={props.postOnClick}
+              disabled={props.disabled}
+            />
+          </Grid>
+        </Grid>
+      </div>
     </Modal>
   );
 }

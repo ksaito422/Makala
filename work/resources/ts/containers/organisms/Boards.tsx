@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { AddIcon } from '../../components/atoms/AddIcon';
 import { CloseIcon } from '../../components/atoms/CloseIcon';
-import { ModalWindow } from '../../components/molecules/ModalWindow';
+import { ModalWindow } from '../../components/molecules/ModalWindowCopy';
+import { ModalBoard } from '../../components/molecules/ModalBoard';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import {
   Button,
@@ -25,9 +26,6 @@ type Props = {
 }
 
 export const Boards: React.FC<Props> = (props) => {
-  // モーダルオープン時に新規作成か更新かを判別するstate
-  const [newModeState, setNewModeState] = useState<boolean>(false);
-
   // モーダルに渡す表示内容
   const [modalValueState, setmodalValueState] = useState<any>({
     id: null,
@@ -100,27 +98,21 @@ export const Boards: React.FC<Props> = (props) => {
         <ModalWindow
           modalOpen={modalOpenState}
           modalOnClose={modalClose}
-          postOnClick={() => {
-            (newModeState?
-              props.storeOnClick(modalValueState) :
+        >
+          <ModalBoard
+            defaultValueTitle={modalValueState.board_name}
+            titleOnChange={(e) => {
+              setmodalValueState({ ...modalValueState, board_name: e.target.value })
+            }}
+            postOnClick={() => {
               props.postOnClick(modalValueState)
-            )
-          }}
-          defaultValueTitle={modalValueState.board_name}
-          // いらない
-          defaultValueContent={''}
-          titleOnChange={(e) => {
-            setmodalValueState({ ...modalValueState, board_name: e.target.value });
-          }}
-          // いらない
-          contentOnChange={() => {
-            console.log('hello')
-          }}
-        />
+            }}
+            modalOnClose={modalClose}
+          />
+        </ModalWindow>
         <AddIcon
           onClick={() => {
             setModalOpenState(true);
-            setNewModeState(true);
           }}
         />
       </Container>
