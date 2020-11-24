@@ -23,6 +23,11 @@ export const MuiTheme = createMuiTheme({
       label: {
         // justifyContent: `none`,
       }
+    },
+    MuiListItemText: {
+      root: {
+        flex: `none`,
+      }
     }
   }
 });

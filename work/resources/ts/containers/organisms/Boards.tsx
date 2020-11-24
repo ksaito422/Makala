@@ -83,6 +83,9 @@ export const Boards: React.FC<Props> = (props) => {
                   </IconButton>
                 </ListItemIcon>
                 <Button
+                  classes={{
+                    label: classes.label,
+                  }}
                   fullWidth
                   onClick={() => {
                     props.showOnClick(board.id)
