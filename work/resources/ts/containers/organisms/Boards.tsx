@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { AddIcon } from '../../components/atoms/AddIcon';
 import { CloseIcon } from '../../components/atoms/CloseIcon';
 import { ModalWindow } from '../../components/molecules/ModalWindow';
@@ -26,6 +26,10 @@ type Props = {
 }
 
 export const Boards: React.FC<Props> = (props) => {
+  // cssの定義
+  const { useStyles } = useContext<any>(StylesContext);
+  const classes = useStyles();
+
   // 新規作成か更新か判別するstate
   const [createState, setCreateState] = useState<boolean>(false);
 
@@ -79,6 +83,9 @@ export const Boards: React.FC<Props> = (props) => {
                   </IconButton>
                 </ListItemIcon>
                 <Button
+                  classes={{
+                    label: classes.label,
+                  }}
                   fullWidth
                   onClick={() => {
                     props.showOnClick(board.id)
@@ -99,33 +106,35 @@ export const Boards: React.FC<Props> = (props) => {
               ))}
           </List>
         </Paper>
-        <ModalWindow
-          modalOpen={modalOpenState}
-          modalOnClose={modalClose}
-        >
-          <ModalBoard
-            defaultValueTitle={modalValueState.board_name}
-            titleOnChange={(e) => {
-              setmodalValueState({ ...modalValueState, board_name: e.target.value })
+        <div className={classes.centerPlacement}>
+          <AddIcon
+            onClick={() => {
+              setModalOpenState(true);
+              setCreateState(true);
             }}
-            postOnClick={() => {
-              // 新規作成か更新を判断してメソッドを使い分ける
-              createState ? (
-                  props.storeOnClick(modalValueState)
-                ) : (
-                  props.postOnClick(modalValueState)
-                );
-            }}
-            modalOnClose={modalClose}
           />
-        </ModalWindow>
-        <AddIcon
-          onClick={() => {
-            setModalOpenState(true);
-            setCreateState(true);
-          }}
-        />
+        </div>
       </Container>
+      <ModalWindow
+        modalOpen={modalOpenState}
+        modalOnClose={modalClose}
+      >
+        <ModalBoard
+          defaultValueTitle={modalValueState.board_name}
+          titleOnChange={(e) => {
+            setmodalValueState({ ...modalValueState, board_name: e.target.value })
+          }}
+          postOnClick={() => {
+            // 新規作成か更新を判断してメソッドを使い分ける
+            createState ? (
+                props.storeOnClick(modalValueState)
+              ) : (
+                props.postOnClick(modalValueState)
+              );
+          }}
+          modalOnClose={modalClose}
+        />
+      </ModalWindow>
     </>
   );
 }

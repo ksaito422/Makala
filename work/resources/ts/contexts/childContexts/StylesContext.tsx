@@ -1,5 +1,6 @@
 import React, { createContext } from 'react';
 import { makeStyles } from '@material-ui/core';
+import { NoEncryption } from '@material-ui/icons';
 
 export const StylesContext = createContext({});
 
@@ -56,6 +57,10 @@ export const StylesContextProvider: React.FC = props => {
     auth_form: {
       width: `100%`,
       marginTop: theme.spacing(4),
+    },
+    // Boardsのボタンラベルに適用
+    label: {
+      justifyContent: `left`,
     },
   }));
 
