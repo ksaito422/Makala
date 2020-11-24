@@ -99,26 +99,6 @@ export const Boards: React.FC<Props> = (props) => {
               ))}
           </List>
         </Paper>
-        <ModalWindow
-          modalOpen={modalOpenState}
-          modalOnClose={modalClose}
-        >
-          <ModalBoard
-            defaultValueTitle={modalValueState.board_name}
-            titleOnChange={(e) => {
-              setmodalValueState({ ...modalValueState, board_name: e.target.value })
-            }}
-            postOnClick={() => {
-              // 新規作成か更新を判断してメソッドを使い分ける
-              createState ? (
-                  props.storeOnClick(modalValueState)
-                ) : (
-                  props.postOnClick(modalValueState)
-                );
-            }}
-            modalOnClose={modalClose}
-          />
-        </ModalWindow>
         <AddIcon
           onClick={() => {
             setModalOpenState(true);
@@ -126,6 +106,26 @@ export const Boards: React.FC<Props> = (props) => {
           }}
         />
       </Container>
+      <ModalWindow
+        modalOpen={modalOpenState}
+        modalOnClose={modalClose}
+      >
+        <ModalBoard
+          defaultValueTitle={modalValueState.board_name}
+          titleOnChange={(e) => {
+            setmodalValueState({ ...modalValueState, board_name: e.target.value })
+          }}
+          postOnClick={() => {
+            // 新規作成か更新を判断してメソッドを使い分ける
+            createState ? (
+                props.storeOnClick(modalValueState)
+              ) : (
+                props.postOnClick(modalValueState)
+              );
+          }}
+          modalOnClose={modalClose}
+        />
+      </ModalWindow>
     </>
   );
 }
