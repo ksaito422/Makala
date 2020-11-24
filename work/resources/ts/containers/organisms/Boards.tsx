@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { AddIcon } from '../../components/atoms/AddIcon';
 import { CloseIcon } from '../../components/atoms/CloseIcon';
 import { ModalWindow } from '../../components/molecules/ModalWindow';
@@ -26,6 +26,10 @@ type Props = {
 }
 
 export const Boards: React.FC<Props> = (props) => {
+  // cssの定義
+  const { useStyles } = useContext<any>(StylesContext);
+  const classes = useStyles();
+
   // 新規作成か更新か判別するstate
   const [createState, setCreateState] = useState<boolean>(false);
 
@@ -99,12 +103,14 @@ export const Boards: React.FC<Props> = (props) => {
               ))}
           </List>
         </Paper>
-        <AddIcon
-          onClick={() => {
-            setModalOpenState(true);
-            setCreateState(true);
-          }}
-        />
+        <div className={classes.centerPlacement}>
+          <AddIcon
+            onClick={() => {
+              setModalOpenState(true);
+              setCreateState(true);
+            }}
+          />
+        </div>
       </Container>
       <ModalWindow
         modalOpen={modalOpenState}
