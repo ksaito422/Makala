@@ -58,9 +58,8 @@ export const CardPage = React.memo (() => {
       result.source.index,
       result.destination.index
     );
-// バグあるから、あとでやる
-    setCardsState({ items });
-    console.log(items);
+
+    setCardsState(items);
   };
 
   // width 1024px以下での表示レイアウト切り替え定義
