@@ -18,11 +18,6 @@ export const ShowCardsContextProvider: React.FC = props => {
     })
     .then((res) => {
       setCardsState(res.data.cards);
-      // setCardsState({ ...cardsState, numberMade: res.data.cards.length});
-      // console.log(cardsState);
-      // console.log(res.data);
-      // console.log(res.data.cards);
-      // console.log(res.data.cards.length);
     })
     .catch((err) => {
       return;
