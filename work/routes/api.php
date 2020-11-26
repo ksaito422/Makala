@@ -33,8 +33,8 @@ Route::group(['middleware' => 'api'], function() {
 
     Route::apiResource('/v1/cards', 'Api\CardController', ['except' => ['index', 'show']])
     ->names([
-        'store' => 'cards.store',
-        'update' => 'cards.update',
-        'destroy' => 'cards.destroy'
+        'store' => 'card.store',
+        'update' => 'card.update',
+        'destroy' => 'card.destroy'
     ]);
 });

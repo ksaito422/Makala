@@ -39,7 +39,7 @@ class CardControllerTest extends TestCase
      */
     public function storeメソッドでカードを保存できる()
     {
-        $url = route('cards.store');
+        $url = route('card.store');
 
         $data = [
             'board_id' => 1,
@@ -59,7 +59,7 @@ class CardControllerTest extends TestCase
      */
     public function updateメソッドでカードを更新できる()
     {
-        $url = route('cards.update', ['card' => $this->card->id]);
+        $url = route('card.update', ['card' => $this->card->id]);
 
         $data = [
             'title' => 'title',
@@ -78,7 +78,7 @@ class CardControllerTest extends TestCase
      */
     public function destroyメソッドでカードを削除できる()
     {
-        $url = route('cards.destroy', ['card' => $this->card->id]);
+        $url = route('card.destroy', ['card' => $this->card->id]);
 
         $this->delete($url)
             ->assertOk()
