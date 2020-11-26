@@ -21,10 +21,9 @@ Route::group(['middleware' => 'api'], function() {
     Route::get('/v1/boards/{user}', 'Api\BoardController@index')
         ->name('board.index');
 
-    Route::apiResource('/v1/boards', 'Api\BoardController', ['except' => ['index']])
+    Route::apiResource('/v1/boards', 'Api\BoardController', ['except' => ['index', 'show']])
         ->names([
             'store' => 'board.store',
-            'show' => 'board.show',
             'update' => 'board.update',
             'destroy' => 'board.destroy'
         ]);
