@@ -23,6 +23,20 @@ class CardControllerTest extends TestCase
     /**
      * @test
      */
+    public function indexメソッドでカードを取得表示できる()
+    {
+        $url = route('card.index', ['card' => $this->board->id]);
+
+        $this->get($url)
+            ->assertOk()
+            ->assertSeeText('cards')
+            ->assertJsonFragment(['board_id' => $this->board->id])
+            ->assertHeader('Content-Type', 'application/json');
+    }
+
+    /**
+     * @test
+     */
     public function storeメソッドでカードを保存できる()
     {
         $url = route('cards.store');
@@ -37,20 +51,6 @@ class CardControllerTest extends TestCase
             ->assertStatus(201)
             ->assertJsonFragment(['message' => '新しいカードを作成しました。'])
             ->assertJsonCount(1)
-            ->assertHeader('Content-Type', 'application/json');
-    }
-
-    /**
-     * @test
-     */
-    public function showメソッドでカードを取得表示できる()
-    {
-        $url = route('cards.show', ['card' => $this->board->id]);
-
-        $this->get($url)
-            ->assertOk()
-            ->assertSeeText('cards')
-            ->assertJsonFragment(['board_id' => $this->board->id])
             ->assertHeader('Content-Type', 'application/json');
     }
 
