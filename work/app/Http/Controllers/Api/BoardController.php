@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\User;
 use App\Model\Board;
 
 class BoardController extends Controller
@@ -15,8 +16,8 @@ class BoardController extends Controller
      */
     public function index($id)
     {
-        $boards = Board::where('user_id', $id)
-                        ->get();
+        $boards = User::find($id)
+                        ->boards;
         return response()->json([
             'boards' => $boards
         ], 200, [], JSON_UNESCAPED_UNICODE);

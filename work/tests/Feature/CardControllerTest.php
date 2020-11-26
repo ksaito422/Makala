@@ -23,9 +23,23 @@ class CardControllerTest extends TestCase
     /**
      * @test
      */
+    public function indexメソッドでカードを取得表示できる()
+    {
+        $url = route('card.index', ['card' => $this->board->id]);
+
+        $this->get($url)
+            ->assertOk()
+            ->assertSeeText('cards')
+            ->assertJsonFragment(['board_id' => $this->board->id])
+            ->assertHeader('Content-Type', 'application/json');
+    }
+
+    /**
+     * @test
+     */
     public function storeメソッドでカードを保存できる()
     {
-        $url = route('cards.store');
+        $url = route('card.store');
 
         $data = [
             'board_id' => 1,
@@ -43,23 +57,9 @@ class CardControllerTest extends TestCase
     /**
      * @test
      */
-    public function showメソッドでカードを取得表示できる()
-    {
-        $url = route('cards.show', ['card' => $this->board->id]);
-
-        $this->get($url)
-            ->assertOk()
-            ->assertSeeText('cards')
-            ->assertJsonFragment(['board_id' => $this->board->id])
-            ->assertHeader('Content-Type', 'application/json');
-    }
-
-    /**
-     * @test
-     */
     public function updateメソッドでカードを更新できる()
     {
-        $url = route('cards.update', ['card' => $this->card->id]);
+        $url = route('card.update', ['card' => $this->card->id]);
 
         $data = [
             'title' => 'title',
@@ -78,7 +78,7 @@ class CardControllerTest extends TestCase
      */
     public function destroyメソッドでカードを削除できる()
     {
-        $url = route('cards.destroy', ['card' => $this->card->id]);
+        $url = route('card.destroy', ['card' => $this->card->id]);
 
         $this->delete($url)
             ->assertOk()

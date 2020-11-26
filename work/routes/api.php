@@ -21,18 +21,20 @@ Route::group(['middleware' => 'api'], function() {
     Route::get('/v1/boards/{user}', 'Api\BoardController@index')
         ->name('board.index');
 
-    Route::apiResource('/v1/boards', 'Api\BoardController', ['except' => 'index', 'show'])
+    Route::apiResource('/v1/boards', 'Api\BoardController', ['except' => ['index', 'show']])
         ->names([
             'store' => 'board.store',
             'update' => 'board.update',
             'destroy' => 'board.destroy'
         ]);
 
-    Route::apiResource('/v1/cards', 'Api\CardController', ['except' => 'index'])
+    Route::get('/v1/cards/{card}', 'Api\CardController@index')
+        ->name('card.index');
+
+    Route::apiResource('/v1/cards', 'Api\CardController', ['except' => ['index', 'show']])
     ->names([
-        'store' => 'cards.store',
-        'show' => 'cards.show',
-        'update' => 'cards.update',
-        'destroy' => 'cards.destroy'
+        'store' => 'card.store',
+        'update' => 'card.update',
+        'destroy' => 'card.destroy'
     ]);
 });
