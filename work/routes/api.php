@@ -28,6 +28,9 @@ Route::group(['middleware' => 'api'], function() {
             'destroy' => 'board.destroy'
         ]);
 
+    Route::get('/v1/cards/{card}', 'Api\CardController@index')
+        ->name('card.index');
+
     Route::apiResource('/v1/cards', 'Api\CardController', ['except' => ['index', 'show']])
     ->names([
         'store' => 'cards.store',
