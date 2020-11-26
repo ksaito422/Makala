@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Model\Board;
 use App\Model\Card;
 
 class CardController extends Controller
@@ -13,9 +14,13 @@ class CardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        //
+        $cards = Board::find($id)
+                        ->cards;
+        return response()->json([
+            'cards' => $cards
+        ], 200, [], JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -34,21 +39,6 @@ class CardController extends Controller
         return response()->json([
             'message' => '新しいカードを作成しました。'
         ], 201, [], JSON_UNESCAPED_UNICODE);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $cards = Card::where('board_id', $id)
-                    ->get();
-        return response()->json([
-            'cards' => $cards
-        ], 200, [], JSON_UNESCAPED_UNICODE);
     }
 
     /**
