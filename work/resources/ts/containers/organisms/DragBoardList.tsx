@@ -5,8 +5,7 @@ import { AddIcon } from '../../components/atoms/AddIcon';
 import { ModalWindow } from '../../components/molecules/ModalWindow';
 import { ModalCard } from '../../components/molecules/ModalCard';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
-import { BoardItemContext } from '../../contexts/childContexts/BoardItemContext';
-import { ShowCardsContext } from '../../contexts/childContexts/ShowCardsContext';
+import { ApiCardsContext } from '../../contexts/childContexts/ApiCardsContext';
 
 type BoardListProps = {
   items?: any,
@@ -22,8 +21,7 @@ export const DragBoardList = React.memo<BoardListProps> (({
   const classes = useStyles()
 
   // dragBoardItemのレンダーするデータを読み取り
-  const { BoardItemState, setBoardItemState } = useContext<any>(BoardItemContext);
-  const { cardsState, setCardsState } = useContext<any>(ShowCardsContext);
+  const { cardsState, setCardsState } = useContext<any>(ApiCardsContext);
 
   // モーダルに渡す表示内容
   const [modalValueState, setmodalValueState] = useState<any>({
