@@ -4,7 +4,7 @@ import { Header } from '../organisms/Header';
 import { DragBoardList } from '../organisms/DragBoardList';
 import { Preview } from '../organisms/Preview';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
-import { ShowCardsContext } from '../../contexts/childContexts/ShowCardsContext';
+import { ApiCardsContext } from '../../contexts/childContexts/ApiCardsContext';
 import {
   Container,
   CssBaseline,
@@ -38,10 +38,10 @@ export const CardPage = React.memo (() => {
   const matches = useMediaQuery('(min-width: 1025px)');
 
   // dragItemのデータ 表示する内容のstateをShowCardsContextから読み取る
-  const { cardsState, showCards, setCardsState } = useContext<any>(ShowCardsContext);
+  const { cardsState, getCards, setCardsState } = useContext<any>(ApiCardsContext);
 
   useEffect(() => {
-    showCards(2);
+    getCards(2);
   }, []);
 
   const onDragEnd = (result: any) => {

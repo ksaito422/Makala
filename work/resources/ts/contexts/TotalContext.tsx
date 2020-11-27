@@ -3,7 +3,7 @@ import { StylesContextProvider } from './childContexts/StylesContext';
 import { AuthContextProvider } from './childContexts/AuthContext';
 import { ApiBoardsContextProvider } from './childContexts/ApiBoardsContext';
 import { StoreBoardContextProvider } from './childContexts/StoreBoardContext';
-import { ShowCardsContextProvider } from './childContexts/ShowCardsContext';
+import { ApiCardsContextProvider } from './childContexts/ApiCardsContext';
 import { BoardItemContextProvider } from './childContexts/BoardItemContext';
 
 export const TotalContext = createContext({});
@@ -14,11 +14,11 @@ export const TotalContextProvider: React.FC = props => {
       <AuthContextProvider>
         <ApiBoardsContextProvider>
           <StoreBoardContextProvider>
-            <ShowCardsContextProvider>
+            <ApiCardsContextProvider>
               <BoardItemContextProvider>
                 {props.children}
               </BoardItemContextProvider>
-            </ShowCardsContextProvider>
+            </ApiCardsContextProvider>
           </StoreBoardContextProvider>
         </ApiBoardsContextProvider>
       </AuthContextProvider>
