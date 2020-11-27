@@ -24,11 +24,30 @@ export const ApiCardsContextProvider: React.FC = props => {
     })
   }
 
+  // apiと通信して、カードを取得するロジック
+  const deleteCard: any = (id: number) => {
+    axios({
+      method: 'DELETE',
+      url: `/api/v1/cards/${id}`,
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+    .then((res) => {
+      // ログイン認証作ったら、修正する
+      console.log('削除');
+    })
+    .catch((err) => {
+      return;
+    })
+  }
+
   return (
     <ApiCardsContext.Provider value={{
       cardsState,
       setCardsState,
-      getCards
+      getCards,
+      deleteCard
       }}
     >
       {props.children}
