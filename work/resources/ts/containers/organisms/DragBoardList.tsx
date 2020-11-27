@@ -5,8 +5,7 @@ import { AddIcon } from '../../components/atoms/AddIcon';
 import { ModalWindow } from '../../components/molecules/ModalWindow';
 import { ModalCard } from '../../components/molecules/ModalCard';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
-import { BoardItemContext } from '../../contexts/childContexts/BoardItemContext';
-import { ShowCardsContext } from '../../contexts/childContexts/ShowCardsContext';
+import { ApiCardsContext } from '../../contexts/childContexts/ApiCardsContext';
 
 type BoardListProps = {
   items?: any,
@@ -22,8 +21,7 @@ export const DragBoardList = React.memo<BoardListProps> (({
   const classes = useStyles()
 
   // dragBoardItemのレンダーするデータを読み取り
-  const { BoardItemState, setBoardItemState } = useContext<any>(BoardItemContext);
-  const { cardsState, setCardsState } = useContext<any>(ShowCardsContext);
+  const { cardsState, setCardsState, deleteCard } = useContext<any>(ApiCardsContext);
 
   // モーダルに渡す表示内容
   const [modalValueState, setmodalValueState] = useState<any>({
@@ -76,11 +74,12 @@ const regularExpressions = /^.+/;
                   }}
                   deleteOnClick={() => {
                     //  今のBoardItemの配列を受け取り、[index]を基にカードを削除
-                    let newBoardItemState = { ...cardsState };
-                    newBoardItemState.items.splice(index, 1);
-                    setCardsState(
-                      newBoardItemState,
-                    );
+                    // let newBoardItemState = { ...cardsState };
+                    // newBoardItemState.items.splice(index, 1);
+                    // setCardsState(
+                    //   newBoardItemState,
+                    // );
+                    deleteCard(item.id);
                   }}
                 />
               ))}

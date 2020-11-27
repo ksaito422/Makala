@@ -4,7 +4,6 @@ import { Header } from '../organisms/Header';
 import { Boards } from '../organisms/Boards';
 import { ApiBoardsContext } from '../../contexts/childContexts/ApiBoardsContext';
 import { StoreBoardContext } from '../../contexts/childContexts/StoreBoardContext';
-import { ShowCardsContext } from '../../contexts/childContexts/ShowCardsContext';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import {
   Container,
@@ -14,7 +13,6 @@ import {
 export const HomePage: React.FC = () => {
   const { boardsState, getBoards, updateBoard, updateBoardState,  deleteBoard, deleteBoardState } = useContext<any>(ApiBoardsContext);
   const { storeBoard } = useContext<any>(StoreBoardContext);
-  const { showCards, cardsState } = useContext<any>(ShowCardsContext);
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
   const history = useHistory();
