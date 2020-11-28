@@ -29,7 +29,9 @@ Route::group([
 });
 
 
-Route::group(['middleware' => 'api'], function() {
+Route::group([
+    'middleware' => 'api'
+], function() {
     Route::get('/v1/boards/{user}', 'Api\BoardController@index')
         ->name('board.index');
 
