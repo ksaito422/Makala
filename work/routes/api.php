@@ -13,11 +13,21 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+// 認証関係のルート
+Route::group([
+    'prefix' => 'auth',
+    'middleware' => 'api'
+], function() {
+    Route::post('login', 'Api\AuthController@login');
+    Route::post('logout', 'Api\AuthController@logout');
+    Route::post('refresh', 'Api\AuthController@refresh');
+    Route::post('me', 'Api\AuthController@me');
 });
 
-Route::group(['middleware' => 'api'], function() {
+
+Route::group([
+    'middleware' => 'api'
+], function() {
     Route::get('/v1/boards/{user}', 'Api\BoardController@index')
         ->name('board.index');
 
