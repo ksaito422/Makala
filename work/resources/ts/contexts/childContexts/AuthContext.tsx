@@ -49,6 +49,24 @@ export const AuthContextProvider: React.FC = props => {
     })
   }
 
+  // apiと通信して、ユーザー情報を取得
+  const authMe = async () => {
+    const token = localStorage.getItem('makala');
+    await axios({
+      method: 'POST',
+      url: 'api/auth/me',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    .then((res) => {
+      login();
+    })
+    .catch((err) => {
+    })
+  }
+
   return (
     <AuthContext.Provider value={{
       authState,
@@ -56,6 +74,7 @@ export const AuthContextProvider: React.FC = props => {
       isAuth,
       login,
       authLogin,
+      authMe,
       }}
     >
       {props.children}
