@@ -5,7 +5,7 @@ export const ApiBoardsContext = createContext({});
 
 export const ApiBoardsContextProvider: React.FC = props => {
   const [boardsState, setBoardsState] = useState([]);
-  const token = localStorage.getItem('makala');
+  const token = localStorage.getItem('makala_token');
 
   // apiと通信して、ボードを取得するロジック
   const getBoards: any = (id: number) => {

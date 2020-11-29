@@ -40,8 +40,11 @@ export const AuthContextProvider: React.FC = props => {
       }
     })
     .then((res) => {
+      // ローカルストレージに認証情報を保管 *脆弱性のことはあとで考える
+      localStorage.setItem('makala_token', res.data.access_token);
+      localStorage.setItem('makala_user', res.data.id);
       login();
-      localStorage.setItem('makala', res.data.access_token);
+
     })
     .catch((err) => {
       // あとでフロントに失敗を通知のロジックを書く
@@ -51,7 +54,7 @@ export const AuthContextProvider: React.FC = props => {
 
   // apiと通信して、ユーザー情報を取得
   const authMe = async () => {
-    const token = localStorage.getItem('makala');
+    const token = localStorage.getItem('makala_token');
     await axios({
       method: 'POST',
       url: 'api/auth/me',

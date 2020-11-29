@@ -10,11 +10,12 @@ type Props = {
 
 export const GuestRoute: React.FC<Props> = (props) => {
   const { isAuth } = useContext<any>(AuthContext);
+  const user = localStorage.getItem('makala_user');
 
   // 認証済みユーザーなら'/home'にリダイレクトする
   return (
     isAuth ? (
-      <Redirect to='/home' />
+      <Redirect to={`/home/${user}`} />
     ) : (
       <Route {...props} />
     )

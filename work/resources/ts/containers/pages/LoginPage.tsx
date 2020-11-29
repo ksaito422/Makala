@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useContext, useEffect } from 'react';
+import { useHistory, Redirect } from 'react-router-dom';
 import { Header } from '../organisms/Header';
 import { Login } from '../organisms/Login';
 import { AuthContext } from '../../contexts/childContexts/AuthContext';
@@ -18,6 +18,12 @@ export const LoginPage: React.FC = () => {
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
   const history = useHistory();
+  const user = localStorage.getItem('makala_user');
+
+  // api通信中にローディングアイコンを出したい
+  useEffect(() => {
+    authMe();
+  }, []);
 
   return (
     <>
@@ -33,8 +39,9 @@ export const LoginPage: React.FC = () => {
           }}
           loginOnClick={async () => {
             await authLogin();
-            const newIsAuth = await true;
-            await newIsAuth ? history.push('/home') : null;
+            // const newIsAuth = await true;
+            // const user = await localStorage.getItem('makala_user');
+            // await newIsAuth ? history.push(`/home/${user}`) : null;
           }}
           cancelOnClick={() => {
             history.push('/');
