@@ -21,8 +21,22 @@ export const AuthContextProvider: React.FC = props => {
     authError: null
   });
 
+  // ログイン状態の管理
+  const [isAuth, setIsAuth] = useState(false);
+
+  // 認証成功したらisAuthをtrueにする
+  const login = () => {
+    setIsAuth(true);
+  }
+
   return (
-    <AuthContext.Provider value={{authState, setAuthState}}>
+    <AuthContext.Provider value={{
+      authState,
+      setAuthState,
+      isAuth,
+      login,
+      }}
+    >
       {props.children}
     </AuthContext.Provider>
   );
