@@ -5,15 +5,16 @@ export const ApiBoardsContext = createContext({});
 
 export const ApiBoardsContextProvider: React.FC = props => {
   const [boardsState, setBoardsState] = useState([]);
+  const token = localStorage.getItem('makala');
 
   // apiと通信して、ボードを取得するロジック
-  const getBoards: any = () => {
+  const getBoards: any = (id: number) => {
     axios({
       method: 'GET',
-      // とりあえずuser id を1でセットしてる
-      url: '/api/v1/boards/1',
+      url: `/api/v1/boards/${id}`,
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
       }
     })
     .then((res) => {
