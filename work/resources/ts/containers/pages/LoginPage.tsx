@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useContext, useEffect } from 'react';
+import { useHistory, Redirect } from 'react-router-dom';
 import { Header } from '../organisms/Header';
 import { Login } from '../organisms/Login';
 import { AuthContext } from '../../contexts/childContexts/AuthContext';
@@ -14,10 +14,16 @@ export const LoginPage: React.FC = () => {
    * cssの定義
    * react-router-dom URLルーティングに使う
    */
-  const { authState, setAuthState } = useContext<any>(AuthContext);
+  const { authState, setAuthState, isAuth, authLogin, authMe } = useContext<any>(AuthContext);
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
   const history = useHistory();
+  const user = localStorage.getItem('makala_user');
+
+  // api通信中にローディングアイコンを出したい
+  useEffect(() => {
+    authMe();
+  }, []);
 
   return (
     <>
@@ -31,9 +37,11 @@ export const LoginPage: React.FC = () => {
           passwordOnChange={(e) => {
             setAuthState({ ...authState, password: e.target.value });
           }}
-          loginOnClick={() => {
-            // ログインのロジックをあとで書く
-            history.push('/home');
+          loginOnClick={async () => {
+            await authLogin();
+            // const newIsAuth = await true;
+            // const user = await localStorage.getItem('makala_user');
+            // await newIsAuth ? history.push(`/home/${user}`) : null;
           }}
           cancelOnClick={() => {
             history.push('/');
