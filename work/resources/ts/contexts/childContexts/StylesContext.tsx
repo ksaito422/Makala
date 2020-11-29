@@ -62,6 +62,10 @@ export const StylesContextProvider: React.FC = props => {
     label: {
       justifyContent: `left`,
     },
+    // スピナーに適用
+    Spinner: {
+      zIndex: 99,
+    },
   }));
 
   return (
