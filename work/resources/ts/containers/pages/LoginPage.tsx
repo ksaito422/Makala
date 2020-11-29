@@ -14,7 +14,7 @@ export const LoginPage: React.FC = () => {
    * cssの定義
    * react-router-dom URLルーティングに使う
    */
-  const { authState, setAuthState, isAuth, authLogin } = useContext<any>(AuthContext);
+  const { authState, setAuthState, isAuth, authLogin, authMe } = useContext<any>(AuthContext);
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
   const history = useHistory();
