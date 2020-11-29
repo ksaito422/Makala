@@ -1,5 +1,5 @@
 import React, { useState, createContext } from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 
 type Props = {
     name: string | null,
@@ -29,12 +29,33 @@ export const AuthContextProvider: React.FC = props => {
     setIsAuth(true);
   }
 
+  // apiと通信して、ログイン処理を行う
+  const authLogin = async () => {
+    await axios({
+      method: 'POST',
+      url: 'api/auth/login',
+      data: authState,
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+    .then((res) => {
+      login();
+      localStorage.setItem('makala', res.data.access_token);
+    })
+    .catch((err) => {
+      // あとでフロントに失敗を通知のロジックを書く
+      console.log('ログインに失敗しました。');
+    })
+  }
+
   return (
     <AuthContext.Provider value={{
       authState,
       setAuthState,
       isAuth,
       login,
+      authLogin,
       }}
     >
       {props.children}
