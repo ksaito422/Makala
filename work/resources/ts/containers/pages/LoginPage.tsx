@@ -14,7 +14,7 @@ export const LoginPage: React.FC = () => {
    * cssの定義
    * react-router-dom URLルーティングに使う
    */
-  const { authState, setAuthState } = useContext<any>(AuthContext);
+  const { authState, setAuthState, isAuth, authLogin } = useContext<any>(AuthContext);
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
   const history = useHistory();
@@ -31,9 +31,9 @@ export const LoginPage: React.FC = () => {
           passwordOnChange={(e) => {
             setAuthState({ ...authState, password: e.target.value });
           }}
-          loginOnClick={() => {
-            // ログインのロジックをあとで書く
-            history.push('/home');
+          loginOnClick={async () => {
+            await authLogin();
+            isAuth ? history.push('/home') : null;
           }}
           cancelOnClick={() => {
             history.push('/');
