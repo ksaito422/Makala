@@ -18,10 +18,10 @@ Route::group([
     'prefix' => 'auth',
     'middleware' => 'api'
 ], function() {
-    Route::post('login', 'Api\AuthController@login');
-    Route::post('logout', 'Api\AuthController@logout');
-    Route::post('refresh', 'Api\AuthController@refresh');
-    Route::post('me', 'Api\AuthController@me');
+    Route::post('login', 'Api\AuthController@login')->name('auth.login');
+    Route::post('logout', 'Api\AuthController@logout')->name('auth.logout');
+    Route::post('refresh', 'Api\AuthController@refresh')->name('auth.refresh');
+    Route::post('me', 'Api\AuthController@me')->name('auth.me');
 });
 
 
