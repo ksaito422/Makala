@@ -33,7 +33,8 @@ export const LoginPage: React.FC = () => {
           }}
           loginOnClick={async () => {
             await authLogin();
-            isAuth ? history.push('/home') : null;
+            const newIsAuth = await true;
+            await newIsAuth ? history.push('/home') : null;
           }}
           cancelOnClick={() => {
             history.push('/');

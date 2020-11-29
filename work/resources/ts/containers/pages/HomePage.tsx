@@ -19,7 +19,7 @@ export const HomePage: React.FC = () => {
 
   // 最初のレンダー時にボードを取得する
   useEffect(() => {
-    getBoards();
+    getBoards(1);
   }, []);
 
   return (

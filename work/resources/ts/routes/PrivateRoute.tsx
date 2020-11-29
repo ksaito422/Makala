@@ -16,7 +16,7 @@ export const PrivateRoute: React.FC<Props> = (props) => {
     isAuth ? (
       <Route {...props} />
     ) : (
-      <Redirect to='/' />
+      <Redirect to='/login' />
     )
   );
 }
