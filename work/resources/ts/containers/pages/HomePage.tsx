@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { Header } from '../organisms/Header';
 import { Boards } from '../organisms/Boards';
 import { ApiBoardsContext } from '../../contexts/childContexts/ApiBoardsContext';
@@ -16,10 +16,11 @@ export const HomePage: React.FC = () => {
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
   const history = useHistory();
+  const { user } = useParams<any>();
 
   // 最初のレンダー時にボードを取得する
   useEffect(() => {
-    getBoards(1);
+    getBoards(user);
   }, []);
 
   return (
