@@ -11,6 +11,7 @@ import { ConfirmPage } from './containers/pages/ConfirmPage';
 import { HomePage } from './containers/pages/HomePage';
 import { CardPage } from './containers/pages/CardPage';
 import { MuiTheme } from './theme/MuiTheme';
+import { Auth } from './Auth/Auth';
 import { MuiThemeProvider } from '@material-ui/core';
 
 const App: React.FC = () => {
@@ -18,14 +19,16 @@ const App: React.FC = () => {
     <Router>
       <TotalContextProvider>
         <MuiThemeProvider theme={MuiTheme}>
-          <Switch>
-            <Route exact path='/' component={TopPage} />
-            <GuestRoute exact path='/login' component={LoginPage} />
-            <GuestRoute exact path='/sign-up' component={SignUpPage} />
-            <GuestRoute exact path='/sign-up/confirm' component={ConfirmPage} />
-            <PrivateRoute exact path='/home/:user' component={HomePage} />
-            <PrivateRoute exact path='/home/cards' component={CardPage} />
-          </Switch>
+          <Auth>
+            <Switch>
+              <Route exact path='/' component={TopPage} />
+              <GuestRoute exact path='/login' component={LoginPage} />
+              <GuestRoute exact path='/sign-up' component={SignUpPage} />
+              <GuestRoute exact path='/sign-up/confirm' component={ConfirmPage} />
+              <PrivateRoute exact path='/home/:user' component={HomePage} />
+              <PrivateRoute exact path='/home/cards' component={CardPage} />
+            </Switch>
+          </Auth>
         </MuiThemeProvider>
       </TotalContextProvider>
     </Router>
