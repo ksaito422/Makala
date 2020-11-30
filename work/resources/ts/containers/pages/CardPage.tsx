@@ -1,10 +1,12 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { ButtonGroup } from '../../components/molecules/ButtonGroup';
+import { Spinner } from '../../components/molecules/Spinner';
 import { Header } from '../organisms/Header';
 import { DragBoardList } from '../organisms/DragBoardList';
 import { Preview } from '../organisms/Preview';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import { ApiCardsContext } from '../../contexts/childContexts/ApiCardsContext';
+import { FeedbackContext } from '../../contexts/childContexts/FeedbackContext';
 import {
   Container,
   CssBaseline,
@@ -30,6 +32,8 @@ const reorder = (
 };
 
 export const CardPage = React.memo (() => {
+  // スピナー、api通信の結果通知の状態管理
+  const { progress, status, setStatus } = useContext<any>(FeedbackContext);
   // classNameのインポート
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
@@ -70,6 +74,7 @@ export const CardPage = React.memo (() => {
 
   return (
     <>
+      <Spinner open={progress} />
       <CssBaseline />
       <Header />
       <Container maxWidth='xl' className={classes.main_container}>
