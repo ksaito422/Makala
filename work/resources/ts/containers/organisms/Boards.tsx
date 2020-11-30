@@ -98,6 +98,7 @@ export const Boards: React.FC<Props> = (props) => {
                 <ListItemSecondaryAction>
                   <CloseIcon
                     onClick={() => {
+                      modalClose(),
                       props.deleteOnClick(board.id, index)
                     }}
                   />
@@ -127,8 +128,10 @@ export const Boards: React.FC<Props> = (props) => {
           postOnClick={() => {
             // 新規作成か更新を判断してメソッドを使い分ける
             createState ? (
+                modalClose(),
                 props.storeOnClick(modalValueState)
               ) : (
+                modalClose(),
                 props.postOnClick(modalValueState)
               );
           }}

@@ -1,15 +1,21 @@
-import React, { useState, createContext } from 'react';
+import React, { useState, createContext, useContext } from 'react';
+import { FeedbackContext } from './FeedbackContext';
 import axios from 'axios';
 
 export const ApiBoardsContext = createContext({});
 
 export const ApiBoardsContextProvider: React.FC = props => {
+  // スピナー表示するため
+  const { setProgress, setStatus } = useContext<any>(FeedbackContext);
+  // getBoardsで取得したデータを保管
   const [boardsState, setBoardsState] = useState([]);
-  const token = localStorage.getItem('makala_token');
 
   // apiと通信して、ボードを取得するロジック
-  const getBoards: any = (id: number) => {
-    axios({
+  const getBoards = async (id: number) => {
+    await setProgress(true);
+    const token = localStorage.getItem('makala_token');
+
+    await axios({
       method: 'GET',
       url: `/api/v1/boards/${id}`,
       headers: {
@@ -19,33 +25,62 @@ export const ApiBoardsContextProvider: React.FC = props => {
     })
     .then((res) => {
       setBoardsState(res.data.boards);
+      return;
     })
     .catch((err) => {
-      return
+      setStatus({
+        open: true,
+        type: 'error',
+        message: 'データの取得に失敗しました。'
+      });
+      return;
+    })
+    .finally(() => {
+      setProgress(false);
+      return;
     })
   }
 
   // apiと通信して、ボード名を更新するロジック
-  const updateBoard = (
+  const updateBoard = async (
     obj: {
       id: number,
     }) => {
-    axios({
-      method: 'PUT',
-      url: `/api/v1/boards/${obj.id}`,
-      data: obj,
-      headers: {
-        'Content-Type': 'application/json',
-      }
-    })
-    .then((res) => {
-      return;
-    })
-    .catch((err) => {
-      // あとでやる エラー時はメッセージを表示して、ボード再取得
-      getBoards();
-    })
-  }
+      await setProgress(true);
+      const token = localStorage.getItem('makala_token');
+
+      await axios({
+        method: 'PUT',
+        url: `/api/v1/boards/${obj.id}`,
+        data: obj,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+      })
+      .then((res) => {
+        setStatus({
+          open: true,
+          type: 'success',
+          message: 'ボード名を変更しました。'
+        });
+        return;
+      })
+      .catch(async (err) => {
+        // あとで直す board取得のid
+        await getBoards(1);
+        await setStatus({
+          open: true,
+          type: 'error',
+          message: 'ボード名の変更に失敗しました。'
+        });
+        return;
+      })
+      .finally(() => {
+        setProgress(false);
+        return;
+      })
+    }
 
   // ボードの更新時に、更新部分だけを再度stateにセットし直している
   const updateBoardState = (
@@ -59,20 +94,39 @@ export const ApiBoardsContextProvider: React.FC = props => {
   }
 
   // apiと通信して、ボードを削除するロジック
-  const deleteBoard = (id: number) => {
-    axios({
+  const deleteBoard = async (id: number) => {
+    await setProgress(true);
+    const token = localStorage.getItem('makala_token');
+
+    await axios({
       method: 'DELETE',
       url: `/api/v1/boards/${id}`,
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
       }
     })
     .then((res) => {
+      setStatus({
+        open: true,
+        type: 'success',
+        message: 'ボードを削除しました。'
+      });
       return;
     })
-    .catch((err) => {
-      // あとでやる エラー時はメッセージを表示して、ボード再取得
-      getBoards();
+    .catch(async (err) => {
+      // あとで直す board取得のid
+      await getBoards(1);
+      await setStatus({
+        open: true,
+        type: 'error',
+        message: 'ボードの削除に失敗しました。'
+      });
+      return;
+    })
+    .finally(() => {
+      setProgress(false);
+      return;
     })
   }
 

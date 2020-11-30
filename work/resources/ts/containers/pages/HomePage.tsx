@@ -1,9 +1,12 @@
 import React, { useContext, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+import { Spinner } from '../../components/molecules/Spinner';
+import { Notice } from '../../components/molecules/Notice';
 import { Header } from '../organisms/Header';
 import { Boards } from '../organisms/Boards';
 import { ApiBoardsContext } from '../../contexts/childContexts/ApiBoardsContext';
 import { StoreBoardContext } from '../../contexts/childContexts/StoreBoardContext';
+import { FeedbackContext } from '../../contexts/childContexts/FeedbackContext';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import {
   Container,
@@ -13,6 +16,7 @@ import {
 export const HomePage: React.FC = () => {
   const { boardsState, getBoards, updateBoard, updateBoardState,  deleteBoard, deleteBoardState } = useContext<any>(ApiBoardsContext);
   const { storeBoard } = useContext<any>(StoreBoardContext);
+  const { progress, status, setStatus } = useContext<any>(FeedbackContext);
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
   const history = useHistory();
@@ -25,6 +29,15 @@ export const HomePage: React.FC = () => {
 
   return (
     <>
+      <Spinner open={progress} />
+      <Notice
+        open={status.open}
+        type={status.type}
+        message={status.message}
+        onClose={() => {
+          setStatus({ ...status, open: false });
+        }}
+      />
       <CssBaseline />
       <Header />
       <Container maxWidth='xl' className={classes.main_container}>
