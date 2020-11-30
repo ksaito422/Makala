@@ -6,10 +6,9 @@ export const ApiBoardsContext = createContext({});
 
 export const ApiBoardsContextProvider: React.FC = props => {
   // スピナー表示するため
-  const { setProgress } = useContext<any>(FeedbackContext);
-
+  const { setProgress, setStatus } = useContext<any>(FeedbackContext);
+  // getBoardsで取得したデータを保管
   const [boardsState, setBoardsState] = useState([]);
-
 
   // apiと通信して、ボードを取得するロジック
   const getBoards = async (id: number) => {
@@ -26,12 +25,19 @@ export const ApiBoardsContextProvider: React.FC = props => {
     })
     .then((res) => {
       setBoardsState(res.data.boards);
+      return;
     })
     .catch((err) => {
-      return
+      setStatus({
+        open: true,
+        type: 'error',
+        message: 'データの取得に失敗しました。'
+      });
+      return;
     })
     .finally(() => {
       setProgress(false);
+      return;
     })
   }
 
@@ -53,14 +59,26 @@ export const ApiBoardsContextProvider: React.FC = props => {
         }
       })
       .then((res) => {
+        setStatus({
+          open: true,
+          type: 'success',
+          message: 'ボード名を変更しました。'
+        });
         return;
       })
-      .catch((err) => {
-        // あとでやる エラー時はメッセージを表示して、ボード再取得
-        getBoards(1);
+      .catch(async (err) => {
+        // あとで直す board取得のid
+        await getBoards(1);
+        await setStatus({
+          open: true,
+          type: 'error',
+          message: 'ボード名の変更に失敗しました。'
+        });
+        return;
       })
       .finally(() => {
         setProgress(false);
+        return;
       })
     }
 
@@ -89,14 +107,26 @@ export const ApiBoardsContextProvider: React.FC = props => {
       }
     })
     .then((res) => {
+      setStatus({
+        open: true,
+        type: 'success',
+        message: 'ボードを削除しました。'
+      });
       return;
     })
-    .catch((err) => {
-      // あとでやる エラー時はメッセージを表示して、ボード再取得
-      getBoards(1);
+    .catch(async (err) => {
+      // あとで直す board取得のid
+      await getBoards(1);
+      await setStatus({
+        open: true,
+        type: 'error',
+        message: 'ボードの削除に失敗しました。'
+      });
+      return;
     })
     .finally(() => {
       setProgress(false);
+      return;
     })
   }
 
