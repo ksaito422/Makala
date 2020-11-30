@@ -1,4 +1,5 @@
-import React, { useState, createContext } from 'react';
+import React, { useState, createContext, useContext } from 'react';
+import { FeedbackContext } from './FeedbackContext';
 import axios from 'axios';
 
 type Props = {
@@ -12,6 +13,9 @@ type Props = {
 export const AuthContext = createContext({});
 
 export const AuthContextProvider: React.FC = props => {
+  // スピナー表示するため
+  const { setProgress } = useContext<any>(FeedbackContext);
+
   // 認証情報を保持するstate
   const [authState, setAuthState] = useState<Props>({
     name: null,
@@ -28,9 +32,15 @@ export const AuthContextProvider: React.FC = props => {
   const login = () => {
     setIsAuth(true);
   }
+  // ログアウトしたらisAuthをfalseにする
+  const logout = () => {
+    setIsAuth(false);
+  }
 
   // apiと通信して、ログイン処理を行う
   const authLogin = async () => {
+    await setProgress(true);
+
     await axios({
       method: 'POST',
       url: 'api/auth/login',
@@ -50,11 +60,17 @@ export const AuthContextProvider: React.FC = props => {
       // あとでフロントに失敗を通知のロジックを書く
       console.log('ログインに失敗しました。');
     })
+    .finally(() => {
+      setProgress(false);
+    })
   }
 
   // apiと通信して、ユーザー情報を取得
   const authMe = async () => {
+    // api通信中はスピナー表示する
+    await setProgress(true);
     const token = localStorage.getItem('makala_token');
+
     await axios({
       method: 'POST',
       url: 'api/auth/me',
@@ -67,6 +83,9 @@ export const AuthContextProvider: React.FC = props => {
       login();
     })
     .catch((err) => {
+    })
+    .finally(() => {
+      setProgress(false);
     })
   }
 
