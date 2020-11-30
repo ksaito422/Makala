@@ -28,6 +28,11 @@ export const ApiCardsContextProvider: React.FC = props => {
       return;
     })
     .catch((err) => {
+      setStatus({
+        open: true,
+        type: 'error',
+        message: 'データの取得に失敗しました。'
+      });
       return;
     })
     .finally(() => {

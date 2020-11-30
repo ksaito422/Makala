@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { ButtonGroup } from '../../components/molecules/ButtonGroup';
 import { Spinner } from '../../components/molecules/Spinner';
+import { Notice } from '../../components/molecules/Notice';
 import { Header } from '../organisms/Header';
 import { DragBoardList } from '../organisms/DragBoardList';
 import { Preview } from '../organisms/Preview';
@@ -75,6 +76,14 @@ export const CardPage = React.memo (() => {
   return (
     <>
       <Spinner open={progress} />
+      <Notice
+        open={status.open}
+        type={status.type}
+        message={status.message}
+        onClose={() => {
+          setStatus({ ...status, open: false });
+        }}
+      />
       <CssBaseline />
       <Header />
       <Container maxWidth='xl' className={classes.main_container}>
