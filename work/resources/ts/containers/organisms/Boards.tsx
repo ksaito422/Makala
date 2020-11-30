@@ -35,6 +35,7 @@ export const Boards: React.FC<Props> = (props) => {
 
   // モーダルに渡す表示内容
   const [modalValueState, setmodalValueState] = useState<any>({
+    user_id: 1,
     id: null,
     board_name: null,
     index: null

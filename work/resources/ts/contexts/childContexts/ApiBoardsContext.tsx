@@ -41,6 +41,48 @@ export const ApiBoardsContextProvider: React.FC = props => {
     })
   }
 
+  // apiと通信して、ボードを作成するロジック
+  const createBoard = async (
+    obj: {
+      user_id: number,
+      board_name: string,
+    }) => {
+      await setProgress(true);
+      const token = localStorage.getItem('makala_token');
+
+      await axios({
+        method: 'POST',
+        url: `/api/v1/boards`,
+        data: obj,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+      })
+      .then((res) => {
+        setStatus({
+          open: true,
+          type: 'success',
+          message: 'ボードを作成しました。'
+        });
+        return;
+      })
+      .catch((err) => {
+        setStatus({
+          open: true,
+          type: 'error',
+          message: 'ボードの作成に失敗しました。'
+        });
+        return;
+      })
+      .finally(() => {
+        setProgress(false);
+        // あとで直す board取得のid
+        getBoards(1);
+        return;
+      })
+    }
+
   // apiと通信して、ボード名を更新するロジック
   const updateBoard = async (
     obj: {
@@ -142,6 +184,7 @@ export const ApiBoardsContextProvider: React.FC = props => {
       boardsState,
       setBoardsState,
       getBoards,
+      createBoard,
       updateBoard,
       updateBoardState,
       deleteBoard,
