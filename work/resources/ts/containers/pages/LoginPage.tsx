@@ -1,8 +1,10 @@
 import React, { useContext, useEffect } from 'react';
-import { useHistory, Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import { Spinner } from '../../components/molecules/Spinner';
 import { Header } from '../organisms/Header';
 import { Login } from '../organisms/Login';
 import { AuthContext } from '../../contexts/childContexts/AuthContext';
+import { FeedbackContext } from '../../contexts/childContexts/FeedbackContext';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import {
   Container,
@@ -11,14 +13,15 @@ import {
 
 export const LoginPage: React.FC = () => {
   /** 認証関連のロジック
+   * api通信中のスピナー表示のon/off管理
    * cssの定義
    * react-router-dom URLルーティングに使う
    */
   const { authState, setAuthState, isAuth, authLogin, authMe } = useContext<any>(AuthContext);
+  const { progress } = useContext<any>(FeedbackContext);
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
   const history = useHistory();
-  const user = localStorage.getItem('makala_user');
 
   // api通信中にローディングアイコンを出したい
   useEffect(() => {
@@ -27,6 +30,7 @@ export const LoginPage: React.FC = () => {
 
   return (
     <>
+      <Spinner open={progress} />
       <CssBaseline />
       <Header />
       <Container maxWidth='xl' className={classes.main_container}>
@@ -39,9 +43,6 @@ export const LoginPage: React.FC = () => {
           }}
           loginOnClick={async () => {
             await authLogin();
-            // const newIsAuth = await true;
-            // const user = await localStorage.getItem('makala_user');
-            // await newIsAuth ? history.push(`/home/${user}`) : null;
           }}
           cancelOnClick={() => {
             history.push('/');
