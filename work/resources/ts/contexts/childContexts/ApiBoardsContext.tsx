@@ -6,7 +6,7 @@ export const ApiBoardsContext = createContext({});
 
 export const ApiBoardsContextProvider: React.FC = props => {
   // スピナー表示するため
-  const { setProgress, progress } = useContext<any>(FeedbackContext);
+  const { setProgress } = useContext<any>(FeedbackContext);
 
   const [boardsState, setBoardsState] = useState([]);
 
@@ -36,26 +36,33 @@ export const ApiBoardsContextProvider: React.FC = props => {
   }
 
   // apiと通信して、ボード名を更新するロジック
-  const updateBoard = (
+  const updateBoard = async (
     obj: {
       id: number,
     }) => {
-    axios({
-      method: 'PUT',
-      url: `/api/v1/boards/${obj.id}`,
-      data: obj,
-      headers: {
-        'Content-Type': 'application/json',
-      }
-    })
-    .then((res) => {
-      return;
-    })
-    .catch((err) => {
-      // あとでやる エラー時はメッセージを表示して、ボード再取得
-      getBoards(1);
-    })
-  }
+      await setProgress(true);
+      const token = localStorage.getItem('makala_token');
+
+      await axios({
+        method: 'PUT',
+        url: `/api/v1/boards/${obj.id}`,
+        data: obj,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+      })
+      .then((res) => {
+        return;
+      })
+      .catch((err) => {
+        // あとでやる エラー時はメッセージを表示して、ボード再取得
+        getBoards(1);
+      })
+      .finally(() => {
+        setProgress(false);
+      })
+    }
 
   // ボードの更新時に、更新部分だけを再度stateにセットし直している
   const updateBoardState = (
@@ -69,12 +76,16 @@ export const ApiBoardsContextProvider: React.FC = props => {
   }
 
   // apiと通信して、ボードを削除するロジック
-  const deleteBoard = (id: number) => {
-    axios({
+  const deleteBoard = async (id: number) => {
+    await setProgress(true);
+    const token = localStorage.getItem('makala_token');
+
+    await axios({
       method: 'DELETE',
       url: `/api/v1/boards/${id}`,
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
       }
     })
     .then((res) => {
@@ -83,6 +94,9 @@ export const ApiBoardsContextProvider: React.FC = props => {
     .catch((err) => {
       // あとでやる エラー時はメッセージを表示して、ボード再取得
       getBoards(1);
+    })
+    .finally(() => {
+      setProgress(false);
     })
   }
 
