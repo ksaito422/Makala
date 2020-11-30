@@ -1,15 +1,22 @@
-import React, { useState, createContext } from 'react';
+import React, { useState, createContext, useContext } from 'react';
+import { FeedbackContext } from './FeedbackContext';
 import axios from 'axios';
 
 export const ApiBoardsContext = createContext({});
 
 export const ApiBoardsContextProvider: React.FC = props => {
+  // スピナー表示するため
+  const { setProgress, progress } = useContext<any>(FeedbackContext);
+
   const [boardsState, setBoardsState] = useState([]);
-  const token = localStorage.getItem('makala_token');
+
 
   // apiと通信して、ボードを取得するロジック
-  const getBoards: any = (id: number) => {
-    axios({
+  const getBoards = async (id: number) => {
+    await setProgress(true);
+    const token = localStorage.getItem('makala_token');
+
+    await axios({
       method: 'GET',
       url: `/api/v1/boards/${id}`,
       headers: {
@@ -22,6 +29,9 @@ export const ApiBoardsContextProvider: React.FC = props => {
     })
     .catch((err) => {
       return
+    })
+    .finally(() => {
+      setProgress(false);
     })
   }
 
@@ -43,7 +53,7 @@ export const ApiBoardsContextProvider: React.FC = props => {
     })
     .catch((err) => {
       // あとでやる エラー時はメッセージを表示して、ボード再取得
-      getBoards();
+      getBoards(1);
     })
   }
 
@@ -72,7 +82,7 @@ export const ApiBoardsContextProvider: React.FC = props => {
     })
     .catch((err) => {
       // あとでやる エラー時はメッセージを表示して、ボード再取得
-      getBoards();
+      getBoards(1);
     })
   }
 
