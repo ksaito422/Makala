@@ -5,7 +5,6 @@ import { Notice } from '../../components/molecules/Notice';
 import { Header } from '../organisms/Header';
 import { Boards } from '../organisms/Boards';
 import { ApiBoardsContext } from '../../contexts/childContexts/ApiBoardsContext';
-import { StoreBoardContext } from '../../contexts/childContexts/StoreBoardContext';
 import { FeedbackContext } from '../../contexts/childContexts/FeedbackContext';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import {
@@ -14,8 +13,7 @@ import {
 } from '@material-ui/core';
 
 export const HomePage: React.FC = () => {
-  const { boardsState, getBoards, updateBoard, updateBoardState,  deleteBoard, deleteBoardState } = useContext<any>(ApiBoardsContext);
-  const { storeBoard } = useContext<any>(StoreBoardContext);
+  const { boardsState, getBoards, createBoard, updateBoard, updateBoardState,  deleteBoard, deleteBoardState } = useContext<any>(ApiBoardsContext);
   const { progress, status, setStatus } = useContext<any>(FeedbackContext);
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
@@ -44,9 +42,8 @@ export const HomePage: React.FC = () => {
         <Boards
           boards={boardsState}
           // 新しいボードの作成メソッド
-          storeOnClick={(data) => {
-            // storeBoard(data);
-            console.log('hello')
+          storeOnClick={(obj) => {
+            createBoard(obj);
           }}
           // ボード名の更新メソッド
           postOnClick={(obj) => {
@@ -59,8 +56,8 @@ export const HomePage: React.FC = () => {
             deleteBoardState(index);
           }}
           // ボードと関連づいたカードを表示するメソッド
-          showOnClick={() => {
-            history.push('/home/cards');
+          showOnClick={(id) => {
+            history.push(`/home/cards/${id}`);
           }}
         />
       </Container>

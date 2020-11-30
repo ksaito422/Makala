@@ -8,12 +8,15 @@ export const ApiCardsContextProvider: React.FC = props => {
   const [cardsState, setCardsState] = useState<any>([]);
 
   // apiと通信して、カードを取得するロジック
-  const getCards: any = (id: number) => {
+  const getCards = async (id: number) => {
+    const token = localStorage.getItem('makala_token');
+
     axios({
       method: 'GET',
       url: `/api/v1/cards/${id}`,
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
       }
     })
     .then((res) => {

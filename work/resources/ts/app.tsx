@@ -26,7 +26,7 @@ const App: React.FC = () => {
               <GuestRoute exact path='/sign-up' component={SignUpPage} />
               <GuestRoute exact path='/sign-up/confirm' component={ConfirmPage} />
               <PrivateRoute exact path='/home/:user' component={HomePage} />
-              <PrivateRoute exact path='/home/cards' component={CardPage} />
+              <PrivateRoute exact path='/home/cards/:card' component={CardPage} />
             </Switch>
           </Auth>
         </MuiThemeProvider>
