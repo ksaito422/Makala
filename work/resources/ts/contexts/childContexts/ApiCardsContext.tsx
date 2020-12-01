@@ -42,19 +42,38 @@ export const ApiCardsContextProvider: React.FC = props => {
   }
 
   // apiと通信して、カードを取得するロジック
-  const deleteCard: any = (id: number) => {
-    axios({
+  const deleteCard: any = async (id: number) => {
+    await setProgress(true);
+    const token = localStorage.getItem('makala_token');
+
+    await axios({
       method: 'DELETE',
       url: `/api/v1/cards/${id}`,
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
       }
     })
-    .then((res) => {
-      // ログイン認証作ったら、修正する
-      console.log('削除');
+    .then(async (res) => {
+      await getCards(1);
+      await setStatus({
+        open: true,
+        type: 'success',
+        message: 'カードを削除しました。'
+      });
+      return;
     })
-    .catch((err) => {
+    .catch(async (err) => {
+      await getCards(1);
+      await setStatus({
+        open: true,
+        type: 'error',
+        message: 'カードの削除に失敗しました。'
+      });
+      return;
+    })
+    .finally(() => {
+      setProgress(false);
       return;
     })
   }

@@ -73,14 +73,15 @@ const regularExpressions = /^.+/;
                     })
                   }}
                   deleteOnClick={() => {
+                    deleteCard(item.id);
+                  }}
                     //  今のBoardItemの配列を受け取り、[index]を基にカードを削除
                     // let newBoardItemState = { ...cardsState };
                     // newBoardItemState.items.splice(index, 1);
                     // setCardsState(
                     //   newBoardItemState,
                     // );
-                    deleteCard(item.id);
-                  }}
+                    // deleteCard(item.id);
                 />
               ))}
               {provided.placeholder}
