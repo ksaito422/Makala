@@ -27,11 +27,21 @@ class CardControllerTest extends TestCase
     {
         $url = route('card.index', ['card' => $this->board->id]);
 
-        $this->get($url)
-            ->assertOk()
-            ->assertSeeText('cards')
-            ->assertJsonFragment(['board_id' => $this->board->id])
-            ->assertHeader('Content-Type', 'application/json');
+        // 認証外だと500エラーを返す つまりapiを利用できない
+        $this->assertGuest()
+             ->get($url)
+             ->assertStatus(500);
+
+        $response = $this->actingAs($this->user)
+                         ->get($url);
+
+        // 指定したユーザーが認証されていることを確認
+        $this->assertAuthenticatedAs($this->user);
+
+        $response->assertOk()
+                 ->assertSeeText('cards')
+                 ->assertJsonFragment(['board_id' => $this->board->id])
+                 ->assertHeader('Content-Type', 'application/json');
     }
 
     /**
@@ -47,11 +57,21 @@ class CardControllerTest extends TestCase
             'content' => 'test'
         ];
 
-        $this->post($url, $data)
-            ->assertStatus(201)
-            ->assertJsonFragment(['message' => '新しいカードを作成しました。'])
-            ->assertJsonCount(1)
-            ->assertHeader('Content-Type', 'application/json');
+        // 認証外だと500エラーを返す つまりapiを利用できない
+        $this->assertGuest()
+             ->post($url, $data)
+             ->assertStatus(500);
+
+        $response = $this->actingAs($this->user)
+                         ->post($url, $data);
+
+        // 指定したユーザーが認証されていることを確認
+        $this->assertAuthenticatedAs($this->user);
+
+        $response->assertStatus(201)
+                 ->assertJsonFragment(['message' => '新しいカードを作成しました。'])
+                 ->assertJsonCount(1)
+                 ->assertHeader('Content-Type', 'application/json');
     }
 
     /**
@@ -66,11 +86,21 @@ class CardControllerTest extends TestCase
             'content' => 'content'
         ];
 
-        $this->put($url, $data)
-            ->assertOk()
-            ->assertJsonFragment(['message' => 'カードの内容を変更しました。'])
-            ->assertJsonCount(1)
-            ->assertHeader('Content-Type', 'application/json');
+        // 認証外だと500エラーを返す つまりapiを利用できない
+        $this->assertGuest()
+             ->put($url, $data)
+             ->assertStatus(500);
+
+        $response = $this->actingAs($this->user)
+                            ->put($url, $data);
+
+        // 指定したユーザーが認証されていることを確認
+        $this->assertAuthenticatedAs($this->user);
+
+        $response->assertOk()
+                 ->assertJsonFragment(['message' => 'カードの内容を変更しました。'])
+                 ->assertJsonCount(1)
+                 ->assertHeader('Content-Type', 'application/json');
     }
 
     /**
@@ -80,10 +110,20 @@ class CardControllerTest extends TestCase
     {
         $url = route('card.destroy', ['card' => $this->card->id]);
 
-        $this->delete($url)
-            ->assertOk()
-            ->assertJsonFragment(['message' => 'カードを削除しました。'])
-            ->assertJsonCount(1)
-            ->assertHeader('Content-Type', 'application/json');
+        // 認証外だと500エラーを返す つまりapiを利用できない
+        $this->assertGuest()
+             ->delete($url)
+             ->assertStatus(500);
+
+        $response = $this->actingAs($this->user)
+                            ->delete($url);
+
+        // 指定したユーザーが認証されていることを確認
+        $this->assertAuthenticatedAs($this->user);
+
+        $response->assertOk()
+                 ->assertJsonFragment(['message' => 'カードを削除しました。'])
+                 ->assertJsonCount(1)
+                 ->assertHeader('Content-Type', 'application/json');
     }
 }
