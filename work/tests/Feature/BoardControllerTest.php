@@ -26,13 +26,23 @@ class BoardControllerTest extends TestCase
      */
     public function indexメソッドで自分の投稿だけ取得できる()
     {
-        $url = route('board.index', ['user' => $this->user->id]);
+        $url = route('board.index', ['user' => $this->user->name]);
 
-        $this->get($url)
-            ->assertOk()
-            ->assertSeeText('boards')
-            ->assertJsonFragment(['user_id' => $this->user->id])
-            ->assertHeader('Content-Type', 'application/json');;
+        // 認証外だと500エラーを返す つまりapiを利用できない
+        $this->assertGuest()
+             ->get($url)
+             ->assertStatus(500);
+
+        $response = $this->actingAs($this->user)
+                         ->get($url);
+
+        // 指定したユーザーが認証されていることを確認
+        $this->assertAuthenticatedAs($this->user);
+
+        $response->assertOk()
+                 ->assertSeeText('boards')
+                 ->assertJsonFragment(['user_id' => $this->user->id])
+                 ->assertHeader('Content-Type', 'application/json');;
     }
 
     /**
@@ -46,6 +56,17 @@ class BoardControllerTest extends TestCase
             'user_id' => $this->user->id,
             'board_name' => 'test'
         ];
+
+        // 認証外だと500エラーを返す つまりapiを利用できない
+        $this->assertGuest()
+            ->get($url)
+            ->assertStatus(500);
+
+        $response = $this->actingAs($this->user)
+                         ->get($url);
+
+        // 指定したユーザーが認証されていることを確認
+        $this->assertAuthenticatedAs($this->user);
 
         $this->post($url, $data)
             ->assertOk()
