@@ -59,20 +59,19 @@ class BoardControllerTest extends TestCase
 
         // 認証外だと500エラーを返す つまりapiを利用できない
         $this->assertGuest()
-            ->get($url)
-            ->assertStatus(500);
+             ->post($url, $data)
+             ->assertStatus(500);
 
         $response = $this->actingAs($this->user)
-                         ->get($url);
+                         ->post($url, $data);
 
         // 指定したユーザーが認証されていることを確認
         $this->assertAuthenticatedAs($this->user);
 
-        $this->post($url, $data)
-            ->assertOk()
-            ->assertJsonFragment(['message' => '新しいボードを作成しました。'])
-            ->assertJsonCount(1)
-            ->assertHeader('Content-Type', 'application/json');
+        $response->assertOk()
+                 ->assertJsonFragment(['message' => '新しいボードを作成しました。'])
+                 ->assertJsonCount(1)
+                 ->assertHeader('Content-Type', 'application/json');
     }
 
     /**
@@ -86,11 +85,21 @@ class BoardControllerTest extends TestCase
             'board_name' => 'test update'
         ];
 
-        $this->put($url, $data)
-            ->assertOk()
-            ->assertJsonFragment(['message' => 'ボード名を変更しました。'])
-            ->assertJsonCount(1)
-            ->assertHeader('Content-Type', 'application/json');
+        // 認証外だと500エラーを返す つまりapiを利用できない
+        $this->assertGuest()
+             ->put($url, $data)
+             ->assertStatus(500);
+
+        $response = $this->actingAs($this->user)
+                         ->put($url, $data);
+
+        // 指定したユーザーが認証されていることを確認
+        $this->assertAuthenticatedAs($this->user);
+
+        $response->assertOk()
+                 ->assertJsonFragment(['message' => 'ボード名を変更しました。'])
+                 ->assertJsonCount(1)
+                 ->assertHeader('Content-Type', 'application/json');
     }
 
     /**
@@ -100,10 +109,20 @@ class BoardControllerTest extends TestCase
     {
         $url = route('board.destroy', ['board' => $this->board->id]);
 
-        $this->delete($url)
-            ->assertOk()
-            ->assertJsonFragment(['message' => 'ボードを削除しました。'])
-            ->assertJsonCount(1)
-            ->assertHeader('Content-Type', 'application/json');
+        // 認証外だと500エラーを返す つまりapiを利用できない
+        $this->assertGuest()
+             ->delete($url)
+             ->assertStatus(500);
+
+        $response = $this->actingAs($this->user)
+                         ->delete($url);
+
+        // 指定したユーザーが認証されていることを確認
+        $this->assertAuthenticatedAs($this->user);
+
+        $response->assertOk()
+                 ->assertJsonFragment(['message' => 'ボードを削除しました。'])
+                 ->assertJsonCount(1)
+                 ->assertHeader('Content-Type', 'application/json');
     }
 }
