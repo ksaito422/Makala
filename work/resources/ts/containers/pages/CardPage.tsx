@@ -43,7 +43,7 @@ export const CardPage = React.memo (() => {
   const matches = useMediaQuery('(min-width: 1025px)');
 
   // dragItemのデータ 表示する内容のstateをShowCardsContextから読み取る
-  const { cardsState, getCards, setCardsState } = useContext<any>(ApiCardsContext);
+  const { cardsState, getCards, setCardsState, deleteCard } = useContext<any>(ApiCardsContext);
 
   useEffect(() => {
     getCards(2);
@@ -95,6 +95,9 @@ export const CardPage = React.memo (() => {
                 <DragBoardList
                   items={cardsState}
                   onDragEnd={onDragEnd}
+                  deleteOnClick={(id) => {
+                    deleteCard(id);
+                  }}
                 />
               </Container>
             </Grid>
@@ -129,6 +132,9 @@ export const CardPage = React.memo (() => {
                   <DragBoardList
                     items={cardsState}
                     onDragEnd={onDragEnd}
+                    deleteOnClick={(id) => {
+                      deleteCard(id);
+                    }}
                   />
                 }
                 {/* previewOnClickでプレビュー表示したら */}

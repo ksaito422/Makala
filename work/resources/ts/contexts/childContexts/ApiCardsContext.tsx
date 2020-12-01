@@ -41,7 +41,7 @@ export const ApiCardsContextProvider: React.FC = props => {
     })
   }
 
-  // apiと通信して、カードを取得するロジック
+  // apiと通信して、カードを削除するロジック
   const deleteCard: any = async (id: number) => {
     await setProgress(true);
     const token = localStorage.getItem('makala_token');

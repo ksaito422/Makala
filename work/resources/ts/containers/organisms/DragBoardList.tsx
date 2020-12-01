@@ -10,18 +10,20 @@ import { ApiCardsContext } from '../../contexts/childContexts/ApiCardsContext';
 type BoardListProps = {
   items?: any,
   onDragEnd: any,
+  deleteOnClick: (id?: string) => void,
 }
 
 export const DragBoardList = React.memo<BoardListProps> (({
   items,
   onDragEnd,
+  deleteOnClick,
 }) => {
   // classNameのインポート
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles()
 
   // dragBoardItemのレンダーするデータを読み取り
-  const { cardsState, setCardsState, deleteCard } = useContext<any>(ApiCardsContext);
+  const { cardsState, setCardsState } = useContext<any>(ApiCardsContext);
 
   // モーダルに渡す表示内容
   const [modalValueState, setmodalValueState] = useState<any>({
@@ -73,15 +75,8 @@ const regularExpressions = /^.+/;
                     })
                   }}
                   deleteOnClick={() => {
-                    deleteCard(item.id);
+                    deleteOnClick(item.id);
                   }}
-                    //  今のBoardItemの配列を受け取り、[index]を基にカードを削除
-                    // let newBoardItemState = { ...cardsState };
-                    // newBoardItemState.items.splice(index, 1);
-                    // setCardsState(
-                    //   newBoardItemState,
-                    // );
-                    // deleteCard(item.id);
                 />
               ))}
               {provided.placeholder}
