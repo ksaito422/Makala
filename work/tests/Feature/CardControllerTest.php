@@ -25,7 +25,7 @@ class CardControllerTest extends TestCase
      */
     public function indexメソッドでカードを取得表示できる()
     {
-        $url = route('card.index', ['card' => $this->board->id]);
+        $url = route('card.index', ['card' => $this->board->board_name]);
 
         // 認証外だと500エラーを返す つまりapiを利用できない
         $this->assertGuest()
