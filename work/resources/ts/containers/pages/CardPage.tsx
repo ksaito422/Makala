@@ -1,10 +1,13 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { ButtonGroup } from '../../components/molecules/ButtonGroup';
+import { Spinner } from '../../components/molecules/Spinner';
+import { Notice } from '../../components/molecules/Notice';
 import { Header } from '../organisms/Header';
 import { DragBoardList } from '../organisms/DragBoardList';
 import { Preview } from '../organisms/Preview';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import { ApiCardsContext } from '../../contexts/childContexts/ApiCardsContext';
+import { FeedbackContext } from '../../contexts/childContexts/FeedbackContext';
 import {
   Container,
   CssBaseline,
@@ -30,6 +33,8 @@ const reorder = (
 };
 
 export const CardPage = React.memo (() => {
+  // スピナー、api通信の結果通知の状態管理
+  const { progress, status, setStatus } = useContext<any>(FeedbackContext);
   // classNameのインポート
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
@@ -38,7 +43,7 @@ export const CardPage = React.memo (() => {
   const matches = useMediaQuery('(min-width: 1025px)');
 
   // dragItemのデータ 表示する内容のstateをShowCardsContextから読み取る
-  const { cardsState, getCards, setCardsState } = useContext<any>(ApiCardsContext);
+  const { cardsState, getCards, setCardsState, deleteCard } = useContext<any>(ApiCardsContext);
 
   useEffect(() => {
     getCards(2);
@@ -70,6 +75,15 @@ export const CardPage = React.memo (() => {
 
   return (
     <>
+      <Spinner open={progress} />
+      <Notice
+        open={status.open}
+        type={status.type}
+        message={status.message}
+        onClose={() => {
+          setStatus({ ...status, open: false });
+        }}
+      />
       <CssBaseline />
       <Header />
       <Container maxWidth='xl' className={classes.main_container}>
@@ -81,6 +95,9 @@ export const CardPage = React.memo (() => {
                 <DragBoardList
                   items={cardsState}
                   onDragEnd={onDragEnd}
+                  deleteOnClick={(id) => {
+                    deleteCard(id);
+                  }}
                 />
               </Container>
             </Grid>
@@ -115,6 +132,9 @@ export const CardPage = React.memo (() => {
                   <DragBoardList
                     items={cardsState}
                     onDragEnd={onDragEnd}
+                    deleteOnClick={(id) => {
+                      deleteCard(id);
+                    }}
                   />
                 }
                 {/* previewOnClickでプレビュー表示したら */}

@@ -22,9 +22,10 @@ class BoardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index($name)
     {
-        $boards = User::find($id)
+        $boards = User::where('name', $name)
+                        ->first()
                         ->boards;
         return response()->json([
             'boards' => $boards
