@@ -56,8 +56,8 @@ export const HomePage: React.FC = () => {
             deleteBoardState(index);
           }}
           // ボードと関連づいたカードを表示するメソッド
-          showOnClick={(id) => {
-            history.push(`/home/cards/${id}`);
+          showOnClick={(name) => {
+            history.push(`/${user}/${name}/cards`);
           }}
         />
       </Container>

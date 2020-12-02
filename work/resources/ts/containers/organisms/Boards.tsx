@@ -22,7 +22,7 @@ type Props = {
   storeOnClick: (data: any) => void,
   postOnClick: (data: any) => void,
   deleteOnClick: (id: number, index: number) => void,
-  showOnClick: (data: number) => void,
+  showOnClick: (data: string) => void,
 }
 
 export const Boards: React.FC<Props> = (props) => {
@@ -89,7 +89,7 @@ export const Boards: React.FC<Props> = (props) => {
                   }}
                   fullWidth
                   onClick={() => {
-                    props.showOnClick(board.id)
+                    props.showOnClick(board.board_name)
                   }}
                 >
                   <ListItemText
