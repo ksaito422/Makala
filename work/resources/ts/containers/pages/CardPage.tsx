@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { ButtonGroup } from '../../components/molecules/ButtonGroup';
 import { Spinner } from '../../components/molecules/Spinner';
 import { Notice } from '../../components/molecules/Notice';
@@ -45,8 +46,10 @@ export const CardPage = React.memo (() => {
   // dragItemのデータ 表示する内容のstateをShowCardsContextから読み取る
   const { cardsState, getCards, setCardsState, deleteCard } = useContext<any>(ApiCardsContext);
 
+  const { card } = useParams<any>();
+
   useEffect(() => {
-    getCards(2);
+    getCards(card);
   }, []);
 
   const onDragEnd = (result: any) => {

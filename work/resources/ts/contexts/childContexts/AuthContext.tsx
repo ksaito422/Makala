@@ -52,7 +52,7 @@ export const AuthContextProvider: React.FC = props => {
     .then((res) => {
       // ローカルストレージに認証情報を保管 *脆弱性のことはあとで考える
       localStorage.setItem('makala_token', res.data.access_token);
-      localStorage.setItem('makala_user', res.data.id);
+      localStorage.setItem('makala_user', res.data.user);
       login();
 
     })
@@ -80,6 +80,7 @@ export const AuthContextProvider: React.FC = props => {
       }
     })
     .then((res) => {
+      localStorage.setItem('makala_user', res.data.name);
       login();
     })
     .catch((err) => {

@@ -15,7 +15,7 @@ export const GuestRoute: React.FC<Props> = (props) => {
   // 認証済みユーザーなら'/home'にリダイレクトする
   return (
     isAuth ? (
-      <Redirect to={`/home/${user}`} />
+      <Redirect to={`${user}/home`} />
     ) : (
       <Route {...props} />
     )
