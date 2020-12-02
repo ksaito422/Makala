@@ -17,6 +17,7 @@ type Props = {
   required?: boolean,
   autoFocus?: boolean,
   disabled?: boolean,
+  inputRef?: any,
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void,
 }
 
@@ -39,6 +40,7 @@ export const TextForm: React.FC<Props> = (props) => {
       required={props.required}
       autoFocus={props.autoFocus}
       disabled={props.disabled}
+      inputRef={props.inputRef}
       onChange={props.onChange}
     />
   );
