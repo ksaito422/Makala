@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Spinner } from '../../components/molecules/Spinner';
+import { Notice } from '../../components/molecules/Notice';
 import { Header } from '../organisms/Header';
 import { Login } from '../organisms/Login';
 import { AuthContext } from '../../contexts/childContexts/AuthContext';
@@ -12,13 +13,13 @@ import {
 } from '@material-ui/core';
 
 export const LoginPage: React.FC = () => {
-  /** 認証関連のロジック
+  /** Login api import
    * api通信中のスピナー表示のon/off管理
    * cssの定義
    * react-router-dom URLルーティングに使う
    */
-  const { authState, setAuthState, isAuth, authLogin, authMe } = useContext<any>(AuthContext);
-  const { progress } = useContext<any>(FeedbackContext);
+  const { authLogin } = useContext<any>(AuthContext);
+  const { progress, status, setStatus } = useContext<any>(FeedbackContext);
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
   const history = useHistory();
@@ -26,18 +27,20 @@ export const LoginPage: React.FC = () => {
   return (
     <>
       <Spinner open={progress} />
+      <Notice
+        open={status.open}
+        type={status.type}
+        message={status.message}
+        onClose={() => {
+          setStatus({ ...status, open: false });
+        }}
+      />
       <CssBaseline />
       <Header />
       <Container maxWidth='xl' className={classes.main_container}>
         <Login
-          mailOnChange={(e) => {
-            setAuthState({ ...authState, email: e.target.value });
-          }}
-          passwordOnChange={(e) => {
-            setAuthState({ ...authState, password: e.target.value });
-          }}
-          loginOnClick={async () => {
-            await authLogin();
+          loginOnClick={(data) => {
+            authLogin(data);
           }}
           cancelOnClick={() => {
             history.push('/');

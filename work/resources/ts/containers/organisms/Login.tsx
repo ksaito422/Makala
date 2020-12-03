@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { useForm } from 'react-hook-form';
 import { Button } from '../../components/atoms/Button';
 import { TextForm } from '../../components/atoms/TextForm';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
@@ -9,63 +10,89 @@ import {
 } from '@material-ui/core';
 
 type Props = {
-  mailOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
-  passwordOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-  loginOnClick: () => void,
+  loginOnClick: (data: any) => void,
   cancelOnClick: () => void,
 }
 
 export const Login: React.FC<Props> = (props) => {
   // cssの定義
+  // API import of react-hook-form
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
+  const { register, handleSubmit, errors } = useForm();
 
   return (
     <>
       <Container maxWidth='sm' className={classes.auth}>
         <Typography variant='h4'>makalaにログイン</Typography>
-        <form noValidate className={classes.auth_form}>
+        <form
+          className={classes.auth_form}
+          onSubmit={handleSubmit((data) => {
+            props.loginOnClick(data)
+          })}
+        >
           <TextForm
             fullWidth
-            required
             margin='normal'
             label="メールアドレス"
             name="email"
             autoFocus
             autoComplete="email"
-            onChange={props.mailOnChange}
+            inputRef={
+              register({
+                required: true,
+                pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
+              })
+            }
+            error={Boolean(errors.email)}
+            helperText={errors.email && 'メールアドレスを入力してください'}
           />
           <TextForm
             fullWidth
-            required
             margin='normal'
             label="パスワード"
             name="password"
             type='password'
             autoComplete="current-password"
-            onChange={props.passwordOnChange}
+            inputRef={
+              register({
+                required: ' パスワードを入力して下さい',
+                minLength: {
+                  value: 8,
+                  message: 'パスワードを8文字以上20文字以下で入力して下さい'
+                },
+                maxLength: {
+                  value: 20,
+                  message: 'パスワードを8文字以上20文字以下で入力して下さい'
+                }
+              })
+            }
+            error={Boolean(errors.password)}
+            helperText={
+              errors.password && errors.password.message
+            }
           />
+          <Container maxWidth='sm'>
+            <Grid container spacing={10} className={classes.main_container}>
+              <Grid item xs={6}>
+                <Button
+                  type='submit'
+                  fullWidth
+                >
+                  ログインする
+                </Button>
+              </Grid>
+              <Grid item xs={6}>
+                <Button
+                  fullWidth
+                  onClick={props.cancelOnClick}
+                >
+                  キャンセル
+                </Button>
+              </Grid>
+            </Grid>
+          </Container>
         </form>
-        <Container maxWidth='sm'>
-          <Grid container spacing={10} className={classes.main_container}>
-            <Grid item xs={6}>
-              <Button
-                fullWidth
-                onClick={props.loginOnClick}
-              >
-                ログインする
-            </Button>
-            </Grid>
-            <Grid item xs={6}>
-              <Button
-                fullWidth
-                onClick={props.cancelOnClick}
-              >
-                キャンセル
-              </Button>
-            </Grid>
-          </Grid>
-        </Container>
       </Container>
     </>
   );
