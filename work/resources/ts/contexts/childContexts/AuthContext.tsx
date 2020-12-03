@@ -14,7 +14,7 @@ export const AuthContext = createContext({});
 
 export const AuthContextProvider: React.FC = props => {
   // スピナー表示するため
-  const { setProgress } = useContext<any>(FeedbackContext);
+  const { setProgress, setStatus } = useContext<any>(FeedbackContext);
 
   // 認証情報を保持するstate
   const [authState, setAuthState] = useState<Props>({
@@ -56,18 +56,29 @@ export const AuthContextProvider: React.FC = props => {
     })
     .then((res) => {
       // ローカルストレージに認証情報を保管 *脆弱性のことはあとで考える
+      // set isAuth to true
+      // 通信結果の通知内容
       localStorage.setItem('makala_token', res.data.access_token);
       localStorage.setItem('makala_user', res.data.user);
       login();
+      setStatus({
+        open: true,
+        type: 'success',
+        message: 'ログインしました。'
+      });
     })
     .catch((err) => {
-      // あとでフロントに失敗を通知のロジックを書く
-      console.log('ログインに失敗しました。');
+      // 通信結果の通知内容
+      setStatus({
+        open: true,
+        type: 'error',
+        message: 'ログインに失敗しました。'
+      });
     })
     .finally(() => {
       // スピナーoff
       setProgress(false);
-    })
+    });
   }
 
   // apiと通信して、ユーザー情報を取得
