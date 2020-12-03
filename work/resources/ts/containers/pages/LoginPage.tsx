@@ -12,12 +12,12 @@ import {
 } from '@material-ui/core';
 
 export const LoginPage: React.FC = () => {
-  /** 認証関連のロジック
+  /** Login api import
    * api通信中のスピナー表示のon/off管理
    * cssの定義
    * react-router-dom URLルーティングに使う
    */
-  const { authState, setAuthState, isAuth, authLogin, authMe } = useContext<any>(AuthContext);
+  const { authLogin } = useContext<any>(AuthContext);
   const { progress } = useContext<any>(FeedbackContext);
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
@@ -30,14 +30,8 @@ export const LoginPage: React.FC = () => {
       <Header />
       <Container maxWidth='xl' className={classes.main_container}>
         <Login
-          mailOnChange={(e) => {
-            setAuthState({ ...authState, email: e.target.value });
-          }}
-          passwordOnChange={(e) => {
-            setAuthState({ ...authState, password: e.target.value });
-          }}
-          loginOnClick={async (data) => {
-            await authLogin(data);
+          loginOnClick={(data) => {
+            authLogin(data);
           }}
           cancelOnClick={() => {
             history.push('/');
