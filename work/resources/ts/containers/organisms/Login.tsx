@@ -22,17 +22,13 @@ export const Login: React.FC<Props> = (props) => {
   const classes = useStyles();
   const { register, handleSubmit, errors } = useForm();
 
-  const submit = () => {
-    console.log(submit)
-  }
-
   return (
     <>
       <Container maxWidth='sm' className={classes.auth}>
         <Typography variant='h4'>makalaにログイン</Typography>
         <form
           className={classes.auth_form}
-          onSubmit={handleSubmit(submit)}
+          onSubmit={handleSubmit(props.loginOnClick)}
         >
           <TextForm
             fullWidth
@@ -73,17 +69,15 @@ export const Login: React.FC<Props> = (props) => {
             }
             onChange={props.passwordOnChange}
           />
-          <input type='submit' />
-        </form>
-        <Container maxWidth='sm'>
+          <Container maxWidth='sm'>
           <Grid container spacing={10} className={classes.main_container}>
             <Grid item xs={6}>
               <Button
+                type='submit'
                 fullWidth
-                onClick={props.loginOnClick}
               >
                 ログインする
-            </Button>
+              </Button>
             </Grid>
             <Grid item xs={6}>
               <Button
@@ -95,6 +89,7 @@ export const Login: React.FC<Props> = (props) => {
             </Grid>
           </Grid>
         </Container>
+        </form>
       </Container>
     </>
   );
