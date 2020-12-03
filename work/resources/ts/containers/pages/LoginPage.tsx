@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Spinner } from '../../components/molecules/Spinner';
+import { Notice } from '../../components/molecules/Notice';
 import { Header } from '../organisms/Header';
 import { Login } from '../organisms/Login';
 import { AuthContext } from '../../contexts/childContexts/AuthContext';
@@ -18,7 +19,7 @@ export const LoginPage: React.FC = () => {
    * react-router-dom URLルーティングに使う
    */
   const { authLogin } = useContext<any>(AuthContext);
-  const { progress } = useContext<any>(FeedbackContext);
+  const { progress, status, setStatus } = useContext<any>(FeedbackContext);
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
   const history = useHistory();
@@ -26,6 +27,14 @@ export const LoginPage: React.FC = () => {
   return (
     <>
       <Spinner open={progress} />
+      <Notice
+        open={status.open}
+        type={status.type}
+        message={status.message}
+        onClose={() => {
+          setStatus({ ...status, open: false });
+        }}
+      />
       <CssBaseline />
       <Header />
       <Container maxWidth='xl' className={classes.main_container}>
