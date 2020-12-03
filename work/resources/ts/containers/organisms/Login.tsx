@@ -12,7 +12,7 @@ import {
 type Props = {
   mailOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
   passwordOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-  loginOnClick: () => void,
+  loginOnClick: (data: any) => void,
   cancelOnClick: () => void,
 }
 
@@ -28,7 +28,9 @@ export const Login: React.FC<Props> = (props) => {
         <Typography variant='h4'>makalaにログイン</Typography>
         <form
           className={classes.auth_form}
-          onSubmit={handleSubmit(props.loginOnClick)}
+          onSubmit={handleSubmit((data) => {
+            props.loginOnClick(data)
+          })}
         >
           <TextForm
             fullWidth

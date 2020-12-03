@@ -38,13 +38,18 @@ export const AuthContextProvider: React.FC = props => {
   }
 
   // apiと通信して、ログイン処理を行う
-  const authLogin = async () => {
+  const authLogin = async (
+    data: {
+      'email': string,
+      'password': string,
+  }) => {
+    // スピナーon
     await setProgress(true);
 
     await axios({
       method: 'POST',
       url: 'api/auth/login',
-      data: authState,
+      data: data,
       headers: {
         'Content-Type': 'application/json',
       }
@@ -54,13 +59,13 @@ export const AuthContextProvider: React.FC = props => {
       localStorage.setItem('makala_token', res.data.access_token);
       localStorage.setItem('makala_user', res.data.user);
       login();
-
     })
     .catch((err) => {
       // あとでフロントに失敗を通知のロジックを書く
       console.log('ログインに失敗しました。');
     })
     .finally(() => {
+      // スピナーoff
       setProgress(false);
     })
   }

@@ -36,8 +36,8 @@ export const LoginPage: React.FC = () => {
           passwordOnChange={(e) => {
             setAuthState({ ...authState, password: e.target.value });
           }}
-          loginOnClick={async () => {
-            await authLogin();
+          loginOnClick={async (data) => {
+            await authLogin(data);
           }}
           cancelOnClick={() => {
             history.push('/');
