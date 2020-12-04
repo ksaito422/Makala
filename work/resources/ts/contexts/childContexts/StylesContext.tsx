@@ -58,6 +58,9 @@ export const StylesContextProvider: React.FC = props => {
       width: `100%`,
       marginTop: theme.spacing(4),
     },
+    form_board: {
+      width: `100%`,
+    },
     // Boardsのボタンラベルに適用
     label: {
       justifyContent: `left`,
