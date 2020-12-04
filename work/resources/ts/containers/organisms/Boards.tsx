@@ -123,14 +123,12 @@ export const Boards: React.FC<Props> = (props) => {
       >
         <ModalBoard
           defaultValueTitle={modalValueState.board_name}
-          titleOnChange={(e) => {
-            setmodalValueState({ ...modalValueState, board_name: e.target.value })
-          }}
-          postOnClick={() => {
+          postOnClick={(data) => {
             // 新規作成か更新を判断してメソッドを使い分ける
             createState ? (
                 modalClose(),
-                props.storeOnClick(modalValueState)
+                // props.storeOnClick(data)
+                console.log(data)
               ) : (
                 modalClose(),
                 props.postOnClick(modalValueState)
