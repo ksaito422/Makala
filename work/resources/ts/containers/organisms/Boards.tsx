@@ -27,21 +27,20 @@ type Props = {
 
 export const Boards: React.FC<Props> = (props) => {
   // cssの定義
+  // 新規作成か更新か判別するstate
+  // モーダルに渡す表示内容
+  // モーダル表示のon/off切り替え
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
-
-  // 新規作成か更新か判別するstate
   const [createState, setCreateState] = useState<boolean>(false);
-
-  // モーダルに渡す表示内容
   const [modalValueState, setmodalValueState] = useState<any>({
     user_id: 1,
     id: null,
     board_name: null,
     index: null
   });
-  // モーダル表示のon/off切り替え
   const [modalOpenState, setModalOpenState] = useState<boolean>(false);
+
   // モーダルを閉じるとき、入力値をクリア
   const modalClose = () => {
     setModalOpenState(false);
