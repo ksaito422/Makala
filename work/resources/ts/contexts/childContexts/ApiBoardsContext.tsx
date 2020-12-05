@@ -1,23 +1,26 @@
 import React, { useState, createContext, useContext } from 'react';
 import { FeedbackContext } from './FeedbackContext';
+import { AuthContext } from './AuthContext';
 import axios from 'axios';
 
 export const ApiBoardsContext = createContext({});
 
 export const ApiBoardsContextProvider: React.FC = props => {
   // スピナー表示するため
-  const { setProgress, setStatus } = useContext<any>(FeedbackContext);
+  // ログインユーザーの情報
   // getBoardsで取得したデータを保管
+  const { setProgress, setStatus } = useContext<any>(FeedbackContext);
+  const { authUserState } = useContext<any>(AuthContext);
   const [boardsState, setBoardsState] = useState([]);
 
   // apiと通信して、ボードを取得するロジック
-  const getBoards = async (name: string) => {
+  const getBoards = async () => {
     await setProgress(true);
     const token = localStorage.getItem('makala_token');
 
     await axios({
       method: 'GET',
-      url: `/api/v1/boards/${name}`,
+      url: `/api/v1/boards/${authUserState.name}`,
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
@@ -78,14 +81,14 @@ export const ApiBoardsContextProvider: React.FC = props => {
       })
       .finally(() => {
         setProgress(false);
-        getBoards(data.user_name)
+        getBoards();
         return;
       })
     }
 
   // apiと通信して、ボード名を更新するロジック
   const updateBoard = async (
-    obj: {
+    data: {
       id: number,
     }) => {
       await setProgress(true);
@@ -93,8 +96,8 @@ export const ApiBoardsContextProvider: React.FC = props => {
 
       await axios({
         method: 'PUT',
-        url: `/api/v1/boards/${obj.id}`,
-        data: obj,
+        url: `/api/v1/boards/${data.id}`,
+        data: data,
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
@@ -109,8 +112,7 @@ export const ApiBoardsContextProvider: React.FC = props => {
         return;
       })
       .catch(async (err) => {
-        // あとで直す board取得のid
-        // await getBoards(1);
+        await getBoards();
         await setStatus({
           open: true,
           type: 'error',
@@ -157,8 +159,7 @@ export const ApiBoardsContextProvider: React.FC = props => {
       return;
     })
     .catch(async (err) => {
-      // あとで直す board取得のid
-      // await getBoards(1);
+      await getBoards();
       await setStatus({
         open: true,
         type: 'error',
