@@ -3,6 +3,7 @@ import { FeedbackContext } from './FeedbackContext';
 import axios from 'axios';
 
 type Props = {
+    id: number | null,
     name: string | null,
     email: string | null,
     password: string | null,
@@ -17,7 +18,8 @@ export const AuthContextProvider: React.FC = props => {
   const { setProgress, setStatus } = useContext<any>(FeedbackContext);
 
   // 認証情報を保持するstate
-  const [authState, setAuthState] = useState<Props>({
+  const [authUserState, setAuthUserState] = useState<Props>({
+    id: null,
     name: null,
     email: null,
     password: null,
@@ -59,7 +61,8 @@ export const AuthContextProvider: React.FC = props => {
       // set isAuth to true
       // 通信結果の通知内容
       localStorage.setItem('makala_token', res.data.access_token);
-      localStorage.setItem('makala_user', res.data.user);
+      localStorage.setItem('makala_user', res.data.name);
+      setAuthUserState({ ...authUserState, id: res.data.id, name: res.data.name});
       login();
       setStatus({
         open: true,
@@ -97,6 +100,7 @@ export const AuthContextProvider: React.FC = props => {
     })
     .then((res) => {
       localStorage.setItem('makala_user', res.data.name);
+      setAuthUserState({ ...authUserState, id: res.data.id, name: res.data.name});
       login();
     })
     .catch((err) => {
@@ -108,8 +112,8 @@ export const AuthContextProvider: React.FC = props => {
 
   return (
     <AuthContext.Provider value={{
-      authState,
-      setAuthState,
+      authUserState,
+      setAuthUserState,
       isAuth,
       login,
       authLogin,
