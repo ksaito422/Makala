@@ -19,8 +19,8 @@ import CreateIcon from '@material-ui/icons/Create';
 
 type Props = {
   boards: any,
-  storeOnClick: (data: any, user: any) => void,
-  postOnClick: (data: any) => void,
+  createOnClick: (data: any, user: any) => void,
+  updateOnClick: (data: any) => void,
   deleteOnClick: (id: number, index: number) => void,
   showOnClick: (data: string) => void,
 }
@@ -34,7 +34,6 @@ export const Boards: React.FC<Props> = (props) => {
   const classes = useStyles();
   const [createState, setCreateState] = useState<boolean>(false);
   const [modalValueState, setmodalValueState] = useState<any>({
-    user_id: 1,
     id: null,
     board_name: null,
     index: null
@@ -46,8 +45,6 @@ export const Boards: React.FC<Props> = (props) => {
     setModalOpenState(false);
     setCreateState(false);
     setmodalValueState({
-      // とりあえずuser_id 1で固定
-      user_id: 1,
       id: null,
       board_name: null,
       index: null
@@ -126,10 +123,10 @@ export const Boards: React.FC<Props> = (props) => {
             // 新規作成か更新を判断してメソッドを使い分ける
             createState ? (
                 modalClose(),
-                props.storeOnClick(data, user)
+                props.createOnClick(data, user)
               ) : (
                 modalClose(),
-                props.postOnClick(modalValueState)
+                props.updateOnClick(modalValueState)
               );
           }}
           modalOnClose={modalClose}
