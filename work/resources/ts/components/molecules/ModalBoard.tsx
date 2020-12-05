@@ -15,6 +15,7 @@ type Props = {
 
 export const ModalBoard: React.FC<Props> = (props) => {
   // cssの定義
+  // ログインユーザーの情報  { user_id: value, user_name: value }
   // API import of react-hook-form
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
