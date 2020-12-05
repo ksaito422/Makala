@@ -22,7 +22,7 @@ export const HomePage: React.FC = () => {
 
   // 最初のレンダー時にボードを取得する
   useEffect(() => {
-    getBoards(user);
+    getBoards();
   }, []);
 
   return (
@@ -42,18 +42,17 @@ export const HomePage: React.FC = () => {
         <Boards
           boards={boardsState}
           // 新しいボードの作成メソッド
-          storeOnClick={(data, user) => {
+          createOnClick={(data, user) => {
             const postData = {
               'user_id': user.id,
-              'user_name': user.name,
               'board_name': data.board_name
             }
             createBoard(postData);
           }}
           // ボード名の更新メソッド
-          postOnClick={(obj) => {
-            updateBoard(obj);
-            updateBoardState(obj);
+          updateOnClick={(data) => {
+            updateBoard(data);
+            updateBoardState(data);
           }}
           // ボードの削除メソッド ApiBoardsContextに定義したメソッドを利用
           deleteOnClick={(id, index) => {

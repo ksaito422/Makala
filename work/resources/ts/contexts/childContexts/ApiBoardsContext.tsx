@@ -48,7 +48,6 @@ export const ApiBoardsContextProvider: React.FC = props => {
   const createBoard = async (
     data: {
       user_id: number,
-      user_name: string,
       board_name: string,
     }) => {
       await setProgress(true);
