@@ -3,12 +3,13 @@ import { useForm } from 'react-hook-form';
 import { TextForm } from '../atoms/TextForm';
 import { CloseIcon } from '../atoms/CloseIcon';
 import { UpdateIcon } from '../atoms/UpdateIcon';
+import { AuthContext } from '../../contexts/childContexts/AuthContext';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
-import { Button, Grid } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 
 type Props = {
   defaultValueTitle: string,
-  postOnClick: (data: any) => void,
+  postOnClick: (data: any, user: any) => void,
   modalOnClose: () => void,
 }
 
@@ -17,6 +18,7 @@ export const ModalBoard: React.FC<Props> = (props) => {
   // API import of react-hook-form
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
+  const { authUserState } = useContext<any>(AuthContext);
   const { register, handleSubmit, errors } = useForm();
 
   // モーダルに表示する内容の定義
@@ -31,7 +33,7 @@ export const ModalBoard: React.FC<Props> = (props) => {
         <form
           className={classes.form_board}
           onSubmit={handleSubmit((data) => {
-            props.postOnClick(data);
+            props.postOnClick(data, authUserState);
           })}
         >
           <Grid item xs={12}>

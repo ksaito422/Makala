@@ -19,7 +19,7 @@ import CreateIcon from '@material-ui/icons/Create';
 
 type Props = {
   boards: any,
-  storeOnClick: (data: any) => void,
+  storeOnClick: (data: any, user: any) => void,
   postOnClick: (data: any) => void,
   deleteOnClick: (id: number, index: number) => void,
   showOnClick: (data: string) => void,
@@ -123,12 +123,11 @@ export const Boards: React.FC<Props> = (props) => {
       >
         <ModalBoard
           defaultValueTitle={modalValueState.board_name}
-          postOnClick={(data) => {
+          postOnClick={(data, user) => {
             // 新規作成か更新を判断してメソッドを使い分ける
             createState ? (
                 modalClose(),
-                // props.storeOnClick(data)
-                console.log(data)
+                props.storeOnClick(data, user)
               ) : (
                 modalClose(),
                 props.postOnClick(modalValueState)
