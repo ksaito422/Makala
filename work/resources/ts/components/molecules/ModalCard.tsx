@@ -57,10 +57,10 @@ export const ModalCard: React.FC<Props> = (props) => {
           />
         </Grid>
         <Grid item xs={12} className={classes.centerPlacement}>
-          <UpdateIcon
+          {/* <UpdateIcon
             onClick={props.postOnClick}
             disabled={props.disabled}
-          />
+          /> */}
         </Grid>
       </Grid>
     </>

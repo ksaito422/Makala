@@ -11,13 +11,13 @@ export const ApiBoardsContextProvider: React.FC = props => {
   const [boardsState, setBoardsState] = useState([]);
 
   // apiと通信して、ボードを取得するロジック
-  const getBoards = async (id: number) => {
+  const getBoards = async (name: string) => {
     await setProgress(true);
     const token = localStorage.getItem('makala_token');
 
     await axios({
       method: 'GET',
-      url: `/api/v1/boards/${id}`,
+      url: `/api/v1/boards/${name}`,
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
@@ -43,8 +43,9 @@ export const ApiBoardsContextProvider: React.FC = props => {
 
   // apiと通信して、ボードを作成するロジック
   const createBoard = async (
-    obj: {
+    data: {
       user_id: number,
+      user_name: string,
       board_name: string,
     }) => {
       await setProgress(true);
@@ -53,7 +54,7 @@ export const ApiBoardsContextProvider: React.FC = props => {
       await axios({
         method: 'POST',
         url: `/api/v1/boards`,
-        data: obj,
+        data: data,
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
@@ -77,8 +78,7 @@ export const ApiBoardsContextProvider: React.FC = props => {
       })
       .finally(() => {
         setProgress(false);
-        // あとで直す board取得のid
-        getBoards(1);
+        getBoards(data.user_name)
         return;
       })
     }
@@ -110,7 +110,7 @@ export const ApiBoardsContextProvider: React.FC = props => {
       })
       .catch(async (err) => {
         // あとで直す board取得のid
-        await getBoards(1);
+        // await getBoards(1);
         await setStatus({
           open: true,
           type: 'error',
@@ -158,7 +158,7 @@ export const ApiBoardsContextProvider: React.FC = props => {
     })
     .catch(async (err) => {
       // あとで直す board取得のid
-      await getBoards(1);
+      // await getBoards(1);
       await setStatus({
         open: true,
         type: 'error',
