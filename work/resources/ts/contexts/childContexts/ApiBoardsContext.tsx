@@ -97,7 +97,7 @@ export const ApiBoardsContextProvider: React.FC = props => {
       await axios({
         method: 'PUT',
         url: `/api/v1/boards/${data.id}`,
-        data: data,
+        data: data.board_name,
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
@@ -122,6 +122,7 @@ export const ApiBoardsContextProvider: React.FC = props => {
       })
       .finally(() => {
         setProgress(false);
+        getBoards();
         return;
       })
     }
