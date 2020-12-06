@@ -9,7 +9,7 @@ import { Grid } from '@material-ui/core';
 
 type Props = {
   defaultValueTitle: string,
-  postOnClick: (data: any, user: any) => void,
+  postOnClick: (data: {[x: string]: any}, user: number) => void,
   modalOnClose: () => void,
 }
 
@@ -21,6 +21,8 @@ export const ModalBoard: React.FC<Props> = (props) => {
   const classes = useStyles();
   const { authUserState } = useContext<any>(AuthContext);
   const { register, handleSubmit, errors } = useForm();
+
+  const user_id = authUserState.id;
 
   // モーダルに表示する内容の定義
   return (
@@ -34,7 +36,7 @@ export const ModalBoard: React.FC<Props> = (props) => {
         <form
           className={classes.form_board}
           onSubmit={handleSubmit((data) => {
-            props.postOnClick(data, authUserState);
+            props.postOnClick(data, user_id);
           })}
         >
           <Grid item xs={12}>
