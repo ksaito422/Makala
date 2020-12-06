@@ -94,14 +94,6 @@ export const Register: React.FC<Props> = props => {
               errors.password && errors.password.message
             }
           />
-          <TextForm
-            fullWidth
-            margin='normal'
-            label="再確認パスワード"
-            name="password"
-            type='password'
-            autoComplete="current-password"
-          />
         <Container maxWidth='sm'>
           <Grid container spacing={10} className={classes.main_container}>
             <Grid item xs={6}>
