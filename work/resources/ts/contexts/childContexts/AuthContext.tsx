@@ -2,7 +2,7 @@ import React, { useState, createContext, useContext } from 'react';
 import { FeedbackContext } from './FeedbackContext';
 import axios from 'axios';
 
-type Props = {
+type AuthUserState = {
     id: number | null,
     name: string | null,
     email: string | null,
@@ -13,12 +13,11 @@ type Props = {
 
 export const AuthContext = createContext({});
 
-export const AuthContextProvider: React.FC = props => {
+export const AuthContextProvider: React.FC = (props) => {
   // スピナー表示するため
-  const { setProgress, setStatus } = useContext<any>(FeedbackContext);
-
   // 認証情報を保持するstate
-  const [authUserState, setAuthUserState] = useState<Props>({
+  const { setProgress, setStatus } = useContext<any>(FeedbackContext);
+  const [authUserState, setAuthUserState] = useState<AuthUserState>({
     id: null,
     name: null,
     email: null,
@@ -28,13 +27,12 @@ export const AuthContextProvider: React.FC = props => {
   });
 
   // ログイン状態の管理
-  const [isAuth, setIsAuth] = useState(false);
-
   // 認証成功したらisAuthをtrueにする
+  // ログアウトしたらisAuthをfalseにする
+  const [isAuth, setIsAuth] = useState(false);
   const login = () => {
     setIsAuth(true);
   }
-  // ログアウトしたらisAuthをfalseにする
   const logout = () => {
     setIsAuth(false);
   }
@@ -69,24 +67,27 @@ export const AuthContextProvider: React.FC = props => {
         type: 'success',
         message: 'ログインしました。'
       });
+      return;
     })
-    .catch((err) => {
+    .catch(() => {
       // 通信結果の通知内容
       setStatus({
         open: true,
         type: 'error',
         message: 'ログインに失敗しました。'
       });
+      return;
     })
     .finally(() => {
       // スピナーoff
       setProgress(false);
+      return;
     });
   }
 
   // apiと通信して、ユーザー情報を取得
   const authMe = async () => {
-    // api通信中はスピナー表示する
+    // スピナーon
     await setProgress(true);
     const token = localStorage.getItem('makala_token');
 
@@ -102,11 +103,15 @@ export const AuthContextProvider: React.FC = props => {
       localStorage.setItem('makala_user', res.data.name);
       setAuthUserState({ ...authUserState, id: res.data.id, name: res.data.name});
       login();
+      return;
     })
-    .catch((err) => {
+    .catch(() => {
+      return;
     })
     .finally(() => {
+      // スピナーoff
       setProgress(false);
+      return;
     })
   }
 
