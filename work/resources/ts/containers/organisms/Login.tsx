@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core';
 
 type Props = {
-  loginOnClick: (data: any) => void,
+  loginOnClick: (data: {[x: string]: any}) => void,
   cancelOnClick: () => void,
 }
 

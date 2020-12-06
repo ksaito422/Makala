@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Spinner } from '../../components/molecules/Spinner';
-import { Notice } from '../../components/molecules/Notice';
 import { Header } from '../organisms/Header';
 import { Login } from '../organisms/Login';
+import { Spinner } from '../../components/molecules/Spinner';
+import { Notice } from '../../components/molecules/Notice';
 import { AuthContext } from '../../contexts/childContexts/AuthContext';
 import { FeedbackContext } from '../../contexts/childContexts/FeedbackContext';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
@@ -26,15 +26,6 @@ export const LoginPage: React.FC = () => {
 
   return (
     <>
-      <Spinner open={progress} />
-      <Notice
-        open={status.open}
-        type={status.type}
-        message={status.message}
-        onClose={() => {
-          setStatus({ ...status, open: false });
-        }}
-      />
       <CssBaseline />
       <Header />
       <Container maxWidth='xl' className={classes.main_container}>
@@ -47,6 +38,16 @@ export const LoginPage: React.FC = () => {
           }}
         />
       </Container>
+
+      <Spinner open={progress} />
+      <Notice
+        open={status.open}
+        type={status.type}
+        message={status.message}
+        onClose={() => {
+          setStatus({ ...status, open: false });
+        }}
+      />
     </>
   );
 }
