@@ -50,9 +50,12 @@ export const HomePage: React.FC = () => {
             createBoard(postData);
           }}
           // ボード名の更新メソッド
-          updateOnClick={(data) => {
-            updateBoard(data);
-            updateBoardState(data);
+          updateOnClick={(data, id) => {
+            const postData = {
+              'id': id,
+              'board_name': data
+            }
+            updateBoard(postData);
           }}
           // ボードの削除メソッド ApiBoardsContextに定義したメソッドを利用
           deleteOnClick={(id, index) => {

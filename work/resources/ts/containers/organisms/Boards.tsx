@@ -3,6 +3,7 @@ import { AddIcon } from '../../components/atoms/AddIcon';
 import { CloseIcon } from '../../components/atoms/CloseIcon';
 import { ModalWindow } from '../../components/molecules/ModalWindow';
 import { ModalBoard } from '../../components/molecules/ModalBoard';
+import { ModalPropsContext } from '../../contexts/childContexts/ModalPropsContext';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import {
   Button,
@@ -20,31 +21,30 @@ import CreateIcon from '@material-ui/icons/Create';
 type Props = {
   boards: any,
   createOnClick: (data: any, user: any) => void,
-  updateOnClick: (data: any) => void,
+  updateOnClick: (data: {'data': string}, user: number) => void,
   deleteOnClick: (id: number, index: number) => void,
   showOnClick: (data: string) => void,
 }
 
 export const Boards: React.FC<Props> = (props) => {
   // cssの定義
+  // モーダルに渡す表示内容 表示のon/off切り替え
   // 新規作成か更新か判別するstate
-  // モーダルに渡す表示内容
-  // モーダル表示のon/off切り替え
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
+  const {
+    modalValueState,
+    setModalValueState,
+    modalOpenState,
+    setModalOpenState
+  } = useContext<any>(ModalPropsContext);
   const [createState, setCreateState] = useState<boolean>(false);
-  const [modalValueState, setmodalValueState] = useState<any>({
-    id: null,
-    board_name: null,
-    index: null
-  });
-  const [modalOpenState, setModalOpenState] = useState<boolean>(false);
 
   // モーダルを閉じるとき、入力値をクリア
   const modalClose = () => {
     setModalOpenState(false);
     setCreateState(false);
-    setmodalValueState({
+    setModalValueState({
       id: null,
       board_name: null,
       index: null
@@ -68,12 +68,12 @@ export const Boards: React.FC<Props> = (props) => {
                   <IconButton
                     onClick={() => {
                       setModalOpenState(true);
-                      setmodalValueState({
+                      setModalValueState({
                         ...modalValueState,
                         id: board.id,
                         board_name: board.board_name,
                         index: index
-                      })
+                      });
                     }}
                   >
                     <CreateIcon />
@@ -126,7 +126,7 @@ export const Boards: React.FC<Props> = (props) => {
                 props.createOnClick(data, user)
               ) : (
                 modalClose(),
-                props.updateOnClick(modalValueState)
+                props.updateOnClick(data, modalValueState.id)
               );
           }}
           modalOnClose={modalClose}
