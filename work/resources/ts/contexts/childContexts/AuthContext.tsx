@@ -5,9 +5,6 @@ import axios from 'axios';
 type AuthUserState = {
     id: number | null,
     name: string | null,
-    email: string | null,
-    password: string | null,
-    passConfirm: string | null,
 }
 
 export const AuthContext = createContext({});
@@ -19,9 +16,6 @@ export const AuthContextProvider: React.FC = (props) => {
   const [authUserState, setAuthUserState] = useState<AuthUserState>({
     id: null,
     name: null,
-    email: null,
-    password: null,
-    passConfirm: null,
   });
 
   // ログイン状態の管理

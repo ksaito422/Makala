@@ -10,10 +10,6 @@ import {
 } from '@material-ui/core';
 
 type Props = {
-  nameOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
-  mailOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
-  passwordOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
-  passConfirmOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
   registerOnClick: () => void,
   cancelOnClick: () => void,
 }
@@ -44,7 +40,6 @@ export const Register: React.FC<Props> = props => {
             name="name"
             autoFocus
             autoComplete="name"
-            onChange={props.nameOnChange}
             inputRef={
               register({
                 required: 'ユーザー名を入力して下さい',
@@ -65,7 +60,6 @@ export const Register: React.FC<Props> = props => {
             label="メールアドレス"
             name="email"
             autoComplete="email"
-            onChange={props.mailOnChange}
           />
           <TextForm
             fullWidth
@@ -74,7 +68,6 @@ export const Register: React.FC<Props> = props => {
             name="password"
             type='password'
             autoComplete="current-password"
-            onChange={props.passwordOnChange}
           />
           <TextForm
             fullWidth
@@ -83,7 +76,6 @@ export const Register: React.FC<Props> = props => {
             name="password"
             type='password'
             autoComplete="current-password"
-            onChange={props.passConfirmOnChange}
           />
         <Container maxWidth='sm'>
           <Grid container spacing={10} className={classes.main_container}>

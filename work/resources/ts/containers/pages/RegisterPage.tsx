@@ -10,11 +10,9 @@ import {
 } from '@material-ui/core';
 
 export const RegisterPage: React.FC = () => {
-  /** 認証関連のロジック
-   * cssの定義
+  /** cssの定義
    * react-router-dom URLルーティングに使う
    */
-  const { authState, setAuthState } = useContext<any>(AuthContext);
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
   const history = useHistory();
@@ -25,19 +23,6 @@ export const RegisterPage: React.FC = () => {
       <Header />
       <Container maxWidth='xl' className={classes.main_container}>
         <Register
-          // 認証情報をstateに保持していく
-          nameOnChange={(e) => {
-            setAuthState({ ...authState, name: e.target.value });
-          }}
-          mailOnChange={(e) => {
-            setAuthState({ ...authState, email: e.target.value });
-          }}
-          passwordOnChange={(e) => {
-            setAuthState({ ...authState, password: e.target.value });
-          }}
-          passConfirmOnChange={(e) => {
-            setAuthState({ ...authState, passConfirm: e.target.value });
-          }}
           registerOnClick={() => {
             history.push('/sign-up/confirm');
           }}
