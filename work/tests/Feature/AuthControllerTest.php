@@ -42,7 +42,7 @@ class AuthControllerTest extends TestCase
         $this->post($url, $real_user)
             ->assertOk()
             ->assertJson(['access_token' => true])
-            ->assertJsonCount(3)
+            ->assertJsonCount(5)
             ->assertHeader('Content-Type', 'application/json');
     }
 }

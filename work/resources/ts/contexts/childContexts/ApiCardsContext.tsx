@@ -4,14 +4,15 @@ import axios from 'axios';
 
 export const ApiCardsContext = createContext({});
 
-export const ApiCardsContextProvider: React.FC = props => {
+export const ApiCardsContextProvider: React.FC = (props) => {
   // スピナー、api通信の結果を表示するため
-  const { setProgress, setStatus } = useContext<any>(FeedbackContext);
   // { items: ボードアイテムで表示するデータ, numberMade: 今までにカードを作った総数 }
-  const [cardsState, setCardsState] = useState<any>([]);
+  const { setProgress, setStatus } = useContext<any>(FeedbackContext);
+  const [cardsState, setCardsState] = useState([]);
 
   // apiと通信して、カードを取得するロジック
   const getCards = async (id: number) => {
+    // スピナーon
     await setProgress(true);
     const token = localStorage.getItem('makala_token');
 
@@ -27,7 +28,7 @@ export const ApiCardsContextProvider: React.FC = props => {
       setCardsState(res.data.cards);
       return;
     })
-    .catch((err) => {
+    .catch(() => {
       setStatus({
         open: true,
         type: 'error',
@@ -36,13 +37,15 @@ export const ApiCardsContextProvider: React.FC = props => {
       return;
     })
     .finally(() => {
+      // スピナーoff
       setProgress(false);
       return;
     })
   }
 
   // apiと通信して、カードを削除するロジック
-  const deleteCard: any = async (id: number) => {
+  const deleteCard = async (id: number) => {
+    // スピナーon
     await setProgress(true);
     const token = localStorage.getItem('makala_token');
 
@@ -54,7 +57,7 @@ export const ApiCardsContextProvider: React.FC = props => {
         'Authorization': `Bearer ${token}`
       }
     })
-    .then(async (res) => {
+    .then(async () => {
       await getCards(1);
       await setStatus({
         open: true,
@@ -63,7 +66,7 @@ export const ApiCardsContextProvider: React.FC = props => {
       });
       return;
     })
-    .catch(async (err) => {
+    .catch(async () => {
       await getCards(1);
       await setStatus({
         open: true,
@@ -73,6 +76,7 @@ export const ApiCardsContextProvider: React.FC = props => {
       return;
     })
     .finally(() => {
+      // スピナーoff
       setProgress(false);
       return;
     })
