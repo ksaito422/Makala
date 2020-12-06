@@ -89,6 +89,7 @@ export const ApiBoardsContextProvider: React.FC = props => {
   const updateBoard = async (
     data: {
       id: number,
+      board_name: string,
     }) => {
       await setProgress(true);
       const token = localStorage.getItem('makala_token');
