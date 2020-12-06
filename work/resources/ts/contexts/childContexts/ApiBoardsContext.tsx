@@ -5,7 +5,7 @@ import axios from 'axios';
 
 export const ApiBoardsContext = createContext({});
 
-export const ApiBoardsContextProvider: React.FC = props => {
+export const ApiBoardsContextProvider: React.FC = (props) => {
   // スピナー表示するため
   // ログインユーザーの情報
   // getBoardsで取得したデータを保管
@@ -15,6 +15,7 @@ export const ApiBoardsContextProvider: React.FC = props => {
 
   // apiと通信して、ボードを取得するロジック
   const getBoards = async () => {
+    // スピナーon
     await setProgress(true);
     const token = localStorage.getItem('makala_token');
 
@@ -39,6 +40,7 @@ export const ApiBoardsContextProvider: React.FC = props => {
       return;
     })
     .finally(() => {
+      // スピナーoff
       setProgress(false);
       return;
     })
@@ -91,6 +93,7 @@ export const ApiBoardsContextProvider: React.FC = props => {
       id: number,
       board_name: string,
     }) => {
+      // スピナーon
       await setProgress(true);
       const token = localStorage.getItem('makala_token');
 
@@ -103,7 +106,7 @@ export const ApiBoardsContextProvider: React.FC = props => {
           'Authorization': `Bearer ${token}`
         }
       })
-      .then((res) => {
+      .then(() => {
         setStatus({
           open: true,
           type: 'success',
@@ -111,7 +114,7 @@ export const ApiBoardsContextProvider: React.FC = props => {
         });
         return;
       })
-      .catch(async (err) => {
+      .catch(async () => {
         await getBoards();
         await setStatus({
           open: true,
@@ -121,6 +124,7 @@ export const ApiBoardsContextProvider: React.FC = props => {
         return;
       })
       .finally(() => {
+        // スピナーoff
         setProgress(false);
         getBoards();
         return;
@@ -140,6 +144,7 @@ export const ApiBoardsContextProvider: React.FC = props => {
 
   // apiと通信して、ボードを削除するロジック
   const deleteBoard = async (id: number) => {
+    // スピナーon
     await setProgress(true);
     const token = localStorage.getItem('makala_token');
 
@@ -151,7 +156,7 @@ export const ApiBoardsContextProvider: React.FC = props => {
         'Authorization': `Bearer ${token}`
       }
     })
-    .then((res) => {
+    .then(() => {
       setStatus({
         open: true,
         type: 'success',
@@ -159,7 +164,7 @@ export const ApiBoardsContextProvider: React.FC = props => {
       });
       return;
     })
-    .catch(async (err) => {
+    .catch(async () => {
       await getBoards();
       await setStatus({
         open: true,
@@ -169,6 +174,7 @@ export const ApiBoardsContextProvider: React.FC = props => {
       return;
     })
     .finally(() => {
+      // スピナーoff
       setProgress(false);
       return;
     })
@@ -195,5 +201,5 @@ export const ApiBoardsContextProvider: React.FC = props => {
     >
       {props.children}
     </ApiBoardsContext.Provider>
-  )
+  );
 }
