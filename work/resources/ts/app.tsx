@@ -7,7 +7,6 @@ import { TotalContextProvider } from './contexts/TotalContext';
 import { TopPage } from './containers/pages/TopPage';
 import { LoginPage } from './containers/pages/LoginPage';
 import { RegisterPage } from './containers/pages/RegisterPage';
-import { ConfirmPage } from './containers/pages/ConfirmPage';
 import { HomePage } from './containers/pages/HomePage';
 import { CardPage } from './containers/pages/CardPage';
 import { MuiTheme } from './theme/MuiTheme';
@@ -24,7 +23,6 @@ const App: React.FC = () => {
               <Route exact path='/' component={TopPage} />
               <GuestRoute exact path='/login' component={LoginPage} />
               <GuestRoute exact path='/register' component={RegisterPage} />
-              <GuestRoute exact path='/sign-up/confirm' component={ConfirmPage} />
               <PrivateRoute exact path='/:user/home' component={HomePage} />
               <PrivateRoute exact path='/:user/:card/cards/' component={CardPage} />
             </Switch>
