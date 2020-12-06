@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core';
 
 type Props = {
-  signupOnClick: () => void,
+  registerOnClick: () => void,
   loginOnClick: () => void,
 }
 
@@ -60,7 +60,7 @@ export const Tutorial: React.FC<Props> = (props) => {
                     <Grid item xs={12}>
                       <Button
                         size='large'
-                        onClick={props.signupOnClick}
+                        onClick={props.registerOnClick}
                       >
                         新規登録する
                       </Button>

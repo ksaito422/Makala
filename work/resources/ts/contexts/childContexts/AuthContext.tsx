@@ -5,10 +5,6 @@ import axios from 'axios';
 type AuthUserState = {
     id: number | null,
     name: string | null,
-    email: string | null,
-    password: string | null,
-    passConfirm: string | null,
-    authError: string | null,
 }
 
 export const AuthContext = createContext({});
@@ -20,10 +16,6 @@ export const AuthContextProvider: React.FC = (props) => {
   const [authUserState, setAuthUserState] = useState<AuthUserState>({
     id: null,
     name: null,
-    email: null,
-    password: null,
-    passConfirm: null,
-    authError: null
   });
 
   // ログイン状態の管理
@@ -85,6 +77,55 @@ export const AuthContextProvider: React.FC = (props) => {
     });
   }
 
+  // apiと通信して、ユーザー登録を行う
+  const authRegister = async (
+    data: {
+      'name': string,
+      'email': string,
+      'password': string,
+  }) => {
+    // スピナーon
+    await setProgress(true);
+
+    await axios({
+      method: 'POST',
+      url: 'api/auth/register',
+      data: data,
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+    .then((res) => {
+      // ローカルストレージに認証情報を保管 *脆弱性のことはあとで考える
+      // set isAuth to true
+      // 通信結果の通知内容
+      localStorage.setItem('makala_token', res.data.access_token);
+      localStorage.setItem('makala_user', res.data.name);
+      setAuthUserState({ ...authUserState, id: res.data.id, name: res.data.name});
+      login();
+      setStatus({
+        open: true,
+        type: 'success',
+        message: '新規ユーザー登録しました。'
+      });
+      return;
+    })
+    .catch(() => {
+      // 通信結果の通知内容
+      setStatus({
+        open: true,
+        type: 'error',
+        message: '新規ユーザー登録に失敗しました。'
+      });
+      return;
+    })
+    .finally(() => {
+      // スピナーoff
+      setProgress(false);
+      return;
+    });
+  }
+
   // apiと通信して、ユーザー情報を取得
   const authMe = async () => {
     // スピナーon
@@ -122,6 +163,7 @@ export const AuthContextProvider: React.FC = (props) => {
       isAuth,
       login,
       authLogin,
+      authRegister,
       authMe,
       }}
     >
