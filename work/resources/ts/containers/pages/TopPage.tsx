@@ -22,8 +22,8 @@ export const TopPage: React.FC = () => {
       <Header />
       <Container maxWidth='xl' className={classes.main_container}>
         <Tutorial
-          signupOnClick={() => {
-            history.push('/sign-up');
+          registerOnClick={() => {
+            history.push('/register');
           }}
           loginOnClick={() => {
             history.push('/login');

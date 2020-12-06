@@ -8,7 +8,6 @@ type AuthUserState = {
     email: string | null,
     password: string | null,
     passConfirm: string | null,
-    authError: string | null,
 }
 
 export const AuthContext = createContext({});
@@ -23,7 +22,6 @@ export const AuthContextProvider: React.FC = (props) => {
     email: null,
     password: null,
     passConfirm: null,
-    authError: null
   });
 
   // ログイン状態の管理

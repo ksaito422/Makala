@@ -15,10 +15,9 @@ type Props = {
   passConfirmOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
   registerOnClick: () => void,
   cancelOnClick: () => void,
-  error: string | null,
 }
 
-export const SignUp: React.FC<Props> = props => {
+export const Register: React.FC<Props> = props => {
   // cssの定義
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
@@ -69,12 +68,6 @@ export const SignUp: React.FC<Props> = props => {
             onChange={props.passConfirmOnChange}
           />
         </form>
-        {/* [登録する]時にエラーあれば、エラーメッセージを表示する */}
-        {props.error ? (
-          <Typography color='error'>{props.error}</Typography>
-          ) : (
-          null)
-        }
         <Container maxWidth='sm'>
           <Grid container spacing={10} className={classes.main_container}>
             <Grid item xs={6}>

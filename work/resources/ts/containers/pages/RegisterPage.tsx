@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Header } from '../organisms/Header';
-import { SignUp } from '../organisms/SignUp';
+import { Register } from '../organisms/Register';
 import { AuthContext } from '../../contexts/childContexts/AuthContext';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import {
@@ -9,7 +9,7 @@ import {
   CssBaseline,
 } from '@material-ui/core';
 
-export const SignUpPage: React.FC = () => {
+export const RegisterPage: React.FC = () => {
   /** 認証関連のロジック
    * cssの定義
    * react-router-dom URLルーティングに使う
@@ -24,7 +24,7 @@ export const SignUpPage: React.FC = () => {
       <CssBaseline />
       <Header />
       <Container maxWidth='xl' className={classes.main_container}>
-        <SignUp
+        <Register
           // 認証情報をstateに保持していく
           nameOnChange={(e) => {
             setAuthState({ ...authState, name: e.target.value });
@@ -39,19 +39,11 @@ export const SignUpPage: React.FC = () => {
             setAuthState({ ...authState, passConfirm: e.target.value });
           }}
           registerOnClick={() => {
-            // パスワードが両方で合っているかの確認 違えばエラーメッセージを返す
-            authState.password === authState.passConfirm ? (
-              history.push('/sign-up/confirm')
-            ) : (
-              setAuthState({ ...authState, authError: 'パスワードが再確認パスワードと一致しません。' })
-            );
+            history.push('/sign-up/confirm');
           }}
           cancelOnClick={() => {
-            // エラー内容が永続されるため、nullにしてから戻る
-            setAuthState({ ...authState, authError: null })
             history.push('/');
           }}
-          error={authState.authError}
         />
       </Container>
     </>
