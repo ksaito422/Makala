@@ -60,6 +60,14 @@ export const Register: React.FC<Props> = props => {
             label="メールアドレス"
             name="email"
             autoComplete="email"
+            inputRef={
+              register({
+                required: true,
+                pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
+              })
+            }
+            error={Boolean(errors.email)}
+            helperText={errors.email && 'メールアドレスを入力してください'}
           />
           <TextForm
             fullWidth
