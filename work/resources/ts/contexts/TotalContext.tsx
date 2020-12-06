@@ -4,7 +4,7 @@ import { FeedbackContextProvider } from './childContexts/FeedbackContext';
 import { AuthContextProvider } from './childContexts/AuthContext';
 import { ApiBoardsContextProvider } from './childContexts/ApiBoardsContext';
 import { ApiCardsContextProvider } from './childContexts/ApiCardsContext';
-import { BoardItemContextProvider } from './childContexts/BoardItemContext';
+import { ModalPropsContextProvider } from './childContexts/ModalPropsContext';
 
 export const TotalContext = createContext({});
 
@@ -15,9 +15,9 @@ export const TotalContextProvider: React.FC = props => {
         <AuthContextProvider>
           <ApiBoardsContextProvider>
             <ApiCardsContextProvider>
-              <BoardItemContextProvider>
+              <ModalPropsContextProvider>
                 {props.children}
-              </BoardItemContextProvider>
+              </ModalPropsContextProvider>
             </ApiCardsContextProvider>
           </ApiBoardsContextProvider>
         </AuthContextProvider>

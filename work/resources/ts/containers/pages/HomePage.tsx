@@ -13,7 +13,7 @@ import {
 } from '@material-ui/core';
 
 export const HomePage: React.FC = () => {
-  const { boardsState, getBoards, createBoard, updateBoard, updateBoardState,  deleteBoard, deleteBoardState } = useContext<any>(ApiBoardsContext);
+  const { boardsState, getBoards, createBoard, updateBoard, deleteBoard, deleteBoardState } = useContext<any>(ApiBoardsContext);
   const { progress, status, setStatus } = useContext<any>(FeedbackContext);
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
@@ -22,38 +22,31 @@ export const HomePage: React.FC = () => {
 
   // 最初のレンダー時にボードを取得する
   useEffect(() => {
-    getBoards(user);
+    getBoards();
   }, []);
 
   return (
     <>
-      <Spinner open={progress} />
-      <Notice
-        open={status.open}
-        type={status.type}
-        message={status.message}
-        onClose={() => {
-          setStatus({ ...status, open: false });
-        }}
-      />
       <CssBaseline />
       <Header />
       <Container maxWidth='xl' className={classes.main_container}>
         <Boards
           boards={boardsState}
           // 新しいボードの作成メソッド
-          storeOnClick={(data, user) => {
+          createOnClick={(data, user_id) => {
             const postData = {
-              'user_id': user.id,
-              'user_name': user.name,
+              'user_id': user_id,
               'board_name': data.board_name
             }
             createBoard(postData);
           }}
           // ボード名の更新メソッド
-          postOnClick={(obj) => {
-            updateBoard(obj);
-            updateBoardState(obj);
+          updateOnClick={(data, id) => {
+            const postData = {
+              'id': id,
+              'board_name': data
+            }
+            updateBoard(postData);
           }}
           // ボードの削除メソッド ApiBoardsContextに定義したメソッドを利用
           deleteOnClick={(id, index) => {
@@ -66,6 +59,15 @@ export const HomePage: React.FC = () => {
           }}
         />
       </Container>
+      <Spinner open={progress} />
+      <Notice
+        open={status.open}
+        type={status.type}
+        message={status.message}
+        onClose={() => {
+          setStatus({ ...status, open: false });
+        }}
+      />
     </>
-  )
+  );
 }
