@@ -76,6 +76,23 @@ export const Register: React.FC<Props> = props => {
             name="password"
             type='password'
             autoComplete="current-password"
+            inputRef={
+              register({
+                required: ' パスワードを入力して下さい',
+                minLength: {
+                  value: 8,
+                  message: 'パスワードを8文字以上20文字以下で入力して下さい'
+                },
+                maxLength: {
+                  value: 20,
+                  message: 'パスワードを8文字以上20文字以下で入力して下さい'
+                }
+              })
+            }
+            error={Boolean(errors.password)}
+            helperText={
+              errors.password && errors.password.message
+            }
           />
           <TextForm
             fullWidth
