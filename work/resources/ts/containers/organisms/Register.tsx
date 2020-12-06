@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core';
 
 type Props = {
-  registerOnClick: () => void,
+  registerOnClick: (data: {[x: string]: any}) => void,
   cancelOnClick: () => void,
 }
 
@@ -29,8 +29,7 @@ export const Register: React.FC<Props> = props => {
         <form
           className={classes.auth_form}
           onSubmit={handleSubmit((data) => {
-            console.log(data);
-            // props.registerOnClick(data);
+            props.registerOnClick(data);
           })}
         >
           <TextForm

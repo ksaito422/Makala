@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Header } from '../organisms/Header';
 import { Register } from '../organisms/Register';
-import { AuthContext } from '../../contexts/childContexts/AuthContext';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import {
   Container,
@@ -23,8 +22,8 @@ export const RegisterPage: React.FC = () => {
       <Header />
       <Container maxWidth='xl' className={classes.main_container}>
         <Register
-          registerOnClick={() => {
-            history.push('/sign-up/confirm');
+          registerOnClick={(data) => {
+            console.log(data);
           }}
           cancelOnClick={() => {
             history.push('/');
@@ -32,5 +31,5 @@ export const RegisterPage: React.FC = () => {
         />
       </Container>
     </>
-  )
+  );
 }
