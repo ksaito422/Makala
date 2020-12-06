@@ -45,4 +45,25 @@ class AuthControllerTest extends TestCase
             ->assertJsonCount(5)
             ->assertHeader('Content-Type', 'application/json');
     }
+
+    /**
+     * @test
+     */
+    public function ユーザー登録できる()
+    {
+        $url = route('auth.register');
+
+        $user = [
+            'name' => 'api_test',
+            'email' => 'api_test@example.com',
+            'password' => 'test1234'
+        ];
+
+        // トークンが返ってくる
+        $this->post($url, $user)
+            ->assertOk()
+            ->assertJson(['access_token' => true])
+            ->assertJsonCount(5)
+            ->assertHeader('Content-Type', 'application/json');
+    }
 }
