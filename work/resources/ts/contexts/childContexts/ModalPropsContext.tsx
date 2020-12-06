@@ -2,15 +2,15 @@ import React, { useState, createContext } from 'react';
 
 export const ModalPropsContext = createContext({});
 
-type ModalProps = {
+type ModalValueState = {
   id: number | null,
   board_name: string | null,
   index: number | null,
 }
 
-export const ModalPropsContextProvider: React.FC = props => {
+export const ModalPropsContextProvider: React.FC = (props) => {
   // モーダルに表示するデータ
-  const [modalValueState, setModalValueState] = useState<ModalProps>({
+  const [modalValueState, setModalValueState] = useState<ModalValueState>({
     id: null,
     board_name: null,
     index: null

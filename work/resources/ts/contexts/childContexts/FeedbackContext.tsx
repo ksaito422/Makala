@@ -8,7 +8,7 @@ type Status = {
   message: string | null,
 }
 
-export const FeedbackContextProvider: React.FC = props => {
+export const FeedbackContextProvider: React.FC = (props) => {
   // スピナー表示の状態管理
   const [progress, setProgress] = useState(false);
 
@@ -20,11 +20,12 @@ export const FeedbackContextProvider: React.FC = props => {
   });
 
   return (
-    <FeedbackContext.Provider value={{
-      progress,
-      setProgress,
-      status,
-      setStatus
+    <FeedbackContext.Provider
+      value={{
+        progress,
+        setProgress,
+        status,
+        setStatus
       }}
     >
       {props.children}
