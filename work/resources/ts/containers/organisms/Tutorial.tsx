@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Button } from '../../components/atoms/Button';
 import { AccordionArea } from '../../components/molecules/AccordionArea';
+import { AuthContext } from '../../contexts/childContexts/AuthContext';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import {
   Container,
@@ -12,10 +13,15 @@ import {
 type Props = {
   registerOnClick: () => void,
   loginOnClick: () => void,
+  boardOnClick: () => void,
 }
 
 export const Tutorial: React.FC<Props> = (props) => {
-  // cssの定義
+  /**
+   * { 認証状態の確認 }
+   * cssの定義
+   */
+  const { isAuth } = useContext<any>(AuthContext);
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
 
@@ -57,22 +63,37 @@ export const Tutorial: React.FC<Props> = (props) => {
                     justify="flex-end"
                     alignItems="center"
                   >
-                    <Grid item xs={12}>
-                      <Button
-                        size='large'
-                        onClick={props.registerOnClick}
-                      >
-                        新規登録する
-                      </Button>
-                    </Grid>
-                    <Grid item xs={12}>
-                      <Button
-                        size='large'
-                        onClick={props.loginOnClick}
-                      >
-                        ログインする
-                      </Button>
-                    </Grid>
+                    {!isAuth ? (
+                      <>
+                        <Grid item xs={12}>
+                        <Button
+                          size='large'
+                          onClick={props.registerOnClick}
+                        >
+                          新規登録する
+                        </Button>
+                        </Grid>
+                        <Grid item xs={12}>
+                          <Button
+                            size='large'
+                            onClick={props.loginOnClick}
+                          >
+                            ログインする
+                          </Button>
+                        </Grid>
+                      </>
+                    ) : (
+                      <>
+                        <Grid item xs={12}>
+                          <Button
+                            size='large'
+                            onClick={props.boardOnClick}
+                          >
+                            ボードリストへ
+                          </Button>
+                        </Grid>
+                      </>
+                    )}
                   </Grid>
                 </Grid>
               </Grid>
