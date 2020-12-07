@@ -18,7 +18,7 @@ export const Header: React.FC = () => {
    * URLパラメータ取得
    */
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const { isAuth } = useContext<any>(AuthContext);
+  const { isAuth, authLogout } = useContext<any>(AuthContext);
   const { user } = useParams<any>();
 
   // メニューのオープンon/off
@@ -60,7 +60,7 @@ export const Header: React.FC = () => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={() => {console.log('logout!!')}}>ログアウト</MenuItem>
+        <MenuItem onClick={authLogout}>ログアウト</MenuItem>
       </Menu>
     </>
   );

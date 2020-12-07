@@ -134,6 +134,7 @@ export const AuthContextProvider: React.FC = (props) => {
 
     await axios({
       method: 'POST',
+      baseURL: 'http://localhost:8080/',
       url: 'api/auth/logout',
       headers: {
         'Content-Type': 'application/json',
@@ -154,7 +155,7 @@ export const AuthContextProvider: React.FC = (props) => {
       });
       return;
     })
-    .catch(() => {
+    .catch((err) => {
       // 通信結果の通知内容
       setStatus({
         open: true,
