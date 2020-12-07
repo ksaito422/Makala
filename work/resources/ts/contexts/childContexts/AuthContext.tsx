@@ -171,6 +171,27 @@ export const AuthContextProvider: React.FC = (props) => {
     });
   }
 
+  const authRefresh = async () => {
+    const token = localStorage.getItem('makala_token');
+
+    await axios({
+      method: 'POST',
+      baseURL: 'http://localhost:8080',
+      url: 'api/auth/refresh',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    .then((res) => {
+      localStorage.setItem('makala_token', res.data.access_token);
+      return;
+    })
+    .catch(() => {
+      return;
+    })
+  }
+
   // apiと通信して、ユーザー情報を取得
   const authMe = async () => {
     // スピナーon
@@ -189,6 +210,7 @@ export const AuthContextProvider: React.FC = (props) => {
       localStorage.setItem('makala_user', res.data.name);
       setAuthUserState({ ...authUserState, id: res.data.id, name: res.data.name});
       login();
+      authRefresh();
       return;
     })
     .catch(() => {
