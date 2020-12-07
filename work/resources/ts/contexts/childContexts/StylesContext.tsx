@@ -72,7 +72,12 @@ export const StylesContextProvider: React.FC = props => {
     Avatar: {
       color: theme.palette.secondary.dark,
       backgroundColor: theme.palette.secondary.light
-    }
+    },
+    // aタグの装飾
+    Link: {
+      textDecoration: `none`,
+      color: theme.palette.secondary.main,
+    },
   }));
 
   return (

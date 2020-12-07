@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react';
-import { useParams } from 'react-router-dom';
 import { Title } from '../../components/atoms/Title';
 import { Avatar } from '../../components/atoms/Avatar';
 import { AuthContext } from '../../contexts/childContexts/AuthContext';
@@ -14,12 +13,10 @@ import {
 export const Header: React.FC = () => {
   /**
    * ポップアップメニューの表示位置
-   * ログイン状態の確認
-   * URLパラメータ取得
+   * { ログイン状態の確認, ログインユーザーの情報, ログインメソッド }
    */
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const { isAuth, authLogout } = useContext<any>(AuthContext);
-  const { user } = useParams<any>();
+  const { isAuth, authUserState, authLogout } = useContext<any>(AuthContext);
 
   // メニューのオープンon/off
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -43,7 +40,7 @@ export const Header: React.FC = () => {
                   ariaControls='avatar'
                   ariaHaspopup={true}
                   onClick={handleClick}>
-                    {user.slice(0,1)}
+                    {authUserState.name.slice(0,1)}
                   </Avatar>
               ) : (
                 null
