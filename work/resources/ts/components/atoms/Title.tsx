@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import {
   createMuiTheme,
   MuiThemeProvider,
@@ -22,6 +24,9 @@ type Props = {
 }
 
 export const Title: React.FC<Props> = (props) => {
+  const { useStyles } = useContext<any>(StylesContext);
+  const classes = useStyles();
+
   return (
     <MuiThemeProvider theme={theme}>
       <Typography
@@ -29,7 +34,9 @@ export const Title: React.FC<Props> = (props) => {
         component='h1'
         variant='h3'
       >
-        {props.title}
+        <Link className={classes.Link} to='/'>
+          {props.title}
+        </Link>
       </Typography>
     </MuiThemeProvider>
   );
