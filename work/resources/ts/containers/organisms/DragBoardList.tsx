@@ -101,25 +101,25 @@ const regularExpressions = /^.+/;
         modalOnClose={modalClose}
       >
         <ModalCard
-          errorTitle={regularExpressions.test(modalValueState.title) ? false : true}
-          helperTextTitle={
-            regularExpressions.test(modalValueState.title) ? undefined : 'タイトルを入力してください'
-          }
-          errorContent={regularExpressions.test(modalValueState.content) ? false : true}
-          helperTextContent={
-            regularExpressions.test(modalValueState.content) ? undefined : '内容を入力してください'
-          }
-          modalOpen={modalOpenState}
+          // errorTitle={regularExpressions.test(modalValueState.title) ? false : true}
+          // helperTextTitle={
+          //   regularExpressions.test(modalValueState.title) ? undefined : 'タイトルを入力してください'
+          // }
+          // errorContent={regularExpressions.test(modalValueState.content) ? false : true}
+          // helperTextContent={
+          //   regularExpressions.test(modalValueState.content) ? undefined : '内容を入力してください'
+          // }
+          // modalOpen={modalOpenState}
           modalOnClose={modalClose}
           // 押したボタンの番号によって、表示内容を変える
           defaultValueTitle={modalValueState.title}
           defaultValueContent={modalValueState.content}
-          titleOnChange={(e) => {
-            setmodalValueState({ ...modalValueState, title: e.target.value })
-          }}
-          contentOnChange={(e) => {
-            setmodalValueState({ ...modalValueState, content: e.target.value })
-          }}
+          // titleOnChange={(e) => {
+          //   setmodalValueState({ ...modalValueState, title: e.target.value })
+          // }}
+          // contentOnChange={(e) => {
+          //   setmodalValueState({ ...modalValueState, content: e.target.value })
+          // }}
           postOnClick={() => {
             /** 今のBoardItemの配列を受け取り、更新部分だけ新しい値に入れ替える
               * updateなら既存のindexに格納
@@ -138,10 +138,10 @@ const regularExpressions = /^.+/;
             )
             modalClose();
           }}
-          disabled={
-            // クソコードだから整理したい
-            modalValueState.title === null || modalValueState.content === null ? (true) : (
-            regularExpressions.test(modalValueState.title) && regularExpressions.test(modalValueState.content) ? (false) : (true))}
+          // disabled={
+          //   // クソコードだから整理したい
+          //   modalValueState.title === null || modalValueState.content === null ? (true) : (
+          //   regularExpressions.test(modalValueState.title) && regularExpressions.test(modalValueState.content) ? (false) : (true))}
         />
       </ModalWindow>
     </>
