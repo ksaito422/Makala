@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Header } from '../organisms/Header';
-import { Tutorial } from '../organisms/Tutorial';
+import { Top } from '../organisms/Top';
 import { AuthContext } from '../../contexts/childContexts/AuthContext';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import {
@@ -25,7 +25,7 @@ export const TopPage: React.FC = () => {
       <CssBaseline />
       <Header />
       <Container maxWidth='xl' className={classes.main_container}>
-        <Tutorial
+        <Top
           registerOnClick={() => {
             history.push('/register');
           }}

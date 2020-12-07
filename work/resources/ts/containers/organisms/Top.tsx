@@ -16,7 +16,7 @@ type Props = {
   boardOnClick: () => void,
 }
 
-export const Tutorial: React.FC<Props> = (props) => {
+export const Top: React.FC<Props> = (props) => {
   /**
    * { 認証状態の確認 }
    * cssの定義
