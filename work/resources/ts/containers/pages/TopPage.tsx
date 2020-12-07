@@ -9,7 +9,8 @@ import {
 } from '@material-ui/core';
 
 export const TopPage: React.FC = () => {
-  /** cssの定義
+  /**
+   * cssの定義
    * react-router-dom URLルーティングに使う
    */
   const { useStyles } = useContext<any>(StylesContext);
