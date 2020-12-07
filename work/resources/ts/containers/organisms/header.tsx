@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { useParams } from 'react-router-dom';
 import { Title } from '../../components/atoms/Title';
 import { Avatar } from '../../components/atoms/Avatar';
+import { AuthContext } from '../../contexts/childContexts/AuthContext';
 import {
   AppBar,
   Grid,
@@ -8,6 +10,13 @@ import {
 } from '@material-ui/core';
 
 export const Header: React.FC = () => {
+  /**
+   * ログイン状態の確認
+   * URLパラメータ取得
+   */
+  const { isAuth } = useContext<any>(AuthContext);
+  const { user } = useParams<any>();
+
   return (
     <AppBar color='primary' position='sticky'>
       <Toolbar>
@@ -16,13 +25,17 @@ export const Header: React.FC = () => {
             <Title title='makala' />
           </Grid>
           <Grid item xs={1}>
-            <Avatar
-              onClick={() => {
-                console.log('avatar!!');
-              }}
-            >
-              A
-            </Avatar>
+            {isAuth ? (
+              <Avatar
+                onClick={() => {
+                  console.log('avatar!!');
+                }}
+              >
+                {user.slice(0,1)}
+              </Avatar>
+            ) : (
+              null
+            )}
           </Grid>
         </Grid>
       </Toolbar>
