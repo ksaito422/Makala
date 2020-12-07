@@ -1,6 +1,5 @@
 import React, { createContext } from 'react';
 import { makeStyles } from '@material-ui/core';
-import { NoEncryption } from '@material-ui/icons';
 
 export const StylesContext = createContext({});
 
@@ -69,6 +68,11 @@ export const StylesContextProvider: React.FC = props => {
     Spinner: {
       zIndex: 99,
     },
+    // アバターの色
+    Avatar: {
+      color: theme.palette.secondary.dark,
+      backgroundColor: theme.palette.secondary.light
+    }
   }));
 
   return (

@@ -126,6 +126,51 @@ export const AuthContextProvider: React.FC = (props) => {
     });
   }
 
+  // apiと通信して、ログアウト処理を行う
+  const authLogout = async () => {
+    // スピナーon
+    await setProgress(true);
+    const token = localStorage.getItem('makala_token');
+
+    await axios({
+      method: 'POST',
+      baseURL: 'http://localhost:8080/',
+      url: 'api/auth/logout',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    .then((res) => {
+      // ローカルストレージの認証情報を削除
+      // set isAuth to false
+      // 通信結果の通知内容
+      localStorage.removeItem('makala_token');
+      localStorage.removeItem('makala_user');
+      logout();
+      setStatus({
+        open: true,
+        type: 'success',
+        message: 'ログアウトしました。'
+      });
+      return;
+    })
+    .catch((err) => {
+      // 通信結果の通知内容
+      setStatus({
+        open: true,
+        type: 'error',
+        message: 'ログアウトに失敗しました。'
+      });
+      return;
+    })
+    .finally(() => {
+      // スピナーoff
+      setProgress(false);
+      return;
+    });
+  }
+
   // apiと通信して、ユーザー情報を取得
   const authMe = async () => {
     // スピナーon
@@ -164,6 +209,7 @@ export const AuthContextProvider: React.FC = (props) => {
       login,
       authLogin,
       authRegister,
+      authLogout,
       authMe,
       }}
     >
