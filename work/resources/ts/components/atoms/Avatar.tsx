@@ -6,7 +6,9 @@ import {
 } from '@material-ui/core';
 
 type Props = {
-  onClick: () => void,
+  ariaControls: string,
+  ariaHaspopup: boolean,
+  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void,
 }
 
 export const Avatar: React.FC<Props> = (props) => {
@@ -15,7 +17,11 @@ export const Avatar: React.FC<Props> = (props) => {
 
   return (
     <>
-      <IconButton onClick={props.onClick}>
+      <IconButton
+        aria-controls={props.ariaControls}
+        aria-haspopup={props.ariaHaspopup}
+        onClick={props.onClick}
+      >
         <LetterAvatar className={classes.Avatar}>
           {props.children}
         </LetterAvatar>
