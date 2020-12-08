@@ -15,7 +15,6 @@ import {
   Grid,
   useMediaQuery,
 } from '@material-ui/core';
-import { createNamespaceExportDeclaration } from 'typescript';
 
 type ItemType = {
   id: string;
