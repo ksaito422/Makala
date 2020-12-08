@@ -32,7 +32,7 @@ export const Preview: React.FC<Props> = (props) => {
     const element = document.createElement("a");
     const file = new Blob([previewText], {type: 'text/plain'});
     element.href = URL.createObjectURL(file);
-    element.download = "myFile.md";
+    element.download = "makala.md";
     document.body.appendChild(element); // Required for this to work in FireFox
     element.click();
   }
