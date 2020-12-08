@@ -44,7 +44,7 @@ export const CardPage = React.memo (() => {
   const { progress, status, setStatus } = useContext<any>(FeedbackContext);
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
-  const { cardsState, getCards, setCardsState, deleteCard } = useContext<any>(ApiCardsContext);
+  const { cardsState, getCards, setCardsState, updateCard, deleteCard } = useContext<any>(ApiCardsContext);
   const matches = useMediaQuery('(min-width: 1025px)');
   const { card } = useParams<any>();
 
@@ -93,6 +93,9 @@ export const CardPage = React.memo (() => {
                   deleteOnClick={(id) => {
                     deleteCard(id, card);
                   }}
+                  updateOnSubmit={(data, id) => {
+                    updateCard(id, card, data);
+                  }}
                 />
               </Container>
             </Grid>
@@ -129,6 +132,9 @@ export const CardPage = React.memo (() => {
                     onDragEnd={onDragEnd}
                     deleteOnClick={(id) => {
                       deleteCard(id);
+                    }}
+                    updateOnSubmit={(data) => {
+                      console.log(data);
                     }}
                   />
                 }

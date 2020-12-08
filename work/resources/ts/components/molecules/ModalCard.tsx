@@ -9,7 +9,7 @@ import { Grid } from '@material-ui/core';
 type Props = {
   defaultValueTitle: string,
   defaultValueContent: string,
-  postOnClick: () => void,
+  postOnSubmit: (data: {[x: string]: any;}) => void,
   modalOnClose: () => void,
 }
 
@@ -32,7 +32,7 @@ export const ModalCard: React.FC<Props> = (props) => {
         <form
           className={classes.form_board}
           onSubmit={handleSubmit((data) => {
-            console.log(data);
+            props.postOnSubmit(data);
           })}
         >
           <Grid container spacing={4}>

@@ -43,6 +43,51 @@ export const ApiCardsContextProvider: React.FC = (props) => {
     })
   }
 
+  // apiと通信して、カードを更新するロジック
+  const updateCard = async (
+    id: number,
+    card: any,
+    data: {
+      card_name: string,
+      card_content: string,
+    }) => {
+      // スピナーon
+      await setProgress(true);
+      const token = localStorage.getItem('makala_token');
+
+      await axios({
+        method: 'PUT',
+        url: `/api/v1/cards/${id}`,
+        data: data,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+      })
+      .then(() => {
+        setStatus({
+          open: true,
+          type: 'success',
+          message: 'カードの内容を変更しました。'
+        });
+        return;
+      })
+      .catch(async () => {
+        await setStatus({
+          open: true,
+          type: 'error',
+          message: 'カードの変更に失敗しました。'
+        });
+        return;
+      })
+      .finally(() => {
+        // スピナーoff
+        setProgress(false);
+        getCards(card);
+        return;
+      })
+    }
+
   // apiと通信して、カードを削除するロジック
   const deleteCard = async (id: number, card: any) => {
     // スピナーon
@@ -86,6 +131,7 @@ export const ApiCardsContextProvider: React.FC = (props) => {
       cardsState,
       setCardsState,
       getCards,
+      updateCard,
       deleteCard
       }}
     >
