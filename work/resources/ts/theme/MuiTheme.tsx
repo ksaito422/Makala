@@ -21,6 +21,7 @@ export const MuiTheme = createMuiTheme({
         textTransform: `none`,
       },
     },
+    // ListItemTextの中央寄せを解除 ~use Board.tsx~
     MuiListItemText: {
       root: {
         flex: `none`,
