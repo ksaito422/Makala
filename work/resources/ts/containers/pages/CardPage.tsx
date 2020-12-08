@@ -15,7 +15,6 @@ import {
   Grid,
   useMediaQuery,
 } from '@material-ui/core';
-import { createNamespaceExportDeclaration } from 'typescript';
 
 type ItemType = {
   id: string;
@@ -94,9 +93,9 @@ export const CardPage = React.memo (() => {
                   deleteOnClick={(id) => {
                     deleteCard(id, card);
                   }}
-                  createOnSubmit={(data, id) => {
+                  createOnSubmit={(data) => {
                     const postData = {
-                      'board_id': id,
+                      'board_name': card,
                       'card_name': data.card_name,
                       'card_content': data.card_content
                     }
@@ -143,10 +142,15 @@ export const CardPage = React.memo (() => {
                       deleteCard(id);
                     }}
                     createOnSubmit={(data) => {
-                      console.log(data);
+                      const postData = {
+                        'board_name': card,
+                        'card_name': data.card_name,
+                        'card_content': data.card_content
+                      }
+                      createCard(card, postData);
                     }}
-                    updateOnSubmit={(data) => {
-                      console.log(data);
+                    updateOnSubmit={(data, id) => {
+                      updateCard(id, card, data);
                     }}
                   />
                 }

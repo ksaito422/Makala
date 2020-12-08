@@ -11,14 +11,14 @@ export const ApiCardsContextProvider: React.FC = (props) => {
   const [cardsState, setCardsState] = useState([]);
 
   // apiと通信して、カードを取得するロジック
-  const getCards = async (id: number) => {
+  const getCards = async (board_name: string) => {
     // スピナーon
     await setProgress(true);
     const token = localStorage.getItem('makala_token');
 
     await axios({
       method: 'GET',
-      url: `/api/v1/cards/${id}`,
+      url: `/api/v1/cards/${board_name}`,
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
@@ -47,7 +47,7 @@ export const ApiCardsContextProvider: React.FC = (props) => {
   const createCard = async (
     card: any,
     data: {
-      board_id: number,
+      board_name: string,
       card_name: string,
       card_content: string,
     }) => {

@@ -52,9 +52,9 @@ class CardControllerTest extends TestCase
         $url = route('card.store');
 
         $data = [
-            'board_id' => 1,
-            'title' => 'test',
-            'content' => 'test'
+            'board_name' => $this->board->board_name,
+            'card_name' => 'test',
+            'card_content' => 'test'
         ];
 
         // 認証外だと500エラーを返す つまりapiを利用できない
@@ -82,8 +82,8 @@ class CardControllerTest extends TestCase
         $url = route('card.update', ['card' => $this->card->id]);
 
         $data = [
-            'title' => 'title',
-            'content' => 'content'
+            'card_name' => 'title',
+            'card_content' => 'content'
         ];
 
         // 認証外だと500エラーを返す つまりapiを利用できない
