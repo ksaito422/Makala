@@ -47,7 +47,7 @@ export const ApiCardsContextProvider: React.FC = (props) => {
   const createCard = async (
     card: any,
     data: {
-      board_id: number,
+      board_name: string,
       card_name: string,
       card_content: string,
     }) => {
