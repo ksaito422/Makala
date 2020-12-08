@@ -60,8 +60,8 @@ class CardController extends Controller
     public function update(Request $request, $id)
     {
         $card = Card::find($id);
-        $card->title = $request->title;
-        $card->content = $request->content;
+        $card->title = $request->card_name;
+        $card->content = $request->card_content;
         $card->save();
         return response()->json([
             'message' => 'カードの内容を変更しました。'
