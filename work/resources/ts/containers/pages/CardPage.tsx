@@ -91,7 +91,7 @@ export const CardPage = React.memo (() => {
                   items={cardsState}
                   onDragEnd={onDragEnd}
                   deleteOnClick={(id) => {
-                    deleteCard(id);
+                    deleteCard(id, card);
                   }}
                 />
               </Container>

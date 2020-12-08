@@ -44,7 +44,7 @@ export const ApiCardsContextProvider: React.FC = (props) => {
   }
 
   // apiと通信して、カードを削除するロジック
-  const deleteCard = async (id: number) => {
+  const deleteCard = async (id: number, card: any) => {
     // スピナーon
     await setProgress(true);
     const token = localStorage.getItem('makala_token');
@@ -58,7 +58,6 @@ export const ApiCardsContextProvider: React.FC = (props) => {
       }
     })
     .then(async () => {
-      await getCards(1);
       await setStatus({
         open: true,
         type: 'success',
@@ -67,7 +66,6 @@ export const ApiCardsContextProvider: React.FC = (props) => {
       return;
     })
     .catch(async () => {
-      await getCards(1);
       await setStatus({
         open: true,
         type: 'error',
@@ -78,6 +76,7 @@ export const ApiCardsContextProvider: React.FC = (props) => {
     .finally(() => {
       // スピナーoff
       setProgress(false);
+      getCards(card);
       return;
     })
   }
