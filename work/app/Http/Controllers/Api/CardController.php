@@ -42,8 +42,8 @@ class CardController extends Controller
     {
         $cards = new Card();
         $cards->board_id = $request->board_id;
-        $cards->title = $request->title;
-        $cards->content = $request->content;
+        $cards->title = $request->card_name;
+        $cards->content = $request->card_content;
         $cards->save();
         return response()->json([
             'message' => '新しいカードを作成しました。'
