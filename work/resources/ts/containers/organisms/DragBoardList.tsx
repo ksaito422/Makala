@@ -11,7 +11,7 @@ import { ApiCardsContext } from '../../contexts/childContexts/ApiCardsContext';
 type BoardListProps = {
   items?: any,
   onDragEnd: any,
-  createOnSubmit: (data: {[x: string]: any;}, id: number) => void,
+  createOnSubmit: (data: {[x: string]: any;}) => void,
   updateOnSubmit: (data: {[x: string]: any;}, id: number) => void,
   deleteOnClick: (id?: string) => void,
 }
@@ -39,7 +39,6 @@ export const DragBoardList = React.memo<BoardListProps> ((props) => {
     setModalOpenState(false);
     setCreateState(false);
     setModalValueState({
-      board_id: null,
       id: null,
       card_name: null,
       card_content: null
@@ -90,8 +89,6 @@ export const DragBoardList = React.memo<BoardListProps> ((props) => {
             setCreateState(true);
             setModalValueState({
               ...modalValueState,
-              // [0]をどうにかしたい...  あとでcard.storeのapi変えるかも？
-              board_id: props.items[0].board_id,
               id: String(cardsState.numberMade),
             });
           }}
@@ -109,7 +106,7 @@ export const DragBoardList = React.memo<BoardListProps> ((props) => {
           postOnSubmit={(data) => {
             createState ? (
               modalClose(),
-              props.createOnSubmit(data, modalValueState.board_id)
+              props.createOnSubmit(data)
             ) : (
               modalClose(),
               props.updateOnSubmit(data, modalValueState.id)
