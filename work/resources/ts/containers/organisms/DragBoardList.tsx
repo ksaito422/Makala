@@ -4,6 +4,7 @@ import { DragBoardItem } from '../../components/molecules/DragBoardItem';
 import { AddIcon } from '../../components/atoms/AddIcon';
 import { ModalWindow } from '../../components/molecules/ModalWindow';
 import { ModalCard } from '../../components/molecules/ModalCard';
+import { ModalPropsContext } from '../../contexts/childContexts/ModalPropsContext';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import { ApiCardsContext } from '../../contexts/childContexts/ApiCardsContext';
 
@@ -18,34 +19,30 @@ export const DragBoardList = React.memo<BoardListProps> (({
   onDragEnd,
   deleteOnClick,
 }) => {
-  // classNameのインポート
+  /**
+   * cssの定義
+   * dragBoardItemのレンダーするデータを読み取り
+   * { モーダルに渡す表示内容 表示のon/off切り替え }
+   */
   const { useStyles } = useContext<any>(StylesContext);
-  const classes = useStyles()
-
-  // dragBoardItemのレンダーするデータを読み取り
+  const classes = useStyles();
   const { cardsState, setCardsState } = useContext<any>(ApiCardsContext);
+  const {
+    modalValueState,
+    setModalValueState,
+    modalOpenState,
+    setModalOpenState
+  } = useContext<any>(ModalPropsContext);
 
-  // モーダルに渡す表示内容
-  const [modalValueState, setmodalValueState] = useState<any>({
-    id: null,
-    title: null,
-    content: null
-  });
-
-  // モーダル表示のon/off切り替え
-  const [modalOpenState, setModalOpenState] = useState<boolean>(false);
   // モーダルを閉じるとき、入力値をクリア
   const modalClose = () => {
     setModalOpenState(false);
-    setmodalValueState({
+    setModalValueState({
       id: null,
-      title: null,
-      content: null
+      card_name: null,
+      card_content: null
     });
   };
-
-  // 正規表現でフォームの空欄不可にする
-const regularExpressions = /^.+/;
 
   return (
     <>
@@ -67,11 +64,11 @@ const regularExpressions = /^.+/;
                   key={item.id}
                   openOnClick={() => {
                     setModalOpenState(true);
-                    setmodalValueState({
+                    setModalValueState({
                       ...modalValueState,
                       id: item.id,
-                      title: item.title,
-                      content: item.content,
+                      card_name: item.title,
+                      card_content: item.content,
                     })
                   }}
                   deleteOnClick={() => {
@@ -89,7 +86,7 @@ const regularExpressions = /^.+/;
           onClick={() => {
             // 重複してるため、後で一箇所にまとめる setModalOpenState(true);
             setModalOpenState(true);
-            setmodalValueState({
+            setModalValueState({
               ...modalValueState,
               id: String(cardsState.numberMade),
             });
@@ -101,25 +98,10 @@ const regularExpressions = /^.+/;
         modalOnClose={modalClose}
       >
         <ModalCard
-          // errorTitle={regularExpressions.test(modalValueState.title) ? false : true}
-          // helperTextTitle={
-          //   regularExpressions.test(modalValueState.title) ? undefined : 'タイトルを入力してください'
-          // }
-          // errorContent={regularExpressions.test(modalValueState.content) ? false : true}
-          // helperTextContent={
-          //   regularExpressions.test(modalValueState.content) ? undefined : '内容を入力してください'
-          // }
-          // modalOpen={modalOpenState}
           modalOnClose={modalClose}
           // 押したボタンの番号によって、表示内容を変える
-          defaultValueTitle={modalValueState.title}
-          defaultValueContent={modalValueState.content}
-          // titleOnChange={(e) => {
-          //   setmodalValueState({ ...modalValueState, title: e.target.value })
-          // }}
-          // contentOnChange={(e) => {
-          //   setmodalValueState({ ...modalValueState, content: e.target.value })
-          // }}
+          defaultValueTitle={modalValueState.card_name}
+          defaultValueContent={modalValueState.card_content}
           postOnClick={() => {
             /** 今のBoardItemの配列を受け取り、更新部分だけ新しい値に入れ替える
               * updateなら既存のindexに格納
@@ -138,10 +120,6 @@ const regularExpressions = /^.+/;
             )
             modalClose();
           }}
-          // disabled={
-          //   // クソコードだから整理したい
-          //   modalValueState.title === null || modalValueState.content === null ? (true) : (
-          //   regularExpressions.test(modalValueState.title) && regularExpressions.test(modalValueState.content) ? (false) : (true))}
         />
       </ModalWindow>
     </>
