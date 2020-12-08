@@ -15,7 +15,7 @@ export const Button: React.FC<Props> = (props) => {
   return (
     <MuiButton
       variant='contained'
-      color='secondary'
+      color='primary'
       disabled={props.disabled}
       fullWidth={props.fullWidth}
       onClick={props.onClick}

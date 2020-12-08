@@ -24,6 +24,7 @@ type Props = {
 export const TextForm: React.FC<Props> = (props) => {
   return (
     <TextField
+      color='secondary'
       error={props.error}
       helperText={props.helperText}
       multiline={props.multiline}

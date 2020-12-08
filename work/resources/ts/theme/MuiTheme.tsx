@@ -1,8 +1,8 @@
 import { createMuiTheme } from '@material-ui/core';
 import { deepPurple, yellow } from '@material-ui/core/colors';
 
-// ページ全体で使うテーマカラーの定義
 export const MuiTheme = createMuiTheme({
+  // ページ全体で使うテーマカラーの定義
   palette: {
     primary: {
       light: yellow[100],

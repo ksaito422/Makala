@@ -16,7 +16,7 @@ export const Spinner: React.FC<Props> = (props) => {
   return (
     <>
       <Backdrop open={props.open} className={classes.Spinner}>
-        <CircularProgress color='secondary' />
+        <CircularProgress color='primary' />
       </Backdrop>
     </>
   );

@@ -28,7 +28,7 @@ export const Header: React.FC = () => {
 
   return (
     <>
-      <AppBar color='primary' position='sticky'>
+      <AppBar color='secondary' position='sticky'>
         <Toolbar>
           <Grid container spacing={2}>
             <Grid item xs={11}>
