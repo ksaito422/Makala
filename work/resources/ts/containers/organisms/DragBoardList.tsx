@@ -99,24 +99,6 @@ export const DragBoardList = React.memo<BoardListProps> ((props) => {
           // 押したボタンの番号によって、表示内容を変える
           defaultValueTitle={modalValueState.card_name}
           defaultValueContent={modalValueState.card_content}
-          // postOnClick={() => {
-          //   /** 今のBoardItemの配列を受け取り、更新部分だけ新しい値に入れ替える
-          //     * updateなら既存のindexに格納
-          //     * addならnewBoardItemState.items.lengthで最後の位置に格納
-          //     * indexNumberに格納位置のindexを入れる
-          //   */
-          //   const newBoardItemState = { ...cardsState };
-          //   const searchIndex = newBoardItemState.items.findIndex(({id}: any) => id == modalValueState.id)
-          //   const indexNumber = searchIndex > -1 ? searchIndex : newBoardItemState.items.length;
-          //   newBoardItemState.items[indexNumber] = modalValueState;
-          //   setCardsState(
-          //     newBoardItemState,
-          //   );
-          //   setCardsState(
-          //     { ...cardsState, numberMade: cardsState.numberMade + 1 }
-          //   )
-          //   modalClose();
-          // }}
           postOnSubmit={(data) => {
             modalClose(),
             props.updateOnSubmit(data, modalValueState.id);
@@ -124,5 +106,5 @@ export const DragBoardList = React.memo<BoardListProps> ((props) => {
         />
       </ModalWindow>
     </>
-  )
+  );
 });
