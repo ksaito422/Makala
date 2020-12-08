@@ -42,8 +42,8 @@ class CardController extends Controller
     {
         $cards = new Card();
         $cards->board_id = $request->board_id;
-        $cards->title = $request->title;
-        $cards->content = $request->content;
+        $cards->title = $request->card_name;
+        $cards->content = $request->card_content;
         $cards->save();
         return response()->json([
             'message' => '新しいカードを作成しました。'
@@ -60,8 +60,8 @@ class CardController extends Controller
     public function update(Request $request, $id)
     {
         $card = Card::find($id);
-        $card->title = $request->title;
-        $card->content = $request->content;
+        $card->title = $request->card_name;
+        $card->content = $request->card_content;
         $card->save();
         return response()->json([
             'message' => 'カードの内容を変更しました。'

@@ -43,8 +43,96 @@ export const ApiCardsContextProvider: React.FC = (props) => {
     })
   }
 
+  // apiと通信して、カードを新規作成するロジック
+  const createCard = async (
+    card: any,
+    data: {
+      board_id: number,
+      card_name: string,
+      card_content: string,
+    }) => {
+      await setProgress(true);
+      const token = localStorage.getItem('makala_token');
+
+      await axios({
+        method: 'POST',
+        url: `/api/v1/cards`,
+        data: data,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+      })
+      .then((res) => {
+        setStatus({
+          open: true,
+          type: 'success',
+          message: res.data.message
+        });
+        return;
+      })
+      .catch(() => {
+        setStatus({
+          open: true,
+          type: 'error',
+          message: 'カードの作成に失敗しました。'
+        });
+        return;
+      })
+      .finally(() => {
+        setProgress(false);
+        getCards(card);
+        return;
+      })
+    }
+
+  // apiと通信して、カードを更新するロジック
+  const updateCard = async (
+    id: number,
+    card: any,
+    data: {
+      card_name: string,
+      card_content: string,
+    }) => {
+      // スピナーon
+      await setProgress(true);
+      const token = localStorage.getItem('makala_token');
+
+      await axios({
+        method: 'PUT',
+        url: `/api/v1/cards/${id}`,
+        data: data,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+      })
+      .then(() => {
+        setStatus({
+          open: true,
+          type: 'success',
+          message: 'カードの内容を変更しました。'
+        });
+        return;
+      })
+      .catch(async () => {
+        await setStatus({
+          open: true,
+          type: 'error',
+          message: 'カードの変更に失敗しました。'
+        });
+        return;
+      })
+      .finally(() => {
+        // スピナーoff
+        setProgress(false);
+        getCards(card);
+        return;
+      })
+    }
+
   // apiと通信して、カードを削除するロジック
-  const deleteCard = async (id: number) => {
+  const deleteCard = async (id: number, card: any) => {
     // スピナーon
     await setProgress(true);
     const token = localStorage.getItem('makala_token');
@@ -58,7 +146,6 @@ export const ApiCardsContextProvider: React.FC = (props) => {
       }
     })
     .then(async () => {
-      await getCards(1);
       await setStatus({
         open: true,
         type: 'success',
@@ -67,7 +154,6 @@ export const ApiCardsContextProvider: React.FC = (props) => {
       return;
     })
     .catch(async () => {
-      await getCards(1);
       await setStatus({
         open: true,
         type: 'error',
@@ -78,6 +164,7 @@ export const ApiCardsContextProvider: React.FC = (props) => {
     .finally(() => {
       // スピナーoff
       setProgress(false);
+      getCards(card);
       return;
     })
   }
@@ -87,6 +174,8 @@ export const ApiCardsContextProvider: React.FC = (props) => {
       cardsState,
       setCardsState,
       getCards,
+      createCard,
+      updateCard,
       deleteCard
       }}
     >

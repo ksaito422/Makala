@@ -4,56 +4,55 @@ import { DragBoardItem } from '../../components/molecules/DragBoardItem';
 import { AddIcon } from '../../components/atoms/AddIcon';
 import { ModalWindow } from '../../components/molecules/ModalWindow';
 import { ModalCard } from '../../components/molecules/ModalCard';
+import { ModalPropsContext } from '../../contexts/childContexts/ModalPropsContext';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import { ApiCardsContext } from '../../contexts/childContexts/ApiCardsContext';
 
 type BoardListProps = {
   items?: any,
   onDragEnd: any,
+  createOnSubmit: (data: {[x: string]: any;}, id: number) => void,
+  updateOnSubmit: (data: {[x: string]: any;}, id: number) => void,
   deleteOnClick: (id?: string) => void,
 }
 
-export const DragBoardList = React.memo<BoardListProps> (({
-  items,
-  onDragEnd,
-  deleteOnClick,
-}) => {
-  // classNameのインポート
+export const DragBoardList = React.memo<BoardListProps> ((props) => {
+  /**
+   * cssの定義
+   * dragBoardItemのレンダーするデータを読み取り
+   * { モーダルに渡す表示内容 表示のon/off切り替え }
+   * 新規作成か更新か判別するstate
+   */
   const { useStyles } = useContext<any>(StylesContext);
-  const classes = useStyles()
-
-  // dragBoardItemのレンダーするデータを読み取り
+  const classes = useStyles();
   const { cardsState, setCardsState } = useContext<any>(ApiCardsContext);
+  const {
+    modalValueState,
+    setModalValueState,
+    modalOpenState,
+    setModalOpenState
+  } = useContext<any>(ModalPropsContext);
+  const [createState, setCreateState] = useState<boolean>(false);
 
-  // モーダルに渡す表示内容
-  const [modalValueState, setmodalValueState] = useState<any>({
-    id: null,
-    title: null,
-    content: null
-  });
-
-  // モーダル表示のon/off切り替え
-  const [modalOpenState, setModalOpenState] = useState<boolean>(false);
   // モーダルを閉じるとき、入力値をクリア
   const modalClose = () => {
     setModalOpenState(false);
-    setmodalValueState({
+    setCreateState(false);
+    setModalValueState({
+      board_id: null,
       id: null,
-      title: null,
-      content: null
+      card_name: null,
+      card_content: null
     });
   };
 
-  // 正規表現でフォームの空欄不可にする
-const regularExpressions = /^.+/;
-
   return (
     <>
-      <DragDropContext onDragEnd={onDragEnd}>
+      <DragDropContext onDragEnd={props.onDragEnd}>
         <Droppable droppableId="list">
           {provided => (
             <div ref={provided.innerRef} className={classes.drop_able}>
-              {items.map((
+              {props.items.map((
                 item: {
                   id: string,
                   title: string,
@@ -67,15 +66,15 @@ const regularExpressions = /^.+/;
                   key={item.id}
                   openOnClick={() => {
                     setModalOpenState(true);
-                    setmodalValueState({
+                    setModalValueState({
                       ...modalValueState,
                       id: item.id,
-                      title: item.title,
-                      content: item.content,
+                      card_name: item.title,
+                      card_content: item.content,
                     })
                   }}
                   deleteOnClick={() => {
-                    deleteOnClick(item.id);
+                    props.deleteOnClick(item.id);
                   }}
                 />
               ))}
@@ -87,10 +86,12 @@ const regularExpressions = /^.+/;
       <div className={classes.centerPlacement}>
         <AddIcon
           onClick={() => {
-            // 重複してるため、後で一箇所にまとめる setModalOpenState(true);
             setModalOpenState(true);
-            setmodalValueState({
+            setCreateState(true);
+            setModalValueState({
               ...modalValueState,
+              // [0]をどうにかしたい...  あとでcard.storeのapi変えるかも？
+              board_id: props.items[0].board_id,
               id: String(cardsState.numberMade),
             });
           }}
@@ -101,49 +102,21 @@ const regularExpressions = /^.+/;
         modalOnClose={modalClose}
       >
         <ModalCard
-          errorTitle={regularExpressions.test(modalValueState.title) ? false : true}
-          helperTextTitle={
-            regularExpressions.test(modalValueState.title) ? undefined : 'タイトルを入力してください'
-          }
-          errorContent={regularExpressions.test(modalValueState.content) ? false : true}
-          helperTextContent={
-            regularExpressions.test(modalValueState.content) ? undefined : '内容を入力してください'
-          }
-          modalOpen={modalOpenState}
           modalOnClose={modalClose}
           // 押したボタンの番号によって、表示内容を変える
-          defaultValueTitle={modalValueState.title}
-          defaultValueContent={modalValueState.content}
-          titleOnChange={(e) => {
-            setmodalValueState({ ...modalValueState, title: e.target.value })
-          }}
-          contentOnChange={(e) => {
-            setmodalValueState({ ...modalValueState, content: e.target.value })
-          }}
-          postOnClick={() => {
-            /** 今のBoardItemの配列を受け取り、更新部分だけ新しい値に入れ替える
-              * updateなら既存のindexに格納
-              * addならnewBoardItemState.items.lengthで最後の位置に格納
-              * indexNumberに格納位置のindexを入れる
-            */
-            const newBoardItemState = { ...cardsState };
-            const searchIndex = newBoardItemState.items.findIndex(({id}: any) => id == modalValueState.id)
-            const indexNumber = searchIndex > -1 ? searchIndex : newBoardItemState.items.length;
-            newBoardItemState.items[indexNumber] = modalValueState;
-            setCardsState(
-              newBoardItemState,
+          defaultValueTitle={modalValueState.card_name}
+          defaultValueContent={modalValueState.card_content}
+          postOnSubmit={(data) => {
+            createState ? (
+              modalClose(),
+              props.createOnSubmit(data, modalValueState.board_id)
+            ) : (
+              modalClose(),
+              props.updateOnSubmit(data, modalValueState.id)
             );
-            setCardsState(
-              { ...cardsState, numberMade: cardsState.numberMade + 1 }
-            )
-            modalClose();
           }}
-          disabled={
-            // クソコードだから整理したい
-            modalValueState.title === null || modalValueState.content === null ? (true) : (
-            regularExpressions.test(modalValueState.title) && regularExpressions.test(modalValueState.content) ? (false) : (true))}
         />
       </ModalWindow>
     </>
-  )
+  );
 });
