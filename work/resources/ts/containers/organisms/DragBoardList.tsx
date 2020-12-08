@@ -14,11 +14,7 @@ type BoardListProps = {
   deleteOnClick: (id?: string) => void,
 }
 
-export const DragBoardList = React.memo<BoardListProps> (({
-  items,
-  onDragEnd,
-  deleteOnClick,
-}) => {
+export const DragBoardList = React.memo<BoardListProps> ((props) => {
   /**
    * cssの定義
    * dragBoardItemのレンダーするデータを読み取り
@@ -46,11 +42,11 @@ export const DragBoardList = React.memo<BoardListProps> (({
 
   return (
     <>
-      <DragDropContext onDragEnd={onDragEnd}>
+      <DragDropContext onDragEnd={props.onDragEnd}>
         <Droppable droppableId="list">
           {provided => (
             <div ref={provided.innerRef} className={classes.drop_able}>
-              {items.map((
+              {props.items.map((
                 item: {
                   id: string,
                   title: string,
@@ -72,7 +68,7 @@ export const DragBoardList = React.memo<BoardListProps> (({
                     })
                   }}
                   deleteOnClick={() => {
-                    deleteOnClick(item.id);
+                    props.deleteOnClick(item.id);
                   }}
                 />
               ))}
