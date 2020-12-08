@@ -43,6 +43,49 @@ export const ApiCardsContextProvider: React.FC = (props) => {
     })
   }
 
+  // apiと通信して、カードを新規作成するロジック
+  const createCard = async (
+    card: any,
+    data: {
+      board_id: number,
+      card_name: string,
+      card_content: string,
+    }) => {
+      await setProgress(true);
+      const token = localStorage.getItem('makala_token');
+
+      await axios({
+        method: 'POST',
+        url: `/api/v1/cards`,
+        data: data,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+      })
+      .then((res) => {
+        setStatus({
+          open: true,
+          type: 'success',
+          message: res.data.message
+        });
+        return;
+      })
+      .catch(() => {
+        setStatus({
+          open: true,
+          type: 'error',
+          message: 'カードの作成に失敗しました。'
+        });
+        return;
+      })
+      .finally(() => {
+        setProgress(false);
+        getCards(card);
+        return;
+      })
+    }
+
   // apiと通信して、カードを更新するロジック
   const updateCard = async (
     id: number,
@@ -131,6 +174,7 @@ export const ApiCardsContextProvider: React.FC = (props) => {
       cardsState,
       setCardsState,
       getCards,
+      createCard,
       updateCard,
       deleteCard
       }}

@@ -15,6 +15,7 @@ import {
   Grid,
   useMediaQuery,
 } from '@material-ui/core';
+import { createNamespaceExportDeclaration } from 'typescript';
 
 type ItemType = {
   id: string;
@@ -44,7 +45,7 @@ export const CardPage = React.memo (() => {
   const { progress, status, setStatus } = useContext<any>(FeedbackContext);
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
-  const { cardsState, getCards, setCardsState, updateCard, deleteCard } = useContext<any>(ApiCardsContext);
+  const { cardsState, getCards, setCardsState, createCard, updateCard, deleteCard } = useContext<any>(ApiCardsContext);
   const matches = useMediaQuery('(min-width: 1025px)');
   const { card } = useParams<any>();
 
@@ -93,6 +94,14 @@ export const CardPage = React.memo (() => {
                   deleteOnClick={(id) => {
                     deleteCard(id, card);
                   }}
+                  createOnSubmit={(data, id) => {
+                    const postData = {
+                      'board_id': id,
+                      'card_name': data.card_name,
+                      'card_content': data.card_content
+                    }
+                    createCard(card, postData);
+                  }}
                   updateOnSubmit={(data, id) => {
                     updateCard(id, card, data);
                   }}
@@ -132,6 +141,9 @@ export const CardPage = React.memo (() => {
                     onDragEnd={onDragEnd}
                     deleteOnClick={(id) => {
                       deleteCard(id);
+                    }}
+                    createOnSubmit={(data) => {
+                      console.log(data);
                     }}
                     updateOnSubmit={(data) => {
                       console.log(data);

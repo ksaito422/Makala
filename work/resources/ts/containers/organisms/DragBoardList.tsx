@@ -11,6 +11,7 @@ import { ApiCardsContext } from '../../contexts/childContexts/ApiCardsContext';
 type BoardListProps = {
   items?: any,
   onDragEnd: any,
+  createOnSubmit: (data: {[x: string]: any;}, id: number) => void,
   updateOnSubmit: (data: {[x: string]: any;}, id: number) => void,
   deleteOnClick: (id?: string) => void,
 }
@@ -20,6 +21,7 @@ export const DragBoardList = React.memo<BoardListProps> ((props) => {
    * cssの定義
    * dragBoardItemのレンダーするデータを読み取り
    * { モーダルに渡す表示内容 表示のon/off切り替え }
+   * 新規作成か更新か判別するstate
    */
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
@@ -30,11 +32,14 @@ export const DragBoardList = React.memo<BoardListProps> ((props) => {
     modalOpenState,
     setModalOpenState
   } = useContext<any>(ModalPropsContext);
+  const [createState, setCreateState] = useState<boolean>(false);
 
   // モーダルを閉じるとき、入力値をクリア
   const modalClose = () => {
     setModalOpenState(false);
+    setCreateState(false);
     setModalValueState({
+      board_id: null,
       id: null,
       card_name: null,
       card_content: null
@@ -81,10 +86,12 @@ export const DragBoardList = React.memo<BoardListProps> ((props) => {
       <div className={classes.centerPlacement}>
         <AddIcon
           onClick={() => {
-            // 重複してるため、後で一箇所にまとめる setModalOpenState(true);
             setModalOpenState(true);
+            setCreateState(true);
             setModalValueState({
               ...modalValueState,
+              // [0]をどうにかしたい...  あとでcard.storeのapi変えるかも？
+              board_id: props.items[0].board_id,
               id: String(cardsState.numberMade),
             });
           }}
@@ -100,8 +107,13 @@ export const DragBoardList = React.memo<BoardListProps> ((props) => {
           defaultValueTitle={modalValueState.card_name}
           defaultValueContent={modalValueState.card_content}
           postOnSubmit={(data) => {
-            modalClose(),
-            props.updateOnSubmit(data, modalValueState.id);
+            createState ? (
+              modalClose(),
+              props.createOnSubmit(data, modalValueState.board_id)
+            ) : (
+              modalClose(),
+              props.updateOnSubmit(data, modalValueState.id)
+            );
           }}
         />
       </ModalWindow>
