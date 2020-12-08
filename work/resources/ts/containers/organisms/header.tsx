@@ -32,7 +32,7 @@ export const Header: React.FC = () => {
         <Toolbar>
           <Grid container spacing={2}>
             <Grid item xs={11}>
-              <Title title='makala' />
+              <Title />
             </Grid>
             <Grid item xs={1}>
               {isAuth ? (

@@ -1,8 +1,11 @@
 import React, { useContext } from 'react';
 import MarkdownPreview from '@uiw/react-markdown-preview';
-import { StylesContext } from '../../contexts/childContexts/StylesContext';
-import { Paper } from '@material-ui/core';
 import { DownloadIcon } from '../../components/atoms/DownloadIcon';
+import { StylesContext } from '../../contexts/childContexts/StylesContext';
+import {
+  Container,
+  Paper
+} from '@material-ui/core';
 
 type Props = {
   items: [
@@ -15,7 +18,7 @@ type Props = {
 }
 
 export const Preview: React.FC<Props> = (props) => {
-  // classNameのインポート
+  // cssの定義
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
 
@@ -32,19 +35,21 @@ export const Preview: React.FC<Props> = (props) => {
     const element = document.createElement("a");
     const file = new Blob([previewText], {type: 'text/plain'});
     element.href = URL.createObjectURL(file);
-    element.download = "myFile.md";
+    element.download = "makala.md";
     document.body.appendChild(element); // Required for this to work in FireFox
     element.click();
   }
 
   return (
     <>
-      <Paper elevation={3} className={classes.preview}>
-        <MarkdownPreview source={previewText} />
-      </ Paper>
-      <DownloadIcon
-        onClick={downloadFile}
-      />
+      <Container maxWidth='lg'>
+        <Paper elevation={3} className={classes.preview}>
+          <MarkdownPreview source={previewText} />
+        </ Paper>
+        <div className={classes.centerPlacement}>
+          <DownloadIcon onClick={downloadFile} />
+        </div>
+      </Container>
     </>
   );
 }
