@@ -34,20 +34,21 @@ const reorder = (
 };
 
 export const CardPage = React.memo (() => {
-  // スピナー、api通信の結果通知の状態管理
+  /**
+   * { スピナー, api通信の結果通知の状態管理 }
+   * cssの定義
+   * dragItemのデータ 表示する内容のstateをShowCardsContextから読み取る
+   * iPad Pro(1024px) < PC(1025px以上)を基準にレスポンシブ対応
+   * ボード名をURLパラメータから取得
+   */
   const { progress, status, setStatus } = useContext<any>(FeedbackContext);
-  // classNameのインポート
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
-
-  // iPad Pro(1024px) < PC(1025px以上)を基準にレスポンシブ対応
-  const matches = useMediaQuery('(min-width: 1025px)');
-
-  // dragItemのデータ 表示する内容のstateをShowCardsContextから読み取る
   const { cardsState, getCards, setCardsState, deleteCard } = useContext<any>(ApiCardsContext);
-
+  const matches = useMediaQuery('(min-width: 1025px)');
   const { card } = useParams<any>();
 
+  // 最初のレンダー時にボードと関連のあるカードを取得する
   useEffect(() => {
     getCards(card);
   }, []);
@@ -78,15 +79,6 @@ export const CardPage = React.memo (() => {
 
   return (
     <>
-      <Spinner open={progress} />
-      <Notice
-        open={status.open}
-        type={status.type}
-        message={status.message}
-        onClose={() => {
-          setStatus({ ...status, open: false });
-        }}
-      />
       <CssBaseline />
       <Header />
       <Container maxWidth='xl' className={classes.main_container}>
@@ -151,6 +143,16 @@ export const CardPage = React.memo (() => {
           </Container>
         )}
       </Container>
+
+      <Spinner open={progress} />
+      <Notice
+        open={status.open}
+        type={status.type}
+        message={status.message}
+        onClose={() => {
+          setStatus({ ...status, open: false });
+        }}
+      />
     </>
   )
 })
