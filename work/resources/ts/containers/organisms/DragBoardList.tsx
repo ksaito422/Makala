@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import { DragBoardItem } from '../../components/molecules/DragBoardItem';
+import { DragCard } from '../../components/molecules/DragCard';
 import { AddIcon } from '../../components/atoms/AddIcon';
 import { ModalWindow } from '../../components/molecules/ModalWindow';
 import { ModalCard } from '../../components/molecules/ModalCard';
@@ -59,7 +59,7 @@ export const DragBoardList = React.memo<BoardListProps> ((props) => {
                 },
                 index: number
                 ) => (
-                <DragBoardItem
+                <DragCard
                   item={item}
                   index={index}
                   key={item.id}
