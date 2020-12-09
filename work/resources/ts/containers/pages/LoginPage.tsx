@@ -13,15 +13,16 @@ import {
 } from '@material-ui/core';
 
 export const LoginPage: React.FC = () => {
-  /** Login api import
+  /**
    * api通信中のスピナー表示のon/off管理
    * cssの定義
+   * Login api import
    * react-router-dom URLルーティングに使う
    */
-  const { authLogin } = useContext<any>(AuthContext);
   const { progress, status, setStatus } = useContext<any>(FeedbackContext);
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
+  const { authLogin } = useContext<any>(AuthContext);
   const history = useHistory();
 
   return (
