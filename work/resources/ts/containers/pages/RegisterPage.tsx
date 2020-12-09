@@ -13,15 +13,16 @@ import {
 } from '@material-ui/core';
 
 export const RegisterPage: React.FC = () => {
-  /** Register api import
+  /**
    * api通信中のスピナー表示のon/off管理
    * cssの定義
+   * Register api import
    * react-router-dom URLルーティングに使う
    */
-  const { authRegister } = useContext<any>(AuthContext);
   const { progress, status, setStatus } = useContext<any>(FeedbackContext);
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
+  const { authRegister } = useContext<any>(AuthContext);
   const history = useHistory();
 
   return (
