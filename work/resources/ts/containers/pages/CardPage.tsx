@@ -37,14 +37,21 @@ export const CardPage = React.memo (() => {
   /**
    * { スピナー, api通信の結果通知の状態管理 }
    * cssの定義
-   * dragItemのデータ 表示する内容のstateをShowCardsContextから読み取る
+   * Cards api import
    * iPad Pro(1024px) < PC(1025px以上)を基準にレスポンシブ対応
    * ボード名をURLパラメータから取得
    */
   const { progress, status, setStatus } = useContext<any>(FeedbackContext);
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
-  const { cardsState, getCards, setCardsState, createCard, updateCard, deleteCard } = useContext<any>(ApiCardsContext);
+  const {
+    cardsState,
+    getCards,
+    setCardsState,
+    createCard,
+    updateCard,
+    deleteCard
+  } = useContext<any>(ApiCardsContext);
   const matches = useMediaQuery('(min-width: 1025px)');
   const { card } = useParams<any>();
 
@@ -109,9 +116,7 @@ export const CardPage = React.memo (() => {
             </Grid>
             <Grid item xs={6}>
               <Container maxWidth='xl'>
-                <Preview
-                  items={cardsState}
-                />
+                <Preview items={cardsState} />
               </Container>
             </Grid>
           </Grid>
@@ -156,9 +161,7 @@ export const CardPage = React.memo (() => {
                 }
                 {/* previewOnClickでプレビュー表示したら */}
                 {previewState.preview &&
-                  <Preview
-                    items={cardsState}
-                  />
+                  <Preview items={cardsState} />
                 }
               </Grid>
             </Grid>
@@ -176,5 +179,5 @@ export const CardPage = React.memo (() => {
         }}
       />
     </>
-  )
+  );
 })
