@@ -78,8 +78,11 @@ export const StylesContextProvider: React.FC = props => {
       textDecoration: `none`,
       color: theme.palette.primary.main,
     },
+    // cardのスタイル
+    Card: {
+      justifyContent: 'left'
+    },
   }));
-
   return (
     <StylesContext.Provider value={{useStyles}}>
       {props.children}

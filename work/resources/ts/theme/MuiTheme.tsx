@@ -16,10 +16,21 @@ export const MuiTheme = createMuiTheme({
     },
   },
   overrides: {
+    // Buttonタグ内のテキストを入力したままの状態で表示する
+    MuiButton: {
+      root: {
+        textTransform: `none`,
+      }
+    },
     // ListItemTextの中央寄せを解除 ~use Board.tsx~
     MuiListItemText: {
       root: {
         flex: `none`,
+      }
+    },
+    MuiAppBar: {
+      root: {
+        zIndex: 10,
       }
     }
   }
