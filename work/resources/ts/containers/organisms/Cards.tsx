@@ -8,7 +8,7 @@ import { ModalPropsContext } from '../../contexts/childContexts/ModalPropsContex
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import { ApiCardsContext } from '../../contexts/childContexts/ApiCardsContext';
 
-type BoardListProps = {
+type Props = {
   items?: any,
   onDragEnd: any,
   createOnSubmit: (data: {[x: string]: any;}) => void,
@@ -16,7 +16,7 @@ type BoardListProps = {
   deleteOnClick: (id?: string) => void,
 }
 
-export const Cards = React.memo<BoardListProps> ((props) => {
+export const Cards = React.memo<Props> ((props) => {
   /**
    * cssの定義
    * dragBoardItemのレンダーするデータを読み取り
@@ -25,7 +25,7 @@ export const Cards = React.memo<BoardListProps> ((props) => {
    */
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
-  const { cardsState, setCardsState } = useContext<any>(ApiCardsContext);
+  const { cardsState } = useContext<any>(ApiCardsContext);
   const {
     modalValueState,
     setModalValueState,
@@ -83,21 +83,17 @@ export const Cards = React.memo<BoardListProps> ((props) => {
         </Droppable>
       </DragDropContext>
       <div className={classes.centerPlacement}>
-        <AddIcon
-          onClick={() => {
-            setModalOpenState(true);
-            setCreateState(true);
-            setModalValueState({
-              ...modalValueState,
-              id: String(cardsState.numberMade),
-            });
-          }}
+        <AddIcon onClick={() => {
+          setModalOpenState(true);
+          setCreateState(true);
+          setModalValueState({
+            ...modalValueState,
+            id: String(cardsState.numberMade),
+          });
+        }}
         />
       </div>
-      <ModalWindow
-        modalOpen={modalOpenState}
-        modalOnClose={modalClose}
-      >
+      <ModalWindow modalOpen={modalOpenState} modalOnClose={modalClose}>
         <ModalCard
           modalOnClose={modalClose}
           // 押したボタンの番号によって、表示内容を変える
