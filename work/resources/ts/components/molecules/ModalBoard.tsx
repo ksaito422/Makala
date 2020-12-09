@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { TextForm } from '../atoms/TextForm';
 import { CloseIcon } from '../atoms/CloseIcon';
-import { UpdateIcon } from '../atoms/UpdateIcon';
+import { SubmitIcon } from '../atoms/SubmitIcon';
 import { AuthContext } from '../../contexts/childContexts/AuthContext';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import { Grid } from '@material-ui/core';
@@ -56,7 +56,7 @@ export const ModalBoard: React.FC<Props> = (props) => {
             />
           </Grid>
           <Grid item xs={12} className={classes.centerPlacement}>
-            <UpdateIcon
+            <SubmitIcon
               type='submit'
             />
           </Grid>
