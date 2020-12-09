@@ -10,13 +10,14 @@ type Props = {
 }
 
 export const Spinner: React.FC<Props> = (props) => {
+  // cssの定義
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
 
   return (
     <>
       <Backdrop open={props.open} className={classes.Spinner}>
-        <CircularProgress color='secondary' />
+        <CircularProgress color='primary' />
       </Backdrop>
     </>
   );

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { TextForm } from '../atoms/TextForm';
 import { CloseIcon } from '../atoms/CloseIcon';
-import { UpdateIcon } from '../atoms/UpdateIcon';
+import { SubmitIcon } from '../atoms/SubmitIcon';
 import { AuthContext } from '../../contexts/childContexts/AuthContext';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import { Grid } from '@material-ui/core';
@@ -14,24 +14,24 @@ type Props = {
 }
 
 export const ModalBoard: React.FC<Props> = (props) => {
-  // cssの定義
-  // ログインユーザーの情報  { user_id: value, user_name: value }
-  // API import of react-hook-form
+  /**
+   * cssの定義
+   * ログインユーザーの情報  { user_id: value, user_name: value }
+   * 投稿データに渡す引数
+   * API import of react-hook-form
+   */
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
   const { authUserState } = useContext<any>(AuthContext);
-  const { register, handleSubmit, errors } = useForm();
-
   const user_id = authUserState.id;
+  const { register, handleSubmit, errors } = useForm();
 
   // モーダルに表示する内容の定義
   return (
     <>
       <Grid container spacing={4}>
         <Grid item xs={12} className={classes.rightPlacement}>
-          <CloseIcon
-            onClick={props.modalOnClose}
-          />
+          <CloseIcon onClick={props.modalOnClose} />
         </Grid>
         <form
           className={classes.form_board}
@@ -56,9 +56,7 @@ export const ModalBoard: React.FC<Props> = (props) => {
             />
           </Grid>
           <Grid item xs={12} className={classes.centerPlacement}>
-            <UpdateIcon
-              type='submit'
-            />
+            <SubmitIcon type='submit' />
           </Grid>
         </form>
       </Grid>

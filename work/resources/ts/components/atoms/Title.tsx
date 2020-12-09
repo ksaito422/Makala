@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 
 export const Title: React.FC = () => {
+  // cssの定義
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
 

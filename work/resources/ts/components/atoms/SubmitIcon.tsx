@@ -3,10 +3,10 @@ import { IconButton } from '@material-ui/core';
 import { SystemUpdateAlt } from '@material-ui/icons';
 
 type Props = {
-  type?:'submit' | 'reset' | 'button',
+  type: 'submit' | 'reset' | 'button',
 }
 
-export const UpdateIcon: React.FC<Props> = (props) => {
+export const SubmitIcon: React.FC<Props> = (props) => {
   return (
     <IconButton
       type={props.type}

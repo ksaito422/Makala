@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
+import { Button } from '../atoms/Button';
 import { CloseIcon } from '../atoms/CloseIcon';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import {
-  Button,
   Card,
   CardHeader,
   CardContent,
@@ -21,7 +21,7 @@ type Props = {
   deleteOnClick: () => void,
 }
 
-export const DragBoardItem: React.FC<Props> = (props) => {
+export const DragCard: React.FC<Props> = (props) => {
   // cssの定義
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
@@ -39,16 +39,10 @@ export const DragBoardItem: React.FC<Props> = (props) => {
             <CardHeader
               title={props.item.title}
               action={
-                <CloseIcon
-                  onClick={props.deleteOnClick}
-                />
+                <CloseIcon onClick={props.deleteOnClick}/>
               }
             />
-            <Button
-              variant='text'
-              fullWidth
-              onClick={props.openOnClick}
-            >
+            <Button color='default' variant='text' fullWidth onClick={props.openOnClick}>
               <CardContent>
                 <Typography>
                   {props.item.content}

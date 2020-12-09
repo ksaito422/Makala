@@ -8,19 +8,13 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 type Props = {
   defaultExpanded?: boolean
-  children: React.ReactNode
 }
 
 export const AccordionArea: React.FC<Props> = (props) => {
   return (
     <>
-      <Accordion
-        defaultExpanded={props.defaultExpanded}
-      >
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-        >
-        </AccordionSummary>
+      <Accordion defaultExpanded={props.defaultExpanded}>
+        <AccordionSummary expandIcon={<ExpandMoreIcon />} />
         <AccordionDetails>
           {props.children}
         </AccordionDetails>

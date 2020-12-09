@@ -10,8 +10,10 @@ type AuthUserState = {
 export const AuthContext = createContext({});
 
 export const AuthContextProvider: React.FC = (props) => {
-  // スピナー表示するため
-  // 認証情報を保持するstate
+  /**
+   * { api通信中のスピナー表示のon/off管理, api通信の結果通知 }
+   * 認証情報を保持するstate
+   */
   const { setProgress, setStatus } = useContext<any>(FeedbackContext);
   const [authUserState, setAuthUserState] = useState<AuthUserState>({
     id: null,
@@ -29,7 +31,7 @@ export const AuthContextProvider: React.FC = (props) => {
     setIsAuth(false);
   }
 
-  // apiと通信して、ログイン処理を行う
+  // ログイン処理を行うapiと通信
   const authLogin = async (
     data: {
       'email': string,
@@ -77,7 +79,7 @@ export const AuthContextProvider: React.FC = (props) => {
     });
   }
 
-  // apiと通信して、ユーザー登録を行う
+  // ユーザー登録を行うapiと通信
   const authRegister = async (
     data: {
       'name': string,
@@ -106,7 +108,7 @@ export const AuthContextProvider: React.FC = (props) => {
       setStatus({
         open: true,
         type: 'success',
-        message: '新規ユーザー登録しました。'
+        message: 'ユーザー登録が完了しました。'
       });
       return;
     })
@@ -115,7 +117,7 @@ export const AuthContextProvider: React.FC = (props) => {
       setStatus({
         open: true,
         type: 'error',
-        message: '新規ユーザー登録に失敗しました。'
+        message: 'ユーザー登録に失敗しました。'
       });
       return;
     })
@@ -126,9 +128,10 @@ export const AuthContextProvider: React.FC = (props) => {
     });
   }
 
-  // apiと通信して、ログアウト処理を行う
+  // ログアウト処理を行うapiと通信
   const authLogout = async () => {
     // スピナーon
+    // トークン取得
     await setProgress(true);
     const token = localStorage.getItem('makala_token');
 
@@ -151,11 +154,11 @@ export const AuthContextProvider: React.FC = (props) => {
       setStatus({
         open: true,
         type: 'success',
-        message: 'ログアウトしました。'
+        message: res.data.message
       });
       return;
     })
-    .catch((err) => {
+    .catch(() => {
       // 通信結果の通知内容
       setStatus({
         open: true,
@@ -171,7 +174,9 @@ export const AuthContextProvider: React.FC = (props) => {
     });
   }
 
+  // トークンリフレッシュするapiと通信
   const authRefresh = async () => {
+    // トークン取得
     const token = localStorage.getItem('makala_token');
 
     await axios({
@@ -184,6 +189,7 @@ export const AuthContextProvider: React.FC = (props) => {
       }
     })
     .then((res) => {
+      // 再度取得した、トークンをセット
       localStorage.setItem('makala_token', res.data.access_token);
       return;
     })
@@ -192,9 +198,10 @@ export const AuthContextProvider: React.FC = (props) => {
     })
   }
 
-  // apiと通信して、ユーザー情報を取得
+  // ユーザー情報を取得するapiと通信
   const authMe = async () => {
     // スピナーon
+    // トークン取得
     await setProgress(true);
     const token = localStorage.getItem('makala_token');
 
@@ -207,6 +214,9 @@ export const AuthContextProvider: React.FC = (props) => {
       }
     })
     .then((res) => {
+      // ユーザー名とidをセット
+      // isAuthをtrueにする
+      // トークンリフレッシュする
       localStorage.setItem('makala_user', res.data.name);
       setAuthUserState({ ...authUserState, id: res.data.id, name: res.data.name});
       login();

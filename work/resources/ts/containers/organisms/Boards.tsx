@@ -27,9 +27,11 @@ type Props = {
 }
 
 export const Boards: React.FC<Props> = (props) => {
-  // cssの定義
-  // モーダルに渡す表示内容 表示のon/off切り替え
-  // 新規作成か更新か判別するstate
+  /**
+   * cssの定義
+   * { モーダルに渡す表示内容, 表示のon/off切り替え }
+   * 新規作成か更新か判別するstate
+   */
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
   const {
@@ -88,16 +90,13 @@ export const Boards: React.FC<Props> = (props) => {
                     props.showOnClick(board.board_name)
                   }}
                 >
-                  <ListItemText
-                    primary={board.board_name}
-                  />
+                  <ListItemText primary={board.board_name} />
                 </Button>
                 <ListItemSecondaryAction>
-                  <CloseIcon
-                    onClick={() => {
-                      modalClose(),
-                      props.deleteOnClick(board.id, index)
-                    }}
+                  <CloseIcon onClick={() => {
+                    modalClose(),
+                    props.deleteOnClick(board.id, index)
+                  }}
                   />
                 </ListItemSecondaryAction>
               </ListItem>
@@ -105,18 +104,14 @@ export const Boards: React.FC<Props> = (props) => {
           </List>
         </Paper>
         <div className={classes.centerPlacement}>
-          <AddIcon
-            onClick={() => {
-              setModalOpenState(true);
-              setCreateState(true);
-            }}
+          <AddIcon onClick={() => {
+            setModalOpenState(true);
+            setCreateState(true);
+          }}
           />
         </div>
       </Container>
-      <ModalWindow
-        modalOpen={modalOpenState}
-        modalOnClose={modalClose}
-      >
+      <ModalWindow modalOpen={modalOpenState} modalOnClose={modalClose}>
         <ModalBoard
           defaultValueTitle={modalValueState.board_name}
           postOnClick={(data, user_id) => {

@@ -15,8 +15,10 @@ type Props = {
 }
 
 export const Login: React.FC<Props> = (props) => {
-  // cssの定義
-  // API import of react-hook-form
+  /**
+   * cssの定義
+   * API import of react-hook-form
+   */
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
   const { register, handleSubmit, errors } = useForm();
@@ -34,10 +36,10 @@ export const Login: React.FC<Props> = (props) => {
           <TextForm
             fullWidth
             margin='normal'
-            label="メールアドレス"
-            name="email"
+            label='メールアドレス'
+            name='email'
             autoFocus
-            autoComplete="email"
+            autoComplete='email'
             inputRef={
               register({
                 required: true,
@@ -50,10 +52,10 @@ export const Login: React.FC<Props> = (props) => {
           <TextForm
             fullWidth
             margin='normal'
-            label="パスワード"
-            name="password"
+            label='パスワード'
+            name='password'
             type='password'
-            autoComplete="current-password"
+            autoComplete='current-password'
             inputRef={
               register({
                 required: ' パスワードを入力して下さい',
@@ -68,25 +70,17 @@ export const Login: React.FC<Props> = (props) => {
               })
             }
             error={Boolean(errors.password)}
-            helperText={
-              errors.password && errors.password.message
-            }
+            helperText={errors.password && errors.password.message}
           />
           <Container maxWidth='sm'>
             <Grid container spacing={10} className={classes.main_container}>
               <Grid item xs={6}>
-                <Button
-                  type='submit'
-                  fullWidth
-                >
+                <Button type='submit' fullWidth>
                   ログインする
                 </Button>
               </Grid>
               <Grid item xs={6}>
-                <Button
-                  fullWidth
-                  onClick={props.cancelOnClick}
-                >
+                <Button fullWidth onClick={props.cancelOnClick}>
                   キャンセル
                 </Button>
               </Grid>

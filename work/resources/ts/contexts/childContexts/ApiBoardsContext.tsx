@@ -6,16 +6,19 @@ import axios from 'axios';
 export const ApiBoardsContext = createContext({});
 
 export const ApiBoardsContextProvider: React.FC = (props) => {
-  // スピナー表示するため
-  // ログインユーザーの情報
-  // getBoardsで取得したデータを保管
+  /**
+   * { api通信中のスピナー表示のon/off管理, api通信の結果通知 }
+   * ログインユーザーの情報
+   * getBoardsで取得したデータを保管
+   */
   const { setProgress, setStatus } = useContext<any>(FeedbackContext);
   const { authUserState } = useContext<any>(AuthContext);
   const [boardsState, setBoardsState] = useState([]);
 
-  // apiと通信して、ボードを取得するロジック
+  // ボードを取得するapiと通信
   const getBoards = async () => {
     // スピナーon
+    // トークン取得
     await setProgress(true);
     const token = localStorage.getItem('makala_token');
 
@@ -28,10 +31,11 @@ export const ApiBoardsContextProvider: React.FC = (props) => {
       }
     })
     .then((res) => {
+      // 無事データを取得できたら、boardsStateに保管
       setBoardsState(res.data.boards);
       return;
     })
-    .catch((err) => {
+    .catch(() => {
       setStatus({
         open: true,
         type: 'error',
@@ -46,12 +50,14 @@ export const ApiBoardsContextProvider: React.FC = (props) => {
     })
   }
 
-  // apiと通信して、ボードを作成するロジック
+  // ボードを作成するapiと通信
   const createBoard = async (
     data: {
       user_id: number,
       board_name: string,
     }) => {
+      // スピナーon
+      // トークン取得
       await setProgress(true);
       const token = localStorage.getItem('makala_token');
 
@@ -68,11 +74,11 @@ export const ApiBoardsContextProvider: React.FC = (props) => {
         setStatus({
           open: true,
           type: 'success',
-          message: 'ボードを作成しました。'
+          message: res.data.message
         });
         return;
       })
-      .catch((err) => {
+      .catch(() => {
         setStatus({
           open: true,
           type: 'error',
@@ -81,19 +87,21 @@ export const ApiBoardsContextProvider: React.FC = (props) => {
         return;
       })
       .finally(() => {
+        // スピナーoff
         setProgress(false);
         getBoards();
         return;
       })
     }
 
-  // apiと通信して、ボード名を更新するロジック
+  // ボード名を更新するapiと通信
   const updateBoard = async (
     data: {
       id: number,
       board_name: string,
     }) => {
       // スピナーon
+      // トークン取得
       await setProgress(true);
       const token = localStorage.getItem('makala_token');
 
@@ -106,17 +114,16 @@ export const ApiBoardsContextProvider: React.FC = (props) => {
           'Authorization': `Bearer ${token}`
         }
       })
-      .then(() => {
+      .then((res) => {
         setStatus({
           open: true,
           type: 'success',
-          message: 'ボード名を変更しました。'
+          message: res.data.message
         });
         return;
       })
-      .catch(async () => {
-        await getBoards();
-        await setStatus({
+      .catch(() => {
+        setStatus({
           open: true,
           type: 'error',
           message: 'ボード名の変更に失敗しました。'
@@ -131,6 +138,7 @@ export const ApiBoardsContextProvider: React.FC = (props) => {
       })
     }
 
+  // パフォーマンス向上させるときに使う
   // ボードの更新時に、更新部分だけを再度stateにセットし直している
   const updateBoardState = (
     obj: {
@@ -142,9 +150,10 @@ export const ApiBoardsContextProvider: React.FC = (props) => {
     setBoardsState(newBoardsState);
   }
 
-  // apiと通信して、ボードを削除するロジック
+  // ボードを削除するapiと通信
   const deleteBoard = async (id: number) => {
     // スピナーon
+    // トークン取得
     await setProgress(true);
     const token = localStorage.getItem('makala_token');
 
@@ -156,11 +165,11 @@ export const ApiBoardsContextProvider: React.FC = (props) => {
         'Authorization': `Bearer ${token}`
       }
     })
-    .then(() => {
+    .then((res) => {
       setStatus({
         open: true,
         type: 'success',
-        message: 'ボードを削除しました。'
+        message: res.data.message
       });
       return;
     })

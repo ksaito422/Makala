@@ -1,29 +1,29 @@
 import React from 'react';
 import { TextField } from '@material-ui/core';
 
-type Props = {
-  error?: boolean,
-  helperText?: string,
-  multiline?: boolean,
-  fullWidth?: boolean,
-  rowsMax?: number,
-  rows?: number,
-  defaultValue?: string,
-  margin?: "none" | "dense" | "normal",
-  label?: string,
-  name?: string,
-  type?: string,
-  autoComplete?: string,
-  required?: boolean,
-  autoFocus?: boolean,
-  disabled?: boolean,
-  inputRef?: any,
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void,
-}
+type Props = Partial<{
+  error: boolean,
+  helperText: string,
+  multiline: boolean,
+  fullWidth: boolean,
+  rowsMax: number,
+  rows: number,
+  defaultValue: string,
+  margin: "none" | "dense" | "normal",
+  label: string,
+  name: string,
+  type: string,
+  autoComplete: string,
+  required: boolean,
+  autoFocus: boolean,
+  inputRef: any,
+}>
 
 export const TextForm: React.FC<Props> = (props) => {
   return (
     <TextField
+      color='secondary'
+      variant='filled'
       error={props.error}
       helperText={props.helperText}
       multiline={props.multiline}
@@ -31,7 +31,6 @@ export const TextForm: React.FC<Props> = (props) => {
       rowsMax={props.rowsMax}
       rows={props.rows}
       defaultValue={props.defaultValue}
-      variant='filled'
       margin={props.margin}
       label={props.label}
       name={props.name}
@@ -39,9 +38,7 @@ export const TextForm: React.FC<Props> = (props) => {
       autoComplete={props.autoComplete}
       required={props.required}
       autoFocus={props.autoFocus}
-      disabled={props.disabled}
       inputRef={props.inputRef}
-      onChange={props.onChange}
     />
   );
 }

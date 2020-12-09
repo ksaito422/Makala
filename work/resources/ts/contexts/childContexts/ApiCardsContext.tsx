@@ -5,14 +5,17 @@ import axios from 'axios';
 export const ApiCardsContext = createContext({});
 
 export const ApiCardsContextProvider: React.FC = (props) => {
-  // スピナー、api通信の結果を表示するため
-  // { items: ボードアイテムで表示するデータ, numberMade: 今までにカードを作った総数 }
+  /**
+   * { api通信中のスピナー表示のon/off管理, api通信の結果通知 }
+   * { items: ボードアイテムで表示するデータ, numberMade: 今までにカードを作った総数 }
+   */
   const { setProgress, setStatus } = useContext<any>(FeedbackContext);
   const [cardsState, setCardsState] = useState([]);
 
-  // apiと通信して、カードを取得するロジック
+  // カードを取得するapiと通信
   const getCards = async (board_name: string) => {
     // スピナーon
+    // トークン取得
     await setProgress(true);
     const token = localStorage.getItem('makala_token');
 
@@ -25,6 +28,7 @@ export const ApiCardsContextProvider: React.FC = (props) => {
       }
     })
     .then((res) => {
+      // 無事データを取得できたら、cardsStateに保管
       setCardsState(res.data.cards);
       return;
     })
@@ -43,7 +47,7 @@ export const ApiCardsContextProvider: React.FC = (props) => {
     })
   }
 
-  // apiと通信して、カードを新規作成するロジック
+  // カードを新規作成するapiと通信
   const createCard = async (
     card: any,
     data: {
@@ -51,6 +55,8 @@ export const ApiCardsContextProvider: React.FC = (props) => {
       card_name: string,
       card_content: string,
     }) => {
+      // スピナーon
+      // トークン取得
       await setProgress(true);
       const token = localStorage.getItem('makala_token');
 
@@ -86,7 +92,7 @@ export const ApiCardsContextProvider: React.FC = (props) => {
       })
     }
 
-  // apiと通信して、カードを更新するロジック
+  // カードを更新するロジックapiと通信
   const updateCard = async (
     id: number,
     card: any,
@@ -95,6 +101,7 @@ export const ApiCardsContextProvider: React.FC = (props) => {
       card_content: string,
     }) => {
       // スピナーon
+      // トークン取得
       await setProgress(true);
       const token = localStorage.getItem('makala_token');
 
@@ -107,19 +114,19 @@ export const ApiCardsContextProvider: React.FC = (props) => {
           'Authorization': `Bearer ${token}`
         }
       })
-      .then(() => {
+      .then((res) => {
         setStatus({
           open: true,
           type: 'success',
-          message: 'カードの内容を変更しました。'
+          message: res.data.message
         });
         return;
       })
-      .catch(async () => {
-        await setStatus({
+      .catch(() => {
+        setStatus({
           open: true,
           type: 'error',
-          message: 'カードの変更に失敗しました。'
+          message: 'カードの内容変更に失敗しました。'
         });
         return;
       })
@@ -131,9 +138,10 @@ export const ApiCardsContextProvider: React.FC = (props) => {
       })
     }
 
-  // apiと通信して、カードを削除するロジック
+  // カードを削除するapiと通信
   const deleteCard = async (id: number, card: any) => {
     // スピナーon
+    // トークン取得
     await setProgress(true);
     const token = localStorage.getItem('makala_token');
 
@@ -145,16 +153,16 @@ export const ApiCardsContextProvider: React.FC = (props) => {
         'Authorization': `Bearer ${token}`
       }
     })
-    .then(async () => {
-      await setStatus({
+    .then((res) => {
+      setStatus({
         open: true,
         type: 'success',
-        message: 'カードを削除しました。'
+        message: res.data.message
       });
       return;
     })
-    .catch(async () => {
-      await setStatus({
+    .catch(() => {
+      setStatus({
         open: true,
         type: 'error',
         message: 'カードの削除に失敗しました。'

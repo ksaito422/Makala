@@ -70,13 +70,13 @@ export const StylesContextProvider: React.FC = props => {
     },
     // アバターの色
     Avatar: {
-      color: theme.palette.secondary.dark,
-      backgroundColor: theme.palette.secondary.light
+      color: theme.palette.primary.dark,
+      backgroundColor: theme.palette.primary.light
     },
     // aタグの装飾
     Link: {
       textDecoration: `none`,
-      color: theme.palette.secondary.main,
+      color: theme.palette.primary.main,
     },
   }));
 

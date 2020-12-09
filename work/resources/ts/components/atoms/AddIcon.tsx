@@ -11,7 +11,7 @@ export const AddIcon: React.FC<Props> = (props) => {
     <IconButton
       onClick={props.onClick}
     >
-      <AddCircle color='secondary' />
+      <AddCircle color='primary' />
     </IconButton>
   );
 }
