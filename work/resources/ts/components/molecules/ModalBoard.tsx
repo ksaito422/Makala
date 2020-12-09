@@ -14,24 +14,24 @@ type Props = {
 }
 
 export const ModalBoard: React.FC<Props> = (props) => {
-  // cssの定義
-  // ログインユーザーの情報  { user_id: value, user_name: value }
-  // API import of react-hook-form
+  /**
+   * cssの定義
+   * ログインユーザーの情報  { user_id: value, user_name: value }
+   * 投稿データに渡す引数
+   * API import of react-hook-form
+   */
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
   const { authUserState } = useContext<any>(AuthContext);
-  const { register, handleSubmit, errors } = useForm();
-
   const user_id = authUserState.id;
+  const { register, handleSubmit, errors } = useForm();
 
   // モーダルに表示する内容の定義
   return (
     <>
       <Grid container spacing={4}>
         <Grid item xs={12} className={classes.rightPlacement}>
-          <CloseIcon
-            onClick={props.modalOnClose}
-          />
+          <CloseIcon onClick={props.modalOnClose} />
         </Grid>
         <form
           className={classes.form_board}
@@ -56,9 +56,7 @@ export const ModalBoard: React.FC<Props> = (props) => {
             />
           </Grid>
           <Grid item xs={12} className={classes.centerPlacement}>
-            <SubmitIcon
-              type='submit'
-            />
+            <SubmitIcon type='submit' />
           </Grid>
         </form>
       </Grid>
