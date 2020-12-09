@@ -21,18 +21,17 @@ function getModalStyle() {
 }
 
 export const ModalWindow: React.FC<Props> = (props) => {
-  // cssの定義
-  // モーダルの位置を指定したstate
+  /**
+   * cssの定義
+   * モーダルの位置を指定したstate
+   */
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles()
   const [modalStyleState] = useState(getModalStyle);
 
   // モーダルに表示する内容の定義
   return (
-    <Modal
-      open={props.modalOpen}
-      onClose={props.modalOnClose}
-    >
+    <Modal open={props.modalOpen} onClose={props.modalOnClose}>
       <div style={modalStyleState} className={classes.modal}>
         {props.children}
       </div>
