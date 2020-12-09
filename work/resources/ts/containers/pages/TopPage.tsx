@@ -13,15 +13,15 @@ import {
 
 export const TopPage: React.FC = () => {
   /**
-   * { ログインユーザーの情報 }
    * { api通信中のスピナー表示のon/off管理 }
    * cssの定義
+   * { ログインユーザーの情報 }
    * react-router-dom URLルーティングに使う
    */
-  const { authUserState } = useContext<any>(AuthContext);
   const { progress } = useContext<any>(FeedbackContext);
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
+  const { authUserState } = useContext<any>(AuthContext);
   const history = useHistory();
 
   return (
