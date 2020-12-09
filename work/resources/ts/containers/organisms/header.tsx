@@ -39,9 +39,10 @@ export const Header: React.FC = () => {
                 <Avatar
                   ariaControls='avatar'
                   ariaHaspopup={true}
-                  onClick={handleClick}>
-                    {authUserState.name.slice(0,1)}
-                  </Avatar>
+                  onClick={handleClick}
+                >
+                  {authUserState.name.slice(0,1)}
+                </Avatar>
               ) : (
                 null
               )}
@@ -50,12 +51,8 @@ export const Header: React.FC = () => {
         </Toolbar>
       </AppBar>
 
-      <Menu
-        id='avatar'
-        anchorEl={anchorEl}
-        keepMounted
-        open={Boolean(anchorEl)}
-        onClose={handleClose}
+      <Menu id='avatar' anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)}
+            onClose={handleClose}
       >
         <MenuItem onClick={authLogout}>ログアウト</MenuItem>
       </Menu>
