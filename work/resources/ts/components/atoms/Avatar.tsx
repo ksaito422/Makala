@@ -12,6 +12,7 @@ type Props = {
 }
 
 export const Avatar: React.FC<Props> = (props) => {
+  // cssの定義
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
 
