@@ -42,9 +42,15 @@ export const DragCard: React.FC<Props> = (props) => {
                 <CloseIcon onClick={props.deleteOnClick}/>
               }
             />
-            <Button color='default' variant='text' fullWidth onClick={props.openOnClick}>
-              <CardContent>
-                <Typography>
+            <Button
+              className={classes.Card}
+              color='default'
+              variant='contained'
+              fullWidth
+              onClick={props.openOnClick}
+            >
+              <CardContent component='span'>
+                <Typography align='left'>
                   {props.item.content}
                 </Typography>
               </CardContent>

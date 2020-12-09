@@ -4,6 +4,7 @@ import {
 } from '@material-ui/core';
 
 type Props = {
+  className?: any,
   variant?: 'text' | 'outlined' | 'contained',
   color?: 'inherit' | 'primary' | 'secondary' | 'default'
   type?: 'button' | 'submit' | 'reset',
@@ -16,6 +17,7 @@ type Props = {
 export const Button: React.FC<Props> = (props) => {
   return (
     <MuiButton
+      className={props.className}
       variant={props.variant}
       color={props.color}
       type={props.type}
