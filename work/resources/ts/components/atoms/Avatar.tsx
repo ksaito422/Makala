@@ -19,6 +19,7 @@ export const Avatar: React.FC<Props> = (props) => {
   return (
     <>
       <IconButton
+        size='small'
         aria-controls={props.ariaControls}
         aria-haspopup={props.ariaHaspopup}
         onClick={props.onClick}
