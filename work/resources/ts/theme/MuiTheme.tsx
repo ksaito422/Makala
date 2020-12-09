@@ -27,6 +27,11 @@ export const MuiTheme = createMuiTheme({
       root: {
         flex: `none`,
       }
+    },
+    MuiAppBar: {
+      root: {
+        zIndex: 10,
+      }
     }
   }
 });
