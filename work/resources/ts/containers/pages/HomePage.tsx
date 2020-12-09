@@ -13,10 +13,24 @@ import {
 } from '@material-ui/core';
 
 export const HomePage: React.FC = () => {
-  const { boardsState, getBoards, createBoard, updateBoard, deleteBoard, deleteBoardState } = useContext<any>(ApiBoardsContext);
+  /**
+   * { スピナー, api通信の結果通知の状態管理 }
+   * cssの定義
+   * Boards api import
+   * react-router-dom URLルーティングに使う
+   * ユーザー名をURLパラメータから取得
+   */
   const { progress, status, setStatus } = useContext<any>(FeedbackContext);
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
+  const {
+    boardsState,
+    getBoards,
+    createBoard,
+    updateBoard,
+    deleteBoard,
+    deleteBoardState
+  } = useContext<any>(ApiBoardsContext);
   const history = useHistory();
   const { user } = useParams<any>();
 
@@ -59,6 +73,7 @@ export const HomePage: React.FC = () => {
           }}
         />
       </Container>
+
       <Spinner open={progress} />
       <Notice
         open={status.open}
