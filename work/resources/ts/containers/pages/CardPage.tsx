@@ -4,7 +4,7 @@ import { ButtonGroup } from '../../components/molecules/ButtonGroup';
 import { Spinner } from '../../components/molecules/Spinner';
 import { Notice } from '../../components/molecules/Notice';
 import { Header } from '../organisms/Header';
-import { DragBoardList } from '../organisms/DragBoardList';
+import { Cards } from '../organisms/Cards';
 import { Preview } from '../organisms/Preview';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import { ApiCardsContext } from '../../contexts/childContexts/ApiCardsContext';
@@ -87,7 +87,7 @@ export const CardPage = React.memo (() => {
           <Grid container spacing={2}>
             <Grid item xs={6}>
               <Container maxWidth='xl'>
-                <DragBoardList
+                <Cards
                   items={cardsState}
                   onDragEnd={onDragEnd}
                   deleteOnClick={(id) => {
@@ -135,7 +135,7 @@ export const CardPage = React.memo (() => {
               <Grid item xs={12}>
                 {/* cardOnClickでカード表示したら */}
                 {previewState.card &&
-                  <DragBoardList
+                  <Cards
                     items={cardsState}
                     onDragEnd={onDragEnd}
                     deleteOnClick={(id) => {

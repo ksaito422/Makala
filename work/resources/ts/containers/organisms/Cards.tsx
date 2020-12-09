@@ -16,7 +16,7 @@ type BoardListProps = {
   deleteOnClick: (id?: string) => void,
 }
 
-export const DragBoardList = React.memo<BoardListProps> ((props) => {
+export const Cards = React.memo<BoardListProps> ((props) => {
   /**
    * cssの定義
    * dragBoardItemのレンダーするデータを読み取り
