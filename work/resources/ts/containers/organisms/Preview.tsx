@@ -22,15 +22,18 @@ export const Preview: React.FC<Props> = (props) => {
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
 
-  // プレビューに表示するテキストの変数宣言
-  // forEachでタイトル -> 内容の順で繰り返し変数に入れていく
-  // 最後にpreviewTextをMarkdownPreviewで表示する
+  /**
+   * プレビューに表示するテキストの変数宣言
+   * forEachでタイトル -> 内容の順で繰り返し変数に入れていく
+   * 最後にpreviewTextをMarkdownPreviewで表示する
+   */
   let previewText: string = '';
   const tmp = props.items.forEach(key => {
-    // プレビューに表示するテキスト内容をカスタマイズしている
+    // プレビューに表示するテキスト内容をカスタマイズ
     previewText += '# ' + key.title + '\n' + key.content + '\n\n'
   });
 
+  // markdown file downloadの細かい設定
   const downloadFile = () => {
     const element = document.createElement("a");
     const file = new Blob([previewText], {type: 'text/plain'});
@@ -45,7 +48,7 @@ export const Preview: React.FC<Props> = (props) => {
       <Container maxWidth='lg'>
         <Paper elevation={3} className={classes.preview}>
           <MarkdownPreview source={previewText} />
-        </ Paper>
+        </Paper>
         <div className={classes.centerPlacement}>
           <DownloadIcon onClick={downloadFile} />
         </div>
