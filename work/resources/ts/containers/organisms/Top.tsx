@@ -47,12 +47,8 @@ export const Top: React.FC<Props> = (props) => {
                     </Typography>
                   </Grid>
                   <Grid item xs={12}>
-                    <Grid
-                      container
-                      spacing={4}
-                      direction="column"
-                      justify="flex-end"
-                      alignItems="center"
+                    <Grid container spacing={4} direction="column"
+                          justify="flex-end" alignItems="center"
                     >
                       {!isAuth ? (
                         // ゲストユーザーなら表示
