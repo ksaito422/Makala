@@ -24,31 +24,10 @@ export const Header: React.FC = () => {
   // メニューのオープンon/off
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(e.currentTarget);
+    console.log(anchorEl)
   }
   const handleClose = () => {
     setAnchorEl(null);
-  }
-
-  /**
-   * レスポンシブ対応のため共通コンポーネント化
-   * CommonAvatarはログイン済なら表示し、それ以外なら非表示する
-   */
-  const CommonAvatar: React.FC = () => {
-    return (
-      <>
-        {isAuth ? (
-          <Avatar
-            ariaControls='avatar'
-            ariaHaspopup={true}
-            onClick={handleClick}
-          >
-            {authUserState.name.slice(0,1)}
-          </Avatar>
-        ) : (
-          null
-        )}
-      </>
-    );
   }
 
   return (
@@ -56,21 +35,43 @@ export const Header: React.FC = () => {
       <AppBar color='secondary' position='sticky'>
         <Toolbar>
           {matches ? (
-            <Grid container spacing={2}>
+            // PCレイアウト width >= 1025px
+            <Grid container spacing={2} alignItems='center'>
               <Grid item xs={11}>
                 <Title />
               </Grid>
               <Grid item xs={1}>
-                <CommonAvatar />
+                {isAuth ? (
+                  <Avatar
+                    ariaControls='avatar'
+                    ariaHaspopup={true}
+                    onClick={handleClick}
+                  >
+                    {authUserState.name.slice(0,1)}
+                  </Avatar>
+                ) : (
+                  null
+                )}
               </Grid>
             </Grid>
           ) : (
-            <Grid container spacing={10}>
-              <Grid item xs={11}>
+            // タブレット・スマホレイアウト width <= 1024px
+            <Grid container spacing={2} alignItems='center'>
+              <Grid item xs={10}>
                 <Title />
               </Grid>
-              <Grid item xs={1}>
-                <CommonAvatar />
+              <Grid item xs={2}>
+                {isAuth ? (
+                  <Avatar
+                    ariaControls='avatar'
+                    ariaHaspopup={true}
+                    onClick={handleClick}
+                  >
+                    {authUserState.name.slice(0,1)}
+                  </Avatar>
+                ) : (
+                  null
+                )}
               </Grid>
             </Grid>
           )}
