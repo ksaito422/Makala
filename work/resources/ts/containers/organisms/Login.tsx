@@ -7,6 +7,7 @@ import {
   Container,
   Grid,
   Typography,
+  useMediaQuery,
 } from '@material-ui/core';
 
 type Props = {
@@ -18,10 +19,60 @@ export const Login: React.FC<Props> = (props) => {
   /**
    * cssの定義
    * API import of react-hook-form
+   * スマホ( > 600px)を基準にレスポンシブ対応
    */
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
   const { register, handleSubmit, errors } = useForm();
+  const matches = useMediaQuery('(min-width: 601px)');
+
+  /**
+   * 共通コンポーネント化
+   * CommonLogin and CommonCancelはボタンの共通化
+   * classNameはuseStylesのスタイルをインポート
+   * returnはスマホとタブレット以上の画面サイズで表示レイアウトを切り替えている
+   */
+  const ResponsiveComponent: React.FC = () => {
+    const CommonLogin = () => {
+      return (
+        <Button type='submit' fullWidth>
+          ログインする
+        </Button>
+      );
+    }
+    const CommonCancel = () => {
+      return (
+        <Button fullWidth onClick={props.cancelOnClick}>
+          キャンセル
+        </Button>
+      );
+    }
+    const className = classes.main_container;
+
+    return (
+      <>
+        {matches ? (
+          <Grid container spacing={10} className={className}>
+            <Grid item xs={6}>
+              <CommonLogin />
+            </Grid>
+            <Grid item xs={6}>
+              <CommonCancel />
+            </Grid>
+          </Grid>
+        ) : (
+          <Grid container spacing={4} className={className}>
+            <Grid item xs={12}>
+              <CommonLogin />
+            </Grid>
+            <Grid item xs={12}>
+              <CommonCancel />
+            </Grid>
+          </Grid>
+        )}
+      </>
+    );
+  }
 
   return (
     <>
@@ -73,18 +124,7 @@ export const Login: React.FC<Props> = (props) => {
             helperText={errors.password && errors.password.message}
           />
           <Container maxWidth='sm'>
-            <Grid container spacing={10} className={classes.main_container}>
-              <Grid item xs={6}>
-                <Button type='submit' fullWidth>
-                  ログインする
-                </Button>
-              </Grid>
-              <Grid item xs={6}>
-                <Button fullWidth onClick={props.cancelOnClick}>
-                  キャンセル
-                </Button>
-              </Grid>
-            </Grid>
+            <ResponsiveComponent />
           </Container>
         </form>
       </Container>
