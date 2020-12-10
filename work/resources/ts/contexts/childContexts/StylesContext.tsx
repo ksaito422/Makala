@@ -12,7 +12,7 @@ export const StylesContextProvider: React.FC = props => {
     },
     // dragBoradの高さとスクロール可否
     drop_able: {
-      maxHeight: `80vh`,
+      maxHeight: `70vh`,
       overflowY: 'scroll',
     },
     // Draggable内の要素の間隔をとるため
@@ -38,10 +38,10 @@ export const StylesContextProvider: React.FC = props => {
     },
     // MarkdownPreview Paperのスタイル
     preview: {
-      height: `80vh`,
-      maxHeight: `80vh`,
+      height: `70vh`,
+      maxHeight: `70vh`,
       overflowY: 'scroll',
-      padding: `16px`,
+      padding: theme.spacing(2),
     },
     // AccodionAreaのgif画の高さ
     gif: {
