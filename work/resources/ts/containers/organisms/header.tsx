@@ -15,11 +15,11 @@ export const Header: React.FC = () => {
   /**
    * ポップアップメニューの表示位置
    * { ログイン状態の確認, ログインユーザーの情報, ログインメソッド }
-   * iPad Pro(1024px) < PC(1025px以上)を基準にレスポンシブ対応
+   * タブレット( > 900px)を基準にレスポンシブ対応
    */
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const { isAuth, authUserState, authLogout } = useContext<any>(AuthContext);
-  const matches = useMediaQuery('(min-width: 1025px)');
+  const matches = useMediaQuery('(min-width: 900px)');
 
   // メニューのオープンon/off
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -35,7 +35,7 @@ export const Header: React.FC = () => {
       <AppBar color='secondary' position='sticky'>
         <Toolbar>
           {matches ? (
-            // PCレイアウト width >= 1025px
+            // PCレイアウト width >= 901px
             <Grid container spacing={2} alignItems='center'>
               <Grid item xs={11}>
                 <Title />
@@ -55,7 +55,7 @@ export const Header: React.FC = () => {
               </Grid>
             </Grid>
           ) : (
-            // タブレット・スマホレイアウト width <= 1024px
+            // タブレット・スマホレイアウト width <= 900px
             <Grid container spacing={2} alignItems='center'>
               <Grid item xs={10}>
                 <Title />
