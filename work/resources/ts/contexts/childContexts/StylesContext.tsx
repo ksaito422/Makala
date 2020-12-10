@@ -69,9 +69,14 @@ export const StylesContextProvider: React.FC = props => {
       zIndex: 99,
     },
     // アバターの色
-    Avatar: {
+    avatar: {
       color: theme.palette.primary.dark,
-      backgroundColor: theme.palette.primary.light
+      backgroundColor: theme.palette.primary.light,
+    },
+    // スマホ画面対応のアバターサイズ
+    avatar_small: {
+      width: `26px`,
+      height: `26px`,
     },
     // aタグの装飾
     Link: {

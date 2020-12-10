@@ -8,19 +8,23 @@ import {
   Menu,
   MenuItem,
   Toolbar,
+  useMediaQuery,
 } from '@material-ui/core';
 
 export const Header: React.FC = () => {
   /**
    * ポップアップメニューの表示位置
    * { ログイン状態の確認, ログインユーザーの情報, ログインメソッド }
+   * iPad Pro(1024px) < PC(1025px以上)を基準にレスポンシブ対応
    */
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const { isAuth, authUserState, authLogout } = useContext<any>(AuthContext);
+  const matches = useMediaQuery('(min-width: 1025px)');
 
   // メニューのオープンon/off
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(e.currentTarget);
+    console.log(anchorEl)
   }
   const handleClose = () => {
     setAnchorEl(null);
@@ -30,24 +34,47 @@ export const Header: React.FC = () => {
     <>
       <AppBar color='secondary' position='sticky'>
         <Toolbar>
-          <Grid container spacing={2}>
-            <Grid item xs={11}>
-              <Title />
+          {matches ? (
+            // PCレイアウト width >= 1025px
+            <Grid container spacing={2} alignItems='center'>
+              <Grid item xs={11}>
+                <Title />
+              </Grid>
+              <Grid item xs={1}>
+                {isAuth ? (
+                  <Avatar
+                    ariaControls='avatar'
+                    ariaHaspopup={true}
+                    onClick={handleClick}
+                  >
+                    {authUserState.name.slice(0,1)}
+                  </Avatar>
+                ) : (
+                  null
+                )}
+              </Grid>
             </Grid>
-            <Grid item xs={1}>
-              {isAuth ? (
-                <Avatar
-                  ariaControls='avatar'
-                  ariaHaspopup={true}
-                  onClick={handleClick}
-                >
-                  {authUserState.name.slice(0,1)}
-                </Avatar>
-              ) : (
-                null
-              )}
+          ) : (
+            // タブレット・スマホレイアウト width <= 1024px
+            <Grid container spacing={2} alignItems='center'>
+              <Grid item xs={10}>
+                <Title />
+              </Grid>
+              <Grid item xs={2}>
+                {isAuth ? (
+                  <Avatar
+                    ariaControls='avatar'
+                    ariaHaspopup={true}
+                    onClick={handleClick}
+                  >
+                    {authUserState.name.slice(0,1)}
+                  </Avatar>
+                ) : (
+                  null
+                )}
+              </Grid>
             </Grid>
-          </Grid>
+          )}
         </Toolbar>
       </AppBar>
 
