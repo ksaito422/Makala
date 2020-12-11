@@ -34,29 +34,20 @@ export const ModalWindow: React.FC<Props> = (props) => {
   const [modalStyleState] = useState(getModalStyle);
   const matches = useMediaQuery('(min-width: 601px)');
 
-
-  /**
-   * modalのサイズをレスポンシブ対応
-   * スマホ or タブレット以上の画面サイズで大きさを変える
-   */
-  const ReaponsiveModal: React.FC = () => {
-    return (
-      matches ? (
+  // モーダルに表示する内容の定義
+  return (
+    <Modal open={props.modalOpen} onClose={props.modalOnClose}>
+      {matches ? (
+        // タブレット以上の画面サイズ
         <div style={modalStyleState} className={classes.modal}>
           {props.children}
         </div>
       ) : (
+        // スマホの画面サイズ
         <div style={modalStyleState} className={classes.modal_responsive}>
           {props.children}
         </div>
-      )
-    );
-  }
-
-  // モーダルに表示する内容の定義
-  return (
-    <Modal open={props.modalOpen} onClose={props.modalOnClose}>
-      <ReaponsiveModal />
+      )}
     </Modal>
   );
 }
