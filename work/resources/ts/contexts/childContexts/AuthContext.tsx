@@ -207,6 +207,7 @@ export const AuthContextProvider: React.FC = (props) => {
 
     await axios({
       method: 'POST',
+      baseURL: 'http://localhost:8080/',
       url: 'api/auth/me',
       headers: {
         'Content-Type': 'application/json',
