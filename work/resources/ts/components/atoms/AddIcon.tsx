@@ -1,6 +1,6 @@
 import React from 'react';
-import { IconButton } from '@material-ui/core';
-import { AddCircle } from '@material-ui/icons';
+import { Fab } from '@material-ui/core';
+import { Add } from '@material-ui/icons';
 
 type Props = {
   onClick: () => void,
@@ -8,10 +8,8 @@ type Props = {
 
 export const AddIcon: React.FC<Props> = (props) => {
   return (
-    <IconButton
-      onClick={props.onClick}
-    >
-      <AddCircle color='primary' />
-    </IconButton>
+    <Fab color='primary' aria-label='add' onClick={props.onClick}>
+      <Add />
+    </Fab>
   );
 }

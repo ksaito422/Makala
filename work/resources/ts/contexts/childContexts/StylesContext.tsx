@@ -12,7 +12,7 @@ export const StylesContextProvider: React.FC = props => {
     },
     // dragBoradの高さとスクロール可否
     drop_able: {
-      maxHeight: `80vh`,
+      maxHeight: `70vh`,
       overflowY: 'scroll',
     },
     // Draggable内の要素の間隔をとるため
@@ -22,7 +22,16 @@ export const StylesContextProvider: React.FC = props => {
     // modalの表示サイズ
     modal: {
       position: 'absolute',
-      width: `60%`,
+      width: `80%`,
+      backgroundColor: theme.palette.background.paper,
+      border: '2px solid #000',
+      boxShadow: theme.shadows[5],
+      padding: theme.spacing(2, 4, 3),
+    },
+    // スマホサイズのmodal表示サイズ
+    modal_responsive: {
+      position: 'absolute',
+      width: `95%`,
       backgroundColor: theme.palette.background.paper,
       border: '2px solid #000',
       boxShadow: theme.shadows[5],
@@ -38,10 +47,10 @@ export const StylesContextProvider: React.FC = props => {
     },
     // MarkdownPreview Paperのスタイル
     preview: {
-      height: `80vh`,
-      maxHeight: `80vh`,
+      height: `70vh`,
+      maxHeight: `70vh`,
       overflowY: 'scroll',
-      padding: `16px`,
+      padding: theme.spacing(2),
     },
     // AccodionAreaのgif画の高さ
     gif: {
@@ -84,7 +93,7 @@ export const StylesContextProvider: React.FC = props => {
       color: theme.palette.primary.main,
     },
     // cardのスタイル
-    Card: {
+    card: {
       justifyContent: 'left'
     },
   }));
