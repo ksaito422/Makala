@@ -31,6 +31,7 @@ export const Top: React.FC<Props> = (props) => {
   /**
    * 共通コンポーネント化
    * CommonGif GIFで説明動画をいれる
+   * とりあえずまだ、公開しない
    */
   const CommonGif = () => {
     return (
@@ -104,11 +105,11 @@ export const Top: React.FC<Props> = (props) => {
                   </Grid>
                 </Container>
               </Grid>
-              <Container maxWidth='sm'>
+              {/* <Container maxWidth='sm'>
                 <Grid item xs={12}>
                   <CommonGif />
                 </Grid>
-              </Container>
+              </Container> */}
             </Grid>
           ) : (
             // タブレット・スマホレイアウト width <= 1100px
@@ -152,11 +153,11 @@ export const Top: React.FC<Props> = (props) => {
                   </Grid>
                 </Container>
               </Grid>
-              <Container maxWidth='xs'>
+              {/* <Container maxWidth='xs'>
                 <Grid item xs={12}>
                   <CommonGif />
                 </Grid>
-              </Container>
+              </Container> */}
             </Grid>
           )}
         </AccordionArea>
