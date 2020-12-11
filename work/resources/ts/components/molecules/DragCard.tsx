@@ -43,7 +43,7 @@ export const DragCard: React.FC<Props> = (props) => {
               }
             />
             <Button
-              className={classes.Card}
+              className={classes.card}
               color='default'
               variant='contained'
               fullWidth

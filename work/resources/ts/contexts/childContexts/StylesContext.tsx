@@ -93,7 +93,7 @@ export const StylesContextProvider: React.FC = props => {
       color: theme.palette.primary.main,
     },
     // cardのスタイル
-    Card: {
+    card: {
       justifyContent: 'left'
     },
   }));
