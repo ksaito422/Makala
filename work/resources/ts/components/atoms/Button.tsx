@@ -4,20 +4,35 @@ import {
 } from '@material-ui/core';
 
 type Props = {
+  className?: any,
+  variant?: 'text' | 'outlined' | 'contained',
+  color?: 'inherit' | 'primary' | 'secondary' | 'default'
+  type?: 'button' | 'submit' | 'reset',
   disabled?: boolean,
-  children: string,
-  onClick: () => void,
+  fullWidth?: boolean,
+  size?: 'large' | 'medium' | 'small'
+  onClick?: () => void,
 }
 
-export const Button: React.FC<Props> = (props: Props) => {
+export const Button: React.FC<Props> = (props) => {
   return (
     <MuiButton
-      variant='contained'
-      color='secondary'
+      className={props.className}
+      variant={props.variant}
+      color={props.color}
+      type={props.type}
       disabled={props.disabled}
+      fullWidth={props.fullWidth}
+      size={props.size}
       onClick={props.onClick}
     >
       {props.children}
     </MuiButton>
   );
+}
+
+Button.defaultProps = {
+  color: 'primary',
+  variant: 'contained',
+  type: 'button'
 }

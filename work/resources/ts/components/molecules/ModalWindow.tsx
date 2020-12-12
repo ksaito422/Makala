@@ -1,25 +1,12 @@
 import React, { useState, useContext } from 'react';
-import { TextForm } from '../atoms/TextForm';
-import { CloseIcon } from '../atoms/CloseIcon';
-import { UpdateIcon } from '../atoms/UpdateIcon';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import {
-  Grid,
   Modal,
+  useMediaQuery,
 } from '@material-ui/core';
 
 type Props = {
-  errorTitle?: boolean,
-  helperTextTitle?: string,
-  errorContent?: boolean,
-  helperTextContent?: string,
   modalOpen: boolean,
-  defaultValueTitle: string,
-  defaultValueContent: string,
-  disabled?: boolean,
-  titleOnChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
-  contentOnChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
-  postOnClick: () => void,
   modalOnClose: () => void,
 }
 
@@ -36,60 +23,31 @@ function getModalStyle() {
   };
 }
 
-export const ModalWindow: React.FC<Props> = (props: Props) => {
-  // classNameのインポート
-  // モーダルの位置を指定したstate
+export const ModalWindow: React.FC<Props> = (props) => {
+  /**
+   * cssの定義
+   * モーダルの位置を指定したstate
+   * スマホ( > 600px)を基準にレスポンシブ対応
+   */
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles()
   const [modalStyleState] = useState(getModalStyle);
+  const matches = useMediaQuery('(min-width: 601px)');
 
   // モーダルに表示する内容の定義
-  const modalBody = (
-    <div style={modalStyleState} className={classes.modal}>
-      <Grid container spacing={4}>
-        <Grid item xs={12} className={classes.rightPlacement}>
-          <CloseIcon
-            onClick={props.modalOnClose}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextForm
-            error={props.errorTitle}
-            helperText={props.helperTextTitle}
-            multiline
-            fullWidth
-            rowsMax={1}
-            defaultValue={props.defaultValueTitle}
-            onChange={props.titleOnChange}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextForm
-            error={props.errorContent}
-            helperText={props.helperTextContent}
-            multiline
-            fullWidth
-            rows={8}
-            defaultValue={props.defaultValueContent}
-            onChange={props.contentOnChange}
-          />
-        </Grid>
-        <Grid item xs={12} className={classes.centerPlacement}>
-          <UpdateIcon
-            onClick={props.postOnClick}
-            disabled={props.disabled}
-          />
-        </Grid>
-      </Grid>
-    </div>
-  );
-
   return (
-    <Modal
-      open={props.modalOpen}
-      onClose={props.modalOnClose}
-    >
-      {modalBody}
+    <Modal open={props.modalOpen} onClose={props.modalOnClose}>
+      {matches ? (
+        // タブレット以上の画面サイズ
+        <div style={modalStyleState} className={classes.modal}>
+          {props.children}
+        </div>
+      ) : (
+        // スマホの画面サイズ
+        <div style={modalStyleState} className={classes.modal_responsive}>
+          {props.children}
+        </div>
+      )}
     </Modal>
   );
 }

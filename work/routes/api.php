@@ -13,6 +13,39 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+// 認証関係のルート
+Route::group([
+    'prefix' => 'auth',
+    'middleware' => 'api'
+], function() {
+    Route::post('register', 'Api\AuthController@register')->name('auth.register');
+    Route::post('login', 'Api\AuthController@login')->name('auth.login');
+    Route::post('logout', 'Api\AuthController@logout')->name('auth.logout');
+    Route::post('refresh', 'Api\AuthController@refresh')->name('auth.refresh');
+    Route::post('me', 'Api\AuthController@me')->name('auth.me');
+});
+
+
+Route::group([
+    'middleware' => 'api'
+], function() {
+    Route::get('/v1/boards/{user}', 'Api\BoardController@index')
+        ->name('board.index');
+
+    Route::apiResource('/v1/boards', 'Api\BoardController', ['except' => ['index', 'show']])
+        ->names([
+            'store' => 'board.store',
+            'update' => 'board.update',
+            'destroy' => 'board.destroy'
+        ]);
+
+    Route::get('/v1/cards/{card}', 'Api\CardController@index')
+        ->name('card.index');
+
+    Route::apiResource('/v1/cards', 'Api\CardController', ['except' => ['index', 'show']])
+    ->names([
+        'store' => 'card.store',
+        'update' => 'card.update',
+        'destroy' => 'card.destroy'
+    ]);
 });

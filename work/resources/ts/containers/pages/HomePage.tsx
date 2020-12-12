@@ -1,131 +1,88 @@
-import React, { useState, useContext } from 'react';
-import { ButtonGroup } from '../../components/molecules/ButtonGroup';
+import React, { useContext, useEffect } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
+import { Spinner } from '../../components/molecules/Spinner';
+import { Notice } from '../../components/molecules/Notice';
 import { Header } from '../organisms/Header';
-import { DragBoardList } from '../organisms/DragBoardList';
-import { Preview } from '../organisms/Preview';
+import { Boards } from '../organisms/Boards';
+import { ApiBoardsContext } from '../../contexts/childContexts/ApiBoardsContext';
+import { FeedbackContext } from '../../contexts/childContexts/FeedbackContext';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
-import { BoardItemContext } from '../../contexts/childContexts/BoardItemContext';
 import {
   Container,
   CssBaseline,
-  Grid,
-  useMediaQuery,
 } from '@material-ui/core';
 
-type ItemType = {
-  id: string;
-  content: string;
-}
-
-const reorder = (
-  list: ItemType[],
-  startIndex: number,
-  endIndex: number
-): ItemType[] => {
-  const result = Array.from(list);
-  const [removed] = result.splice(startIndex, 1);
-  result.splice(endIndex, 0, removed);
-
-  return result;
-};
-
-export const HomePage = React.memo (() => {
-  // classNameのインポート
+export const HomePage: React.FC = () => {
+  /**
+   * { スピナー, api通信の結果通知の状態管理 }
+   * cssの定義
+   * Boards api import
+   * react-router-dom URLルーティングに使う
+   * ユーザー名をURLパラメータから取得
+   */
+  const { progress, status, setStatus } = useContext<any>(FeedbackContext);
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
+  const {
+    boardsState,
+    getBoards,
+    createBoard,
+    updateBoard,
+    deleteBoard,
+    deleteBoardState
+  } = useContext<any>(ApiBoardsContext);
+  const history = useHistory();
+  const { user } = useParams<any>();
 
-  // iPad Pro(1024px) < PC(1025px以上)を基準にレスポンシブ対応
-  const matches = useMediaQuery('(min-width: 1025px)');
-
-  // dragItemのデータ 表示する内容のstateをBoardItemContextから読み取る
-  const { BoardItemState, setBoardItemState } = useContext<any>(BoardItemContext);
-
-  const onDragEnd = (result: any) => {
-    if (!result.destination) {
-      return;
-    }
-
-    if (result.destination.index === result.source.index) {
-      return;
-    }
-
-    const items = reorder(
-      BoardItemState.items,
-      result.source.index,
-      result.destination.index
-    );
-
-    setBoardItemState({ items });
-  };
-
-  // width 1024px以下での表示レイアウト切り替え定義
-  const [previewState, setPreviewState] = useState<{
-    card: boolean,
-    preview: boolean,
-  }>({card: true, preview: false });
+  // 最初のレンダー時にボードを取得する
+  useEffect(() => {
+    getBoards();
+  }, []);
 
   return (
     <>
       <CssBaseline />
-      <Header
-        title={'makala'}
-      />
+      <Header />
       <Container maxWidth='xl' className={classes.main_container}>
-        {matches ? (
-          // PCレイアウト width >= 1025px
-          <Grid container spacing={2}>
-            <Grid item xs={6}>
-              <Container maxWidth='xl'>
-                <DragBoardList
-                  items={BoardItemState.items}
-                  onDragEnd={onDragEnd}
-                />
-              </Container>
-            </Grid>
-            <Grid item xs={6}>
-              <Container maxWidth='xl'>
-                <Preview
-                  items={BoardItemState.items}
-                />
-              </Container>
-            </Grid>
-          </Grid>
-        ) : (
-          // タブレット・スマホレイアウト width <= 1024px
-          <Container maxWidth='xl'>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <ButtonGroup
-                  // アクティブならボタンを非表示にする
-                  disabledCard={previewState.card && true}
-                  disabledPreview={previewState.preview && true}
-                  cardOnClick={() => {
-                    setPreviewState({ ...previewState, card: true, preview: false})
-                  }}
-                  previewOnClick={() => {
-                    setPreviewState({ ...previewState, card: false, preview: true})
-                  }}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                {/* cardOnClickでカード表示したら */}
-                {previewState.card &&
-                  <DragBoardList
-                    items={BoardItemState.items}
-                    onDragEnd={onDragEnd}
-                  />
-                }
-                {/* previewOnClickでプレビュー表示したら */}
-                {previewState.preview &&
-                  <Preview
-                    items={BoardItemState.items}
-                  />
-                }
-              </Grid>
-            </Grid>
-          </Container>
-        )}
+        <Boards
+          boards={boardsState}
+          // 新しいボードの作成メソッド
+          createOnClick={(data, user_id) => {
+            const postData = {
+              'user_id': user_id,
+              'board_name': data.board_name
+            }
+            createBoard(postData);
+          }}
+          // ボード名の更新メソッド
+          updateOnClick={(data, id) => {
+            const postData = {
+              'id': id,
+              'board_name': data
+            }
+            updateBoard(postData);
+          }}
+          // ボードの削除メソッド ApiBoardsContextに定義したメソッドを利用
+          deleteOnClick={(id, index) => {
+            deleteBoard(id);
+            deleteBoardState(index);
+          }}
+          // ボードと関連づいたカードを表示するメソッド
+          showOnClick={(name) => {
+            history.push(`/${user}/${name}/cards`);
+          }}
+        />
       </Container>
+
+      <Spinner open={progress} />
+      <Notice
+        open={status.open}
+        type={status.type}
+        message={status.message}
+        onClose={() => {
+          setStatus({ ...status, open: false });
+        }}
+      />
     </>
-  )
-})
+  );
+}

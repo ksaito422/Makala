@@ -1,15 +1,27 @@
 import React, { createContext } from 'react';
 import { StylesContextProvider } from './childContexts/StylesContext';
-import { BoardItemContextProvider } from './childContexts/BoardItemContext';
+import { FeedbackContextProvider } from './childContexts/FeedbackContext';
+import { AuthContextProvider } from './childContexts/AuthContext';
+import { ApiBoardsContextProvider } from './childContexts/ApiBoardsContext';
+import { ApiCardsContextProvider } from './childContexts/ApiCardsContext';
+import { ModalPropsContextProvider } from './childContexts/ModalPropsContext';
 
 export const TotalContext = createContext({});
 
 export const TotalContextProvider: React.FC = props => {
   return (
     <StylesContextProvider>
-      <BoardItemContextProvider>
-        {props.children}
-      </BoardItemContextProvider>
+      <FeedbackContextProvider>
+        <AuthContextProvider>
+          <ApiBoardsContextProvider>
+            <ApiCardsContextProvider>
+              <ModalPropsContextProvider>
+                {props.children}
+              </ModalPropsContextProvider>
+            </ApiCardsContextProvider>
+          </ApiBoardsContextProvider>
+        </AuthContextProvider>
+      </FeedbackContextProvider>
     </StylesContextProvider>
-  )
+  );
 }
