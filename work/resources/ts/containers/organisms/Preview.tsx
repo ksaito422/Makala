@@ -4,6 +4,7 @@ import { DownloadIcon } from '../../components/atoms/DownloadIcon';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import {
   Container,
+  Grid,
   Paper
 } from '@material-ui/core';
 
@@ -46,12 +47,16 @@ export const Preview: React.FC<Props> = (props) => {
   return (
     <>
       <Container maxWidth='lg'>
-        <Paper elevation={3} className={classes.preview}>
-          <MarkdownPreview source={previewText} />
-        </Paper>
-        <div className={classes.centerPlacement}>
-          <DownloadIcon onClick={downloadFile} />
-        </div>
+        <Grid container spacing={4}>
+          <Grid item xs={12}>
+            <Paper elevation={3} className={classes.preview}>
+              <MarkdownPreview source={previewText} />
+            </Paper>
+          </Grid>
+          <Grid item xs={12} className={classes.centerPlacement}>
+            <DownloadIcon onClick={downloadFile} />
+          </Grid>
+        </Grid>
       </Container>
     </>
   );
