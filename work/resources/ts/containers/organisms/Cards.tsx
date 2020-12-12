@@ -7,6 +7,7 @@ import { ModalCard } from '../../components/molecules/ModalCard';
 import { ModalPropsContext } from '../../contexts/childContexts/ModalPropsContext';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import { ApiCardsContext } from '../../contexts/childContexts/ApiCardsContext';
+import { Grid } from '@material-ui/core';
 
 type Props = {
   items?: any,
@@ -47,52 +48,56 @@ export const Cards = React.memo<Props> ((props) => {
 
   return (
     <>
-      <DragDropContext onDragEnd={props.onDragEnd}>
-        <Droppable droppableId="list">
-          {provided => (
-            <div ref={provided.innerRef} className={classes.drop_able}>
-              {props.items.map((
-                item: {
-                  id: string,
-                  title: string,
-                  content: string,
-                },
-                index: number
-                ) => (
-                <DragCard
-                  item={item}
-                  index={index}
-                  key={item.id}
-                  openOnClick={() => {
-                    setModalOpenState(true);
-                    setModalValueState({
-                      ...modalValueState,
-                      id: item.id,
-                      card_name: item.title,
-                      card_content: item.content,
-                    })
-                  }}
-                  deleteOnClick={() => {
-                    props.deleteOnClick(item.id);
-                  }}
-                />
-              ))}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-      </DragDropContext>
-      <div className={classes.centerPlacement}>
-        <AddIcon onClick={() => {
-          setModalOpenState(true);
-          setCreateState(true);
-          setModalValueState({
-            ...modalValueState,
-            id: String(cardsState.numberMade),
-          });
-        }}
-        />
-      </div>
+      <Grid container spacing={4}>
+        <Grid item xs={12}>
+          <DragDropContext onDragEnd={props.onDragEnd}>
+            <Droppable droppableId="list">
+              {provided => (
+                <div ref={provided.innerRef} className={classes.drop_able}>
+                  {props.items.map((
+                    item: {
+                      id: string,
+                      title: string,
+                      content: string,
+                    },
+                    index: number
+                    ) => (
+                    <DragCard
+                      item={item}
+                      index={index}
+                      key={item.id}
+                      openOnClick={() => {
+                        setModalOpenState(true);
+                        setModalValueState({
+                          ...modalValueState,
+                          id: item.id,
+                          card_name: item.title,
+                          card_content: item.content,
+                        })
+                      }}
+                      deleteOnClick={() => {
+                        props.deleteOnClick(item.id);
+                      }}
+                    />
+                  ))}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          </DragDropContext>
+        </Grid>
+        <Grid item xs={12} className={classes.centerPlacement}>
+          <AddIcon onClick={() => {
+            setModalOpenState(true);
+            setCreateState(true);
+            setModalValueState({
+              ...modalValueState,
+              id: String(cardsState.numberMade),
+            });
+          }}
+          />
+        </Grid>
+      </Grid>
       <ModalWindow modalOpen={modalOpenState} modalOnClose={modalClose}>
         <ModalCard
           modalOnClose={modalClose}

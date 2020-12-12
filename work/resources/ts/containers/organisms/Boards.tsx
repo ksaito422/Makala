@@ -8,6 +8,7 @@ import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import {
   Button,
   Container,
+  Grid,
   IconButton,
   List,
   ListItem,
@@ -56,60 +57,64 @@ export const Boards: React.FC<Props> = (props) => {
   return (
     <>
       <Container maxWidth='sm'>
-        <Paper elevation={3}>
-          <List>
-            {props.boards.map((
-              board: {
-                id: number,
-                board_name: string,
-              },
-              index: number
-              ) => (
-              <ListItem key={index}>
-                <ListItemIcon>
-                  <IconButton
-                    onClick={() => {
-                      setModalOpenState(true);
-                      setModalValueState({
-                        ...modalValueState,
-                        id: board.id,
-                        board_name: board.board_name,
-                        index: index
-                      });
-                    }}
-                  >
-                    <CreateIcon />
-                  </IconButton>
-                </ListItemIcon>
-                <Button
-                  classes={{
-                    label: classes.label,
-                  }}
-                  fullWidth
-                  onClick={() => {
-                    props.showOnClick(board.board_name)
-                  }}
-                >
-                  <ListItemText primary={board.board_name} />
-                </Button>
-                <ListItemSecondaryAction>
-                  <CloseIcon onClick={() => {
-                    modalClose(),
-                    props.deleteOnClick(board.id, index)
-                  }}
-                  />
-                </ListItemSecondaryAction>
-              </ListItem>
-              ))}
-          </List>
-        </Paper>
-        <div className={classes.centerPlacement}>
-          <AddIcon onClick={() => {
-            setModalOpenState(true);
-            setCreateState(true);
-          }}
-          />
-        </div>
+        <Grid container spacing={4}>
+          <Grid item xs={12}>
+            <Paper elevation={3}>
+              <List>
+                {props.boards.map((
+                  board: {
+                    id: number,
+                    board_name: string,
+                  },
+                  index: number
+                  ) => (
+                  <ListItem key={index}>
+                    <ListItemIcon>
+                      <IconButton
+                        onClick={() => {
+                          setModalOpenState(true);
+                          setModalValueState({
+                            ...modalValueState,
+                            id: board.id,
+                            board_name: board.board_name,
+                            index: index
+                          });
+                        }}
+                      >
+                        <CreateIcon />
+                      </IconButton>
+                    </ListItemIcon>
+                    <Button
+                      classes={{
+                        label: classes.label,
+                      }}
+                      fullWidth
+                      onClick={() => {
+                        props.showOnClick(board.board_name)
+                      }}
+                    >
+                      <ListItemText primary={board.board_name} />
+                    </Button>
+                    <ListItemSecondaryAction>
+                      <CloseIcon onClick={() => {
+                        modalClose(),
+                        props.deleteOnClick(board.id, index)
+                      }}
+                      />
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                  ))}
+              </List>
+            </Paper>
+          </Grid>
+          <Grid item xs={12} className={classes.centerPlacement}>
+            <AddIcon onClick={() => {
+              setModalOpenState(true);
+              setCreateState(true);
+            }}
+            />
+          </Grid>
+        </Grid>
       </Container>
       <ModalWindow modalOpen={modalOpenState} modalOnClose={modalClose}>
         <ModalBoard

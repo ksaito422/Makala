@@ -39,6 +39,7 @@ export const ModalBoard: React.FC<Props> = (props) => {
             props.postOnClick(data, user_id);
           })}
         >
+          <Grid container spacing={4}>
           <Grid item xs={12}>
             <TextForm
               name='board_name'
@@ -57,6 +58,7 @@ export const ModalBoard: React.FC<Props> = (props) => {
           </Grid>
           <Grid item xs={12} className={classes.centerPlacement}>
             <SubmitIcon type='submit' />
+          </Grid>
           </Grid>
         </form>
       </Grid>
