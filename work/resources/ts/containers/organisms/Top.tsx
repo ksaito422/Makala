@@ -49,10 +49,10 @@ export const Top: React.FC<Props> = (props) => {
   const CommonTutorial = () => {
     return (
       <>
-        <Typography variant='h4'>Welcome to makala.</Typography>
+        <Typography variant='h4'>Welcome to Makala.</Typography>
         <br />
         <Typography variant='subtitle1'>
-          makalaは、文章構成を考案・構築するためのサービスです。<br />
+          Makalaは、文章構成を考案・構築するためのサービスです。<br />
           いつ・どこにいても、ブログや記事の内容をささっと書き残すことができます。
         </Typography>
       </>
