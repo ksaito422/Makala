@@ -5,6 +5,10 @@ COPY --from=composer:1.10 /usr/bin/composer /usr/bin/composer
 COPY --from=node:10.22 /usr/local/bin /usr/local/bin
 COPY --from=node:10.22 /usr/local/lib /usr/local/lib
 
+# AWS ECRにpushするdocker imageを作成する時には下記のコメントアウトを解除する
+# COPY ./docker/app/php.ini /usr/local/etc/php/php.ini
+# COPY . /var/www/html
+
 RUN apt-get update \
 && apt-get install -y \
 git \
