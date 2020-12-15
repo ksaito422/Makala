@@ -17,5 +17,9 @@ unzip \
 vim \
 && docker-php-ext-install pdo_mysql bcmath
 
+# webサーバー<nginx>にアクセス権を与えるため
+# アクセス権限与えないと、laravel関連のエラー多発するため
+RUN chown -R www-data:www-data /var/www/html
+
 WORKDIR /var/www/html/work
 
