@@ -1,6 +1,6 @@
 import React, { useState, createContext, useContext } from 'react';
 import { FeedbackContext } from './FeedbackContext';
-import axios from 'axios';
+import { instance } from '../../config/axios.config';
 
 export const ApiCardsContext = createContext({});
 
@@ -19,11 +19,10 @@ export const ApiCardsContextProvider: React.FC = (props) => {
     await setProgress(true);
     const token = localStorage.getItem('makala_token');
 
-    await axios({
+    await instance({
       method: 'GET',
-      url: `/api/v1/cards/${board_name}`,
+      url: `api/v1/cards/${board_name}`,
       headers: {
-        'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       }
     })
@@ -60,12 +59,11 @@ export const ApiCardsContextProvider: React.FC = (props) => {
       await setProgress(true);
       const token = localStorage.getItem('makala_token');
 
-      await axios({
+      await instance({
         method: 'POST',
-        url: `/api/v1/cards`,
+        url: `api/v1/cards`,
         data: data,
         headers: {
-          'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
         }
       })
@@ -105,12 +103,11 @@ export const ApiCardsContextProvider: React.FC = (props) => {
       await setProgress(true);
       const token = localStorage.getItem('makala_token');
 
-      await axios({
+      await instance({
         method: 'PUT',
-        url: `/api/v1/cards/${id}`,
+        url: `api/v1/cards/${id}`,
         data: data,
         headers: {
-          'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
         }
       })
@@ -145,11 +142,10 @@ export const ApiCardsContextProvider: React.FC = (props) => {
     await setProgress(true);
     const token = localStorage.getItem('makala_token');
 
-    await axios({
+    await instance({
       method: 'DELETE',
-      url: `/api/v1/cards/${id}`,
+      url: `api/v1/cards/${id}`,
       headers: {
-        'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       }
     })

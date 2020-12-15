@@ -1,7 +1,7 @@
 import React, { useState, createContext, useContext } from 'react';
 import { FeedbackContext } from './FeedbackContext';
 import { AuthContext } from './AuthContext';
-import axios from 'axios';
+import { instance } from '../../config/axios.config';
 
 export const ApiBoardsContext = createContext({});
 
@@ -22,11 +22,10 @@ export const ApiBoardsContextProvider: React.FC = (props) => {
     await setProgress(true);
     const token = localStorage.getItem('makala_token');
 
-    await axios({
+    await instance({
       method: 'GET',
-      url: `/api/v1/boards/${authUserState.name}`,
+      url: `api/v1/boards/${authUserState.name}`,
       headers: {
-        'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       }
     })
@@ -61,12 +60,11 @@ export const ApiBoardsContextProvider: React.FC = (props) => {
       await setProgress(true);
       const token = localStorage.getItem('makala_token');
 
-      await axios({
+      await instance({
         method: 'POST',
-        url: `/api/v1/boards`,
+        url: `api/v1/boards`,
         data: data,
         headers: {
-          'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
         }
       })
@@ -105,12 +103,11 @@ export const ApiBoardsContextProvider: React.FC = (props) => {
       await setProgress(true);
       const token = localStorage.getItem('makala_token');
 
-      await axios({
+      await instance({
         method: 'PUT',
-        url: `/api/v1/boards/${data.id}`,
+        url: `api/v1/boards/${data.id}`,
         data: data.board_name,
         headers: {
-          'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
         }
       })
@@ -157,11 +154,10 @@ export const ApiBoardsContextProvider: React.FC = (props) => {
     await setProgress(true);
     const token = localStorage.getItem('makala_token');
 
-    await axios({
+    await instance({
       method: 'DELETE',
-      url: `/api/v1/boards/${id}`,
+      url: `api/v1/boards/${id}`,
       headers: {
-        'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       }
     })

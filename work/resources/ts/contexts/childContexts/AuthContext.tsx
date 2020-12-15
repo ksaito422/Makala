@@ -1,6 +1,6 @@
 import React, { useState, createContext, useContext } from 'react';
 import { FeedbackContext } from './FeedbackContext';
-import axios from 'axios';
+import { instance } from '../../config/axios.config';
 
 type AuthUserState = {
     id: number | null,
@@ -40,13 +40,10 @@ export const AuthContextProvider: React.FC = (props) => {
     // スピナーon
     await setProgress(true);
 
-    await axios({
+    await instance({
       method: 'POST',
       url: 'api/auth/login',
       data: data,
-      headers: {
-        'Content-Type': 'application/json',
-      }
     })
     .then((res) => {
       // ローカルストレージに認証情報を保管 *脆弱性のことはあとで考える
@@ -89,13 +86,10 @@ export const AuthContextProvider: React.FC = (props) => {
     // スピナーon
     await setProgress(true);
 
-    await axios({
+    await instance({
       method: 'POST',
       url: 'api/auth/register',
       data: data,
-      headers: {
-        'Content-Type': 'application/json',
-      }
     })
     .then((res) => {
       // ローカルストレージに認証情報を保管 *脆弱性のことはあとで考える
@@ -135,12 +129,10 @@ export const AuthContextProvider: React.FC = (props) => {
     await setProgress(true);
     const token = localStorage.getItem('makala_token');
 
-    await axios({
+    await instance({
       method: 'POST',
-      baseURL: 'http://localhost:8080/',
       url: 'api/auth/logout',
       headers: {
-        'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       }
     })
@@ -179,12 +171,10 @@ export const AuthContextProvider: React.FC = (props) => {
     // トークン取得
     const token = localStorage.getItem('makala_token');
 
-    await axios({
+    await instance({
       method: 'POST',
-      baseURL: 'http://localhost:8080',
       url: 'api/auth/refresh',
       headers: {
-        'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       }
     })
@@ -205,12 +195,10 @@ export const AuthContextProvider: React.FC = (props) => {
     await setProgress(true);
     const token = localStorage.getItem('makala_token');
 
-    await axios({
+    await instance({
       method: 'POST',
-      baseURL: 'http://localhost:8080/',
       url: 'api/auth/me',
       headers: {
-        'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       }
     })
