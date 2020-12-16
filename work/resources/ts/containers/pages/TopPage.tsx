@@ -15,13 +15,13 @@ export const TopPage: React.FC = () => {
   /**
    * { api通信中のスピナー表示のon/off管理 }
    * cssの定義
-   * { ログインユーザーの情報 }
+   * { ログインユーザーの情報, ゲストログイン機能 }
    * react-router-dom URLルーティングに使う
    */
   const { progress } = useContext<any>(FeedbackContext);
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
-  const { authUserState } = useContext<any>(AuthContext);
+  const { authUserState, authGuestLogin } = useContext<any>(AuthContext);
   const history = useHistory();
 
   return (
@@ -35,6 +35,10 @@ export const TopPage: React.FC = () => {
           }}
           loginOnClick={() => {
             history.push('/login');
+          }}
+          guestOnClick={() => {
+            authGuestLogin();
+            history.push(`/${authUserState.name}/home`);
           }}
           boardOnClick={() => {
             history.push(`/${authUserState.name}/home`)

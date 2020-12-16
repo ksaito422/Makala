@@ -14,6 +14,7 @@ import {
 type Props = {
   registerOnClick: () => void,
   loginOnClick: () => void,
+  guestOnClick: () => void,
   boardOnClick: () => void,
 }
 
@@ -87,6 +88,11 @@ export const Top: React.FC<Props> = (props) => {
                             <Grid item xs={12}>
                               <Button size='large' onClick={props.loginOnClick}>
                                 ログインする
+                              </Button>
+                            </Grid>
+                            <Grid item xs={12}>
+                              <Button size='large' onClick={props.guestOnClick}>
+                                ゲスト利用する
                               </Button>
                             </Grid>
                           </>
