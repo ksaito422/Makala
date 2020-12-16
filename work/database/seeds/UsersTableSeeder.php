@@ -14,14 +14,14 @@ class UsersTableSeeder extends Seeder
     {
         DB::table('users')->insert([
             [
-                'name' => 'test-user',
-                'email' => 'test-user@example.com',
-                'password' => \Hash::make('test1234')
+                'name' => 'guest',
+                'email' => 'guest@example.com',
+                'password' => \Hash::make('guest1234')
             ],
             [
-                'name' => 'saito',
-                'email' => 'saito@example.com',
-                'password' => \Hash::make('saito1234')
+                'name' => 'test',
+                'email' => 'test@example.com',
+                'password' => \Hash::make('test1234')
             ]
         ]);
     }
