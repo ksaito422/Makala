@@ -143,6 +143,11 @@ export const Top: React.FC<Props> = (props) => {
                                 ログインする
                               </Button>
                             </Grid>
+                            <Grid item xs={12}>
+                              <Button size='large' onClick={props.guestOnClick}>
+                                ゲスト利用する
+                              </Button>
+                            </Grid>
                           </>
                         ) : (
                           // ログインユーザーなら表示
