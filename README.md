@@ -32,7 +32,8 @@ Makala
 - React-Markdown-Preview 1.0.9
 
 # AWS(インフラ)構成図
-あとで載せる
+<img width="760" alt="aws_makala_image" src="https://user-images.githubusercontent.com/62602802/102435192-899d8180-4059-11eb-81f3-d3dc7b712753.png">
+
 
 # 機能一覧
 - ユーザー登録
