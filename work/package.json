@@ -2,12 +2,12 @@
     "private": true,
     "scripts": {
         "dev": "npm run development",
-        "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "development": "cross-env NODE_ENV=development ENV_FILE=./.env node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
         "watch": "npm run development -- --watch",
         "watch-poll": "npm run watch -- --watch-poll",
         "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
         "prod": "npm run production",
-        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "production": "cross-env NODE_ENV=production ENV_FILE=./.env.production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
         "create-component": "node ./resources/ts/tools/createComponent.js -c"
     },
     "devDependencies": {
@@ -34,6 +34,7 @@
         "@types/react-router-dom": "^5.1.6",
         "@uiw/react-markdown-preview": "^1.0.9",
         "commander": "^6.2.0",
+        "mix-env-file": "^0.1.0",
         "react": "^16.14.0",
         "react-beautiful-dnd": "^13.0.0",
         "react-dom": "^16.2.0",
