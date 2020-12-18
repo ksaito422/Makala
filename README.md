@@ -20,7 +20,7 @@ Makala
 - Nginx
 - Docker / Docker-compose
 - AWS
-  - EC2 / ECS / ECR / RDS / Route53
+  - EC2 / ECS / ECR / RDS / Route53 / ALB / ACM
 - PHPUnit
 
 ### ライブラリ
@@ -32,7 +32,7 @@ Makala
 - React-Markdown-Preview 1.0.9
 
 # AWS(インフラ)構成図
-<img width="760" alt="aws_makala_image" src="https://user-images.githubusercontent.com/62602802/102435192-899d8180-4059-11eb-81f3-d3dc7b712753.png">
+![スクリーンショット 2020-12-18 9 57 21](https://user-images.githubusercontent.com/62602802/102566185-54109b00-4122-11eb-8f0d-2ff1634e3d0e.png)
 
 
 # 機能一覧
