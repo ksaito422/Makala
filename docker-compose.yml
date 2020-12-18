@@ -1,9 +1,10 @@
 version: "3.8"
 services:
   web:
-    # AWS ECRリポジトリのdocker imageを利用
-    image: 917620984613.dkr.ecr.ap-northeast-1.amazonaws.com/web-makala:latest
-    # image: nginx:1.18
+    build:
+      context: ./
+      dockerfile: ./docker/web/Dockerfile
+    image: nginx:1.18
     depends_on:
       - app
     ports:
@@ -14,9 +15,9 @@ services:
     container_name: web
 
   app:
-    # AWS ECRリポジトリのdocker imageを利用
-    image: 917620984613.dkr.ecr.ap-northeast-1.amazonaws.com/app-makala:latest
-    # build: ./docker/app
+    build:
+      context: ./
+      dockerfile: ./docker/app/Dockerfile
     depends_on:
       - db
     volumes:
