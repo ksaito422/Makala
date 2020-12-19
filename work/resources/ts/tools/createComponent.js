@@ -14,29 +14,29 @@ if (!program.component) {
   program.help();
 }
 
-// '/'ごとに分けて配列にする    例:[coponents, atoms, originalComponent]
+// '/'ごとに分けて配列にする    例:[atoms, originalComponent]
 const argument = program.component.split("/");
-const dir = argument[0];
-const granularity = argument[1];
-const component = argument[2];
+const granularity = argument[0];
+const component = argument[1];
 
-// componentsならatoms or moleculesのみ許可
-if (["components"].includes(dir)){
-  if (!["atoms", "molecules"].includes(granularity)){
-    console.error(
-      "ERROR: For components, only atoms and molecules can be specified."
-    );
-    return;
-  }
+// 下に表記した粒度以外が指定されたらエラー吐いてリターンする
+if (!['atoms', 'molecules', 'organisms'].includes(granularity)) {
+  console.error(
+    'ERROR: only atoms and molecules and organisms can be specified.'
+  );
+  return;
 }
-// containersならorganismsのみ許可
-if (["containers"].includes(dir)){
-  if (!["organisms"].includes(granularity)){
-    console.error(
-      "ERROR: For containers, only organisms can be specified."
-    );
-    return;
-  }
+
+// components or containersのディレクトリを代入
+let dir = null;
+
+// atoms or moleculesなら dir = components
+if (['atoms', 'molecules'].includes(granularity)) {
+  dir = 'components';
+}
+// organismsなら dir = containers
+if (['organisms'].includes(granularity)) {
+  dir = 'containers';
 }
 
 // ディレクトリがなかったら作る
@@ -45,8 +45,8 @@ if (!fs.existsSync(`./resources/ts/${dir}/${granularity}`)) {
 }
 
 // コピー元となるファイル
-const template = "./resources/ts/tools/componentTemplates/Component.tsx";
 // コピー先のディレクトリ
+const template = "./resources/ts/tools/componentTemplates/Component.tsx";
 const dests = `./resources/ts/${dir}/${granularity}/${component}.tsx`;
 
 // 既にファイルが存在する場合は上書きしないようにリターンする
