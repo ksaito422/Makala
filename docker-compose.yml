@@ -1,10 +1,10 @@
 version: "3.8"
 services:
   web:
+    # image: nginx:1.18
     build:
       context: ./
       dockerfile: ./docker/web/Dockerfile
-    image: nginx:1.18
     depends_on:
       - app
     ports:
@@ -26,10 +26,14 @@ services:
     container_name: app
 
   db:
-    image: mysql:8.0
+    # image: mysql:8.0
+    build:
+      context: ./
+      dockerfile: ./docker/db/Dockerfile
     volumes:
       - ./docker/db/data:/var/lib/mysql
       - ./docker/db/my.cnf:/etc/mysql/conf.d
+    command: bash -c 'usermod -o -u $LINUX_MYSQL_UID mysql; groupmod -o -g $LINUX_MYSQL_GID mysql; chown -R mysql:root /var/run/mysqld/ /var/log/mysql/ /var/lib/mysql/; /entrypoint.sh mysqld --user=mysql --console'
     ports:
       - "3306:3306"
     environment:

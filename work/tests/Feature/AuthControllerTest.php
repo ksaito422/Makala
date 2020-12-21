@@ -30,7 +30,7 @@ class AuthControllerTest extends TestCase
         ];
         // DBに存在するユーザー
         $real_user = [
-            'email' => 'test-user@example.com',
+            'email' => 'test@example.com',
             'password' => 'test1234'
         ];
 
