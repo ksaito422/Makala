@@ -57,7 +57,7 @@ export const ModalBoard: React.FC<Props> = (props) => {
             />
           </Grid>
           <Grid item xs={12} className={classes.centerPlacement}>
-            <SubmitIcon type='submit' />
+            <SubmitIcon />
           </Grid>
           </Grid>
         </form>
