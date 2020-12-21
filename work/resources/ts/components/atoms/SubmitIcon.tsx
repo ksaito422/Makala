@@ -2,13 +2,9 @@ import React from 'react';
 import { Fab } from '@material-ui/core';
 import { SystemUpdateAlt } from '@material-ui/icons';
 
-type Props = {
-  type: 'submit' | 'reset' | 'button',
-}
-
-export const SubmitIcon: React.FC<Props> = (props) => {
+export const SubmitIcon: React.FC = () => {
   return (
-    <Fab color='primary' type={props.type}>
+    <Fab color='primary' type='submit'>
       <SystemUpdateAlt />
     </Fab>
   );
