@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Avatar スナップショットテスト 1`] = `
+<button
+  aria-controls="avatar"
+  aria-haspopup={true}
+  className="MuiButtonBase-root MuiIconButton-root"
+  disabled={false}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onDragLeave={[Function]}
+  onFocus={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onMouseDown={[Function]}
+  onMouseLeave={[Function]}
+  onMouseUp={[Function]}
+  onTouchEnd={[Function]}
+  onTouchMove={[Function]}
+  onTouchStart={[Function]}
+  tabIndex={0}
+  type="button"
+>
+  <span
+    className="MuiIconButton-label"
+  >
+    <div
+      className="MuiAvatar-root MuiAvatar-circle makeStyles-avatar-33 makeStyles-avatar_small-34 MuiAvatar-colorDefault"
+    >
+      a
+    </div>
+  </span>
+</button>
+`;
