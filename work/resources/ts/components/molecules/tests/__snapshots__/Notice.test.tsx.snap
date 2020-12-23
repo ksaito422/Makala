@@ -1,0 +1,246 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Notice スナップショットテスト 1`] = `
+<Component
+  message="string"
+  onClose={[Function]}
+  open={true}
+  type="success"
+>
+  <WithStyles(ForwardRef(Snackbar))
+    autoHideDuration={3000}
+    onClose={[Function]}
+    open={true}
+  >
+    <ForwardRef(Snackbar)
+      autoHideDuration={3000}
+      classes={
+        Object {
+          "anchorOriginBottomCenter": "MuiSnackbar-anchorOriginBottomCenter",
+          "anchorOriginBottomLeft": "MuiSnackbar-anchorOriginBottomLeft",
+          "anchorOriginBottomRight": "MuiSnackbar-anchorOriginBottomRight",
+          "anchorOriginTopCenter": "MuiSnackbar-anchorOriginTopCenter",
+          "anchorOriginTopLeft": "MuiSnackbar-anchorOriginTopLeft",
+          "anchorOriginTopRight": "MuiSnackbar-anchorOriginTopRight",
+          "root": "MuiSnackbar-root",
+        }
+      }
+      onClose={[Function]}
+      open={true}
+    >
+      <ClickAwayListener
+        onClickAway={[Function]}
+      >
+        <div
+          className="MuiSnackbar-root MuiSnackbar-anchorOriginBottomCenter"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onTouchEnd={[Function]}
+        >
+          <ForwardRef(Grow)
+            appear={true}
+            direction="up"
+            in={true}
+            onEnter={[Function]}
+            onExited={[Function]}
+            timeout={
+              Object {
+                "enter": 225,
+                "exit": 195,
+              }
+            }
+          >
+            <Transition
+              addEndListener={[Function]}
+              appear={true}
+              direction="up"
+              enter={true}
+              exit={true}
+              in={true}
+              mountOnEnter={false}
+              onEnter={[Function]}
+              onEntered={[Function]}
+              onEntering={[Function]}
+              onExit={[Function]}
+              onExited={[Function]}
+              onExiting={[Function]}
+              timeout={
+                Object {
+                  "enter": 225,
+                  "exit": 195,
+                }
+              }
+              unmountOnExit={false}
+            >
+              <WithStyles(ForwardRef(Alert))
+                direction="up"
+                severity="success"
+                style={
+                  Object {
+                    "opacity": 1,
+                    "transform": "scale(1, 1)",
+                    "visibility": undefined,
+                  }
+                }
+              >
+                <ForwardRef(Alert)
+                  classes={
+                    Object {
+                      "action": "MuiAlert-action",
+                      "filledError": "MuiAlert-filledError",
+                      "filledInfo": "MuiAlert-filledInfo",
+                      "filledSuccess": "MuiAlert-filledSuccess",
+                      "filledWarning": "MuiAlert-filledWarning",
+                      "icon": "MuiAlert-icon",
+                      "message": "MuiAlert-message",
+                      "outlinedError": "MuiAlert-outlinedError",
+                      "outlinedInfo": "MuiAlert-outlinedInfo",
+                      "outlinedSuccess": "MuiAlert-outlinedSuccess",
+                      "outlinedWarning": "MuiAlert-outlinedWarning",
+                      "root": "MuiAlert-root",
+                      "standardError": "MuiAlert-standardError",
+                      "standardInfo": "MuiAlert-standardInfo",
+                      "standardSuccess": "MuiAlert-standardSuccess",
+                      "standardWarning": "MuiAlert-standardWarning",
+                    }
+                  }
+                  direction="up"
+                  severity="success"
+                  style={
+                    Object {
+                      "opacity": 1,
+                      "transform": "scale(1, 1)",
+                      "visibility": undefined,
+                    }
+                  }
+                >
+                  <WithStyles(ForwardRef(Paper))
+                    className="MuiAlert-root MuiAlert-standardSuccess"
+                    direction="up"
+                    elevation={0}
+                    role="alert"
+                    square={true}
+                    style={
+                      Object {
+                        "opacity": 1,
+                        "transform": "scale(1, 1)",
+                        "visibility": undefined,
+                      }
+                    }
+                  >
+                    <ForwardRef(Paper)
+                      className="MuiAlert-root MuiAlert-standardSuccess"
+                      classes={
+                        Object {
+                          "elevation0": "MuiPaper-elevation0",
+                          "elevation1": "MuiPaper-elevation1",
+                          "elevation10": "MuiPaper-elevation10",
+                          "elevation11": "MuiPaper-elevation11",
+                          "elevation12": "MuiPaper-elevation12",
+                          "elevation13": "MuiPaper-elevation13",
+                          "elevation14": "MuiPaper-elevation14",
+                          "elevation15": "MuiPaper-elevation15",
+                          "elevation16": "MuiPaper-elevation16",
+                          "elevation17": "MuiPaper-elevation17",
+                          "elevation18": "MuiPaper-elevation18",
+                          "elevation19": "MuiPaper-elevation19",
+                          "elevation2": "MuiPaper-elevation2",
+                          "elevation20": "MuiPaper-elevation20",
+                          "elevation21": "MuiPaper-elevation21",
+                          "elevation22": "MuiPaper-elevation22",
+                          "elevation23": "MuiPaper-elevation23",
+                          "elevation24": "MuiPaper-elevation24",
+                          "elevation3": "MuiPaper-elevation3",
+                          "elevation4": "MuiPaper-elevation4",
+                          "elevation5": "MuiPaper-elevation5",
+                          "elevation6": "MuiPaper-elevation6",
+                          "elevation7": "MuiPaper-elevation7",
+                          "elevation8": "MuiPaper-elevation8",
+                          "elevation9": "MuiPaper-elevation9",
+                          "outlined": "MuiPaper-outlined",
+                          "root": "MuiPaper-root",
+                          "rounded": "MuiPaper-rounded",
+                        }
+                      }
+                      direction="up"
+                      elevation={0}
+                      role="alert"
+                      square={true}
+                      style={
+                        Object {
+                          "opacity": 1,
+                          "transform": "scale(1, 1)",
+                          "visibility": undefined,
+                        }
+                      }
+                    >
+                      <div
+                        className="MuiPaper-root MuiAlert-root MuiAlert-standardSuccess MuiPaper-elevation0"
+                        direction="up"
+                        role="alert"
+                        style={
+                          Object {
+                            "opacity": 1,
+                            "transform": "scale(1, 1)",
+                            "visibility": undefined,
+                          }
+                        }
+                      >
+                        <div
+                          className="MuiAlert-icon"
+                        >
+                          <ForwardRef(SuccessOutlinedIcon)
+                            fontSize="inherit"
+                          >
+                            <WithStyles(ForwardRef(SvgIcon))
+                              fontSize="inherit"
+                            >
+                              <ForwardRef(SvgIcon)
+                                classes={
+                                  Object {
+                                    "colorAction": "MuiSvgIcon-colorAction",
+                                    "colorDisabled": "MuiSvgIcon-colorDisabled",
+                                    "colorError": "MuiSvgIcon-colorError",
+                                    "colorPrimary": "MuiSvgIcon-colorPrimary",
+                                    "colorSecondary": "MuiSvgIcon-colorSecondary",
+                                    "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
+                                    "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
+                                    "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
+                                    "root": "MuiSvgIcon-root",
+                                  }
+                                }
+                                fontSize="inherit"
+                              >
+                                <svg
+                                  aria-hidden={true}
+                                  className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
+                                  focusable="false"
+                                  viewBox="0 0 24 24"
+                                >
+                                  <path
+                                    d="M20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4C12.76,4 13.5,4.11 14.2, 4.31L15.77,2.74C14.61,2.26 13.34,2 12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0, 0 22,12M7.91,10.08L6.5,11.5L11,16L21,6L19.59,4.58L11,13.17L7.91,10.08Z"
+                                  />
+                                </svg>
+                              </ForwardRef(SvgIcon)>
+                            </WithStyles(ForwardRef(SvgIcon))>
+                          </ForwardRef(SuccessOutlinedIcon)>
+                        </div>
+                        <div
+                          className="MuiAlert-message"
+                        >
+                          string
+                        </div>
+                      </div>
+                    </ForwardRef(Paper)>
+                  </WithStyles(ForwardRef(Paper))>
+                </ForwardRef(Alert)>
+              </WithStyles(ForwardRef(Alert))>
+            </Transition>
+          </ForwardRef(Grow)>
+        </div>
+      </ClickAwayListener>
+    </ForwardRef(Snackbar)>
+  </WithStyles(ForwardRef(Snackbar))>
+</Component>
+`;
