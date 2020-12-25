@@ -1,22 +1,16 @@
 import React, { useContext } from 'react';
+import { Container, Grid, Paper, Typography, useMediaQuery } from '@material-ui/core';
 import { Button } from '../../components/atoms/Button';
 import { AccordionArea } from '../../components/molecules/AccordionArea';
 import { AuthContext } from '../../contexts/childContexts/AuthContext';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
-import {
-  Container,
-  Grid,
-  Paper,
-  Typography,
-  useMediaQuery,
-} from '@material-ui/core';
 
 type Props = {
-  registerOnClick: () => void,
-  loginOnClick: () => void,
-  guestOnClick: () => void,
-  boardOnClick: () => void,
-}
+  registerOnClick: () => void;
+  loginOnClick: () => void;
+  guestOnClick: () => void;
+  boardOnClick: () => void;
+};
 
 export const Top: React.FC<Props> = (props) => {
   /**
@@ -42,7 +36,7 @@ export const Top: React.FC<Props> = (props) => {
         </Paper>
       </>
     );
-  }
+  };
   /**
    * 共通コンポーネント化
    * CommonTutorial コンセプト
@@ -53,17 +47,18 @@ export const Top: React.FC<Props> = (props) => {
         <Typography variant='h4'>Welcome to Makala.</Typography>
         <br />
         <Typography variant='subtitle1'>
-          Makalaは、文章構成を考案・構築するためのサービスです。<br />
+          Makalaは、文章構成を考案・構築するためのサービスです。
+          <br />
           いつ・どこにいても、ブログや記事の内容をささっと書き残すことができます。
         </Typography>
       </>
     );
-  }
+  };
 
   return (
     <>
       <Container maxWidth='md'>
-        <AccordionArea defaultExpanded={true}>
+        <AccordionArea defaultExpanded>
           {matches ? (
             // PCレイアウト width >= 1101px
             <Grid container spacing={6}>
@@ -74,8 +69,12 @@ export const Top: React.FC<Props> = (props) => {
                       <CommonTutorial />
                     </Grid>
                     <Grid item xs={4}>
-                      <Grid container spacing={4} direction="column"
-                            justify="flex-end" alignItems="center"
+                      <Grid
+                        container
+                        spacing={4}
+                        direction='column'
+                        justify='flex-end'
+                        alignItems='center'
                       >
                         {!isAuth ? (
                           // ゲストユーザーなら表示
@@ -127,8 +126,12 @@ export const Top: React.FC<Props> = (props) => {
                       <CommonTutorial />
                     </Grid>
                     <Grid item xs={12}>
-                      <Grid container spacing={4} direction="column"
-                            justify="flex-end" alignItems="center"
+                      <Grid
+                        container
+                        spacing={4}
+                        direction='column'
+                        justify='flex-end'
+                        alignItems='center'
                       >
                         {!isAuth ? (
                           // ゲストユーザーなら表示
@@ -175,4 +178,4 @@ export const Top: React.FC<Props> = (props) => {
       </Container>
     </>
   );
-}
+};

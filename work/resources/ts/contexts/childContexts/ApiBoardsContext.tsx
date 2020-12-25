@@ -26,126 +26,105 @@ export const ApiBoardsContextProvider: React.FC = (props) => {
       method: 'GET',
       url: `api/v1/boards/${authUserState.name}`,
       headers: {
-        'Authorization': `Bearer ${token}`
-      }
+        Authorization: `Bearer ${token}`,
+      },
     })
-    .then((res) => {
-      // 無事データを取得できたら、boardsStateに保管
-      setBoardsState(res.data.boards);
-      return;
-    })
-    .catch(() => {
-      setStatus({
-        open: true,
-        type: 'error',
-        message: 'データの取得に失敗しました。'
+      .then((res) => {
+        // 無事データを取得できたら、boardsStateに保管
+        setBoardsState(res.data.boards);
+      })
+      .catch(() => {
+        setStatus({
+          open: true,
+          type: 'error',
+          message: 'データの取得に失敗しました。',
+        });
+      })
+      .finally(() => {
+        // スピナーoff
+        setProgress(false);
       });
-      return;
-    })
-    .finally(() => {
-      // スピナーoff
-      setProgress(false);
-      return;
-    })
-  }
+  };
 
   // ボードを作成するapiと通信
-  const createBoard = async (
-    data: {
-      user_id: number,
-      board_name: string,
-    }) => {
-      // スピナーon
-      // トークン取得
-      await setProgress(true);
-      const token = localStorage.getItem('makala_token');
+  const createBoard = async (data: { user_id: number; board_name: string }) => {
+    // スピナーon
+    // トークン取得
+    await setProgress(true);
+    const token = localStorage.getItem('makala_token');
 
-      await instance({
-        method: 'POST',
-        url: `api/v1/boards`,
-        data: data,
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      })
+    await instance({
+      method: 'POST',
+      url: `api/v1/boards`,
+      data,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((res) => {
         setStatus({
           open: true,
           type: 'success',
-          message: res.data.message
+          message: res.data.message,
         });
-        return;
       })
       .catch(() => {
         setStatus({
           open: true,
           type: 'error',
-          message: 'ボードの作成に失敗しました。'
+          message: 'ボードの作成に失敗しました。',
         });
-        return;
       })
       .finally(() => {
         // スピナーoff
         setProgress(false);
         getBoards();
-        return;
-      })
-    }
+      });
+  };
 
   // ボード名を更新するapiと通信
-  const updateBoard = async (
-    data: {
-      id: number,
-      board_name: string,
-    }) => {
-      // スピナーon
-      // トークン取得
-      await setProgress(true);
-      const token = localStorage.getItem('makala_token');
+  const updateBoard = async (data: { id: number; board_name: string }) => {
+    // スピナーon
+    // トークン取得
+    await setProgress(true);
+    const token = localStorage.getItem('makala_token');
 
-      await instance({
-        method: 'PUT',
-        url: `api/v1/boards/${data.id}`,
-        data: data.board_name,
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      })
+    await instance({
+      method: 'PUT',
+      url: `api/v1/boards/${data.id}`,
+      data: data.board_name,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((res) => {
         setStatus({
           open: true,
           type: 'success',
-          message: res.data.message
+          message: res.data.message,
         });
-        return;
       })
       .catch(() => {
         setStatus({
           open: true,
           type: 'error',
-          message: 'ボード名の変更に失敗しました。'
+          message: 'ボード名の変更に失敗しました。',
         });
-        return;
       })
       .finally(() => {
         // スピナーoff
         setProgress(false);
         getBoards();
-        return;
-      })
-    }
+      });
+  };
 
   // パフォーマンス向上させるときに使う
   // ボードの更新時に、更新部分だけを再度stateにセットし直している
-  const updateBoardState = (
-    obj: {
-      index: number,
-      board_name: string
-    }) => {
-    const newBoardsState: any = [ ...boardsState ];
+  const updateBoardState = (obj: { index: number; board_name: string }) => {
+    const newBoardsState: any = [...boardsState];
     newBoardsState[obj.index].board_name = obj.board_name;
     setBoardsState(newBoardsState);
-  }
+  };
 
   // ボードを削除するapiと通信
   const deleteBoard = async (id: number) => {
@@ -158,53 +137,51 @@ export const ApiBoardsContextProvider: React.FC = (props) => {
       method: 'DELETE',
       url: `api/v1/boards/${id}`,
       headers: {
-        'Authorization': `Bearer ${token}`
-      }
+        Authorization: `Bearer ${token}`,
+      },
     })
-    .then((res) => {
-      setStatus({
-        open: true,
-        type: 'success',
-        message: res.data.message
+      .then((res) => {
+        setStatus({
+          open: true,
+          type: 'success',
+          message: res.data.message,
+        });
+      })
+      .catch(async () => {
+        await getBoards();
+        await setStatus({
+          open: true,
+          type: 'error',
+          message: 'ボードの削除に失敗しました。',
+        });
+      })
+      .finally(() => {
+        // スピナーoff
+        setProgress(false);
       });
-      return;
-    })
-    .catch(async () => {
-      await getBoards();
-      await setStatus({
-        open: true,
-        type: 'error',
-        message: 'ボードの削除に失敗しました。'
-      });
-      return;
-    })
-    .finally(() => {
-      // スピナーoff
-      setProgress(false);
-      return;
-    })
-  }
+  };
 
   // ボードの削除時にstateから削除して、再度stateにセットし直している
   const deleteBoardState = (index: number) => {
-    const newBoardsState = [ ...boardsState ];
+    const newBoardsState = [...boardsState];
     newBoardsState.splice(index, 1);
     setBoardsState(newBoardsState);
-  }
+  };
 
   return (
-    <ApiBoardsContext.Provider value={{
-      boardsState,
-      setBoardsState,
-      getBoards,
-      createBoard,
-      updateBoard,
-      updateBoardState,
-      deleteBoard,
-      deleteBoardState,
+    <ApiBoardsContext.Provider
+      value={{
+        boardsState,
+        setBoardsState,
+        getBoards,
+        createBoard,
+        updateBoard,
+        updateBoardState,
+        deleteBoard,
+        deleteBoardState,
       }}
     >
       {props.children}
     </ApiBoardsContext.Provider>
   );
-}
+};

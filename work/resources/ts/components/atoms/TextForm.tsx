@@ -2,22 +2,22 @@ import React from 'react';
 import { TextField } from '@material-ui/core';
 
 type Props = Partial<{
-  error: boolean,
-  helperText: string,
-  multiline: boolean,
-  fullWidth: boolean,
-  rowsMax: number,
-  rows: number,
-  defaultValue: string,
-  margin: "none" | "dense" | "normal",
-  label: string,
-  name: string,
-  type: string,
-  autoComplete: string,
-  required: boolean,
-  autoFocus: boolean,
-  inputRef: any,
-}>
+  error: boolean;
+  helperText: string;
+  multiline: boolean;
+  fullWidth: boolean;
+  rowsMax: number;
+  rows: number;
+  defaultValue: string;
+  margin: 'none' | 'dense' | 'normal';
+  label: string;
+  name: string;
+  type: string;
+  autoComplete: string;
+  required: boolean;
+  autoFocus: boolean;
+  inputRef: any;
+}>;
 
 export const TextForm: React.FC<Props> = (props) => {
   return (
@@ -41,4 +41,4 @@ export const TextForm: React.FC<Props> = (props) => {
       inputRef={props.inputRef}
     />
   );
-}
+};

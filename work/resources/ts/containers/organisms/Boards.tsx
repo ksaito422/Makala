@@ -1,10 +1,4 @@
 import React, { useState, useContext } from 'react';
-import { AddIcon } from '../../components/atoms/AddIcon';
-import { CloseIcon } from '../../components/atoms/CloseIcon';
-import { ModalWindow } from '../../components/molecules/ModalWindow';
-import { ModalBoard } from '../../components/molecules/ModalBoard';
-import { ModalPropsContext } from '../../contexts/childContexts/ModalPropsContext';
-import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import {
   Button,
   Container,
@@ -16,16 +10,22 @@ import {
   ListItemText,
   ListItemSecondaryAction,
   Paper,
- } from '@material-ui/core';
+} from '@material-ui/core';
 import CreateIcon from '@material-ui/icons/Create';
+import { AddIcon } from '../../components/atoms/AddIcon';
+import { CloseIcon } from '../../components/atoms/CloseIcon';
+import { ModalWindow } from '../../components/molecules/ModalWindow';
+import { ModalBoard } from '../../components/molecules/ModalBoard';
+import { ModalPropsContext } from '../../contexts/childContexts/ModalPropsContext';
+import { StylesContext } from '../../contexts/childContexts/StylesContext';
 
 type Props = {
-  boards: any,
-  createOnClick: (data: {[x: string]: any}, user: number) => void,
-  updateOnClick: (data: {[x: string]: any}, user: number) => void,
-  deleteOnClick: (id: number, index: number) => void,
-  showOnClick: (data: string) => void,
-}
+  boards: any;
+  createOnClick: (data: { [x: string]: any }, user: number) => void;
+  updateOnClick: (data: { [x: string]: any }, user: number) => void;
+  deleteOnClick: (id: number, index: number) => void;
+  showOnClick: (data: string) => void;
+};
 
 export const Boards: React.FC<Props> = (props) => {
   /**
@@ -35,12 +35,9 @@ export const Boards: React.FC<Props> = (props) => {
    */
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
-  const {
-    modalValueState,
-    setModalValueState,
-    modalOpenState,
-    setModalOpenState
-  } = useContext<any>(ModalPropsContext);
+  const { modalValueState, setModalValueState, modalOpenState, setModalOpenState } = useContext<
+    any
+  >(ModalPropsContext);
   const [createState, setCreateState] = useState<boolean>(false);
 
   // モーダルを閉じるとき、入力値をクリア
@@ -50,7 +47,7 @@ export const Boards: React.FC<Props> = (props) => {
     setModalValueState({
       id: null,
       board_name: null,
-      index: null
+      index: null,
     });
   };
 
@@ -61,13 +58,7 @@ export const Boards: React.FC<Props> = (props) => {
           <Grid item xs={12}>
             <Paper elevation={3}>
               <List>
-                {props.boards.map((
-                  board: {
-                    id: number,
-                    board_name: string,
-                  },
-                  index: number
-                  ) => (
+                {props.boards.map((board: { id: number; board_name: string }, index: number) => (
                   <ListItem key={index}>
                     <ListItemIcon>
                       <IconButton
@@ -77,7 +68,7 @@ export const Boards: React.FC<Props> = (props) => {
                             ...modalValueState,
                             id: board.id,
                             board_name: board.board_name,
-                            index: index
+                            index,
                           });
                         }}
                       >
@@ -90,28 +81,29 @@ export const Boards: React.FC<Props> = (props) => {
                       }}
                       fullWidth
                       onClick={() => {
-                        props.showOnClick(board.board_name)
+                        props.showOnClick(board.board_name);
                       }}
                     >
                       <ListItemText primary={board.board_name} />
                     </Button>
                     <ListItemSecondaryAction>
-                      <CloseIcon onClick={() => {
-                        modalClose(),
-                        props.deleteOnClick(board.id, index)
-                      }}
+                      <CloseIcon
+                        onClick={() => {
+                          modalClose(), props.deleteOnClick(board.id, index);
+                        }}
                       />
                     </ListItemSecondaryAction>
                   </ListItem>
-                  ))}
+                ))}
               </List>
             </Paper>
           </Grid>
           <Grid item xs={12} className={classes.centerPlacement}>
-            <AddIcon onClick={() => {
-              setModalOpenState(true);
-              setCreateState(true);
-            }}
+            <AddIcon
+              onClick={() => {
+                setModalOpenState(true);
+                setCreateState(true);
+              }}
             />
           </Grid>
         </Grid>
@@ -121,17 +113,13 @@ export const Boards: React.FC<Props> = (props) => {
           defaultValueTitle={modalValueState.board_name}
           postOnClick={(data, user_id) => {
             // 新規作成か更新を判断してメソッドを使い分ける
-            createState ? (
-                modalClose(),
-                props.createOnClick(data, user_id)
-              ) : (
-                modalClose(),
-                props.updateOnClick(data, modalValueState.id)
-              );
+            createState
+              ? (modalClose(), props.createOnClick(data, user_id))
+              : (modalClose(), props.updateOnClick(data, modalValueState.id));
           }}
           modalOnClose={modalClose}
         />
       </ModalWindow>
     </>
   );
-}
+};

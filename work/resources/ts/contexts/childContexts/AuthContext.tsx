@@ -3,9 +3,9 @@ import { FeedbackContext } from './FeedbackContext';
 import { instance } from '../../config/axios.config';
 
 type AuthUserState = {
-    id: number | null,
-    name: string | null,
-}
+  id: number | null;
+  name: string | null;
+};
 
 export const AuthContext = createContext({});
 
@@ -26,101 +26,86 @@ export const AuthContextProvider: React.FC = (props) => {
   const [isAuth, setIsAuth] = useState(false);
   const login = () => {
     setIsAuth(true);
-  }
+  };
   const logout = () => {
     setIsAuth(false);
-  }
+  };
 
   // ログイン処理を行うapiと通信
-  const authLogin = async (
-    data: {
-      'email': string,
-      'password': string,
-  }) => {
+  const authLogin = async (data: { email: string; password: string }) => {
     // スピナーon
     await setProgress(true);
 
     await instance({
       method: 'POST',
       url: 'api/auth/login',
-      data: data,
+      data,
     })
-    .then((res) => {
-      // ローカルストレージに認証情報を保管 *脆弱性のことはあとで考える
-      // set isAuth to true
-      // 通信結果の通知内容
-      localStorage.setItem('makala_token', res.data.access_token);
-      localStorage.setItem('makala_user', res.data.name);
-      setAuthUserState({ ...authUserState, id: res.data.id, name: res.data.name});
-      login();
-      setStatus({
-        open: true,
-        type: 'success',
-        message: 'ログインしました。'
+      .then((res) => {
+        // ローカルストレージに認証情報を保管 *脆弱性のことはあとで考える
+        // set isAuth to true
+        // 通信結果の通知内容
+        localStorage.setItem('makala_token', res.data.access_token);
+        localStorage.setItem('makala_user', res.data.name);
+        setAuthUserState({ ...authUserState, id: res.data.id, name: res.data.name });
+        login();
+        setStatus({
+          open: true,
+          type: 'success',
+          message: 'ログインしました。',
+        });
+      })
+      .catch(() => {
+        // 通信結果の通知内容
+        setStatus({
+          open: true,
+          type: 'error',
+          message: 'ログインに失敗しました。',
+        });
+      })
+      .finally(() => {
+        // スピナーoff
+        setProgress(false);
       });
-      return;
-    })
-    .catch(() => {
-      // 通信結果の通知内容
-      setStatus({
-        open: true,
-        type: 'error',
-        message: 'ログインに失敗しました。'
-      });
-      return;
-    })
-    .finally(() => {
-      // スピナーoff
-      setProgress(false);
-      return;
-    });
-  }
+  };
 
   // ユーザー登録を行うapiと通信
-  const authRegister = async (
-    data: {
-      'name': string,
-      'email': string,
-      'password': string,
-  }) => {
+  const authRegister = async (data: { name: string; email: string; password: string }) => {
     // スピナーon
     await setProgress(true);
 
     await instance({
       method: 'POST',
       url: 'api/auth/register',
-      data: data,
+      data,
     })
-    .then((res) => {
-      // ローカルストレージに認証情報を保管 *脆弱性のことはあとで考える
-      // set isAuth to true
-      // 通信結果の通知内容
-      localStorage.setItem('makala_token', res.data.access_token);
-      localStorage.setItem('makala_user', res.data.name);
-      setAuthUserState({ ...authUserState, id: res.data.id, name: res.data.name});
-      login();
-      setStatus({
-        open: true,
-        type: 'success',
-        message: 'ユーザー登録が完了しました。'
+      .then((res) => {
+        // ローカルストレージに認証情報を保管 *脆弱性のことはあとで考える
+        // set isAuth to true
+        // 通信結果の通知内容
+        localStorage.setItem('makala_token', res.data.access_token);
+        localStorage.setItem('makala_user', res.data.name);
+        setAuthUserState({ ...authUserState, id: res.data.id, name: res.data.name });
+        login();
+        setStatus({
+          open: true,
+          type: 'success',
+          message: 'ユーザー登録が完了しました。',
+        });
+      })
+      .catch(() => {
+        // 通信結果の通知内容
+        setStatus({
+          open: true,
+          type: 'error',
+          message: 'ユーザー登録に失敗しました。',
+        });
+      })
+      .finally(() => {
+        // スピナーoff
+        setProgress(false);
       });
-      return;
-    })
-    .catch(() => {
-      // 通信結果の通知内容
-      setStatus({
-        open: true,
-        type: 'error',
-        message: 'ユーザー登録に失敗しました。'
-      });
-      return;
-    })
-    .finally(() => {
-      // スピナーoff
-      setProgress(false);
-      return;
-    });
-  }
+  };
 
   // ログアウト処理を行うapiと通信
   const authLogout = async () => {
@@ -133,38 +118,35 @@ export const AuthContextProvider: React.FC = (props) => {
       method: 'POST',
       url: 'api/auth/logout',
       headers: {
-        'Authorization': `Bearer ${token}`
-      }
+        Authorization: `Bearer ${token}`,
+      },
     })
-    .then((res) => {
-      // ローカルストレージの認証情報を削除
-      // set isAuth to false
-      // 通信結果の通知内容
-      localStorage.removeItem('makala_token');
-      localStorage.removeItem('makala_user');
-      logout();
-      setStatus({
-        open: true,
-        type: 'success',
-        message: res.data.message
+      .then((res) => {
+        // ローカルストレージの認証情報を削除
+        // set isAuth to false
+        // 通信結果の通知内容
+        localStorage.removeItem('makala_token');
+        localStorage.removeItem('makala_user');
+        logout();
+        setStatus({
+          open: true,
+          type: 'success',
+          message: res.data.message,
+        });
+      })
+      .catch(() => {
+        // 通信結果の通知内容
+        setStatus({
+          open: true,
+          type: 'error',
+          message: 'ログアウトに失敗しました。',
+        });
+      })
+      .finally(() => {
+        // スピナーoff
+        setProgress(false);
       });
-      return;
-    })
-    .catch(() => {
-      // 通信結果の通知内容
-      setStatus({
-        open: true,
-        type: 'error',
-        message: 'ログアウトに失敗しました。'
-      });
-      return;
-    })
-    .finally(() => {
-      // スピナーoff
-      setProgress(false);
-      return;
-    });
-  }
+  };
 
   // トークンリフレッシュするapiと通信
   const authRefresh = async () => {
@@ -175,18 +157,15 @@ export const AuthContextProvider: React.FC = (props) => {
       method: 'POST',
       url: 'api/auth/refresh',
       headers: {
-        'Authorization': `Bearer ${token}`
-      }
+        Authorization: `Bearer ${token}`,
+      },
     })
-    .then((res) => {
-      // 再度取得した、トークンをセット
-      localStorage.setItem('makala_token', res.data.access_token);
-      return;
-    })
-    .catch(() => {
-      return;
-    })
-  }
+      .then((res) => {
+        // 再度取得した、トークンをセット
+        localStorage.setItem('makala_token', res.data.access_token);
+      })
+      .catch(() => {});
+  };
 
   // ユーザー情報を取得するapiと通信
   const authMe = async () => {
@@ -199,28 +178,24 @@ export const AuthContextProvider: React.FC = (props) => {
       method: 'POST',
       url: 'api/auth/me',
       headers: {
-        'Authorization': `Bearer ${token}`
-      }
+        Authorization: `Bearer ${token}`,
+      },
     })
-    .then((res) => {
-      // ユーザー名とidをセット
-      // isAuthをtrueにする
-      // トークンリフレッシュする
-      localStorage.setItem('makala_user', res.data.name);
-      setAuthUserState({ ...authUserState, id: res.data.id, name: res.data.name});
-      login();
-      authRefresh();
-      return;
-    })
-    .catch(() => {
-      return;
-    })
-    .finally(() => {
-      // スピナーoff
-      setProgress(false);
-      return;
-    })
-  }
+      .then((res) => {
+        // ユーザー名とidをセット
+        // isAuthをtrueにする
+        // トークンリフレッシュする
+        localStorage.setItem('makala_user', res.data.name);
+        setAuthUserState({ ...authUserState, id: res.data.id, name: res.data.name });
+        login();
+        authRefresh();
+      })
+      .catch(() => {})
+      .finally(() => {
+        // スピナーoff
+        setProgress(false);
+      });
+  };
 
   // ゲストログイン処理を行うapiと通信
   const authGuestLogin = async () => {
@@ -228,60 +203,58 @@ export const AuthContextProvider: React.FC = (props) => {
     // ゲストアカウントの認証情報
     await setProgress(true);
     const data = {
-      'email': 'guest@example.com',
-      'password': 'guest1234'
-    }
+      email: 'guest@example.com',
+      password: 'guest1234',
+    };
 
     await instance({
       method: 'POST',
       url: 'api/auth/login',
-      data: data,
+      data,
     })
-    .then((res) => {
-      // ローカルストレージに認証情報を保管 *脆弱性のことはあとで考える
-      // set isAuth to true
-      // 通信結果の通知内容
-      localStorage.setItem('makala_token', res.data.access_token);
-      localStorage.setItem('makala_user', res.data.name);
-      setAuthUserState({ ...authUserState, id: res.data.id, name: res.data.name});
-      login();
-      setStatus({
-        open: true,
-        type: 'success',
-        message: 'ゲストログインしました。'
+      .then((res) => {
+        // ローカルストレージに認証情報を保管 *脆弱性のことはあとで考える
+        // set isAuth to true
+        // 通信結果の通知内容
+        localStorage.setItem('makala_token', res.data.access_token);
+        localStorage.setItem('makala_user', res.data.name);
+        setAuthUserState({ ...authUserState, id: res.data.id, name: res.data.name });
+        login();
+        setStatus({
+          open: true,
+          type: 'success',
+          message: 'ゲストログインしました。',
+        });
+      })
+      .catch(() => {
+        // 通信結果の通知内容
+        setStatus({
+          open: true,
+          type: 'error',
+          message: 'ログインに失敗しました。',
+        });
+      })
+      .finally(() => {
+        // スピナーoff
+        setProgress(false);
       });
-      return;
-    })
-    .catch(() => {
-      // 通信結果の通知内容
-      setStatus({
-        open: true,
-        type: 'error',
-        message: 'ログインに失敗しました。'
-      });
-      return;
-    })
-    .finally(() => {
-      // スピナーoff
-      setProgress(false);
-      return;
-    });
-  }
+  };
 
   return (
-    <AuthContext.Provider value={{
-      authUserState,
-      setAuthUserState,
-      isAuth,
-      login,
-      authLogin,
-      authRegister,
-      authLogout,
-      authMe,
-      authGuestLogin,
+    <AuthContext.Provider
+      value={{
+        authUserState,
+        setAuthUserState,
+        isAuth,
+        login,
+        authLogin,
+        authRegister,
+        authLogout,
+        authMe,
+        authGuestLogin,
       }}
     >
       {props.children}
     </AuthContext.Provider>
   );
-}
+};

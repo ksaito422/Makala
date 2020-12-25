@@ -1,15 +1,12 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import { Container, CssBaseline } from '@material-ui/core';
 import { Header } from '../organisms/Header';
 import { Top } from '../organisms/Top';
 import { Spinner } from '../../components/molecules/Spinner';
 import { AuthContext } from '../../contexts/childContexts/AuthContext';
 import { FeedbackContext } from '../../contexts/childContexts/FeedbackContext';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
-import {
-  Container,
-  CssBaseline,
-} from '@material-ui/core';
 
 export const TopPage: React.FC = () => {
   /**
@@ -41,7 +38,7 @@ export const TopPage: React.FC = () => {
             history.push(`/${authUserState.name}/home`);
           }}
           boardOnClick={() => {
-            history.push(`/${authUserState.name}/home`)
+            history.push(`/${authUserState.name}/home`);
           }}
         />
       </Container>
@@ -49,4 +46,4 @@ export const TopPage: React.FC = () => {
       <Spinner open={progress} />
     </>
   );
-}
+};

@@ -14,7 +14,4 @@ mix.env(process.env.ENV_FILE);
  |
  */
 
-// mix.react('resources/js/app.js', 'public/js')
-   // .sass('resources/sass/app.scss', 'public/css');
-mix.ts('resources/ts/app.tsx', 'public/js')
-   .sass('resources/sass/app.scss', 'public/css');
+mix.ts('resources/ts/app.tsx', 'public/js').sass('resources/sass/app.scss', 'public/css');

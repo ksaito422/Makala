@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import { useMediaQuery } from '@material-ui/core';
+import { StylesContext } from '../../contexts/childContexts/StylesContext';
 
 type Props = {
-  href: string,
-}
+  href: string;
+};
 
 export const Title: React.FC = () => {
   /**
@@ -21,23 +21,43 @@ export const Title: React.FC = () => {
       <>
         {matches ? (
           // タブレット以上のレイアウト width >= 601px
-          <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="203px" height="43px" viewBox="0 0 203 43"enableBackground="new 0 0 203 43">
-            <image id="image0" x="0" y="0" width="203px" height="43px" href={props.href} />
+          <svg
+            version='1.1'
+            id='Layer_1'
+            xmlns='http://www.w3.org/2000/svg'
+            x='0px'
+            y='0px'
+            width='203px'
+            height='43px'
+            viewBox='0 0 203 43'
+            enableBackground='new 0 0 203 43'
+          >
+            <image id='image0' x='0' y='0' width='203px' height='43px' href={props.href} />
           </svg>
         ) : (
           // スマホ以下のレイアウト width <= 600px
-          <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100px" height="43px" viewBox="0 0 100 43"enableBackground="new 0 0 100 43">
-            <image id="image0" x="0" y="0" width="100px" height="43px" href={props.href} />
+          <svg
+            version='1.1'
+            id='Layer_1'
+            xmlns='http://www.w3.org/2000/svg'
+            x='0px'
+            y='0px'
+            width='100px'
+            height='43px'
+            viewBox='0 0 100 43'
+            enableBackground='new 0 0 100 43'
+          >
+            <image id='image0' x='0' y='0' width='100px' height='43px' href={props.href} />
           </svg>
         )}
       </>
     );
-  }
+  };
 
   return (
     <Link className={classes.Link} to='/'>
       <ResponsiveSvg
-        href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMsAAAArCAYAAADWv3yxAAAABGdBTUEAALGPC/xhBQAAACBjSFJN
+        href='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMsAAAArCAYAAADWv3yxAAAABGdBTUEAALGPC/xhBQAAACBjSFJN
         AAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QA/wD/AP+gvaeTAAAA
         AW9yTlQBz6J3mgAADqVJREFUeNrtnHmUVNWdxz+/V1Xd9L5Ud9PgAmhcERiDBGWRRREBAZdAGBAP
         GkUTorjN8SSGTCUazByZGRMVBmSQwRA9jWhAYXRQGwIIMSA4hqAJigjSTdfSG01TXfXeb/6obuja
@@ -110,8 +130,8 @@ export const Title: React.FC = () => {
         Y3JlYXRlADIwMjAtMTItMDhUMDY6MTU6MzQrMDA6MDCT3iyjAAAAJXRFWHRkYXRlOm1vZGlmeQAy
         MDIwLTEyLTA4VDA2OjE1OjM0KzAwOjAw4oOUHwAAABF0RVh0ZXhpZjpDb2xvclNwYWNlADEPmwJJ
         AAAAEnRFWHRleGlmOkV4aWZPZmZzZXQAMzituL4jAAAAGHRFWHRleGlmOlBpeGVsWERpbWVuc2lv
-        bgAyMDPdfa+OAAAAF3RFWHRleGlmOlBpeGVsWURpbWVuc2lvbgA0M218GMMAAAAASUVORK5CYII="
+        bgAyMDPdfa+OAAAAF3RFWHRleGlmOlBpeGVsWURpbWVuc2lvbgA0M218GMMAAAAASUVORK5CYII='
       />
     </Link>
   );
-}
+};

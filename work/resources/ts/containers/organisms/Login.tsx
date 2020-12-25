@@ -1,19 +1,14 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import { Container, Grid, Typography, useMediaQuery } from '@material-ui/core';
 import { Button } from '../../components/atoms/Button';
 import { TextForm } from '../../components/atoms/TextForm';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
-import {
-  Container,
-  Grid,
-  Typography,
-  useMediaQuery,
-} from '@material-ui/core';
 
 type Props = {
-  loginOnClick: (data: {[x: string]: any}) => void,
-  cancelOnClick: () => void,
-}
+  loginOnClick: (data: { [x: string]: any }) => void;
+  cancelOnClick: () => void;
+};
 
 export const Login: React.FC<Props> = (props) => {
   /**
@@ -39,14 +34,14 @@ export const Login: React.FC<Props> = (props) => {
           ログインする
         </Button>
       );
-    }
+    };
     const CommonCancel = () => {
       return (
         <Button fullWidth onClick={props.cancelOnClick}>
           キャンセル
         </Button>
       );
-    }
+    };
     const className = classes.main_container;
 
     return (
@@ -72,7 +67,7 @@ export const Login: React.FC<Props> = (props) => {
         )}
       </>
     );
-  }
+  };
 
   return (
     <>
@@ -81,7 +76,7 @@ export const Login: React.FC<Props> = (props) => {
         <form
           className={classes.auth_form}
           onSubmit={handleSubmit((data) => {
-            props.loginOnClick(data)
+            props.loginOnClick(data);
           })}
         >
           <TextForm
@@ -91,12 +86,10 @@ export const Login: React.FC<Props> = (props) => {
             name='email'
             autoFocus
             autoComplete='email'
-            inputRef={
-              register({
-                required: true,
-                pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
-              })
-            }
+            inputRef={register({
+              required: true,
+              pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+            })}
             error={Boolean(errors.email)}
             helperText={errors.email && 'メールアドレスを入力してください'}
           />
@@ -107,19 +100,17 @@ export const Login: React.FC<Props> = (props) => {
             name='password'
             type='password'
             autoComplete='current-password'
-            inputRef={
-              register({
-                required: ' パスワードを入力して下さい',
-                minLength: {
-                  value: 8,
-                  message: 'パスワードを8文字以上20文字以下で入力して下さい'
-                },
-                maxLength: {
-                  value: 20,
-                  message: 'パスワードを8文字以上20文字以下で入力して下さい'
-                }
-              })
-            }
+            inputRef={register({
+              required: ' パスワードを入力して下さい',
+              minLength: {
+                value: 8,
+                message: 'パスワードを8文字以上20文字以下で入力して下さい',
+              },
+              maxLength: {
+                value: 20,
+                message: 'パスワードを8文字以上20文字以下で入力して下さい',
+              },
+            })}
             error={Boolean(errors.password)}
             helperText={errors.password && errors.password.message}
           />
@@ -130,4 +121,4 @@ export const Login: React.FC<Props> = (props) => {
       </Container>
     </>
   );
-}
+};
