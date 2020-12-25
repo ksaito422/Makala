@@ -1,13 +1,10 @@
 import React, { useContext } from 'react';
+import { Backdrop, CircularProgress } from '@material-ui/core';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
-import {
-  Backdrop,
-  CircularProgress,
-} from '@material-ui/core';
 
 type Props = {
-  open: boolean,
-}
+  open: boolean;
+};
 
 export const Spinner: React.FC<Props> = (props) => {
   // cssの定義
@@ -21,4 +18,4 @@ export const Spinner: React.FC<Props> = (props) => {
       </Backdrop>
     </>
   );
-}
+};

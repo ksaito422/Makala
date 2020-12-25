@@ -7,21 +7,15 @@ export const Auth: React.FC = (props) => {
   const [check, setCheck] = useState<boolean>(false);
 
   useEffect(() => {
-    const f = async() => {
+    const f = async () => {
       await authMe();
       setCheck(true);
-    }
+    };
     f();
   }, []);
 
   return (
     // 認証確認中にローディングアイコンを表示
-    <>
-      {!check ? (
-        <Spinner open={!check} />
-      ) : (
-        props.children
-      )}
-    </>
+    <>{!check ? <Spinner open={!check} /> : props.children}</>
   );
-}
+};

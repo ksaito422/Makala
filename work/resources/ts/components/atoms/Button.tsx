@@ -1,18 +1,16 @@
 import React from 'react';
-import {
-  Button as MuiButton
-} from '@material-ui/core';
+import { Button as MuiButton } from '@material-ui/core';
 
 type Props = {
-  className?: any,
-  variant?: 'text' | 'outlined' | 'contained',
-  color?: 'inherit' | 'primary' | 'secondary' | 'default'
-  type?: 'button' | 'submit' | 'reset',
-  disabled?: boolean,
-  fullWidth?: boolean,
-  size?: 'large' | 'medium' | 'small'
-  onClick?: () => void,
-}
+  className?: any;
+  variant?: 'text' | 'outlined' | 'contained';
+  color?: 'inherit' | 'primary' | 'secondary' | 'default';
+  type?: 'button' | 'submit' | 'reset';
+  disabled?: boolean;
+  fullWidth?: boolean;
+  size?: 'large' | 'medium' | 'small';
+  onClick?: () => void;
+};
 
 export const Button: React.FC<Props> = (props) => {
   return (
@@ -29,10 +27,10 @@ export const Button: React.FC<Props> = (props) => {
       {props.children}
     </MuiButton>
   );
-}
+};
 
 Button.defaultProps = {
   color: 'primary',
   variant: 'contained',
-  type: 'button'
-}
+  type: 'button',
+};

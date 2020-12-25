@@ -8,20 +8,18 @@ import { ModalPropsContextProvider } from './childContexts/ModalPropsContext';
 
 export const TotalContext = createContext({});
 
-export const TotalContextProvider: React.FC = props => {
+export const TotalContextProvider: React.FC = (props) => {
   return (
     <StylesContextProvider>
       <FeedbackContextProvider>
         <AuthContextProvider>
           <ApiBoardsContextProvider>
             <ApiCardsContextProvider>
-              <ModalPropsContextProvider>
-                {props.children}
-              </ModalPropsContextProvider>
+              <ModalPropsContextProvider>{props.children}</ModalPropsContextProvider>
             </ApiCardsContextProvider>
           </ApiBoardsContextProvider>
         </AuthContextProvider>
       </FeedbackContextProvider>
     </StylesContextProvider>
   );
-}
+};

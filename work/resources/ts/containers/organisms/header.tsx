@@ -1,15 +1,8 @@
 import React, { useState, useContext } from 'react';
+import { AppBar, Grid, Menu, MenuItem, Toolbar, useMediaQuery } from '@material-ui/core';
 import { Title } from '../../components/atoms/Title';
 import { Avatar } from '../../components/atoms/Avatar';
 import { AuthContext } from '../../contexts/childContexts/AuthContext';
-import {
-  AppBar,
-  Grid,
-  Menu,
-  MenuItem,
-  Toolbar,
-  useMediaQuery,
-} from '@material-ui/core';
 
 export const Header: React.FC = () => {
   /**
@@ -24,10 +17,10 @@ export const Header: React.FC = () => {
   // メニューのオープンon/off
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(e.currentTarget);
-  }
+  };
   const handleClose = () => {
     setAnchorEl(null);
-  }
+  };
 
   return (
     <>
@@ -41,16 +34,10 @@ export const Header: React.FC = () => {
               </Grid>
               <Grid item xs={1}>
                 {isAuth ? (
-                  <Avatar
-                    ariaControls='avatar'
-                    ariaHaspopup={true}
-                    onClick={handleClick}
-                  >
-                    {authUserState.name.slice(0,1)}
+                  <Avatar ariaControls='avatar' ariaHaspopup onClick={handleClick}>
+                    {authUserState.name.slice(0, 1)}
                   </Avatar>
-                ) : (
-                  null
-                )}
+                ) : null}
               </Grid>
             </Grid>
           ) : (
@@ -61,27 +48,25 @@ export const Header: React.FC = () => {
               </Grid>
               <Grid item xs={2}>
                 {isAuth ? (
-                  <Avatar
-                    ariaControls='avatar'
-                    ariaHaspopup={true}
-                    onClick={handleClick}
-                  >
-                    {authUserState.name.slice(0,1)}
+                  <Avatar ariaControls='avatar' ariaHaspopup onClick={handleClick}>
+                    {authUserState.name.slice(0, 1)}
                   </Avatar>
-                ) : (
-                  null
-                )}
+                ) : null}
               </Grid>
             </Grid>
           )}
         </Toolbar>
       </AppBar>
 
-      <Menu id='avatar' anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)}
-            onClose={handleClose}
+      <Menu
+        id='avatar'
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
       >
         <MenuItem onClick={authLogout}>ログアウト</MenuItem>
       </Menu>
     </>
   );
-}
+};

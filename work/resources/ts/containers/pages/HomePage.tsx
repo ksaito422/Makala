@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+import { Container, CssBaseline } from '@material-ui/core';
 import { Spinner } from '../../components/molecules/Spinner';
 import { Notice } from '../../components/molecules/Notice';
 import { Header } from '../organisms/Header';
@@ -7,10 +8,6 @@ import { Boards } from '../organisms/Boards';
 import { ApiBoardsContext } from '../../contexts/childContexts/ApiBoardsContext';
 import { FeedbackContext } from '../../contexts/childContexts/FeedbackContext';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
-import {
-  Container,
-  CssBaseline,
-} from '@material-ui/core';
 
 export const HomePage: React.FC = () => {
   /**
@@ -29,7 +26,7 @@ export const HomePage: React.FC = () => {
     createBoard,
     updateBoard,
     deleteBoard,
-    deleteBoardState
+    deleteBoardState,
   } = useContext<any>(ApiBoardsContext);
   const history = useHistory();
   const { user } = useParams<any>();
@@ -49,17 +46,17 @@ export const HomePage: React.FC = () => {
           // 新しいボードの作成メソッド
           createOnClick={(data, user_id) => {
             const postData = {
-              'user_id': user_id,
-              'board_name': data.board_name
-            }
+              user_id,
+              board_name: data.board_name,
+            };
             createBoard(postData);
           }}
           // ボード名の更新メソッド
           updateOnClick={(data, id) => {
             const postData = {
-              'id': id,
-              'board_name': data
-            }
+              id,
+              board_name: data,
+            };
             updateBoard(postData);
           }}
           // ボードの削除メソッド ApiBoardsContextに定義したメソッドを利用
@@ -85,4 +82,4 @@ export const HomePage: React.FC = () => {
       />
     </>
   );
-}
+};

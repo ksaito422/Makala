@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core';
 export const StylesContext = createContext({});
 
 // ページ全体で使うclassNameの定義
-export const StylesContextProvider: React.FC = props => {
+export const StylesContextProvider: React.FC = (props) => {
   const useStyles: any = makeStyles((theme) => ({
     // pagesで使用 メインコンテンツとヘッダーの間隔をとるため
     main_container: {
@@ -39,11 +39,11 @@ export const StylesContextProvider: React.FC = props => {
     },
     // アイコンを中央に
     centerPlacement: {
-      textAlign: 'center'
+      textAlign: 'center',
     },
     // アイコンを右に
     rightPlacement: {
-      textAlign: 'right'
+      textAlign: 'right',
     },
     // MarkdownPreview Paperのスタイル
     preview: {
@@ -94,12 +94,8 @@ export const StylesContextProvider: React.FC = props => {
     },
     // cardのスタイル
     card: {
-      justifyContent: 'left'
+      justifyContent: 'left',
     },
   }));
-  return (
-    <StylesContext.Provider value={{useStyles}}>
-      {props.children}
-    </StylesContext.Provider>
-  )
-}
+  return <StylesContext.Provider value={{ useStyles }}>{props.children}</StylesContext.Provider>;
+};

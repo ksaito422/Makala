@@ -3,15 +3,13 @@ import { IconButton } from '@material-ui/core';
 import { Close } from '@material-ui/icons';
 
 type Props = {
-  onClick: () => void,
-}
+  onClick: () => void;
+};
 
 export const CloseIcon: React.FC<Props> = (props) => {
   return (
-    <IconButton
-      onClick={props.onClick}
-    >
+    <IconButton onClick={props.onClick}>
       <Close />
     </IconButton>
   );
-}
+};

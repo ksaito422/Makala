@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { MuiThemeProvider } from '@material-ui/core';
 import { PrivateRoute } from './routes/PrivateRoute';
 import { GuestRoute } from './routes/GuestRoute';
 import { TotalContextProvider } from './contexts/TotalContext';
@@ -11,7 +12,6 @@ import { HomePage } from './containers/pages/HomePage';
 import { CardPage } from './containers/pages/CardPage';
 import { MuiTheme } from './theme/MuiTheme';
 import { Auth } from './Auth/Auth';
-import { MuiThemeProvider } from '@material-ui/core';
 
 const App: React.FC = () => {
   return (
@@ -31,8 +31,8 @@ const App: React.FC = () => {
       </TotalContextProvider>
     </Router>
   );
-}
+};
 
 if (document.getElementById('app')) {
-    ReactDOM.render(<App />, document.getElementById('app'));
+  ReactDOM.render(<App />, document.getElementById('app'));
 }

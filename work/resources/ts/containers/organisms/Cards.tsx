@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import { Grid } from '@material-ui/core';
 import { DragCard } from '../../components/molecules/DragCard';
 import { AddIcon } from '../../components/atoms/AddIcon';
 import { ModalWindow } from '../../components/molecules/ModalWindow';
@@ -7,17 +8,16 @@ import { ModalCard } from '../../components/molecules/ModalCard';
 import { ModalPropsContext } from '../../contexts/childContexts/ModalPropsContext';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import { ApiCardsContext } from '../../contexts/childContexts/ApiCardsContext';
-import { Grid } from '@material-ui/core';
 
 type Props = {
-  items?: any,
-  onDragEnd: any,
-  createOnSubmit: (data: {[x: string]: any;}) => void,
-  updateOnSubmit: (data: {[x: string]: any;}, id: number) => void,
-  deleteOnClick: (id?: string) => void,
-}
+  items?: any;
+  onDragEnd: any;
+  createOnSubmit: (data: { [x: string]: any }) => void;
+  updateOnSubmit: (data: { [x: string]: any }, id: number) => void;
+  deleteOnClick: (id?: string) => void;
+};
 
-export const Cards = React.memo<Props> ((props) => {
+export const Cards = React.memo<Props>((props) => {
   /**
    * cssの定義
    * dragBoardItemのレンダーするデータを読み取り
@@ -27,12 +27,9 @@ export const Cards = React.memo<Props> ((props) => {
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
   const { cardsState } = useContext<any>(ApiCardsContext);
-  const {
-    modalValueState,
-    setModalValueState,
-    modalOpenState,
-    setModalOpenState
-  } = useContext<any>(ModalPropsContext);
+  const { modalValueState, setModalValueState, modalOpenState, setModalOpenState } = useContext<
+    any
+  >(ModalPropsContext);
   const [createState, setCreateState] = useState<boolean>(false);
 
   // モーダルを閉じるとき、入力値をクリア
@@ -42,7 +39,7 @@ export const Cards = React.memo<Props> ((props) => {
     setModalValueState({
       id: null,
       card_name: null,
-      card_content: null
+      card_content: null,
     });
   };
 
@@ -51,35 +48,37 @@ export const Cards = React.memo<Props> ((props) => {
       <Grid container spacing={4}>
         <Grid item xs={12}>
           <DragDropContext onDragEnd={props.onDragEnd}>
-            <Droppable droppableId="list">
-              {provided => (
+            <Droppable droppableId='list'>
+              {(provided) => (
                 <div ref={provided.innerRef} className={classes.drop_able}>
-                  {props.items.map((
-                    item: {
-                      id: string,
-                      title: string,
-                      content: string,
-                    },
-                    index: number
+                  {props.items.map(
+                    (
+                      item: {
+                        id: string;
+                        title: string;
+                        content: string;
+                      },
+                      index: number
                     ) => (
-                    <DragCard
-                      item={item}
-                      index={index}
-                      key={item.id}
-                      openOnClick={() => {
-                        setModalOpenState(true);
-                        setModalValueState({
-                          ...modalValueState,
-                          id: item.id,
-                          card_name: item.title,
-                          card_content: item.content,
-                        })
-                      }}
-                      deleteOnClick={() => {
-                        props.deleteOnClick(item.id);
-                      }}
-                    />
-                  ))}
+                      <DragCard
+                        item={item}
+                        index={index}
+                        key={item.id}
+                        openOnClick={() => {
+                          setModalOpenState(true);
+                          setModalValueState({
+                            ...modalValueState,
+                            id: item.id,
+                            card_name: item.title,
+                            card_content: item.content,
+                          });
+                        }}
+                        deleteOnClick={() => {
+                          props.deleteOnClick(item.id);
+                        }}
+                      />
+                    )
+                  )}
                   {provided.placeholder}
                 </div>
               )}
@@ -87,14 +86,15 @@ export const Cards = React.memo<Props> ((props) => {
           </DragDropContext>
         </Grid>
         <Grid item xs={12} className={classes.centerPlacement}>
-          <AddIcon onClick={() => {
-            setModalOpenState(true);
-            setCreateState(true);
-            setModalValueState({
-              ...modalValueState,
-              id: String(cardsState.numberMade),
-            });
-          }}
+          <AddIcon
+            onClick={() => {
+              setModalOpenState(true);
+              setCreateState(true);
+              setModalValueState({
+                ...modalValueState,
+                id: String(cardsState.numberMade),
+              });
+            }}
           />
         </Grid>
       </Grid>
@@ -105,13 +105,9 @@ export const Cards = React.memo<Props> ((props) => {
           defaultValueTitle={modalValueState.card_name}
           defaultValueContent={modalValueState.card_content}
           postOnSubmit={(data) => {
-            createState ? (
-              modalClose(),
-              props.createOnSubmit(data)
-            ) : (
-              modalClose(),
-              props.updateOnSubmit(data, modalValueState.id)
-            );
+            createState
+              ? (modalClose(), props.createOnSubmit(data))
+              : (modalClose(), props.updateOnSubmit(data, modalValueState.id));
           }}
         />
       </ModalWindow>

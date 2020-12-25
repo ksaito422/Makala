@@ -1,17 +1,17 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import { Grid } from '@material-ui/core';
 import { TextForm } from '../atoms/TextForm';
 import { CloseIcon } from '../atoms/CloseIcon';
 import { SubmitIcon } from '../atoms/SubmitIcon';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
-import { Grid } from '@material-ui/core';
 
 type Props = {
-  defaultValueTitle: string,
-  defaultValueContent: string,
-  postOnSubmit: (data: {[x: string]: any;}) => void,
-  modalOnClose: () => void,
-}
+  defaultValueTitle: string;
+  defaultValueContent: string;
+  postOnSubmit: (data: { [x: string]: any }) => void;
+  modalOnClose: () => void;
+};
 
 export const ModalCard: React.FC<Props> = (props) => {
   /**
@@ -43,11 +43,9 @@ export const ModalCard: React.FC<Props> = (props) => {
                 fullWidth
                 rowsMax={1}
                 defaultValue={props.defaultValueTitle}
-                inputRef={
-                  register({
-                    required: 'カード名を入力して下さい',
-                  })
-                }
+                inputRef={register({
+                  required: 'カード名を入力して下さい',
+                })}
                 error={Boolean(errors.card_name)}
                 helperText={errors.card_name && errors.card_name.message}
               />
@@ -59,11 +57,9 @@ export const ModalCard: React.FC<Props> = (props) => {
                 fullWidth
                 rows={8}
                 defaultValue={props.defaultValueContent}
-                inputRef={
-                  register({
-                    required: 'カードの内容を入力して下さい',
-                  })
-                }
+                inputRef={register({
+                  required: 'カードの内容を入力して下さい',
+                })}
                 error={Boolean(errors.card_content)}
                 helperText={errors.card_content && errors.card_content.message}
               />
@@ -76,4 +72,4 @@ export const ModalCard: React.FC<Props> = (props) => {
       </Grid>
     </>
   );
-}
+};

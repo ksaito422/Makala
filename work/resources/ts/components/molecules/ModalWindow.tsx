@@ -1,14 +1,11 @@
 import React, { useState, useContext } from 'react';
+import { Modal, useMediaQuery } from '@material-ui/core';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
-import {
-  Modal,
-  useMediaQuery,
-} from '@material-ui/core';
 
 type Props = {
-  modalOpen: boolean,
-  modalOnClose: () => void,
-}
+  modalOpen: boolean;
+  modalOnClose: () => void;
+};
 
 // モーダルの表示位置を決める
 function getModalStyle() {
@@ -30,7 +27,7 @@ export const ModalWindow: React.FC<Props> = (props) => {
    * スマホ( > 600px)を基準にレスポンシブ対応
    */
   const { useStyles } = useContext<any>(StylesContext);
-  const classes = useStyles()
+  const classes = useStyles();
   const [modalStyleState] = useState(getModalStyle);
   const matches = useMediaQuery('(min-width: 601px)');
 
@@ -50,4 +47,4 @@ export const ModalWindow: React.FC<Props> = (props) => {
       )}
     </Modal>
   );
-}
+};

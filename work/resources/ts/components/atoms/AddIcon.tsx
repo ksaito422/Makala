@@ -3,8 +3,8 @@ import { Fab } from '@material-ui/core';
 import { Add } from '@material-ui/icons';
 
 type Props = {
-  onClick: () => void,
-}
+  onClick: () => void;
+};
 
 export const AddIcon: React.FC<Props> = (props) => {
   return (
@@ -12,4 +12,4 @@ export const AddIcon: React.FC<Props> = (props) => {
       <Add />
     </Fab>
   );
-}
+};

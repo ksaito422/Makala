@@ -2,11 +2,11 @@ import React from 'react';
 import { Button } from '../atoms/Button';
 
 type Props = {
-  disabledCard: boolean,
-  disabledPreview: boolean,
-  cardOnClick: () => void,
-  previewOnClick: () => void,
-}
+  disabledCard: boolean;
+  disabledPreview: boolean;
+  cardOnClick: () => void;
+  previewOnClick: () => void;
+};
 
 export const ButtonGroup: React.FC<Props> = (props) => {
   return (
@@ -19,4 +19,4 @@ export const ButtonGroup: React.FC<Props> = (props) => {
       </Button>
     </>
   );
-}
+};
