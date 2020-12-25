@@ -1,0 +1,81 @@
+{
+    "parserOptions": {
+      "ecmaVersion": 12,
+      "sourceType": "module",
+      "ecmaFeatures": {
+          "jsx": true
+      }
+    },
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "react",
+      "@typescript-eslint"
+    ],
+    "env": {
+      "browser": true, // ブラウザのグローバル変数
+      "commonjs": true, // CommonJSグローバル変数とCommonJSスコープ
+      "es2021": true, // すべてのECMAScript2021グローバルを追加
+      "jest": true // Jestグローバル変数
+    },
+    "extends": [
+        "airbnb",
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:prettier/recommended"
+    ],
+    "settings": {
+      "react": {
+          "pragma": "React",
+          "version": "detect"
+      },
+      "import/resolver": {
+          "node": {
+              "paths": ["resources/ts/"],
+              "extensions": [".js", ".jsx", ".ts", ".tsx"]
+            }
+      }
+    },
+    "rules": {
+      /** 0 -> off, 1 -> 警告, 2 -> エラー */
+      // prettierのルール
+      "prettier/prettier": [
+        "error",
+        {
+            "printWidth": 100, // プリンタが折り返す一行の長さ
+            "tabWidth": 2, // タブ幅
+            "semi": true, // ステートメントの最後に;を追加
+            "singleQuote": true, // ''の引用符を使用 JS構文のみに適用
+            "jsxSingleQuote": true, // ''の引用符を使用 jsx・tsx構文のみに適用
+            "trailingComma": "es5", // ES5で有効な場合の末尾のコンマ（オブジェクト、配列など）
+            "bracketSpacing": true, // { foo: bar }
+            "jsxBracketSameLine": false,
+            "arrowParens": "always", // アロー関数の() (x) => x
+            "endOfLine": "lf" // 最終行の改行
+        }
+      ],
+      // import可能な拡張子
+      "import/extensions": [
+        "error",
+        {
+            "js": "never",
+            "jsx": "never",
+            "ts": "never",
+            "tsx": "never"
+        }
+      ],
+      // ts, tsx許可
+      "react/jsx-filename-extension": [2, { "extensions": [".ts",".tsx"] }],
+      // propsを直接使用可能にする。 この形式を許可する -> (props) => {onClick={props.onClick}}
+      "react/destructuring-assignment": [2, "never"],
+      // prop-typesによるバリデーション
+      "react/prop-types": 0,
+      // 変数と関数の定義前の使用を許可
+      "no-use-before-define": "off",
+      // 名前付きエクスポートを許可
+      "import/prefer-default-export": "off",
+      // devDependencies（外部モジュール）のインポートをコードに含めるのを許可
+      "import/no-extraneous-dependencies": [2, { "devDependencies": true }],
+      // 未使用の変数を禁止 引数は未使用を許可
+      "no-unused-vars": [2, { "vars": "all", "args": "none" }]
+    }
+}
