@@ -6,8 +6,8 @@ import { Button } from '../Button';
 describe('Button', () => {
   it('clickイベントの確認', () => {
     const props = {
-      onClick: jest.fn
-    }
+      onClick: jest.fn,
+    };
     // onClickの監視
     // propsを受け取り mount テスト対象component生成
     const spyOnClick = jest.spyOn(props, 'onClick');
@@ -21,12 +21,10 @@ describe('Button', () => {
 
   it('スナップショットテスト', () => {
     const props = {
-      onClick: jest.fn
-    }
+      onClick: jest.fn,
+    };
 
-    const tree = renderer
-      .create(<Button {...props} />)
-      .toJSON();
+    const tree = renderer.create(<Button {...props} />).toJSON();
     expect(tree).toMatchSnapshot();
   });
 });

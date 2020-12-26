@@ -6,8 +6,8 @@ import { DownloadIcon } from '../DownloadIcon';
 describe('DownloadIcon', () => {
   it('clickイベントの確認', () => {
     const props = {
-      onClick: jest.fn
-    }
+      onClick: jest.fn,
+    };
     // onClickの監視
     // propsを受け取り mount テスト対象component生成
     const spyOnClick = jest.spyOn(props, 'onClick');
@@ -21,12 +21,10 @@ describe('DownloadIcon', () => {
 
   it('スナップショットテスト', () => {
     const props = {
-      onClick: jest.fn
-    }
+      onClick: jest.fn,
+    };
 
-    const tree = renderer
-      .create(<DownloadIcon {...props} />)
-      .toJSON();
+    const tree = renderer.create(<DownloadIcon {...props} />).toJSON();
     expect(tree).toMatchSnapshot();
   });
 });

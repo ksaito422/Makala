@@ -4,9 +4,7 @@ import { TextForm } from '../TextForm';
 
 describe('TextForm', () => {
   it('スナップショットテスト', () => {
-    const tree = renderer
-      .create(<TextForm />)
-      .toJSON();
+    const tree = renderer.create(<TextForm />).toJSON();
     expect(tree).toMatchSnapshot();
   });
 });

@@ -1,13 +1,13 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { AddIcon } from '../AddIcon';
 import { mount } from 'enzyme';
+import { AddIcon } from '../AddIcon';
 
 describe('AddIcon', () => {
   it('clickイベントの確認', () => {
     const props = {
-      onClick: jest.fn
-    }
+      onClick: jest.fn,
+    };
 
     // onClickの監視
     // propsを受け取り mount テスト対象component生成
@@ -22,12 +22,10 @@ describe('AddIcon', () => {
 
   it('スナップショットテスト', () => {
     const props = {
-      onClick: jest.fn
-    }
+      onClick: jest.fn,
+    };
 
-    const tree = renderer
-      .create(<AddIcon {...props} />)
-      .toJSON();
+    const tree = renderer.create(<AddIcon {...props} />).toJSON();
     expect(tree).toMatchSnapshot();
   });
 });

@@ -9,17 +9,16 @@ describe('Avatar', () => {
     const props = {
       ariaControls: 'avatar',
       ariaHaspopup: true,
-      onClick: jest.fn
-    }
+      onClick: jest.fn,
+    };
 
     // onClickの監視
     // propsを受け取り mount テスト対象component生成
     const spyOnClick = jest.spyOn(props, 'onClick');
-    const component =
-      mount(
-        <StylesContextProvider>
-          <Avatar {...props} />
-        </StylesContextProvider>
+    const component = mount(
+      <StylesContextProvider>
+        <Avatar {...props} />
+      </StylesContextProvider>
     );
 
     // clickイベント実行
@@ -33,8 +32,8 @@ describe('Avatar', () => {
       ariaControls: 'avatar',
       ariaHaspopup: true,
       onClick: jest.fn,
-      children: 'a'
-    }
+      children: 'a',
+    };
 
     const tree = renderer
       .create(

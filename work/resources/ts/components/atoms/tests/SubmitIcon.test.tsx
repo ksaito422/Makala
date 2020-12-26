@@ -4,9 +4,7 @@ import { SubmitIcon } from '../SubmitIcon';
 
 describe('SubmitIcon', () => {
   it('スナップショットテスト', () => {
-    const tree = renderer
-      .create(<SubmitIcon />)
-      .toJSON();
+    const tree = renderer.create(<SubmitIcon />).toJSON();
     expect(tree).toMatchSnapshot();
   });
 });

@@ -4,9 +4,7 @@ import { AccordionArea } from '../AccordionArea';
 
 describe('AccordionArea', () => {
   it('スナップショットテスト', () => {
-    const tree = renderer
-      .create(<AccordionArea />)
-      .toJSON();
+    const tree = renderer.create(<AccordionArea />).toJSON();
     expect(tree).toMatchSnapshot();
   });
 });

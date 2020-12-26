@@ -8,12 +8,10 @@ describe('ButtonGroup', () => {
       disabledCard: false,
       disabledPreview: false,
       cardOnClick: jest.fn,
-      previewOnClick: jest.fn
-    }
+      previewOnClick: jest.fn,
+    };
 
-    const tree = renderer
-      .create(<ButtonGroup {...props} />)
-      .toJSON();
+    const tree = renderer.create(<ButtonGroup {...props} />).toJSON();
     expect(tree).toMatchSnapshot();
   });
 });
