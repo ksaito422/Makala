@@ -8,9 +8,9 @@ describe('Notice', () => {
       open: true,
       message: 'string',
       onClose: jest.fn,
-    }
+    };
 
-    const tree = mount(<Notice {...props} type='success' />)
+    const tree = mount(<Notice {...props} type='success' />);
     expect(tree).toMatchSnapshot();
   });
 });

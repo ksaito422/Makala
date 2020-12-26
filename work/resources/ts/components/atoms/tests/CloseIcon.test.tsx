@@ -6,8 +6,8 @@ import { CloseIcon } from '../CloseIcon';
 describe('CloseIcon', () => {
   it('clickイベントの確認', () => {
     const props = {
-      onClick: jest.fn
-    }
+      onClick: jest.fn,
+    };
 
     // onClickの監視
     // propsを受け取り mount テスト対象component生成
@@ -22,12 +22,10 @@ describe('CloseIcon', () => {
 
   it('スナップショットテスト', () => {
     const props = {
-      onClick: jest.fn
-    }
+      onClick: jest.fn,
+    };
 
-    const tree = renderer
-      .create(<CloseIcon {...props} />)
-      .toJSON();
+    const tree = renderer.create(<CloseIcon {...props} />).toJSON();
     expect(tree).toMatchSnapshot();
   });
 });

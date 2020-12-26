@@ -1,8 +1,8 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { Title } from '../Title';
 import { StylesContextProvider } from '../../../contexts/childContexts/StylesContext';
-import { BrowserRouter as Router } from 'react-router-dom';
 
 describe('Title', () => {
   it('スナップショットテスト', () => {
