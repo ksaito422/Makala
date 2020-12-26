@@ -76,6 +76,8 @@
       // devDependencies（外部モジュール）のインポートをコードに含めるのを許可
       "import/no-extraneous-dependencies": [2, { "devDependencies": true }],
       // 未使用の変数を禁止 引数は未使用を許可
-      "no-unused-vars": [2, { "vars": "all", "args": "none" }]
+      "no-unused-vars": [2, { "vars": "all", "args": "none" }],
+      // JSXのpropsのスプレッド構文を許可
+      "react/jsx-props-no-spreading": "off"
     }
 }
