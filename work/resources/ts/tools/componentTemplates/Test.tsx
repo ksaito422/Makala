@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-// import { mount, shallow } from 'enzyme';
-// import {  } from '';
+import { render, screen, fireEvent } from '@testing-library/react';
+import {} from '';
 
 //  テストテンプレート コメントアウト解除して使う
 // describe('コンポーネント名', () => {
