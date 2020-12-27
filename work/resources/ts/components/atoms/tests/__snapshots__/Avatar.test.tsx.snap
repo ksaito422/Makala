@@ -25,7 +25,7 @@ exports[`Avatar スナップショットテスト 1`] = `
     className="MuiIconButton-label"
   >
     <div
-      className="MuiAvatar-root MuiAvatar-circle makeStyles-avatar-33 makeStyles-avatar_small-34 MuiAvatar-colorDefault"
+      className="MuiAvatar-root MuiAvatar-circle makeStyles-avatar-15 makeStyles-avatar_small-16 MuiAvatar-colorDefault"
     >
       a
     </div>
