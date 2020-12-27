@@ -4,22 +4,44 @@ exports[`TextForm スナップショットテスト 1`] = `
 <div
   className="MuiFormControl-root MuiTextField-root"
 >
+  <label
+    className="MuiFormLabel-root MuiFormLabel-colorSecondary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-filled Mui-error Mui-error MuiFormLabel-filled Mui-required Mui-required"
+    data-shrink={true}
+  >
+    label
+    <span
+      aria-hidden={true}
+      className="MuiFormLabel-asterisk MuiInputLabel-asterisk Mui-error Mui-error"
+    >
+       
+      *
+    </span>
+  </label>
   <div
-    className="MuiInputBase-root MuiFilledInput-root MuiFilledInput-underline MuiInputBase-colorSecondary MuiFilledInput-colorSecondary MuiInputBase-formControl"
+    className="MuiInputBase-root MuiFilledInput-root MuiFilledInput-underline MuiInputBase-colorSecondary MuiFilledInput-colorSecondary Mui-error Mui-error MuiInputBase-formControl"
     onClick={[Function]}
   >
     <input
-      aria-invalid={false}
-      autoFocus={false}
+      aria-invalid={true}
+      autoComplete="autoComplete"
+      autoFocus={true}
       className="MuiInputBase-input MuiFilledInput-input"
+      defaultValue="defaultValue"
       disabled={false}
+      name="name"
       onAnimationStart={[Function]}
       onBlur={[Function]}
       onChange={[Function]}
       onFocus={[Function]}
-      required={false}
+      required={true}
+      rows={2}
       type="text"
     />
   </div>
+  <p
+    className="MuiFormHelperText-root MuiFormHelperText-contained Mui-error MuiFormHelperText-filled Mui-required"
+  >
+    helperText
+  </p>
 </div>
 `;
