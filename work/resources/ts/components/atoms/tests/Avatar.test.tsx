@@ -1,11 +1,20 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Avatar } from '../Avatar';
 import { StylesContextProvider } from '../../../contexts/childContexts/StylesContext';
 
 describe('Avatar', () => {
-  it('スナップショットテスト', () => {
+  it('PCサイズのスナップショットテスト', () => {
+    window.matchMedia = jest.fn().mockImplementation((query) => {
+      return {
+        matches: true,
+        media: query,
+        onchange: null,
+        addListener: jest.fn(),
+        removeListener: jest.fn(),
+      };
+    });
+
     const props = {
       ariaControls: 'avatar',
       ariaHaspopup: true,
@@ -13,14 +22,38 @@ describe('Avatar', () => {
       children: 'a',
     };
 
-    const tree = renderer
-      .create(
-        <StylesContextProvider>
-          <Avatar {...props} />
-        </StylesContextProvider>
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+    const { baseElement } = render(
+      <StylesContextProvider>
+        <Avatar {...props} />
+      </StylesContextProvider>
+    );
+    expect(baseElement).toMatchSnapshot();
+  });
+
+  it('スマホサイズのスナップショットテスト', () => {
+    window.matchMedia = jest.fn().mockImplementation((query) => {
+      return {
+        matches: false,
+        media: query,
+        onchange: null,
+        addListener: jest.fn(),
+        removeListener: jest.fn(),
+      };
+    });
+
+    const props = {
+      ariaControls: 'avatar',
+      ariaHaspopup: true,
+      onClick: jest.fn,
+      children: 'a',
+    };
+
+    const { baseElement } = render(
+      <StylesContextProvider>
+        <Avatar {...props} />
+      </StylesContextProvider>
+    );
+    expect(baseElement).toMatchSnapshot();
   });
 
   it('clickイベントの確認', () => {

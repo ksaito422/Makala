@@ -1,5 +1,4 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { AddIcon } from '../AddIcon';
 
@@ -9,8 +8,8 @@ describe('AddIcon', () => {
       onClick: jest.fn,
     };
 
-    const tree = renderer.create(<AddIcon {...props} />).toJSON();
-    expect(tree).toMatchSnapshot();
+    const { baseElement } = render(<AddIcon {...props} />);
+    expect(baseElement).toMatchSnapshot();
   });
   it('clickイベントの確認', () => {
     const props = {

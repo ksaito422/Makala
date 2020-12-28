@@ -1,5 +1,5 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 import { TextForm } from '../TextForm';
 
 describe('TextForm', () => {
@@ -17,7 +17,7 @@ describe('TextForm', () => {
       autoFocus: true,
     };
 
-    const tree = renderer.create(<TextForm {...props} />).toJSON();
-    expect(tree).toMatchSnapshot();
+    const { baseElement } = render(<TextForm {...props} />);
+    expect(baseElement).toMatchSnapshot();
   });
 });

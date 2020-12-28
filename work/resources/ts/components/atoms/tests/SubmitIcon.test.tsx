@@ -1,10 +1,10 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 import { SubmitIcon } from '../SubmitIcon';
 
 describe('SubmitIcon', () => {
   it('スナップショットテスト', () => {
-    const tree = renderer.create(<SubmitIcon />).toJSON();
-    expect(tree).toMatchSnapshot();
+    const { baseElement } = render(<SubmitIcon />);
+    expect(baseElement).toMatchSnapshot();
   });
 });
