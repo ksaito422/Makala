@@ -1,5 +1,4 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Button } from '../Button';
 
@@ -9,8 +8,8 @@ describe('Button', () => {
       onClick: jest.fn,
     };
 
-    const tree = renderer.create(<Button {...props} />).toJSON();
-    expect(tree).toMatchSnapshot();
+    const { baseElement } = render(<Button {...props} />);
+    expect(baseElement).toMatchSnapshot();
   });
   it('clickイベントの確認', () => {
     const props = {

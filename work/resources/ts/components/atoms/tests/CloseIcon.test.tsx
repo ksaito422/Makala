@@ -1,5 +1,4 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { CloseIcon } from '../CloseIcon';
 
@@ -9,8 +8,8 @@ describe('CloseIcon', () => {
       onClick: jest.fn,
     };
 
-    const tree = renderer.create(<CloseIcon {...props} />).toJSON();
-    expect(tree).toMatchSnapshot();
+    const { baseElement } = render(<CloseIcon {...props} />);
+    expect(baseElement).toMatchSnapshot();
   });
   it('clickイベントの確認', () => {
     const props = {

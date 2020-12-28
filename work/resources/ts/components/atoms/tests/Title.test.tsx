@@ -1,20 +1,49 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { render } from '@testing-library/react';
 import { Title } from '../Title';
 import { StylesContextProvider } from '../../../contexts/childContexts/StylesContext';
 
 describe('Title', () => {
-  it('スナップショットテスト', () => {
-    const tree = renderer
-      .create(
-        <Router>
-          <StylesContextProvider>
-            <Title />
-          </StylesContextProvider>
-        </Router>
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+  it('PCサイズのスナップショットテスト', () => {
+    window.matchMedia = jest.fn().mockImplementation((query) => {
+      return {
+        matches: true,
+        media: query,
+        onchange: null,
+        addListener: jest.fn(),
+        removeListener: jest.fn(),
+      };
+    });
+
+    const { baseElement } = render(
+      <Router>
+        <StylesContextProvider>
+          <Title />
+        </StylesContextProvider>
+      </Router>
+    );
+    expect(baseElement).toMatchSnapshot();
+  });
+
+  it('スマホサイズのスナップショットテスト', () => {
+    window.matchMedia = jest.fn().mockImplementation((query) => {
+      return {
+        matches: false,
+        media: query,
+        onchange: null,
+        addListener: jest.fn(),
+        removeListener: jest.fn(),
+      };
+    });
+
+    const { baseElement } = render(
+      <Router>
+        <StylesContextProvider>
+          <Title />
+        </StylesContextProvider>
+      </Router>
+    );
+    expect(baseElement).toMatchSnapshot();
   });
 });

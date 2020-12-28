@@ -1,5 +1,4 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { DownloadIcon } from '../DownloadIcon';
 
@@ -9,8 +8,8 @@ describe('DownloadIcon', () => {
       onClick: jest.fn,
     };
 
-    const tree = renderer.create(<DownloadIcon {...props} />).toJSON();
-    expect(tree).toMatchSnapshot();
+    const { baseElement } = render(<DownloadIcon {...props} />);
+    expect(baseElement).toMatchSnapshot();
   });
   it('clickイベントの確認', () => {
     const props = {
