@@ -18,18 +18,13 @@
     "@babel/preset-react": "^7.0.0",
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
-    "@types/enzyme": "^3.10.8",
     "@types/jest": "^26.0.19",
-    "@types/react-test-renderer": "^17.0.0",
     "@typescript-eslint/eslint-plugin": "^4.11.0",
     "@typescript-eslint/parser": "^4.11.0",
     "axios": "^0.19",
     "babel-jest": "^26.6.3",
     "bootstrap": "^4.0.0",
     "cross-env": "^5.1",
-    "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.5",
-    "enzyme-to-json": "^3.6.1",
     "eslint": "^7.16.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^7.1.0",
@@ -44,7 +39,6 @@
     "laravel-mix": "^4.0.7",
     "lodash": "^4.17.13",
     "popper.js": "^1.12",
-    "react-test-renderer": "^17.0.1",
     "resolve-url-loader": "^2.3.1",
     "sass": "^1.15.2",
     "sass-loader": "^7.1.0",
@@ -86,12 +80,6 @@
       "ts",
       "tsx",
       "js"
-    ],
-    "setupFilesAfterEnv": [
-      "<rootDir>/setupTests.js"
-    ],
-    "snapshotSerializers": [
-      "enzyme-to-json/serializer"
     ]
   }
 }
