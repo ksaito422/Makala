@@ -1,6 +1,9 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render, cleanup } from '@testing-library/react';
 import { ButtonGroup } from '../ButtonGroup';
+
+// メモリリークを避けるために、各テスト後にすべてのコンテンツを消去する
+afterEach(cleanup);
 
 describe('ButtonGroup', () => {
   it('スナップショットテスト', () => {
@@ -11,7 +14,7 @@ describe('ButtonGroup', () => {
       previewOnClick: jest.fn,
     };
 
-    const tree = renderer.create(<ButtonGroup {...props} />).toJSON();
-    expect(tree).toMatchSnapshot();
+    const { baseElement } = render(<ButtonGroup {...props} />);
+    expect(baseElement).toMatchSnapshot();
   });
 });

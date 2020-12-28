@@ -1,6 +1,9 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render, cleanup } from '@testing-library/react';
 import { Notice } from '../Notice';
+
+// メモリリークを避けるために、各テスト後にすべてのコンテンツを消去する
+afterEach(cleanup);
 
 describe('Notice', () => {
   it('スナップショットテスト', () => {
@@ -10,7 +13,7 @@ describe('Notice', () => {
       onClose: jest.fn,
     };
 
-    const tree = mount(<Notice {...props} type='success' />);
-    expect(tree).toMatchSnapshot();
+    const { baseElement } = render(<Notice {...props} type='success' />);
+    expect(baseElement).toMatchSnapshot();
   });
 });
