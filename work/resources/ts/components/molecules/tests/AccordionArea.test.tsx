@@ -1,10 +1,13 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render, cleanup } from '@testing-library/react';
 import { AccordionArea } from '../AccordionArea';
+
+// メモリリークを避けるために、各テスト後にすべてのコンテンツを消去する
+afterEach(cleanup);
 
 describe('AccordionArea', () => {
   it('スナップショットテスト', () => {
-    const tree = renderer.create(<AccordionArea />).toJSON();
-    expect(tree).toMatchSnapshot();
+    const { baseElement } = render(<AccordionArea />);
+    expect(baseElement).toMatchSnapshot();
   });
 });
