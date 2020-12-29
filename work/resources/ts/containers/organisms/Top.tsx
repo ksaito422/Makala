@@ -3,7 +3,6 @@ import { Container, Grid, Paper, Typography, useMediaQuery } from '@material-ui/
 import { Button } from '../../components/atoms/Button';
 import { AccordionArea } from '../../components/molecules/AccordionArea';
 import { AuthContext } from '../../contexts/childContexts/AuthContext';
-import { StylesContext } from '../../contexts/childContexts/StylesContext';
 
 type Props = {
   registerOnClick: () => void;
@@ -19,8 +18,6 @@ export const Top: React.FC<Props> = (props) => {
    * タブレット( > 1100px)を基準にレスポンシブ対応
    */
   const { isAuth } = useContext<any>(AuthContext);
-  const { useStyles } = useContext<any>(StylesContext);
-  const classes = useStyles();
   const matches = useMediaQuery('(min-width: 961px)');
 
   /**

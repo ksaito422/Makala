@@ -1,0 +1,271 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Register PCサイズスナップショットテスト 1`] = `
+<body>
+  <div>
+    <div
+      class="MuiContainer-root makeStyles-auth-10 MuiContainer-maxWidthSm"
+    >
+      <h4
+        class="MuiTypography-root MuiTypography-h4"
+      >
+        makalaへようこそ
+      </h4>
+      <h6
+        class="MuiTypography-root MuiTypography-subtitle1"
+      >
+        新規登録（無料）して利用を開始しましょう。
+      </h6>
+      <form
+        class="makeStyles-auth_form-11"
+      >
+        <div
+          class="MuiFormControl-root MuiTextField-root MuiFormControl-marginNormal MuiFormControl-fullWidth"
+        >
+          <label
+            class="MuiFormLabel-root MuiFormLabel-colorSecondary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-filled Mui-focused Mui-focused"
+            data-shrink="true"
+          >
+            ユーザー名
+          </label>
+          <div
+            class="MuiInputBase-root MuiFilledInput-root MuiFilledInput-underline MuiInputBase-colorSecondary MuiFilledInput-colorSecondary MuiInputBase-fullWidth Mui-focused Mui-focused MuiInputBase-formControl"
+          >
+            <input
+              aria-invalid="false"
+              autocomplete="name"
+              class="MuiInputBase-input MuiFilledInput-input"
+              name="name"
+              type="text"
+              value=""
+            />
+          </div>
+        </div>
+        <div
+          class="MuiFormControl-root MuiTextField-root MuiFormControl-marginNormal MuiFormControl-fullWidth"
+        >
+          <label
+            class="MuiFormLabel-root MuiFormLabel-colorSecondary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-filled"
+            data-shrink="false"
+          >
+            メールアドレス
+          </label>
+          <div
+            class="MuiInputBase-root MuiFilledInput-root MuiFilledInput-underline MuiInputBase-colorSecondary MuiFilledInput-colorSecondary MuiInputBase-fullWidth MuiInputBase-formControl"
+          >
+            <input
+              aria-invalid="false"
+              autocomplete="email"
+              class="MuiInputBase-input MuiFilledInput-input"
+              name="email"
+              type="text"
+              value=""
+            />
+          </div>
+        </div>
+        <div
+          class="MuiFormControl-root MuiTextField-root MuiFormControl-marginNormal MuiFormControl-fullWidth"
+        >
+          <label
+            class="MuiFormLabel-root MuiFormLabel-colorSecondary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-filled"
+            data-shrink="false"
+          >
+            パスワード
+          </label>
+          <div
+            class="MuiInputBase-root MuiFilledInput-root MuiFilledInput-underline MuiInputBase-colorSecondary MuiFilledInput-colorSecondary MuiInputBase-fullWidth MuiInputBase-formControl"
+          >
+            <input
+              aria-invalid="false"
+              autocomplete="current-password"
+              class="MuiInputBase-input MuiFilledInput-input"
+              name="password"
+              type="password"
+              value=""
+            />
+          </div>
+        </div>
+        <div
+          class="MuiContainer-root MuiContainer-maxWidthSm"
+        >
+          <div
+            class="MuiGrid-root makeStyles-main_container-1 MuiGrid-container MuiGrid-spacing-xs-10"
+          >
+            <div
+              class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6"
+            >
+              <button
+                class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-fullWidth"
+                tabindex="0"
+                type="submit"
+              >
+                <span
+                  class="MuiButton-label"
+                >
+                  登録する
+                </span>
+                <span
+                  class="MuiTouchRipple-root"
+                />
+              </button>
+            </div>
+            <div
+              class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6"
+            >
+              <button
+                class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-fullWidth"
+                tabindex="0"
+                type="button"
+              >
+                <span
+                  class="MuiButton-label"
+                >
+                  キャンセル
+                </span>
+                <span
+                  class="MuiTouchRipple-root"
+                />
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+`;
+
+exports[`Register スマホサイズスナップショットテスト 1`] = `
+<body>
+  <div>
+    <div
+      class="MuiContainer-root makeStyles-auth-28 MuiContainer-maxWidthSm"
+    >
+      <h4
+        class="MuiTypography-root MuiTypography-h4"
+      >
+        makalaへようこそ
+      </h4>
+      <h6
+        class="MuiTypography-root MuiTypography-subtitle1"
+      >
+        新規登録（無料）して利用を開始しましょう。
+      </h6>
+      <form
+        class="makeStyles-auth_form-29"
+      >
+        <div
+          class="MuiFormControl-root MuiTextField-root MuiFormControl-marginNormal MuiFormControl-fullWidth"
+        >
+          <label
+            class="MuiFormLabel-root MuiFormLabel-colorSecondary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-filled Mui-focused Mui-focused"
+            data-shrink="true"
+          >
+            ユーザー名
+          </label>
+          <div
+            class="MuiInputBase-root MuiFilledInput-root MuiFilledInput-underline MuiInputBase-colorSecondary MuiFilledInput-colorSecondary MuiInputBase-fullWidth Mui-focused Mui-focused MuiInputBase-formControl"
+          >
+            <input
+              aria-invalid="false"
+              autocomplete="name"
+              class="MuiInputBase-input MuiFilledInput-input"
+              name="name"
+              type="text"
+              value=""
+            />
+          </div>
+        </div>
+        <div
+          class="MuiFormControl-root MuiTextField-root MuiFormControl-marginNormal MuiFormControl-fullWidth"
+        >
+          <label
+            class="MuiFormLabel-root MuiFormLabel-colorSecondary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-filled"
+            data-shrink="false"
+          >
+            メールアドレス
+          </label>
+          <div
+            class="MuiInputBase-root MuiFilledInput-root MuiFilledInput-underline MuiInputBase-colorSecondary MuiFilledInput-colorSecondary MuiInputBase-fullWidth MuiInputBase-formControl"
+          >
+            <input
+              aria-invalid="false"
+              autocomplete="email"
+              class="MuiInputBase-input MuiFilledInput-input"
+              name="email"
+              type="text"
+              value=""
+            />
+          </div>
+        </div>
+        <div
+          class="MuiFormControl-root MuiTextField-root MuiFormControl-marginNormal MuiFormControl-fullWidth"
+        >
+          <label
+            class="MuiFormLabel-root MuiFormLabel-colorSecondary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-filled"
+            data-shrink="false"
+          >
+            パスワード
+          </label>
+          <div
+            class="MuiInputBase-root MuiFilledInput-root MuiFilledInput-underline MuiInputBase-colorSecondary MuiFilledInput-colorSecondary MuiInputBase-fullWidth MuiInputBase-formControl"
+          >
+            <input
+              aria-invalid="false"
+              autocomplete="current-password"
+              class="MuiInputBase-input MuiFilledInput-input"
+              name="password"
+              type="password"
+              value=""
+            />
+          </div>
+        </div>
+        <div
+          class="MuiContainer-root MuiContainer-maxWidthSm"
+        >
+          <div
+            class="MuiGrid-root makeStyles-main_container-19 MuiGrid-container MuiGrid-spacing-xs-4"
+          >
+            <div
+              class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+            >
+              <button
+                class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-fullWidth"
+                tabindex="0"
+                type="submit"
+              >
+                <span
+                  class="MuiButton-label"
+                >
+                  登録する
+                </span>
+                <span
+                  class="MuiTouchRipple-root"
+                />
+              </button>
+            </div>
+            <div
+              class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+            >
+              <button
+                class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-fullWidth"
+                tabindex="0"
+                type="button"
+              >
+                <span
+                  class="MuiButton-label"
+                >
+                  キャンセル
+                </span>
+                <span
+                  class="MuiTouchRipple-root"
+                />
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+`;
