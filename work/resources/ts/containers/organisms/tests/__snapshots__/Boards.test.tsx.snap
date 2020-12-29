@@ -1,0 +1,140 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Boards スナップショットテスト 1`] = `
+<body>
+  <div>
+    <div
+      class="MuiContainer-root MuiContainer-maxWidthSm"
+    >
+      <div
+        class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-4"
+      >
+        <div
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+        >
+          <div
+            class="MuiPaper-root MuiPaper-elevation3 MuiPaper-rounded"
+          >
+            <ul
+              class="MuiList-root MuiList-padding"
+            >
+              <li
+                class="MuiListItem-container"
+              >
+                <div
+                  class="MuiListItem-root MuiListItem-gutters MuiListItem-secondaryAction"
+                >
+                  <div
+                    class="MuiListItemIcon-root"
+                  >
+                    <button
+                      class="MuiButtonBase-root MuiIconButton-root"
+                      tabindex="0"
+                      type="button"
+                    >
+                      <span
+                        class="MuiIconButton-label"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          class="MuiSvgIcon-root"
+                          focusable="false"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.9959.9959 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
+                          />
+                        </svg>
+                      </span>
+                      <span
+                        class="MuiTouchRipple-root"
+                      />
+                    </button>
+                  </div>
+                  <button
+                    class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-fullWidth"
+                    tabindex="0"
+                    type="button"
+                  >
+                    <span
+                      class="MuiButton-label makeStyles-label-13"
+                    >
+                      <div
+                        class="MuiListItemText-root"
+                      >
+                        <span
+                          class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                        >
+                          string
+                        </span>
+                      </div>
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
+                    />
+                  </button>
+                </div>
+                <div
+                  class="MuiListItemSecondaryAction-root"
+                >
+                  <button
+                    class="MuiButtonBase-root MuiIconButton-root"
+                    tabindex="0"
+                    type="button"
+                  >
+                    <span
+                      class="MuiIconButton-label"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        class="MuiSvgIcon-root"
+                        focusable="false"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                        />
+                      </svg>
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
+                    />
+                  </button>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div
+          class="MuiGrid-root makeStyles-centerPlacement-6 MuiGrid-item MuiGrid-grid-xs-12"
+        >
+          <button
+            aria-label="add"
+            class="MuiButtonBase-root MuiFab-root MuiFab-primary"
+            tabindex="0"
+            type="button"
+          >
+            <span
+              class="MuiFab-label"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
+                />
+              </svg>
+            </span>
+            <span
+              class="MuiTouchRipple-root"
+            />
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;
