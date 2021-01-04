@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent, cleanup } from '@testing-library/react';
-import {} from '';
+// import {} from '';
 
 // メモリリークを避けるために、各テスト後にすべてのコンテンツを消去する
 afterEach(cleanup);
