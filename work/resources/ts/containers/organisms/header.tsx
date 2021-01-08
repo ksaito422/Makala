@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import { AppBar, Grid, Menu, MenuItem, Toolbar, useMediaQuery } from '@material-ui/core';
 import { Title } from '../../components/atoms/Title';
 import { Avatar } from '../../components/atoms/Avatar';
@@ -12,6 +13,7 @@ export const Header: React.FC = () => {
    */
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const { isAuth, authUserState, authLogout } = useContext<any>(AuthContext);
+  const history = useHistory();
   const matches = useMediaQuery('(min-width: 1101px)');
 
   // メニューのオープンon/off
@@ -65,6 +67,13 @@ export const Header: React.FC = () => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
+        <MenuItem
+          onClick={() => {
+            history.push(`/${authUserState.name}/settings`);
+          }}
+        >
+          設定
+        </MenuItem>
         <MenuItem onClick={authLogout}>ログアウト</MenuItem>
       </Menu>
     </>
