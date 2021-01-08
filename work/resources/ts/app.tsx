@@ -10,6 +10,7 @@ import { LoginPage } from './containers/pages/LoginPage';
 import { RegisterPage } from './containers/pages/RegisterPage';
 import { HomePage } from './containers/pages/HomePage';
 import { CardPage } from './containers/pages/CardPage';
+import { SettingPage } from './containers/pages/SettingPage';
 import { MuiTheme } from './theme/MuiTheme';
 import { Auth } from './Auth/Auth';
 
@@ -25,6 +26,7 @@ const App: React.FC = () => {
               <GuestRoute exact path='/register' component={RegisterPage} />
               <PrivateRoute exact path='/:user/home' component={HomePage} />
               <PrivateRoute exact path='/:user/:card/cards/' component={CardPage} />
+              <PrivateRoute exact path='/:user/settings' component={SettingPage} />
             </Switch>
           </Auth>
         </MuiThemeProvider>
