@@ -69,7 +69,7 @@ export const Header: React.FC = () => {
       >
         <MenuItem
           onClick={() => {
-            history.push(`/${authUserState.name}/settings`);
+            history.push(`/${authUserState.name}/settings/account`);
           }}
         >
           設定
