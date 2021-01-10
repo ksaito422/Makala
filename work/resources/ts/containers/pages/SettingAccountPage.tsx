@@ -3,11 +3,17 @@ import { Container, CssBaseline, Grid } from '@material-ui/core';
 import { Header } from '../organisms/Header';
 import { SettingList } from '../organisms/SettingList';
 import { Account } from '../organisms/Account';
+import { AuthContext } from '../../contexts/childContexts/AuthContext';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 
 export const SettingAccountPage: React.FC = () => {
+  /**
+   * cssの定義
+   * アカウント情報の読み込み
+   */
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
+  const { authUserState } = useContext<any>(AuthContext);
 
   return (
     <>
@@ -19,7 +25,7 @@ export const SettingAccountPage: React.FC = () => {
             <SettingList />
           </Grid>
           <Grid item xs={8}>
-            <Account />
+            <Account name={authUserState.name} email={authUserState.email} />
           </Grid>
         </Grid>
       </Container>
