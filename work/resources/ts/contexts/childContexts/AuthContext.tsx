@@ -5,6 +5,7 @@ import { instance } from '../../config/axios.config';
 type AuthUserState = {
   id: number | null;
   name: string | null;
+  email: string | null;
 };
 
 export const AuthContext = createContext({});
@@ -18,6 +19,7 @@ export const AuthContextProvider: React.FC = (props) => {
   const [authUserState, setAuthUserState] = useState<AuthUserState>({
     id: null,
     name: null,
+    email: null,
   });
 
   // ログイン状態の管理
@@ -47,7 +49,12 @@ export const AuthContextProvider: React.FC = (props) => {
         // 通信結果の通知内容
         localStorage.setItem('makala_token', res.data.access_token);
         localStorage.setItem('makala_user', res.data.name);
-        setAuthUserState({ ...authUserState, id: res.data.id, name: res.data.name });
+        setAuthUserState({
+          ...authUserState,
+          id: res.data.id,
+          name: res.data.name,
+          email: res.data.email,
+        });
         login();
         setStatus({
           open: true,
@@ -85,7 +92,12 @@ export const AuthContextProvider: React.FC = (props) => {
         // 通信結果の通知内容
         localStorage.setItem('makala_token', res.data.access_token);
         localStorage.setItem('makala_user', res.data.name);
-        setAuthUserState({ ...authUserState, id: res.data.id, name: res.data.name });
+        setAuthUserState({
+          ...authUserState,
+          id: res.data.id,
+          name: res.data.name,
+          email: res.data.email,
+        });
         login();
         setStatus({
           open: true,
@@ -186,7 +198,12 @@ export const AuthContextProvider: React.FC = (props) => {
         // isAuthをtrueにする
         // トークンリフレッシュする
         localStorage.setItem('makala_user', res.data.name);
-        setAuthUserState({ ...authUserState, id: res.data.id, name: res.data.name });
+        setAuthUserState({
+          ...authUserState,
+          id: res.data.id,
+          name: res.data.name,
+          email: res.data.email,
+        });
         login();
         authRefresh();
       })
@@ -218,7 +235,12 @@ export const AuthContextProvider: React.FC = (props) => {
         // 通信結果の通知内容
         localStorage.setItem('makala_token', res.data.access_token);
         localStorage.setItem('makala_user', res.data.name);
-        setAuthUserState({ ...authUserState, id: res.data.id, name: res.data.name });
+        setAuthUserState({
+          ...authUserState,
+          id: res.data.id,
+          name: res.data.name,
+          email: res.data.email,
+        });
         login();
         setStatus({
           open: true,
