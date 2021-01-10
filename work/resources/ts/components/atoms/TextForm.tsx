@@ -17,6 +17,7 @@ type Props = Partial<{
   required: boolean;
   autoFocus: boolean;
   inputRef: any;
+  disabled: boolean;
 }>;
 
 export const TextForm: React.FC<Props> = (props) => {
@@ -39,6 +40,7 @@ export const TextForm: React.FC<Props> = (props) => {
       required={props.required}
       autoFocus={props.autoFocus}
       inputRef={props.inputRef}
+      disabled={props.disabled}
     />
   );
 };

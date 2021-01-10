@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Container, CssBaseline, Grid } from '@material-ui/core';
 import { Header } from '../organisms/Header';
 import { SettingList } from '../organisms/SettingList';
+import { Account } from '../organisms/Account';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 
 export const SettingAccountPage: React.FC = () => {
@@ -18,7 +19,7 @@ export const SettingAccountPage: React.FC = () => {
             <SettingList />
           </Grid>
           <Grid item xs={8}>
-            <p>test</p>
+            <Account />
           </Grid>
         </Grid>
       </Container>
