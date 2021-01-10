@@ -96,6 +96,10 @@ export const StylesContextProvider: React.FC = (props) => {
     card: {
       justifyContent: 'left',
     },
+    setting_contents: {
+      marginTop: theme.spacing(4),
+      padding: theme.spacing(2),
+    },
   }));
   return <StylesContext.Provider value={{ useStyles }}>{props.children}</StylesContext.Provider>;
 };
