@@ -18,6 +18,9 @@ export const Account: React.FC<Props> = (props) => {
         <Typography variant='h5' align='center'>
           アカウント
         </Typography>
+        <Typography variant='subtitle2' align='center' color='textSecondary'>
+          登録情報の変更ができます。
+        </Typography>
         <Paper elevation={2} className={classes.setting_contents}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
