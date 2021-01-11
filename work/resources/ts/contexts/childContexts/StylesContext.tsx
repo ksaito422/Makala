@@ -100,6 +100,10 @@ export const StylesContextProvider: React.FC = (props) => {
       marginTop: theme.spacing(4),
       padding: theme.spacing(2),
     },
+    account_button: {
+      marginTop: theme.spacing(1),
+      textAlign: 'right',
+    },
   }));
   return <StylesContext.Provider value={{ useStyles }}>{props.children}</StylesContext.Provider>;
 };
