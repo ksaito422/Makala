@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Container, Grid, Paper, Typography } from '@material-ui/core';
 import { TextForm } from '../../components/atoms/TextForm';
+import { Button } from '../../components/atoms/Button';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 
 type Props = {
@@ -22,17 +23,35 @@ export const Account: React.FC<Props> = (props) => {
           登録情報の変更ができます。
         </Typography>
         <Paper elevation={2} className={classes.setting_contents}>
-          <Grid container spacing={2}>
+          <Grid container spacing={4}>
             <Grid item xs={12}>
               <Typography variant='h6'>基本情報</Typography>
             </Grid>
             <Grid item xs={12}>
               <Typography variant='subtitle2'>ユーザー名</Typography>
               <TextForm fullWidth defaultValue={props.name} disabled />
+              <div className={classes.account_button}>
+                <Button
+                  onClick={() => {
+                    console.log('user');
+                  }}
+                >
+                  変更する
+                </Button>
+              </div>
             </Grid>
             <Grid item xs={12}>
               <Typography variant='subtitle2'>メールアドレス</Typography>
               <TextForm fullWidth defaultValue={props.email} disabled />
+              <div className={classes.account_button}>
+                <Button
+                  onClick={() => {
+                    console.log('email');
+                  }}
+                >
+                  変更する
+                </Button>
+              </div>
             </Grid>
             <Grid item xs={12}>
               <Typography variant='subtitle2'>パスワード</Typography>
