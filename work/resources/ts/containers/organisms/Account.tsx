@@ -11,7 +11,7 @@ import { StylesContext } from '../../contexts/childContexts/StylesContext';
 type Props = {
   name: string;
   email: string;
-  nameChangeOnClick: (data: string) => void;
+  nameChangeOnClick: (name: string, user: number) => void;
 };
 
 export const Account: React.FC<Props> = (props) => {
@@ -123,8 +123,9 @@ export const Account: React.FC<Props> = (props) => {
       {/* アカウント情報の変更時に表示するモーダルを定義する */}
       <ModalWindow modalOpen={modalOpenState} modalOnClose={modalClose}>
         <ModalAccountName
-          nameChangeOnClick={(data) => {
-            props.nameChangeOnClick(data);
+          nameChangeOnClick={(data, userId) => {
+            props.nameChangeOnClick(data, userId);
+            modalClose();
           }}
           modalOnClose={modalClose}
         />
