@@ -126,6 +126,7 @@ export const Account: React.FC<Props> = (props) => {
           nameChangeOnClick={(data) => {
             props.nameChangeOnClick(data);
           }}
+          modalOnClose={modalClose}
         />
       </ModalWindow>
     </>

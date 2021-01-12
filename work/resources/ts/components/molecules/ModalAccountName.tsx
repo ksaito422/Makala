@@ -8,6 +8,7 @@ import { StylesContext } from '../../contexts/childContexts/StylesContext';
 
 type Props = {
   nameChangeOnClick: (data: string) => void;
+  modalOnClose: () => void;
 };
 
 export const ModalAccountName: React.FC<Props> = (props) => {
@@ -23,11 +24,7 @@ export const ModalAccountName: React.FC<Props> = (props) => {
     <>
       <Grid container spacing={4}>
         <Grid item xs={12} className={classes.rightPlacement}>
-          <CloseIcon
-            onClick={() => {
-              console.log('hello');
-            }}
-          />
+          <CloseIcon onClick={props.modalOnClose} />
         </Grid>
         <form
           className={classes.form_board}
