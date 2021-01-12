@@ -1,0 +1,55 @@
+import React, { createContext, useContext } from 'react';
+import { FeedbackContext } from './FeedbackContext';
+import { AuthContext } from './AuthContext';
+import { instance } from '../../config/axios.config';
+
+export const ApiAccountContext = createContext({});
+
+export const ApiAccountContextProvider: React.FC = (props) => {
+  /**
+   * { api通信中のスピナー表示のon/off管理, api通信の結果通知 }
+   * ログインユーザーの情報
+   * getBoardsで取得したデータを保管
+   */
+  const { setProgress, setStatus } = useContext<any>(FeedbackContext);
+  // const { authUserState } = useContext<any>(AuthContext);
+
+  // ユーザー名を更新するapiと通信
+  const changeName = async (name: string, userId: number) => {
+    // スピナーon
+    // トークン取得
+    await setProgress(true);
+    const token = localStorage.getItem('makala_token');
+
+    await instance({
+      method: 'PUT',
+      url: `api/v1/account/${userId}`,
+      data: { name },
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => {
+        setStatus({
+          open: true,
+          type: 'success',
+          message: res.data.message,
+        });
+      })
+      .catch((err) => {
+        setStatus({
+          open: true,
+          type: 'error',
+          message: 'ユーザー名の変更に失敗しました。',
+        });
+      })
+      .finally(() => {
+        // スピナーoff
+        setProgress(false);
+      });
+  };
+
+  return (
+    <ApiAccountContext.Provider value={{ changeName }}>{props.children}</ApiAccountContext.Provider>
+  );
+};
