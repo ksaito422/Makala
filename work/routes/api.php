@@ -48,4 +48,8 @@ Route::group([
         'update' => 'card.update',
         'destroy' => 'card.destroy'
     ]);
+
+    // アカウント名を変更するルート
+    Route::put('/v1/account/{user}', 'Api\AccountController@changeName')
+            ->name('changeName');
 });
