@@ -25,11 +25,6 @@ class AccountController extends Controller
         return response()->json(['message' => 'ユーザー名を変更しました。']);
     }
 
-    /**
-     * Get a JWT via given credentials.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function changeEmail(Request $request, $id)
     {
         // ユーザーを取得して、認証情報を保管
