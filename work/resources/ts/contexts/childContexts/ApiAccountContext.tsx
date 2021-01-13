@@ -23,7 +23,7 @@ export const ApiAccountContextProvider: React.FC = (props) => {
 
     await instance({
       method: 'PUT',
-      url: `api/v1/account/${userId}`,
+      url: `api/v1/account/name/${userId}`,
       data: { name },
       headers: {
         Authorization: `Bearer ${token}`,
