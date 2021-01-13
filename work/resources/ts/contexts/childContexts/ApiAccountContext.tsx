@@ -12,7 +12,7 @@ export const ApiAccountContextProvider: React.FC = (props) => {
    * getBoardsで取得したデータを保管
    */
   const { setProgress, setStatus } = useContext<any>(FeedbackContext);
-  // const { authUserState } = useContext<any>(AuthContext);
+  const { authUserState, setAuthUserState } = useContext<any>(AuthContext);
 
   // ユーザー名を更新するapiと通信
   const changeName = async (name: string, userId: number) => {
@@ -30,6 +30,13 @@ export const ApiAccountContextProvider: React.FC = (props) => {
       },
     })
       .then((res) => {
+        // ローカルストレージのユーザー名を置換する
+        // ユーザー情報を管理するstateのnameを更新する
+        localStorage.setItem('makala_user', name);
+        setAuthUserState({
+          ...authUserState,
+          name,
+        });
         setStatus({
           open: true,
           type: 'success',
