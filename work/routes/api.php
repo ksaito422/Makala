@@ -55,4 +55,7 @@ Route::group([
     // メールアドレスを変更するルート
     Route::put('/v1/account/email/{user}', 'Api\AccountController@changeEmail')
             ->name('changeEmail');
+    // パスワードを変更するルート
+    Route::put('/v1/account/password/{user}', 'Api\AccountController@changePassword')
+            ->name('changePassword');
 });
