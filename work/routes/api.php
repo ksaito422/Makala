@@ -50,6 +50,9 @@ Route::group([
     ]);
 
     // アカウント名を変更するルート
-    Route::put('/v1/account/{user}', 'Api\AccountController@changeName')
+    Route::put('/v1/account/name/{user}', 'Api\AccountController@changeName')
             ->name('changeName');
+    // メールアドレスを変更するルート
+    Route::put('/v1/account/email/{user}', 'Api\AccountController@changeEmail')
+            ->name('changeEmail');
 });
