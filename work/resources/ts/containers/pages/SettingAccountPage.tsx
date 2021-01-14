@@ -20,7 +20,7 @@ export const SettingAccountPage: React.FC = () => {
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
   const { authUserState } = useContext<any>(AuthContext);
-  const { changeName } = useContext<any>(ApiAccountContext);
+  const { changeName, changeEmail } = useContext<any>(ApiAccountContext);
 
   return (
     <>
@@ -37,6 +37,9 @@ export const SettingAccountPage: React.FC = () => {
               email={authUserState.email}
               nameChangeOnClick={(name, userId) => {
                 changeName(name, userId);
+              }}
+              emailChangeOnClick={(newEmail, email, password, userId) => {
+                changeEmail(newEmail, email, password, userId);
               }}
             />
           </Grid>

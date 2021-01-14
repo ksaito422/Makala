@@ -56,7 +56,47 @@ export const ApiAccountContextProvider: React.FC = (props) => {
       });
   };
 
+  // メールアドレスを変更するapiと通信
+  const changeEmail = async (newEmail: string, email: string, password: string, userId: number) => {
+    // スピナーon
+    // トークン取得
+    await setProgress(true);
+    const token = localStorage.getItem('makala_token');
+    const data = { newEmail, email, password, userId };
+
+    await instance({
+      method: 'PUT',
+      url: `api/v1/account/email/${userId}`,
+      data,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => {
+        // ユーザー情報を管理するstateのnameを更新する
+        setAuthUserState({ ...authUserState, email: newEmail });
+        setStatus({
+          open: true,
+          type: 'success',
+          message: res.data.message,
+        });
+      })
+      .catch((err) => {
+        setStatus({
+          open: true,
+          type: 'error',
+          message: err.response.data.message,
+        });
+      })
+      .finally(() => {
+        // スピナーoff
+        setProgress(false);
+      });
+  };
+
   return (
-    <ApiAccountContext.Provider value={{ changeName }}>{props.children}</ApiAccountContext.Provider>
+    <ApiAccountContext.Provider value={{ changeName, changeEmail }}>
+      {props.children}
+    </ApiAccountContext.Provider>
   );
 };
