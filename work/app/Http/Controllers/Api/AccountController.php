@@ -51,13 +51,13 @@ class AccountController extends Controller
 
         // パスワードが正しければパスワード変更する。違ったら変更できない
         if (auth()->validate($credentials)) {
-            $user->password = bcrypt($request->new_password);
+            $user->password = bcrypt($request->newPassword);
             $user->save();
             return response()->json(['message' => 'パスワードを変更しました。']);
         } else {
             return response()->json([
                 'message' => 'パスワードが違うため、パスワードを変更できませんでした。',
-                ]);
+                ], 401, [], JSON_UNESCAPED_UNICODE);
         }
     }
 }
