@@ -94,8 +94,49 @@ export const ApiAccountContextProvider: React.FC = (props) => {
       });
   };
 
+  // パスワードを変更するapiと通信
+  const changePassword = async (
+    password: string,
+    newPassword: string,
+    email: string,
+    userId: number
+  ) => {
+    // スピナーon
+    // トークン取得
+    await setProgress(true);
+    const token = localStorage.getItem('makala_token');
+    const data = { password, newPassword, email, userId };
+
+    await instance({
+      method: 'PUT',
+      url: `api/v1/account/password/${userId}`,
+      data,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => {
+        setStatus({
+          open: true,
+          type: 'success',
+          message: res.data.message,
+        });
+      })
+      .catch((err) => {
+        setStatus({
+          open: true,
+          type: 'error',
+          message: err.response.data.message,
+        });
+      })
+      .finally(() => {
+        // スピナーoff
+        setProgress(false);
+      });
+  };
+
   return (
-    <ApiAccountContext.Provider value={{ changeName, changeEmail }}>
+    <ApiAccountContext.Provider value={{ changeName, changeEmail, changePassword }}>
       {props.children}
     </ApiAccountContext.Provider>
   );
