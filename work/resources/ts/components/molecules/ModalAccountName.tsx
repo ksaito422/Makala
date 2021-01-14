@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import { Grid } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 import { TextForm } from '../atoms/TextForm';
 import { CloseIcon } from '../atoms/CloseIcon';
 import { SubmitIcon } from '../atoms/SubmitIcon';
@@ -30,6 +30,7 @@ export const ModalAccountName: React.FC<Props> = (props) => {
         <Grid item xs={12} className={classes.rightPlacement}>
           <CloseIcon onClick={props.modalOnClose} />
         </Grid>
+        <Typography variant='subtitle1'>ユーザー名の変更</Typography>
         <form
           className={classes.form_board}
           onSubmit={handleSubmit((data) => {
