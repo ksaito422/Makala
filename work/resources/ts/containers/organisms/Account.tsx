@@ -13,6 +13,7 @@ type Props = {
   name: string;
   email: string;
   nameChangeOnClick: (name: string, user: number) => void;
+  emailChangeOnClick: (newEmail: string, email: string, password: string, user: number) => void;
 };
 
 export const Account: React.FC<Props> = (props) => {
@@ -145,7 +146,8 @@ export const Account: React.FC<Props> = (props) => {
         )}
         {modalChangeEmail && (
           <ModalAccountEmail
-            emailChangeOnClick={(data) => {
+            emailChangeOnClick={(newEmail, email, password, userId) => {
+              props.emailChangeOnClick(newEmail, email, password, userId);
               modalClose();
             }}
             modalOnClose={modalClose}

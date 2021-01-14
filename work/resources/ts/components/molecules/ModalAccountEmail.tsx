@@ -8,7 +8,7 @@ import { AuthContext } from '../../contexts/childContexts/AuthContext';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 
 type Props = {
-  emailChangeOnClick: (email: string, user: number) => void;
+  emailChangeOnClick: (newEmail: string, email: string, password: string, user: number) => void;
   modalOnClose: () => void;
 };
 
@@ -34,34 +34,44 @@ export const ModalAccountEmail: React.FC<Props> = (props) => {
         <form
           className={classes.form_board}
           onSubmit={handleSubmit((data) => {
-            props.emailChangeOnClick(data.email, userId);
+            props.emailChangeOnClick(data.email, authUserState.email, data.password, userId);
           })}
         >
           <Grid container spacing={4}>
             <Grid item xs={12}>
               <TextForm
-                name='name'
+                name='email'
+                label='新しいメールアドレス'
                 multiline
                 fullWidth
                 rowsMax={1}
                 inputRef={register({
-                  required: '新しいユーザー名を入力して下さい',
+                  required: true,
+                  pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                })}
+                error={Boolean(errors.email)}
+                helperText={errors.email && '新しいメールアドレスを入力してください'}
+              />
+              <TextForm
+                fullWidth
+                margin='normal'
+                label='パスワード'
+                name='password'
+                type='password'
+                autoComplete='current-password'
+                inputRef={register({
+                  required: ' パスワードを入力して下さい',
                   minLength: {
-                    value: 3,
-                    message: 'ユーザー名は3文字以上20文字以下で入力して下さい',
+                    value: 8,
+                    message: 'パスワードを8文字以上20文字以下で入力して下さい',
                   },
                   maxLength: {
                     value: 20,
-                    message: 'ユーザー名は3文字以上20文字以下で入力して下さい',
-                  },
-                  pattern: {
-                    value: /^[a-zA-Z0-9][a-zA-Z0-9_.-]+[a-zA-Z0-9]$/,
-                    message:
-                      'ユーザ名は半角英数字及び_.-のみ利用可能です。（_.-は先頭と末尾には使えません）',
+                    message: 'パスワードを8文字以上20文字以下で入力して下さい',
                   },
                 })}
-                error={Boolean(errors.name)}
-                helperText={errors.name && errors.name.message}
+                error={Boolean(errors.password)}
+                helperText={errors.password && errors.password.message}
               />
             </Grid>
             <Grid item xs={12} className={classes.centerPlacement}>
