@@ -5,6 +5,7 @@ import { TextForm } from '../../components/atoms/TextForm';
 import { Button } from '../../components/atoms/Button';
 import { ModalWindow } from '../../components/molecules/ModalWindow';
 import { ModalAccountName } from '../../components/molecules/ModalAccountName';
+import { ModalAccountEmail } from '../../components/molecules/ModalAccountEmail';
 import { ModalPropsContext } from '../../contexts/childContexts/ModalPropsContext';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 
@@ -12,6 +13,7 @@ type Props = {
   name: string;
   email: string;
   nameChangeOnClick: (name: string, user: number) => void;
+  emailChangeOnClick: (newEmail: string, email: string, password: string, user: number) => void;
 };
 
 export const Account: React.FC<Props> = (props) => {
@@ -22,10 +24,19 @@ export const Account: React.FC<Props> = (props) => {
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
   const { register, handleSubmit, errors } = useForm();
-  const { modalOpenState, setModalOpenState } = useContext<any>(ModalPropsContext);
+  const {
+    modalOpenState,
+    setModalOpenState,
+    modalChangeName,
+    setModalChangeName,
+    modalChangeEmail,
+    setModalChangeEmail,
+  } = useContext<any>(ModalPropsContext);
 
   const modalClose = () => {
     setModalOpenState(false);
+    setModalChangeName(false);
+    setModalChangeEmail(false);
   };
 
   return (
@@ -49,6 +60,7 @@ export const Account: React.FC<Props> = (props) => {
                 <Button
                   onClick={() => {
                     setModalOpenState(true);
+                    setModalChangeName(true);
                   }}
                 >
                   変更する
@@ -61,7 +73,8 @@ export const Account: React.FC<Props> = (props) => {
               <div className={classes.account_button}>
                 <Button
                   onClick={() => {
-                    console.log('email');
+                    setModalOpenState(true);
+                    setModalChangeEmail(true);
                   }}
                 >
                   変更する
@@ -122,13 +135,24 @@ export const Account: React.FC<Props> = (props) => {
 
       {/* アカウント情報の変更時に表示するモーダルを定義する */}
       <ModalWindow modalOpen={modalOpenState} modalOnClose={modalClose}>
-        <ModalAccountName
-          nameChangeOnClick={(data, userId) => {
-            props.nameChangeOnClick(data, userId);
-            modalClose();
-          }}
-          modalOnClose={modalClose}
-        />
+        {modalChangeName && (
+          <ModalAccountName
+            nameChangeOnClick={(data, userId) => {
+              props.nameChangeOnClick(data, userId);
+              modalClose();
+            }}
+            modalOnClose={modalClose}
+          />
+        )}
+        {modalChangeEmail && (
+          <ModalAccountEmail
+            emailChangeOnClick={(newEmail, email, password, userId) => {
+              props.emailChangeOnClick(newEmail, email, password, userId);
+              modalClose();
+            }}
+            modalOnClose={modalClose}
+          />
+        )}
       </ModalWindow>
     </>
   );

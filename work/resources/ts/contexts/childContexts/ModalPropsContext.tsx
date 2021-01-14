@@ -21,7 +21,11 @@ export const ModalPropsContextProvider: React.FC = (props) => {
   });
 
   // モーダル表示のon/off切り替え
+  // ユーザー名変更時のモーダルの表示状態管理
+  // メールアドレス変更時のモーダルの表示状態管理
   const [modalOpenState, setModalOpenState] = useState<boolean>(false);
+  const [modalChangeName, setModalChangeName] = useState<boolean>(false);
+  const [modalChangeEmail, setModalChangeEmail] = useState<boolean>(false);
 
   return (
     <ModalPropsContext.Provider
@@ -30,6 +34,10 @@ export const ModalPropsContextProvider: React.FC = (props) => {
         setModalValueState,
         modalOpenState,
         setModalOpenState,
+        modalChangeName,
+        setModalChangeName,
+        modalChangeEmail,
+        setModalChangeEmail,
       }}
     >
       {props.children}

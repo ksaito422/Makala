@@ -33,13 +33,13 @@ class AccountController extends Controller
 
         // パスワードが正しければメールアドレス変更する。違ったら変更できない
         if (auth()->validate($credentials)) {
-            $user->email = $request->new_email;
+            $user->email = $request->newEmail;
             $user->save();
             return response()->json(['message' => 'メールアドレスを変更しました。']);
         } else {
             return response()->json([
                 'message' => 'パスワードが違うため、メールアドレスを変更できませんでした。',
-                ]);
+            ], 401, [], JSON_UNESCAPED_UNICODE);
         }
     }
 
