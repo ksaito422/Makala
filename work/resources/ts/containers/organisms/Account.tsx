@@ -65,7 +65,7 @@ export const Account: React.FC<Props> = (props) => {
             </Grid>
             <Grid item xs={12}>
               <Typography variant='subtitle2'>現在のユーザー名</Typography>
-              <TextForm fullWidth defaultValue={props.name} disabled />
+              <TextForm fullWidth value={props.name} disabled />
               <div className={classes.account_button}>
                 <Button
                   onClick={() => {
@@ -79,7 +79,7 @@ export const Account: React.FC<Props> = (props) => {
             </Grid>
             <Grid item xs={12}>
               <Typography variant='subtitle2'>現在のメールアドレス</Typography>
-              <TextForm fullWidth defaultValue={props.email} disabled />
+              <TextForm fullWidth value={props.email} disabled />
               <div className={classes.account_button}>
                 <Button
                   onClick={() => {
