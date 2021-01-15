@@ -114,6 +114,21 @@ export const StylesContextProvider: React.FC = (props) => {
     auth_container: {
       padding: theme.spacing(4),
     },
+    footer: {
+      backgroundColor: theme.palette.secondary.dark,
+      color: '#f0f0f0',
+      padding: theme.spacing(2),
+      position: 'absolute',
+      bottom: 0,
+      width: '100%',
+    },
+    footer_link: {
+      color: '#f0f0f0',
+      textDecoration: 'none',
+    },
+    footer_copylight: {
+      marginTop: theme.spacing(2),
+    },
   }));
   return <StylesContext.Provider value={{ useStyles }}>{props.children}</StylesContext.Provider>;
 };
