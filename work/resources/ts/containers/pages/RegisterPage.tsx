@@ -19,7 +19,7 @@ export const RegisterPage: React.FC = () => {
   const { progress, status, setStatus } = useContext<any>(FeedbackContext);
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
-  const { authRegister } = useContext<any>(AuthContext);
+  const { authRegister, authUserState, authGuestLogin } = useContext<any>(AuthContext);
   const history = useHistory();
 
   return (
@@ -33,6 +33,10 @@ export const RegisterPage: React.FC = () => {
           }}
           cancelOnClick={() => {
             history.push('/');
+          }}
+          guestOnClick={() => {
+            authGuestLogin();
+            history.push(`/${authUserState.name}/home`);
           }}
         />
       </Container>

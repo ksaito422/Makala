@@ -21,6 +21,7 @@ describe('Register', () => {
     const props = {
       registerOnClick: jest.fn(),
       cancelOnClick: jest.fn(),
+      guestOnClick: jest.fn(),
     };
 
     const { baseElement } = render(
@@ -45,6 +46,7 @@ describe('Register', () => {
     const props = {
       registerOnClick: jest.fn(),
       cancelOnClick: jest.fn(),
+      guestOnClick: jest.fn(),
     };
 
     const { baseElement } = render(

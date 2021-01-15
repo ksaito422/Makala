@@ -56,12 +56,6 @@ export const StylesContextProvider: React.FC = (props) => {
     gif: {
       height: `60vh`,
     },
-    // login formのスタイル
-    auth: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-    },
     auth_form: {
       width: `100%`,
       marginTop: theme.spacing(4),
@@ -103,6 +97,22 @@ export const StylesContextProvider: React.FC = (props) => {
     account_button: {
       marginTop: theme.spacing(1),
       textAlign: 'right',
+    },
+    guset_container: {
+      borderTop: 'solid 1px #dcdcdc',
+    },
+    guest_title: {
+      marginBottom: theme.spacing(4),
+    },
+    guest_explanation: {
+      marginBottom: theme.spacing(1),
+    },
+    guest_login: {
+      marginTop: theme.spacing(4),
+      textAlign: 'center',
+    },
+    auth_container: {
+      padding: theme.spacing(4),
     },
   }));
   return <StylesContext.Provider value={{ useStyles }}>{props.children}</StylesContext.Provider>;

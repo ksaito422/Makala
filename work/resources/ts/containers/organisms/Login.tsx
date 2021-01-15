@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import { Container, Grid, Typography, useMediaQuery } from '@material-ui/core';
+import { Container, Grid, Typography, Paper, useMediaQuery } from '@material-ui/core';
 import { Button } from '../../components/atoms/Button';
 import { TextForm } from '../../components/atoms/TextForm';
 import { PasswordForm } from '../../components/atoms/PasswordForm';
@@ -32,7 +32,7 @@ export const Login: React.FC<Props> = (props) => {
     const CommonLogin = () => {
       return (
         <Button type='submit' fullWidth>
-          ログインする
+          ログイン
         </Button>
       );
     };
@@ -48,7 +48,7 @@ export const Login: React.FC<Props> = (props) => {
     return (
       <>
         {matches ? (
-          <Grid container spacing={10} className={className}>
+          <Grid container spacing={4} className={className}>
             <Grid item xs={6}>
               <CommonLogin />
             </Grid>
@@ -72,50 +72,54 @@ export const Login: React.FC<Props> = (props) => {
 
   return (
     <>
-      <Container maxWidth='sm' className={classes.auth}>
-        <Typography variant='h4'>makalaにログイン</Typography>
-        <form
-          className={classes.auth_form}
-          onSubmit={handleSubmit((data) => {
-            props.loginOnClick(data);
-          })}
-        >
-          <TextForm
-            fullWidth
-            margin='normal'
-            label='メールアドレス'
-            name='email'
-            autoFocus
-            autoComplete='email'
-            inputRef={register({
-              required: true,
-              pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+      <Container maxWidth='sm'>
+        <Paper elevation={2} className={classes.auth_container}>
+          <Typography variant='h4' align='center'>
+            makalaにログイン
+          </Typography>
+          <form
+            className={classes.auth_form}
+            onSubmit={handleSubmit((data) => {
+              props.loginOnClick(data);
             })}
-            error={Boolean(errors.email)}
-            helperText={errors.email && 'メールアドレスを入力してください'}
-          />
-          <PasswordForm
-            fullWidth
-            label='パスワード'
-            name='password'
-            inputRef={register({
-              required: ' パスワードを入力して下さい',
-              minLength: {
-                value: 8,
-                message: 'パスワードを8文字以上20文字以下で入力して下さい',
-              },
-              maxLength: {
-                value: 20,
-                message: 'パスワードを8文字以上20文字以下で入力して下さい',
-              },
-            })}
-            error={Boolean(errors.password)}
-            helperText={errors.password && errors.password.message}
-          />
-          <Container maxWidth='sm'>
-            <ResponsiveComponent />
-          </Container>
-        </form>
+          >
+            <TextForm
+              fullWidth
+              margin='normal'
+              label='メールアドレス'
+              name='email'
+              autoFocus
+              autoComplete='email'
+              inputRef={register({
+                required: true,
+                pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+              })}
+              error={Boolean(errors.email)}
+              helperText={errors.email && 'メールアドレスを入力してください'}
+            />
+            <PasswordForm
+              fullWidth
+              label='パスワード'
+              name='password'
+              inputRef={register({
+                required: ' パスワードを入力して下さい',
+                minLength: {
+                  value: 8,
+                  message: 'パスワードを8文字以上20文字以下で入力して下さい',
+                },
+                maxLength: {
+                  value: 20,
+                  message: 'パスワードを8文字以上20文字以下で入力して下さい',
+                },
+              })}
+              error={Boolean(errors.password)}
+              helperText={errors.password && errors.password.message}
+            />
+            <Container maxWidth='sm'>
+              <ResponsiveComponent />
+            </Container>
+          </form>
+        </Paper>
       </Container>
     </>
   );
