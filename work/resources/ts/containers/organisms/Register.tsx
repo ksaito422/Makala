@@ -33,7 +33,7 @@ export const Register: React.FC<Props> = (props) => {
     const CommonRegister = () => {
       return (
         <Button type='submit' fullWidth>
-          登録する
+          登録
         </Button>
       );
     };
