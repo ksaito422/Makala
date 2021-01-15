@@ -124,7 +124,9 @@ export const StylesContextProvider: React.FC = (props) => {
     },
     footer_link: {
       color: '#f0f0f0',
-      textDecoration: 'none',
+      '&:hover': {
+        color: '#f0f0f0',
+      },
     },
     footer_copylight: {
       marginTop: theme.spacing(2),
