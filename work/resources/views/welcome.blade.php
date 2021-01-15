@@ -9,6 +9,9 @@
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
+        <!-- css -->
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
          <!-- Scripts -->
         @if(app('env')=='local')
             <script src="{{ asset('js/app.js') }}" defer></script>
