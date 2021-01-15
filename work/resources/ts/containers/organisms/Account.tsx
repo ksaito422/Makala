@@ -64,8 +64,8 @@ export const Account: React.FC<Props> = (props) => {
               <Typography variant='h6'>基本情報</Typography>
             </Grid>
             <Grid item xs={12}>
-              <Typography variant='subtitle2'>ユーザー名</Typography>
-              <TextForm fullWidth defaultValue={props.name} disabled />
+              <Typography variant='subtitle2'>現在のユーザー名</Typography>
+              <TextForm fullWidth value={props.name} disabled />
               <div className={classes.account_button}>
                 <Button
                   onClick={() => {
@@ -78,8 +78,8 @@ export const Account: React.FC<Props> = (props) => {
               </div>
             </Grid>
             <Grid item xs={12}>
-              <Typography variant='subtitle2'>メールアドレス</Typography>
-              <TextForm fullWidth defaultValue={props.email} disabled />
+              <Typography variant='subtitle2'>現在のメールアドレス</Typography>
+              <TextForm fullWidth value={props.email} disabled />
               <div className={classes.account_button}>
                 <Button
                   onClick={() => {
@@ -94,13 +94,15 @@ export const Account: React.FC<Props> = (props) => {
             <Grid item xs={12}>
               <Typography variant='subtitle2'>パスワード</Typography>
               <form
-                onSubmit={handleSubmit((data) => {
+                onSubmit={handleSubmit((data, e: any) => {
                   props.passwordChangeOnClick(
                     data.password,
                     data.newPassword,
                     authUserState.email,
                     authUserState.id
                   );
+                  // 変更ボタンをクリック後にフォームリセットする
+                  e.target.reset();
                 })}
               >
                 <PasswordForm

@@ -9,6 +9,7 @@ type Props = Partial<{
   rowsMax: number;
   rows: number;
   defaultValue: string;
+  value: string;
   margin: 'none' | 'dense' | 'normal';
   label: string;
   name: string;
@@ -32,6 +33,7 @@ export const TextForm: React.FC<Props> = (props) => {
       rowsMax={props.rowsMax}
       rows={props.rows}
       defaultValue={props.defaultValue}
+      value={props.value}
       margin={props.margin}
       label={props.label}
       name={props.name}
