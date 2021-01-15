@@ -94,13 +94,15 @@ export const Account: React.FC<Props> = (props) => {
             <Grid item xs={12}>
               <Typography variant='subtitle2'>パスワード</Typography>
               <form
-                onSubmit={handleSubmit((data) => {
+                onSubmit={handleSubmit((data, e: any) => {
                   props.passwordChangeOnClick(
                     data.password,
                     data.newPassword,
                     authUserState.email,
                     authUserState.id
                   );
+                  // 変更ボタンをクリック後にフォームリセットする
+                  e.target.reset();
                 })}
               >
                 <PasswordForm
