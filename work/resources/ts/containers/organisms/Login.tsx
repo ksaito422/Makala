@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { Container, Grid, Typography, useMediaQuery } from '@material-ui/core';
 import { Button } from '../../components/atoms/Button';
 import { TextForm } from '../../components/atoms/TextForm';
+import { PasswordForm } from '../../components/atoms/PasswordForm';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 
 type Props = {
@@ -93,13 +94,10 @@ export const Login: React.FC<Props> = (props) => {
             error={Boolean(errors.email)}
             helperText={errors.email && 'メールアドレスを入力してください'}
           />
-          <TextForm
+          <PasswordForm
             fullWidth
-            margin='normal'
             label='パスワード'
             name='password'
-            type='password'
-            autoComplete='current-password'
             inputRef={register({
               required: ' パスワードを入力して下さい',
               minLength: {

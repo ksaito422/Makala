@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { Container, Grid, Paper, Typography } from '@material-ui/core';
 import { TextForm } from '../../components/atoms/TextForm';
+import { PasswordForm } from '../../components/atoms/PasswordForm';
 import { Button } from '../../components/atoms/Button';
 import { ModalWindow } from '../../components/molecules/ModalWindow';
 import { ModalAccountName } from '../../components/molecules/ModalAccountName';
@@ -102,24 +103,20 @@ export const Account: React.FC<Props> = (props) => {
                   );
                 })}
               >
-                <TextForm
+                <PasswordForm
                   fullWidth
-                  margin='normal'
                   label='現在のパスワードを入力'
                   name='password'
-                  type='password'
                   inputRef={register({
                     required: ' 現在のパスワードを入力して下さい',
                   })}
                   error={Boolean(errors.password)}
                   helperText={errors.password && errors.password.message}
                 />
-                <TextForm
+                <PasswordForm
                   fullWidth
-                  margin='normal'
                   label='新しいパスワードを入力'
                   name='newPassword'
-                  type='password'
                   inputRef={register({
                     required: ' 新しいパスワードを入力して下さい',
                   })}
