@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import { Container, Grid, Typography, useMediaQuery } from '@material-ui/core';
+import { Container, Grid, Typography, Paper, useMediaQuery } from '@material-ui/core';
 import { Button } from '../../components/atoms/Button';
 import { TextForm } from '../../components/atoms/TextForm';
 import { PasswordForm } from '../../components/atoms/PasswordForm';
@@ -9,6 +9,7 @@ import { StylesContext } from '../../contexts/childContexts/StylesContext';
 type Props = {
   registerOnClick: (data: { [x: string]: any }) => void;
   cancelOnClick: () => void;
+  guestOnClick: () => void;
 };
 
 export const Register: React.FC<Props> = (props) => {
@@ -73,69 +74,115 @@ export const Register: React.FC<Props> = (props) => {
   return (
     <>
       <Container maxWidth='sm' className={classes.auth}>
-        <Typography variant='h4'>makalaへようこそ</Typography>
-        <Typography variant='subtitle1'>新規登録（無料）して利用を開始しましょう。</Typography>
-        <form
-          className={classes.auth_form}
-          onSubmit={handleSubmit((data) => {
-            props.registerOnClick(data);
-          })}
-        >
-          <TextForm
-            fullWidth
-            margin='normal'
-            label='ユーザー名'
-            name='name'
-            autoFocus
-            autoComplete='name'
-            inputRef={register({
-              required: 'ユーザー名を入力して下さい',
-              minLength: { value: 3, message: 'ユーザー名は3文字以上20文字以下で入力して下さい' },
-              maxLength: { value: 20, message: 'ユーザー名は3文字以上20文字以下で入力して下さい' },
-              pattern: {
-                value: /^[a-zA-Z0-9][a-zA-Z0-9_.-]+[a-zA-Z0-9]$/,
-                message:
-                  'ユーザ名は半角英数字及び_.-のみ利用可能です。（_.-は先頭と末尾には使えません）',
-              },
-            })}
-            error={Boolean(errors.name)}
-            helperText={errors.name && errors.name.message}
-          />
-          <TextForm
-            fullWidth
-            margin='normal'
-            label='メールアドレス'
-            name='email'
-            autoComplete='email'
-            inputRef={register({
-              required: true,
-              pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-            })}
-            error={Boolean(errors.email)}
-            helperText={errors.email && 'メールアドレスを入力してください'}
-          />
-          <PasswordForm
-            fullWidth
-            label='パスワード'
-            name='password'
-            inputRef={register({
-              required: ' パスワードを入力して下さい',
-              minLength: {
-                value: 8,
-                message: 'パスワードを8文字以上20文字以下で入力して下さい',
-              },
-              maxLength: {
-                value: 20,
-                message: 'パスワードを8文字以上20文字以下で入力して下さい',
-              },
-            })}
-            error={Boolean(errors.password)}
-            helperText={errors.password && errors.password.message}
-          />
-          <Container maxWidth='sm'>
-            <ReasponsiveComponent />
-          </Container>
-        </form>
+        <Paper elevation={2} className={classes.register}>
+          <Grid container spacing={4}>
+            <Grid item xs={12}>
+              <Typography variant='h4' align='center'>
+                makalaへようこそ
+              </Typography>
+              <Typography variant='subtitle1' align='center'>
+                新規登録（無料）して利用を開始しましょう。
+              </Typography>
+              <form
+                className={classes.auth_form}
+                onSubmit={handleSubmit((data) => {
+                  props.registerOnClick(data);
+                })}
+              >
+                <TextForm
+                  fullWidth
+                  margin='normal'
+                  label='ユーザー名'
+                  name='name'
+                  autoFocus
+                  autoComplete='name'
+                  inputRef={register({
+                    required: 'ユーザー名を入力して下さい',
+                    minLength: {
+                      value: 3,
+                      message: 'ユーザー名は3文字以上20文字以下で入力して下さい',
+                    },
+                    maxLength: {
+                      value: 20,
+                      message: 'ユーザー名は3文字以上20文字以下で入力して下さい',
+                    },
+                    pattern: {
+                      value: /^[a-zA-Z0-9][a-zA-Z0-9_.-]+[a-zA-Z0-9]$/,
+                      message:
+                        'ユーザ名は半角英数字及び_.-のみ利用可能です。（_.-は先頭と末尾には使えません）',
+                    },
+                  })}
+                  error={Boolean(errors.name)}
+                  helperText={errors.name && errors.name.message}
+                />
+                <TextForm
+                  fullWidth
+                  margin='normal'
+                  label='メールアドレス'
+                  name='email'
+                  autoComplete='email'
+                  inputRef={register({
+                    required: true,
+                    pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                  })}
+                  error={Boolean(errors.email)}
+                  helperText={errors.email && 'メールアドレスを入力してください'}
+                />
+                <PasswordForm
+                  fullWidth
+                  label='パスワード'
+                  name='password'
+                  inputRef={register({
+                    required: ' パスワードを入力して下さい',
+                    minLength: {
+                      value: 8,
+                      message: 'パスワードを8文字以上20文字以下で入力して下さい',
+                    },
+                    maxLength: {
+                      value: 20,
+                      message: 'パスワードを8文字以上20文字以下で入力して下さい',
+                    },
+                  })}
+                  error={Boolean(errors.password)}
+                  helperText={errors.password && errors.password.message}
+                />
+                <Container maxWidth='sm'>
+                  <ReasponsiveComponent />
+                </Container>
+              </form>
+            </Grid>
+            <Grid item xs={12} className={classes.guset_container}>
+              <Typography
+                variant='h5'
+                align='center'
+                color='textSecondary'
+                className={classes.guest_title}
+              >
+                ゲストログイン
+              </Typography>
+              <Typography
+                variant='subtitle2'
+                color='textSecondary'
+                className={classes.guest_explanation}
+              >
+                ゲストでログインしてMakalaの機能を試すことができます。
+              </Typography>
+              <Typography variant='caption' color='textSecondary'>
+                ※ ゲストアカウントは他のユーザーと共有です。
+                <br />
+                ※ 一部機能を制限しています。
+                <br />
+                ※ 投稿が削除される恐れがあるため、お試しとしてご利用ください。
+                <br />
+              </Typography>
+              <Container maxWidth='md' className={classes.guest_login}>
+                <Button size='large' onClick={props.guestOnClick}>
+                  ゲストログイン
+                </Button>
+              </Container>
+            </Grid>
+          </Grid>
+        </Paper>
       </Container>
     </>
   );
