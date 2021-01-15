@@ -18,7 +18,7 @@ export const TopPage: React.FC = () => {
   const { progress } = useContext<any>(FeedbackContext);
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
-  const { authUserState, authGuestLogin } = useContext<any>(AuthContext);
+  const { authUserState } = useContext<any>(AuthContext);
   const history = useHistory();
 
   return (
@@ -29,13 +29,6 @@ export const TopPage: React.FC = () => {
         <Top
           registerOnClick={() => {
             history.push('/register');
-          }}
-          loginOnClick={() => {
-            history.push('/login');
-          }}
-          guestOnClick={() => {
-            authGuestLogin();
-            history.push(`/${authUserState.name}/home`);
           }}
           boardOnClick={() => {
             history.push(`/${authUserState.name}/home`);
