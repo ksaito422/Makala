@@ -64,7 +64,7 @@ export const Account: React.FC<Props> = (props) => {
               <Typography variant='h6'>基本情報</Typography>
             </Grid>
             <Grid item xs={12}>
-              <Typography variant='subtitle2'>ユーザー名</Typography>
+              <Typography variant='subtitle2'>現在のユーザー名</Typography>
               <TextForm fullWidth defaultValue={props.name} disabled />
               <div className={classes.account_button}>
                 <Button
@@ -78,7 +78,7 @@ export const Account: React.FC<Props> = (props) => {
               </div>
             </Grid>
             <Grid item xs={12}>
-              <Typography variant='subtitle2'>メールアドレス</Typography>
+              <Typography variant='subtitle2'>現在のメールアドレス</Typography>
               <TextForm fullWidth defaultValue={props.email} disabled />
               <div className={classes.account_button}>
                 <Button
