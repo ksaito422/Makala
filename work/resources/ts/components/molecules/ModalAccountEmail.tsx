@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { Grid, Typography } from '@material-ui/core';
 import { TextForm } from '../atoms/TextForm';
+import { PasswordForm } from '../atoms/PasswordForm';
 import { CloseIcon } from '../atoms/CloseIcon';
 import { SubmitIcon } from '../atoms/SubmitIcon';
 import { AuthContext } from '../../contexts/childContexts/AuthContext';
@@ -52,13 +53,10 @@ export const ModalAccountEmail: React.FC<Props> = (props) => {
                 error={Boolean(errors.email)}
                 helperText={errors.email && '新しいメールアドレスを入力してください'}
               />
-              <TextForm
+              <PasswordForm
                 fullWidth
-                margin='normal'
                 label='パスワード'
                 name='password'
-                type='password'
-                autoComplete='current-password'
                 inputRef={register({
                   required: ' パスワードを入力して下さい',
                   minLength: {
