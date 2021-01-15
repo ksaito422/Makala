@@ -78,7 +78,7 @@ export const Register: React.FC<Props> = (props) => {
           <Grid container spacing={4}>
             <Grid item xs={12}>
               <Typography variant='h4' align='center'>
-                makalaへようこそ
+                Makalaへようこそ
               </Typography>
               <Typography variant='subtitle1' align='center'>
                 新規登録（無料）して利用を開始しましょう。
