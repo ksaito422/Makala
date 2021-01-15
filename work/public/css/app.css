@@ -10910,3 +10910,7 @@ a.text-dark:focus {
   background-color: rgba(237, 231, 246, 0.5);
 }
 
+a {
+  text-decoration: none;
+}
+
