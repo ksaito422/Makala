@@ -12,7 +12,7 @@ export const MuiTheme = createMuiTheme({
     secondary: {
       light: deepPurple[300],
       main: deepPurple[500],
-      dark: deepPurple[700],
+      dark: deepPurple[900],
     },
   },
   overrides: {
