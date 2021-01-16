@@ -3,6 +3,7 @@ import { Container, CssBaseline, Grid } from '@material-ui/core';
 import { Spinner } from '../../components/molecules/Spinner';
 import { Notice } from '../../components/molecules/Notice';
 import { Header } from '../organisms/Header';
+import { Footer } from '../organisms/Footer';
 import { SettingList } from '../organisms/SettingList';
 import { Account } from '../organisms/Account';
 import { AuthContext } from '../../contexts/childContexts/AuthContext';
@@ -48,6 +49,7 @@ export const SettingAccountPage: React.FC = () => {
           </Grid>
         </Grid>
       </Container>
+      <Footer />
 
       <Spinner open={progress} />
       <Notice

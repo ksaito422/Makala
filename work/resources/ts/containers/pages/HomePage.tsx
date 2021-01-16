@@ -4,6 +4,7 @@ import { Container, CssBaseline } from '@material-ui/core';
 import { Spinner } from '../../components/molecules/Spinner';
 import { Notice } from '../../components/molecules/Notice';
 import { Header } from '../organisms/Header';
+import { Footer } from '../organisms/Footer';
 import { Boards } from '../organisms/Boards';
 import { ApiBoardsContext } from '../../contexts/childContexts/ApiBoardsContext';
 import { FeedbackContext } from '../../contexts/childContexts/FeedbackContext';
@@ -70,6 +71,7 @@ export const HomePage: React.FC = () => {
           }}
         />
       </Container>
+      <Footer />
 
       <Spinner open={progress} />
       <Notice

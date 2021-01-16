@@ -5,6 +5,7 @@ import { ButtonGroup } from '../../components/molecules/ButtonGroup';
 import { Spinner } from '../../components/molecules/Spinner';
 import { Notice } from '../../components/molecules/Notice';
 import { Header } from '../organisms/Header';
+import { Footer } from '../organisms/Footer';
 import { Cards } from '../organisms/Cards';
 import { Preview } from '../organisms/Preview';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
@@ -148,6 +149,7 @@ export const CardPage = React.memo(() => {
           </Container>
         )}
       </Container>
+      <Footer />
 
       <Spinner open={progress} />
       <Notice
