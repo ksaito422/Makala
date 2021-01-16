@@ -15,15 +15,15 @@ export const Rules: React.FC = () => {
               利用規約
             </Typography>
             <Typography variant='subtitle2' color='textSecondary' className={classes.rule_text}>
-              この利用規約（以下，「本規約」といいます。）は，Makalaがこのウェブサイト上で提供するサービス（以下，「本サービス」といいます。）の利用条件を定めるものです。登録ユーザーの皆さま（以下，「ユーザー」といいます。）には，本規約に従って，本サービスをご利用いただきます。
+              この利用規約（以下，「本規約」といいます。）は，本ウェブサイト上で提供するサービス（以下，「本サービス」といいます。）の利用条件を定めるものです。登録ユーザーの皆さま（以下，「ユーザー」といいます。）には，本規約に従って，本サービスをご利用いただきます。
             </Typography>
           </Box>
           <Box component='div'>
             <Typography variant='h6' color='textPrimary' className={classes.rule_title}>
               第1条（適応）
             </Typography>
-            <ol>
-              <Typography variant='subtitle2' color='textSecondary'>
+            <Typography variant='subtitle2' color='textSecondary'>
+              <ol>
                 <li className={classes.rule_text}>
                   本規約は，本サービスの提供条件及び本サービス運営者（以下「運営者」といいます。）とユーザーとの間の本サービスの利用に関わる一切の関係に適用されるものとします。
                 </li>
@@ -33,13 +33,13 @@ export const Rules: React.FC = () => {
                 <li className={classes.rule_text}>
                   本規約の規定が前条の個別規定の規定と矛盾する場合には，個別規定において特段の定めなき限り，個別規定の規定が優先されるものとします。
                 </li>
-              </Typography>
-            </ol>
+              </ol>
+            </Typography>
             <Typography variant='h6' color='textPrimary' className={classes.rule_title}>
               第2条（利用登録）
             </Typography>
-            <ol>
-              <Typography variant='subtitle2' color='textSecondary'>
+            <Typography variant='subtitle2' color='textSecondary'>
+              <ol>
                 <li className={classes.rule_text}>
                   本サービスにおいては，登録希望者が本規約に同意の上，運営者の定める方法によって利用登録を申請し，運営者がこれを承認することによって，利用登録が完了するものとします。
                 </li>
@@ -63,13 +63,13 @@ export const Rules: React.FC = () => {
                     その他，運営者が利用登録を相当でないと判断した場合
                   </li>
                 </ol>
-              </Typography>
-            </ol>
+              </ol>
+            </Typography>
             <Typography variant='h6' color='textPrimary' className={classes.rule_title}>
               第3条（ユーザーIDおよびパスワードの管理）
             </Typography>
-            <ol>
-              <Typography variant='subtitle2' color='textSecondary'>
+            <Typography variant='subtitle2' color='textSecondary'>
+              <ol>
                 <li className={classes.rule_text}>
                   ユーザーは，自己の責任において，本サービスのユーザーIDおよびパスワードを適切に管理するものとします
                 </li>
@@ -79,29 +79,29 @@ export const Rules: React.FC = () => {
                 <li className={classes.rule_text}>
                   ユーザーID及びパスワードが第三者によって使用されたことによって生じた損害は，運営者に故意又は重大な過失がある場合を除き，運営者は一切の責任を負わないものとします。
                 </li>
-              </Typography>
-            </ol>
+              </ol>
+            </Typography>
             <Typography variant='h6' color='textPrimary' className={classes.rule_title}>
               第4条（利用料金および支払方法）
             </Typography>
-            <ol>
-              <Typography variant='subtitle2' color='textSecondary'>
+            <Typography variant='subtitle2' color='textSecondary'>
+              <ol>
                 <li className={classes.rule_text}>
                   ユーザーは，本サービスの有料部分の対価として，運営者が別途定め，本ウェブサイトに表示する利用料金を，運営者が指定する方法により支払うものとします。
                 </li>
                 <li className={classes.rule_text}>
                   ユーザーが利用料金の支払を遅滞した場合には，ユーザーは年14．6％の割合による遅延損害金を支払うものとします。
                 </li>
-              </Typography>
-            </ol>
+              </ol>
+            </Typography>
             <Typography variant='h6' color='textPrimary' className={classes.rule_title}>
               第5条（禁止事項）
             </Typography>
             <Typography variant='subtitle2' color='textSecondary'>
               ユーザーは，本サービスの利用にあたり，以下の行為をしてはなりません。
             </Typography>
-            <ol>
-              <Typography variant='subtitle2' color='textSecondary'>
+            <Typography variant='subtitle2' color='textSecondary'>
+              <ol>
                 <li className={classes.rule_text}>法令または公序良俗に違反する行為</li>
                 <li className={classes.rule_text}>犯罪行為に関連する行為</li>
                 <li className={classes.rule_text}>
@@ -131,13 +131,13 @@ export const Rules: React.FC = () => {
                   運営者のサービスに関連して，反社会的勢力に対して直接または間接に利益を供与する行為
                 </li>
                 <li className={classes.rule_text}>その他，運営者が不適切と判断する行為</li>
-              </Typography>
-            </ol>
+              </ol>
+            </Typography>
             <Typography variant='h6' color='textPrimary' className={classes.rule_title}>
               第6条（本サービスの提供の停止等）
             </Typography>
-            <ol>
-              <Typography variant='subtitle2' color='textSecondary'>
+            <Typography variant='subtitle2' color='textSecondary'>
+              <ol>
                 <li className={classes.rule_text}>
                   運営者は，以下のいずれかの事由があると判断した場合，ユーザーに事前に通知することなく本サービスの全部または一部の提供を停止または中断することができるものとします。
                 </li>
@@ -159,13 +159,13 @@ export const Rules: React.FC = () => {
                 <li className={classes.rule_text}>
                   運営者は，本サービスの提供の停止または中断により，ユーザーまたは第三者が被ったいかなる不利益または損害についても，一切の責任を負わないものとします。
                 </li>
-              </Typography>
-            </ol>
+              </ol>
+            </Typography>
             <Typography variant='h6' color='textPrimary' className={classes.rule_title}>
               第7条（利用制限および登録抹消）
             </Typography>
-            <ol>
-              <Typography variant='subtitle2' color='textSecondary'>
+            <Typography variant='subtitle2' color='textSecondary'>
+              <ol>
                 <li className={classes.rule_text}>
                   運営者は，ユーザーが以下のいずれかに該当する場合には，事前の通知なく，ユーザーに対して，本サービスの全部もしくは一部の利用を制限し，またはユーザーとしての登録を抹消することができるものとします。
                 </li>
@@ -188,8 +188,8 @@ export const Rules: React.FC = () => {
                 <li className={classes.rule_text}>
                   運営者は，本条に基づき運営者が行った行為によりユーザーに生じた損害について，一切の責任を負いません。
                 </li>
-              </Typography>
-            </ol>
+              </ol>
+            </Typography>
             <Typography variant='h6' color='textPrimary' className={classes.rule_title}>
               第8条（退会）
             </Typography>
@@ -199,8 +199,8 @@ export const Rules: React.FC = () => {
             <Typography variant='h6' color='textPrimary' className={classes.rule_title}>
               第9条（保証の否認および免責事項）
             </Typography>
-            <ol>
-              <Typography variant='subtitle2' color='textSecondary'>
+            <Typography variant='subtitle2' color='textSecondary'>
+              <ol>
                 <li className={classes.rule_text}>
                   運営者は，本サービスに事実上または法律上の瑕疵（安全性，信頼性，正確性，完全性，有効性，特定の目的への適合性，セキュリティなどに関する欠陥，エラーやバグ，権利侵害などを含みます。）がないことを明示的にも黙示的にも保証しておりません。
                 </li>
@@ -213,8 +213,8 @@ export const Rules: React.FC = () => {
                 <li className={classes.rule_text}>
                   運営者は，本サービスに関して，ユーザーと他のユーザーまたは第三者との間において生じた取引，連絡または紛争等について一切責任を負いません。
                 </li>
-              </Typography>
-            </ol>
+              </ol>
+            </Typography>
             <Typography variant='h6' color='textPrimary' className={classes.rule_title}>
               第10条（サービス内容の変更等）
             </Typography>
@@ -248,16 +248,16 @@ export const Rules: React.FC = () => {
             <Typography variant='h6' color='textPrimary' className={classes.rule_title}>
               第15条（準拠法・裁判管轄）
             </Typography>
-            <ol>
-              <Typography variant='subtitle2' color='textSecondary'>
+            <Typography variant='subtitle2' color='textSecondary'>
+              <ol>
                 <li className={classes.rule_text}>
                   本規約の解釈にあたっては，日本法を準拠法とします。
                 </li>
                 <li className={classes.rule_text}>
                   本サービスに関して紛争が生じた場合には，札幌地方裁判所を第一審の専属的合意管轄裁判所とします。
                 </li>
-              </Typography>
-            </ol>
+              </ol>
+            </Typography>
           </Box>
           <Box component='div'>
             <Typography variant='h5' color='textPrimary' className={classes.rule_title}>
