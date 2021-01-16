@@ -43,7 +43,7 @@ export const Login: React.FC<Props> = (props) => {
         </Button>
       );
     };
-    const className = classes.main_container;
+    const className = classes.auth_login;
 
     return (
       <>
@@ -75,7 +75,7 @@ export const Login: React.FC<Props> = (props) => {
       <Container maxWidth='sm'>
         <Paper elevation={2} className={classes.auth_container}>
           <Typography variant='h4' align='center'>
-            makalaにログイン
+            Makalaにログイン
           </Typography>
           <form
             className={classes.auth_form}
