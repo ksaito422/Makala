@@ -113,6 +113,10 @@ export const StylesContextProvider: React.FC = (props) => {
       marginTop: theme.spacing(4),
       textAlign: 'center',
     },
+    // 新規登録のボタン群に指定
+    register_button: {
+      marginTop: theme.spacing(2),
+    },
     auth_container: {
       padding: theme.spacing(4),
     },

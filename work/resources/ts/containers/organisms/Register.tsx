@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { Container, Grid, Typography, Paper, useMediaQuery } from '@material-ui/core';
+import { Box, Container, Grid, Typography, Paper, useMediaQuery } from '@material-ui/core';
 import { Button } from '../../components/atoms/Button';
 import { TextForm } from '../../components/atoms/TextForm';
 import { PasswordForm } from '../../components/atoms/PasswordForm';
@@ -44,12 +45,12 @@ export const Register: React.FC<Props> = (props) => {
         </Button>
       );
     };
-    const className = classes.main_container;
+    const className = classes.register_button;
 
     return (
       <>
         {matches ? (
-          <Grid container spacing={10} className={className}>
+          <Grid container spacing={4} className={className}>
             <Grid item xs={6}>
               <CommonRegister />
             </Grid>
@@ -146,6 +147,12 @@ export const Register: React.FC<Props> = (props) => {
                   error={Boolean(errors.password)}
                   helperText={errors.password && errors.password.message}
                 />
+                <Box component='div' m={2} className={classes.centerPlacement}>
+                  <Link to='/rules'>利用規約</Link>
+                  及び
+                  <Link to='/privacy'>プライバシーポリシー</Link>
+                  に同意の上ご利用ください。
+                </Box>
                 <Container maxWidth='sm'>
                   <ReasponsiveComponent />
                 </Container>
