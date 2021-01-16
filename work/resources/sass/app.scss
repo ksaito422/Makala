@@ -9,8 +9,8 @@
 
 #app {
   min-height: 100vh;
-  position: relative;
-  box-sizing: border-box;
+  display: flex;
+  flex-flow: column;
   background-color: rgba(237, 231, 246, .5);
 }
 
