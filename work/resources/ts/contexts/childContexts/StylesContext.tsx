@@ -135,6 +135,13 @@ export const StylesContextProvider: React.FC = (props) => {
     footer_copylight: {
       marginTop: theme.spacing(2),
     },
+    rule_title: {
+      marginTop: theme.spacing(2),
+      marginBottom: theme.spacing(2),
+    },
+    rule_text: {
+      padding: theme.spacing(0.2),
+    },
   }));
   return <StylesContext.Provider value={{ useStyles }}>{props.children}</StylesContext.Provider>;
 };
