@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Container, CssBaseline } from '@material-ui/core';
 import { Header } from '../organisms/Header';
+import { Footer } from '../organisms/Footer';
 import { Top } from '../organisms/Top';
 import { Spinner } from '../../components/molecules/Spinner';
 import { AuthContext } from '../../contexts/childContexts/AuthContext';
@@ -35,6 +36,7 @@ export const TopPage: React.FC = () => {
           }}
         />
       </Container>
+      <Footer />
 
       <Spinner open={progress} />
     </>

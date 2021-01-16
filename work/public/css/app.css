@@ -10903,3 +10903,14 @@ a.text-dark:focus {
   }
 }
 
+#app {
+  min-height: 100vh;
+  display: flex;
+  flex-flow: column;
+  background-color: rgba(237, 231, 246, 0.5);
+}
+
+a {
+  text-decoration: none;
+}
+

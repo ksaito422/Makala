@@ -9,6 +9,8 @@ export const StylesContextProvider: React.FC = (props) => {
     // pagesで使用 メインコンテンツとヘッダーの間隔をとるため
     main_container: {
       marginTop: theme.spacing(4),
+      marginBottom: theme.spacing(4),
+      flex: 1,
     },
     // dragBoradの高さとスクロール可否
     drop_able: {
@@ -113,6 +115,21 @@ export const StylesContextProvider: React.FC = (props) => {
     },
     auth_container: {
       padding: theme.spacing(4),
+    },
+    footer: {
+      backgroundColor: theme.palette.secondary.dark,
+      color: '#f0f0f0',
+      padding: theme.spacing(2),
+      width: '100%',
+    },
+    footer_link: {
+      color: '#f0f0f0',
+      '&:hover': {
+        color: '#f0f0f0',
+      },
+    },
+    footer_copylight: {
+      marginTop: theme.spacing(2),
     },
   }));
   return <StylesContext.Provider value={{ useStyles }}>{props.children}</StylesContext.Provider>;
