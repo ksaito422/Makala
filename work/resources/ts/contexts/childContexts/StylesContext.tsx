@@ -109,7 +109,7 @@ export const StylesContextProvider: React.FC = (props) => {
     guest_explanation: {
       marginBottom: theme.spacing(1),
     },
-    guest_login: {
+    auth_login: {
       marginTop: theme.spacing(4),
       textAlign: 'center',
     },

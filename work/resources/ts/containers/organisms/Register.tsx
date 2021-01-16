@@ -182,7 +182,7 @@ export const Register: React.FC<Props> = (props) => {
                 ※ 投稿が削除される恐れがあるため、お試しとしてご利用ください。
                 <br />
               </Typography>
-              <Container maxWidth='md' className={classes.guest_login}>
+              <Container maxWidth='md' className={classes.auth_login}>
                 <Button size='large' onClick={props.guestOnClick}>
                   ゲストログイン
                 </Button>
