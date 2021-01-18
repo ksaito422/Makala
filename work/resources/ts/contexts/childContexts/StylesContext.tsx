@@ -100,6 +100,16 @@ export const StylesContextProvider: React.FC = (props) => {
       marginTop: theme.spacing(1),
       textAlign: 'right',
     },
+    account_release: {
+      marginBottom: theme.spacing(2),
+    },
+    account_release_button: {
+      backgroundColor: theme.palette.error.main,
+      color: '#ffffff',
+      '&:hover': {
+        backgroundColor: theme.palette.error.dark,
+      },
+    },
     guset_container: {
       borderTop: 'solid 1px #dcdcdc',
     },
