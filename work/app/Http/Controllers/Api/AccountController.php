@@ -60,4 +60,22 @@ class AccountController extends Controller
                 ], 401, [], JSON_UNESCAPED_UNICODE);
         }
     }
+
+    public function accountRelease(Request $request, $id)
+    {
+        // ユーザーを取得して、認証情報を保管
+        $user = USER::find($id);
+        $credentials = request(['email', 'password']);
+
+        // パスワードが正しければ退会処理をする。違ったら退会できない
+        if (auth()->validate($credentials)) {
+            $user->delete();
+            // auth()->logout();
+            return response()->json(['message' => '退会しました。']);
+        } else {
+            return response()->json([
+                'message' => 'パスワードが違うため、退会できませんでした。',
+                ], 401, [], JSON_UNESCAPED_UNICODE);
+        }
+    }
 }
