@@ -40,8 +40,8 @@ export const SettingAccountPage: React.FC = () => {
             <Account
               name={authUserState.name}
               email={authUserState.email}
-              nameChangeOnClick={(name, userId) => {
-                changeName(name, userId);
+              nameChangeOnClick={(name) => {
+                changeName(name, authUserState.id);
               }}
               emailChangeOnClick={(newEmail, email, password, userId) => {
                 changeEmail(newEmail, email, password, userId);

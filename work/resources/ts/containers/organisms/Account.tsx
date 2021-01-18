@@ -13,7 +13,7 @@ import { StylesContext } from '../../contexts/childContexts/StylesContext';
 type Props = {
   name: string;
   email: string;
-  nameChangeOnClick: (name: string, user: number) => void;
+  nameChangeOnClick: (name: string) => void;
   emailChangeOnClick: (newEmail: string, email: string, password: string, user: number) => void;
   passwordChangeOnClick: (password: string, newPassword: string) => void;
   accountRelease: () => void;
@@ -139,8 +139,8 @@ export const Account: React.FC<Props> = (props) => {
       <ModalWindow modalOpen={modalOpenState} modalOnClose={modalClose}>
         {modalChangeName && (
           <ModalAccountName
-            nameChangeOnClick={(data, userId) => {
-              props.nameChangeOnClick(data, userId);
+            nameChangeOnClick={(data) => {
+              props.nameChangeOnClick(data);
               modalClose();
             }}
             modalOnClose={modalClose}
