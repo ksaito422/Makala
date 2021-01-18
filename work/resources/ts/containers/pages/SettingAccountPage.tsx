@@ -43,8 +43,8 @@ export const SettingAccountPage: React.FC = () => {
               nameChangeOnClick={(name) => {
                 changeName(name, authUserState.id);
               }}
-              emailChangeOnClick={(newEmail, email, password, userId) => {
-                changeEmail(newEmail, email, password, userId);
+              emailChangeOnClick={(newEmail, password) => {
+                changeEmail(newEmail, authUserState.email, password, authUserState.id);
               }}
               passwordChangeOnClick={(password, newPassword) => {
                 changePassword(password, newPassword, authUserState.email, authUserState.id);
