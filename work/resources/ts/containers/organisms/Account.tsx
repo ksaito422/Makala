@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { Box, Container, Grid, Paper, Typography } from '@material-ui/core';
 import { TextForm } from '../../components/atoms/TextForm';
@@ -23,6 +22,7 @@ type Props = {
     email: string,
     user: number
   ) => void;
+  accountRelease: () => void;
 };
 
 export const Account: React.FC<Props> = (props) => {
@@ -34,7 +34,6 @@ export const Account: React.FC<Props> = (props) => {
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
   const { authUserState } = useContext<any>(AuthContext);
-  const history = useHistory();
   const { register, handleSubmit, errors } = useForm();
   const {
     modalOpenState,
@@ -140,12 +139,7 @@ export const Account: React.FC<Props> = (props) => {
                 ※ 一度アカウントを削除すると、二度と元に戻せません。十分ご注意ください。
               </Typography>
               <Box m={2} className={classes.centerPlacement}>
-                <Button
-                  className={classes.account_release_button}
-                  onClick={() => {
-                    history.push(`/${authUserState.name}/settings/account/release`);
-                  }}
-                >
+                <Button className={classes.account_release_button} onClick={props.accountRelease}>
                   アカウントを削除する
                 </Button>
               </Box>
