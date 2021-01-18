@@ -46,8 +46,8 @@ export const SettingAccountPage: React.FC = () => {
               emailChangeOnClick={(newEmail, email, password, userId) => {
                 changeEmail(newEmail, email, password, userId);
               }}
-              passwordChangeOnClick={(password, newPassword, email, userId) => {
-                changePassword(password, newPassword, email, userId);
+              passwordChangeOnClick={(password, newPassword) => {
+                changePassword(password, newPassword, authUserState.email, authUserState.id);
               }}
               accountRelease={() => {
                 history.push(`/${authUserState.name}/settings/account/release`);

@@ -8,7 +8,6 @@ import { ModalWindow } from '../../components/molecules/ModalWindow';
 import { ModalAccountName } from '../../components/molecules/ModalAccountName';
 import { ModalAccountEmail } from '../../components/molecules/ModalAccountEmail';
 import { ModalPropsContext } from '../../contexts/childContexts/ModalPropsContext';
-import { AuthContext } from '../../contexts/childContexts/AuthContext';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 
 type Props = {
@@ -16,24 +15,17 @@ type Props = {
   email: string;
   nameChangeOnClick: (name: string, user: number) => void;
   emailChangeOnClick: (newEmail: string, email: string, password: string, user: number) => void;
-  passwordChangeOnClick: (
-    password: string,
-    newPassword: string,
-    email: string,
-    user: number
-  ) => void;
+  passwordChangeOnClick: (password: string, newPassword: string) => void;
   accountRelease: () => void;
 };
 
 export const Account: React.FC<Props> = (props) => {
   /**
    * cssの定義
-   * アカウント情報の読み込み
    * API import of react-hook-form
    */
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
-  const { authUserState } = useContext<any>(AuthContext);
   const { register, handleSubmit, errors } = useForm();
   const {
     modalOpenState,
@@ -96,12 +88,7 @@ export const Account: React.FC<Props> = (props) => {
               <Typography variant='subtitle2'>パスワード</Typography>
               <form
                 onSubmit={handleSubmit((data, e: any) => {
-                  props.passwordChangeOnClick(
-                    data.password,
-                    data.newPassword,
-                    authUserState.email,
-                    authUserState.id
-                  );
+                  props.passwordChangeOnClick(data.password, data.newPassword);
                   // 変更ボタンをクリック後にフォームリセットする
                   e.target.reset();
                 })}
