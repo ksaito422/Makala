@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { Container, Grid, Paper, Typography } from '@material-ui/core';
+import { Box, Container, Grid, Paper, Typography } from '@material-ui/core';
 import { TextForm } from '../../components/atoms/TextForm';
 import { PasswordForm } from '../../components/atoms/PasswordForm';
 import { Button } from '../../components/atoms/Button';
@@ -33,6 +34,7 @@ export const Account: React.FC<Props> = (props) => {
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
   const { authUserState } = useContext<any>(AuthContext);
+  const history = useHistory();
   const { register, handleSubmit, errors } = useForm();
   const {
     modalOpenState,
@@ -129,6 +131,24 @@ export const Account: React.FC<Props> = (props) => {
                   <Button type='submit'>パスワードを変更する</Button>
                 </div>
               </form>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography variant='subtitle2' className={classes.account_release}>
+                アカウント削除
+              </Typography>
+              <Typography variant='body2' color='textSecondary'>
+                ※ 一度アカウントを削除すると、二度と元に戻せません。十分ご注意ください。
+              </Typography>
+              <Box m={2} className={classes.centerPlacement}>
+                <Button
+                  className={classes.account_release_button}
+                  onClick={() => {
+                    history.push(`/${authUserState.name}/settings/account/release`);
+                  }}
+                >
+                  アカウントを削除する
+                </Button>
+              </Box>
             </Grid>
           </Grid>
         </Paper>

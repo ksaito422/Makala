@@ -269,6 +269,7 @@ export const AuthContextProvider: React.FC = (props) => {
         setAuthUserState,
         isAuth,
         login,
+        logout,
         authLogin,
         authRegister,
         authLogout,

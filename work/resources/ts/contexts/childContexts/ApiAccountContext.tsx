@@ -12,7 +12,7 @@ export const ApiAccountContextProvider: React.FC = (props) => {
    * getBoardsで取得したデータを保管
    */
   const { setProgress, setStatus } = useContext<any>(FeedbackContext);
-  const { authUserState, setAuthUserState } = useContext<any>(AuthContext);
+  const { authUserState, setAuthUserState, logout } = useContext<any>(AuthContext);
 
   // ユーザー名を更新するapiと通信
   const changeName = async (name: string, userId: number) => {
@@ -135,8 +135,49 @@ export const ApiAccountContextProvider: React.FC = (props) => {
       });
   };
 
+  // アカウントを削除するapiと通信
+  const accountRelease = async (email: string, password: string, userId: number) => {
+    // スピナーon
+    // トークン取得
+    await setProgress(true);
+    const token = localStorage.getItem('makala_token');
+    const data = { email, password, userId };
+
+    await instance({
+      method: 'DELETE',
+      url: `api/v1/account/release/${userId}`,
+      data,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => {
+        setStatus({
+          open: true,
+          type: 'success',
+          message: res.data.message,
+        });
+        // ログアウト状態をfalseに変更
+        // ストレージからデータを削除する
+        logout();
+        localStorage.removeItem('makala_user');
+        localStorage.removeItem('makala_token');
+      })
+      .catch((err) => {
+        setStatus({
+          open: true,
+          type: 'error',
+          message: err.response.data.message,
+        });
+      })
+      .finally(() => {
+        // スピナーoff
+        setProgress(false);
+      });
+  };
+
   return (
-    <ApiAccountContext.Provider value={{ changeName, changeEmail, changePassword }}>
+    <ApiAccountContext.Provider value={{ changeName, changeEmail, changePassword, accountRelease }}>
       {props.children}
     </ApiAccountContext.Provider>
   );
