@@ -4,24 +4,20 @@ import { Grid, Typography } from '@material-ui/core';
 import { TextForm } from '../atoms/TextForm';
 import { CloseIcon } from '../atoms/CloseIcon';
 import { SubmitIcon } from '../atoms/SubmitIcon';
-import { AuthContext } from '../../contexts/childContexts/AuthContext';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 
 type Props = {
-  nameChangeOnClick: (name: string, user: number) => void;
+  nameChangeOnClick: (name: string) => void;
   modalOnClose: () => void;
 };
 
 export const ModalAccountName: React.FC<Props> = (props) => {
   /**
    * cssの定義
-   * ログインユーザーの情報  { user_id: value }
    * API import of react-hook-form
    */
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
-  const { authUserState } = useContext<any>(AuthContext);
-  const userId = authUserState.id;
   const { register, handleSubmit, errors } = useForm();
 
   return (
@@ -34,7 +30,7 @@ export const ModalAccountName: React.FC<Props> = (props) => {
         <form
           className={classes.form_board}
           onSubmit={handleSubmit((data) => {
-            props.nameChangeOnClick(data.name, userId);
+            props.nameChangeOnClick(data.name);
           })}
         >
           <Grid container spacing={4}>

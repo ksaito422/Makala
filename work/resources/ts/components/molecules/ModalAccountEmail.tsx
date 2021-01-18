@@ -5,24 +5,20 @@ import { TextForm } from '../atoms/TextForm';
 import { PasswordForm } from '../atoms/PasswordForm';
 import { CloseIcon } from '../atoms/CloseIcon';
 import { SubmitIcon } from '../atoms/SubmitIcon';
-import { AuthContext } from '../../contexts/childContexts/AuthContext';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 
 type Props = {
-  emailChangeOnClick: (newEmail: string, email: string, password: string, user: number) => void;
+  emailChangeOnClick: (newEmail: string, password: string) => void;
   modalOnClose: () => void;
 };
 
 export const ModalAccountEmail: React.FC<Props> = (props) => {
   /**
    * cssの定義
-   * ログインユーザーの情報  { user_id: value }
    * API import of react-hook-form
    */
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
-  const { authUserState } = useContext<any>(AuthContext);
-  const userId = authUserState.id;
   const { register, handleSubmit, errors } = useForm();
 
   return (
@@ -35,7 +31,7 @@ export const ModalAccountEmail: React.FC<Props> = (props) => {
         <form
           className={classes.form_board}
           onSubmit={handleSubmit((data) => {
-            props.emailChangeOnClick(data.email, authUserState.email, data.password, userId);
+            props.emailChangeOnClick(data.email, data.password);
           })}
         >
           <Grid container spacing={4}>
