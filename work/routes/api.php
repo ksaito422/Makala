@@ -58,4 +58,7 @@ Route::group([
     // パスワードを変更するルート
     Route::put('/v1/account/password/{user}', 'Api\AccountController@changePassword')
             ->name('changePassword');
+    // 退会処理をするルート
+    Route::delete('/v1/account/release/{user}', 'Api\AccountController@accountRelease')
+            ->name('accountRelease');
 });
