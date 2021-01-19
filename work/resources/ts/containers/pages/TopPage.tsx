@@ -4,6 +4,7 @@ import { Container, CssBaseline } from '@material-ui/core';
 import { Header } from '../organisms/Header';
 import { Footer } from '../organisms/Footer';
 import { Top } from '../organisms/Top';
+import { About } from '../organisms/About';
 import { Spinner } from '../../components/molecules/Spinner';
 import { AuthContext } from '../../contexts/childContexts/AuthContext';
 import { FeedbackContext } from '../../contexts/childContexts/FeedbackContext';
@@ -35,6 +36,7 @@ export const TopPage: React.FC = () => {
             history.push(`/${authUserState.name}/home`);
           }}
         />
+        <About className={classes.sub_container} />
       </Container>
       <Footer />
 

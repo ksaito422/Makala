@@ -12,6 +12,16 @@ export const StylesContextProvider: React.FC = (props) => {
       marginBottom: theme.spacing(4),
       flex: 1,
     },
+    // pages内で2個目以降のコンポーネントに適用
+    sub_container: {
+      marginTop: theme.spacing(8),
+    },
+    // 全Paperに適用 余白を統一するため Board, Card, Previewでは使用していない
+    paper: {
+      marginTop: theme.spacing(4),
+      padding: theme.spacing(4),
+    },
+
     // dragBoradの高さとスクロール可否
     drop_able: {
       maxHeight: `70vh`,
@@ -154,6 +164,34 @@ export const StylesContextProvider: React.FC = (props) => {
     },
     release_button: {
       marginTop: theme.spacing(4),
+    },
+
+    /**
+     * About.tsx
+     */
+    about_title: {
+      paddingTop: theme.spacing(2),
+      paddingBottom: theme.spacing(2),
+    },
+    about_subtitle: {
+      marginBottom: theme.spacing(2),
+    },
+    about_introduction: {
+      marginTop: theme.spacing(3),
+      marginBottom: theme.spacing(2),
+    },
+    about_introduction_sub: {
+      paddingBottom: theme.spacing(1),
+      borderBottom: 'solid 1px #dcdcdc',
+    },
+    about_introduction_title: {
+      marginTop: theme.spacing(2),
+      marginBottom: theme.spacing(3),
+    },
+    about_introduction_text: {
+      marginTop: theme.spacing(3),
+      paddingBottom: theme.spacing(1),
+      borderBottom: 'solid 1px #dcdcdc',
     },
   }));
   return <StylesContext.Provider value={{ useStyles }}>{props.children}</StylesContext.Provider>;

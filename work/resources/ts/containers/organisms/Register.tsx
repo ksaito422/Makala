@@ -75,7 +75,7 @@ export const Register: React.FC<Props> = (props) => {
   return (
     <>
       <Container maxWidth='sm'>
-        <Paper elevation={2} className={classes.auth_container}>
+        <Paper elevation={2} className={classes.paper}>
           <Grid container spacing={4}>
             <Grid item xs={12}>
               <Typography variant='h4' align='center'>

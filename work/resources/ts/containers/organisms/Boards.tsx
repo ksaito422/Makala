@@ -56,7 +56,7 @@ export const Boards: React.FC<Props> = (props) => {
       <Container maxWidth='sm'>
         <Grid container spacing={4}>
           <Grid item xs={12}>
-            <Paper elevation={3}>
+            <Paper elevation={2}>
               <List>
                 {props.boards.map((board: { id: number; board_name: string }, index: number) => (
                   <ListItem key={index}>
