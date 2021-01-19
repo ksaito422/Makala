@@ -13,7 +13,7 @@ export const ApiCardsContextProvider: React.FC = (props) => {
   const [cardsState, setCardsState] = useState([]);
 
   // カードを取得するapiと通信
-  const getCards = async (board_name: string) => {
+  const getCards = async (boardName: string) => {
     // スピナーon
     // トークン取得
     await setProgress(true);
@@ -21,7 +21,7 @@ export const ApiCardsContextProvider: React.FC = (props) => {
 
     await instance({
       method: 'GET',
-      url: `api/v1/cards/${board_name}`,
+      url: `api/v1/cards/${boardName}`,
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -47,9 +47,8 @@ export const ApiCardsContextProvider: React.FC = (props) => {
   const createCard = async (
     card: any,
     data: {
-      board_name: string;
-      card_name: string;
-      card_content: string;
+      boardName: string;
+      cardContent: string;
     }
   ) => {
     // スピナーon
@@ -86,14 +85,7 @@ export const ApiCardsContextProvider: React.FC = (props) => {
   };
 
   // カードを更新するロジックapiと通信
-  const updateCard = async (
-    id: number,
-    card: any,
-    data: {
-      card_name: string;
-      card_content: string;
-    }
-  ) => {
+  const updateCard = async (id: number, card: any, data: string) => {
     // スピナーon
     // トークン取得
     await setProgress(true);

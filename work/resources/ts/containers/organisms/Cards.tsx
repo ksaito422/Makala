@@ -12,8 +12,8 @@ import { ApiCardsContext } from '../../contexts/childContexts/ApiCardsContext';
 type Props = {
   items?: any;
   onDragEnd: any;
-  createOnSubmit: (data: { [x: string]: any }) => void;
-  updateOnSubmit: (data: { [x: string]: any }, id: number) => void;
+  createOnSubmit: (value: string) => void;
+  updateOnSubmit: (value: string, id: number) => void;
   deleteOnClick: (id?: string) => void;
 };
 
@@ -38,8 +38,7 @@ export const Cards = React.memo<Props>((props) => {
     setCreateState(false);
     setModalValueState({
       id: null,
-      card_name: null,
-      card_content: null,
+      card_content: '',
     });
   };
 
@@ -69,8 +68,7 @@ export const Cards = React.memo<Props>((props) => {
                           setModalValueState({
                             ...modalValueState,
                             id: item.id,
-                            card_name: item.title,
-                            card_content: item.content,
+                            cardContent: item.content,
                           });
                         }}
                         deleteOnClick={() => {
@@ -102,12 +100,11 @@ export const Cards = React.memo<Props>((props) => {
         <ModalCard
           modalOnClose={modalClose}
           // 押したボタンの番号によって、表示内容を変える
-          defaultValueTitle={modalValueState.card_name}
-          defaultValueContent={modalValueState.card_content}
-          postOnSubmit={(data) => {
+          defaultValue={modalValueState.cardContent}
+          postOnSubmit={(value) => {
             createState
-              ? (modalClose(), props.createOnSubmit(data))
-              : (modalClose(), props.updateOnSubmit(data, modalValueState.id));
+              ? (modalClose(), props.createOnSubmit(value))
+              : (modalClose(), props.updateOnSubmit(value, modalValueState.id));
           }}
         />
       </ModalWindow>

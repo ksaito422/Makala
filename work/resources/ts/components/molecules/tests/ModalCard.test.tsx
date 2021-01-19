@@ -9,8 +9,7 @@ afterEach(cleanup);
 describe('ModalCard', () => {
   it('スナップショットテスト', () => {
     const props = {
-      defaultValueTitle: 'string',
-      defaultValueContent: 'string',
+      defaultValue: 'string',
       postOnSubmit: jest.fn(),
       modalOnClose: jest.fn(),
     };
