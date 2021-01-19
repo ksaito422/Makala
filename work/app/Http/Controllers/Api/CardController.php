@@ -45,7 +45,6 @@ class CardController extends Controller
 
         $cards = new Card();
         $cards->board_id = $board->id;
-        $cards->title = $request->card_name;
         $cards->content = $request->card_content;
         $cards->save();
         return response()->json([
@@ -63,7 +62,6 @@ class CardController extends Controller
     public function update(Request $request, $id)
     {
         $card = Card::find($id);
-        $card->title = $request->card_name;
         $card->content = $request->card_content;
         $card->save();
         return response()->json([
