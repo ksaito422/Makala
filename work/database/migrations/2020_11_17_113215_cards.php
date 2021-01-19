@@ -16,7 +16,6 @@ class Cards extends Migration
         Schema::create('cards', function(Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('board_id')->unsigned();
-            $table->text('title');
             $table->text('content');
             $table->timestamps();
 
