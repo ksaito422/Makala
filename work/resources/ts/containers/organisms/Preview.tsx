@@ -25,9 +25,9 @@ export const Preview: React.FC<Props> = (props) => {
    * 最後にpreviewTextをMarkdownPreviewで表示する
    */
   let previewText: string = '';
-  const tmp = props.items.forEach((key) => {
+  props.items.forEach((key) => {
     // プレビューに表示するテキスト内容をカスタマイズ
-    previewText += `# ${key.title}\n${key.content}\n\n`;
+    previewText += `${key.content}\n\n`;
   });
 
   // markdown file downloadの細かい設定
@@ -45,7 +45,7 @@ export const Preview: React.FC<Props> = (props) => {
       <Container maxWidth='lg'>
         <Grid container spacing={4}>
           <Grid item xs={12}>
-            <Paper elevation={3} className={classes.preview}>
+            <Paper elevation={2} className={classes.preview}>
               <MarkdownPreview source={previewText} />
             </Paper>
           </Grid>

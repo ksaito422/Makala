@@ -83,16 +83,18 @@ export const CardPage = React.memo(() => {
                   deleteOnClick={(id) => {
                     deleteCard(id, card);
                   }}
-                  createOnSubmit={(data) => {
+                  createOnSubmit={(value) => {
                     const postData = {
-                      board_name: card,
-                      card_name: data.card_name,
-                      card_content: data.card_content,
+                      boardName: card,
+                      cardContent: value,
                     };
                     createCard(card, postData);
                   }}
-                  updateOnSubmit={(data, id) => {
-                    updateCard(id, card, data);
+                  updateOnSubmit={(value, id) => {
+                    const postData = {
+                      cardContent: value,
+                    };
+                    updateCard(id, card, postData);
                   }}
                 />
               </Container>
@@ -129,16 +131,18 @@ export const CardPage = React.memo(() => {
                     deleteOnClick={(id) => {
                       deleteCard(id);
                     }}
-                    createOnSubmit={(data) => {
+                    createOnSubmit={(value) => {
                       const postData = {
-                        board_name: card,
-                        card_name: data.card_name,
-                        card_content: data.card_content,
+                        boardName: card,
+                        cardContent: value,
                       };
                       createCard(card, postData);
                     }}
-                    updateOnSubmit={(data, id) => {
-                      updateCard(id, card, data);
+                    updateOnSubmit={(value, id) => {
+                      const postData = {
+                        cardContent: value,
+                      };
+                      updateCard(id, card, postData);
                     }}
                   />
                 )}
