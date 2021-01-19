@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Box, Container, CssBaseline } from '@material-ui/core';
+import { Container, CssBaseline } from '@material-ui/core';
 import { Header } from '../organisms/Header';
 import { Footer } from '../organisms/Footer';
 import { Top } from '../organisms/Top';
@@ -36,7 +36,7 @@ export const TopPage: React.FC = () => {
             history.push(`/${authUserState.name}/home`);
           }}
         />
-        <About />
+        <About className={classes.sub_container} />
       </Container>
       <Footer />
 
