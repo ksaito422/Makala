@@ -12,6 +12,12 @@ export const StylesContextProvider: React.FC = (props) => {
       marginBottom: theme.spacing(4),
       flex: 1,
     },
+    // 全Paperに適用 余白を統一するため Board, Card, Previewでは使用していない
+    paper: {
+      marginTop: theme.spacing(4),
+      padding: theme.spacing(4),
+    },
+
     // dragBoradの高さとスクロール可否
     drop_able: {
       maxHeight: `70vh`,

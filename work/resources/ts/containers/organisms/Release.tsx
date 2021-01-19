@@ -28,7 +28,7 @@ export const Release: React.FC<Props> = (props) => {
         <Typography variant='subtitle2' align='center' color='textSecondary'>
           一度アカウントを削除すると、二度と元に戻せません。十分ご注意ください。
         </Typography>
-        <Paper elevation={2} className={classes.setting_contents}>
+        <Paper elevation={2} className={classes.paper}>
           <Typography variant='subtitle2'>パスワードを入力して下さい</Typography>
           <form
             onSubmit={handleSubmit((data) => {

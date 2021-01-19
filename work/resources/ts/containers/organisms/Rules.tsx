@@ -9,7 +9,7 @@ export const Rules: React.FC = () => {
   return (
     <>
       <Container maxWidth='md'>
-        <Paper elevation={2} className={classes.auth_container}>
+        <Paper elevation={2} className={classes.paper}>
           <Box component='div'>
             <Typography variant='h5' color='textPrimary' className={classes.rule_title}>
               利用規約

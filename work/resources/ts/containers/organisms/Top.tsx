@@ -21,7 +21,7 @@ export const Top: React.FC<Props> = (props) => {
   return (
     <>
       <Container maxWidth='md'>
-        <Paper elevation={2}>
+        <Paper elevation={2} className={classes.paper}>
           <Grid container spacing={4}>
             <Grid item xs={12}>
               <Typography variant='h4' align='center'>

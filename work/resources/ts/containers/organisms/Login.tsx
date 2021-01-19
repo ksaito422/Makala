@@ -73,7 +73,7 @@ export const Login: React.FC<Props> = (props) => {
   return (
     <>
       <Container maxWidth='sm'>
-        <Paper elevation={2} className={classes.auth_container}>
+        <Paper elevation={2} className={classes.paper}>
           <Typography variant='h4' align='center'>
             Makalaにログイン
           </Typography>
