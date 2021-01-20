@@ -5,6 +5,7 @@ import { MuiThemeProvider } from '@material-ui/core';
 import { PrivateRoute } from './routes/PrivateRoute';
 import { GuestRoute } from './routes/GuestRoute';
 import { TotalContextProvider } from './contexts/TotalContext';
+import { NotFoundPage } from './containers/pages/NotFoundPage';
 import { TopPage } from './containers/pages/TopPage';
 import { RulesPage } from './containers/pages/RulesPage';
 import { PrivacyPage } from './containers/pages/PrivacyPage';
@@ -37,6 +38,7 @@ const App: React.FC = () => {
                 path='/:user/settings/account/release'
                 component={AccountReleasePage}
               />
+              <Route path='*' component={NotFoundPage} />
             </Switch>
           </Auth>
         </MuiThemeProvider>
