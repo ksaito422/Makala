@@ -186,7 +186,7 @@ export const StylesContextProvider: React.FC = (props) => {
     },
     about_introduction_title: {
       marginTop: theme.spacing(2),
-      marginBottom: theme.spacing(3),
+      marginBottom: theme.spacing(1),
     },
     about_introduction_text: {
       marginTop: theme.spacing(3),
