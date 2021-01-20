@@ -30,7 +30,7 @@ const App: React.FC = () => {
               <GuestRoute exact path='/login' component={LoginPage} />
               <GuestRoute exact path='/register' component={RegisterPage} />
               <PrivateRoute exact path='/:user/home' component={HomePage} />
-              <PrivateRoute exact path='/:user/:card/cards/' component={CardPage} />
+              <PrivateRoute exact path='/:user/cards/:card' component={CardPage} />
               <PrivateRoute exact path='/:user/settings/account' component={SettingAccountPage} />
               <PrivateRoute
                 exact
