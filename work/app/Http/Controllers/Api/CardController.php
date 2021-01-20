@@ -40,11 +40,8 @@ class CardController extends Controller
      */
     public function store(Request $request)
     {
-        $board = Board::where('board_name', $request->boardName)
-                        ->first();
-
         $cards = new Card();
-        $cards->board_id = $board->id;
+        $cards->board_id = $request->boardId;
         $cards->content = $request->cardContent;
         $cards->save();
         return response()->json([

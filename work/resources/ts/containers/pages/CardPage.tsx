@@ -85,7 +85,7 @@ export const CardPage = React.memo(() => {
                   }}
                   createOnSubmit={(value) => {
                     const postData = {
-                      boardName: card,
+                      boardId: card,
                       cardContent: value,
                     };
                     createCard(card, postData);
@@ -133,7 +133,7 @@ export const CardPage = React.memo(() => {
                     }}
                     createOnSubmit={(value) => {
                       const postData = {
-                        boardName: card,
+                        boardId: card,
                         cardContent: value,
                       };
                       createCard(card, postData);
