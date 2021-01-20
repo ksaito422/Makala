@@ -22,9 +22,9 @@ class CardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($name)
+    public function index($id)
     {
-        $cards = Board::where('board_name', $name)
+        $cards = Board::where('id', $id)
                         ->first()
                         ->cards;
         return response()->json([

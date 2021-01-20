@@ -11,14 +11,13 @@ type Props = {
   boards: [
     {
       id: number;
-      board_name: string;
     }
   ];
   index: number;
   createOnClick: (data: { [x: string]: any }, user: number) => void;
   updateOnClick: (data: { [x: string]: any }, user: number) => void;
   deleteOnClick: (id: number, index: number) => void;
-  showOnClick: (data: string) => void;
+  showOnClick: (id: number) => void;
 };
 
 describe('Boards', () => {
@@ -27,7 +26,6 @@ describe('Boards', () => {
       boards: [
         {
           id: 1,
-          board_name: 'string',
         },
       ],
       index: 1,

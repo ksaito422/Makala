@@ -24,7 +24,7 @@ type Props = {
   createOnClick: (data: { [x: string]: any }, user: number) => void;
   updateOnClick: (data: { [x: string]: any }, user: number) => void;
   deleteOnClick: (id: number, index: number) => void;
-  showOnClick: (data: string) => void;
+  showOnClick: (id: number) => void;
 };
 
 export const Boards: React.FC<Props> = (props) => {
@@ -81,7 +81,7 @@ export const Boards: React.FC<Props> = (props) => {
                       }}
                       fullWidth
                       onClick={() => {
-                        props.showOnClick(board.board_name);
+                        props.showOnClick(board.id);
                       }}
                     >
                       <ListItemText primary={board.board_name} />

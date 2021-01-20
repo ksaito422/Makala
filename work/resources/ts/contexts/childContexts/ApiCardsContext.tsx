@@ -13,7 +13,7 @@ export const ApiCardsContextProvider: React.FC = (props) => {
   const [cardsState, setCardsState] = useState([]);
 
   // カードを取得するapiと通信
-  const getCards = async (boardName: string) => {
+  const getCards = async (id: number) => {
     // スピナーon
     // トークン取得
     await setProgress(true);
@@ -21,7 +21,7 @@ export const ApiCardsContextProvider: React.FC = (props) => {
 
     await instance({
       method: 'GET',
-      url: `api/v1/cards/${boardName}`,
+      url: `api/v1/cards/${id}`,
       headers: {
         Authorization: `Bearer ${token}`,
       },
