@@ -205,7 +205,7 @@ export const AuthContextProvider: React.FC = (props) => {
           email: res.data.email,
         });
         login();
-        authRefresh();
+        // authRefresh();
       })
       .catch(() => {})
       .finally(() => {
