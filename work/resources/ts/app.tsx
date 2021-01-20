@@ -5,6 +5,7 @@ import { MuiThemeProvider } from '@material-ui/core';
 import { PrivateRoute } from './routes/PrivateRoute';
 import { GuestRoute } from './routes/GuestRoute';
 import { TotalContextProvider } from './contexts/TotalContext';
+import { NotFoundPage } from './containers/pages/NotFoundPage';
 import { TopPage } from './containers/pages/TopPage';
 import { RulesPage } from './containers/pages/RulesPage';
 import { PrivacyPage } from './containers/pages/PrivacyPage';
@@ -30,13 +31,14 @@ const App: React.FC = () => {
               <GuestRoute exact path='/login' component={LoginPage} />
               <GuestRoute exact path='/register' component={RegisterPage} />
               <PrivateRoute exact path='/:user/home' component={HomePage} />
-              <PrivateRoute exact path='/:user/:card/cards/' component={CardPage} />
+              <PrivateRoute exact path='/:user/cards/:card' component={CardPage} />
               <PrivateRoute exact path='/:user/settings/account' component={SettingAccountPage} />
               <PrivateRoute
                 exact
                 path='/:user/settings/account/release'
                 component={AccountReleasePage}
               />
+              <Route path='*' component={NotFoundPage} />
             </Switch>
           </Auth>
         </MuiThemeProvider>
