@@ -10,7 +10,12 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <!-- css -->
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        @if(app('env')=='local')
+            <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        @endif
+        @if(app('env')=='production')
+            <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
+        @endif
 
          <!-- Scripts -->
         @if(app('env')=='local')
