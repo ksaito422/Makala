@@ -13,6 +13,7 @@ import { StylesContext } from '../../contexts/childContexts/StylesContext';
 type Props = {
   name: string;
   email: string;
+  disabled: boolean;
   nameChangeOnClick: (name: string) => void;
   emailChangeOnClick: (newEmail: string, password: string) => void;
   passwordChangeOnClick: (password: string, newPassword: string) => void;
@@ -65,6 +66,7 @@ export const Account: React.FC<Props> = (props) => {
                     setModalOpenState(true);
                     setModalChangeName(true);
                   }}
+                  disabled={props.disabled}
                 >
                   変更する
                 </Button>
@@ -79,6 +81,7 @@ export const Account: React.FC<Props> = (props) => {
                     setModalOpenState(true);
                     setModalChangeEmail(true);
                   }}
+                  disabled={props.disabled}
                 >
                   変更する
                 </Button>
@@ -114,7 +117,9 @@ export const Account: React.FC<Props> = (props) => {
                   helperText={errors.newPassword && errors.newPassword.message}
                 />
                 <div className={classes.centerPlacement}>
-                  <Button type='submit'>パスワードを変更する</Button>
+                  <Button type='submit' disabled={props.disabled}>
+                    パスワードを変更する
+                  </Button>
                 </div>
               </form>
             </Grid>
@@ -126,7 +131,11 @@ export const Account: React.FC<Props> = (props) => {
                 ※ 一度アカウントを削除すると、二度と元に戻せません。十分ご注意ください。
               </Typography>
               <Box m={2} className={classes.centerPlacement}>
-                <Button className={classes.account_release_button} onClick={props.accountRelease}>
+                <Button
+                  className={classes.account_release_button}
+                  onClick={props.accountRelease}
+                  disabled={props.disabled}
+                >
                   アカウントを削除する
                 </Button>
               </Box>

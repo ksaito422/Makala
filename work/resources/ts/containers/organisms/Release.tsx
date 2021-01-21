@@ -6,6 +6,7 @@ import { PasswordForm } from '../../components/atoms/PasswordForm';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 
 type Props = {
+  disabled: boolean;
   releaseOnClick: (password: string) => void;
   cancelOnClick: () => void;
 };
@@ -48,7 +49,7 @@ export const Release: React.FC<Props> = (props) => {
             <Container maxWidth='sm'>
               <Grid container spacing={4} className={classes.release_button}>
                 <Grid item xs={6}>
-                  <Button fullWidth type='submit'>
+                  <Button fullWidth type='submit' disabled={props.disabled}>
                     退会
                   </Button>
                 </Grid>

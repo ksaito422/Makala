@@ -43,6 +43,7 @@ export const AccountReleasePage: React.FC = () => {
               cancelOnClick={() => {
                 history.push(`/${authUserState.name}/settings/account`);
               }}
+              disabled={authUserState.id === 1}
             />
           </Grid>
         </Grid>

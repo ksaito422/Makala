@@ -19,6 +19,11 @@ class AccountController extends Controller
 
     public function changeName(Request $request, $id)
     {
+        // ゲストユーザーのアカウントは変更できない
+        if ($id == 1) {
+            return response()->json(['message' => 'ゲストユーザーのため変更できません。'], 403);
+        }
+
         $user = User::find($id);
         $user->name = $request->name;
         $user->save();
@@ -27,6 +32,11 @@ class AccountController extends Controller
 
     public function changeEmail(Request $request, $id)
     {
+        // ゲストユーザーのアカウントは変更できない
+        if ($id == 1) {
+            return response()->json(['message' => 'ゲストユーザーのため変更できません。'], 403);
+        }
+
         // ユーザーを取得して、認証情報を保管
         $user = USER::find($id);
         $credentials = request(['email', 'password']);
@@ -45,6 +55,11 @@ class AccountController extends Controller
 
     public function changePassword(Request $request, $id)
     {
+        // ゲストユーザーのアカウントは変更できない
+        if ($id == 1) {
+            return response()->json(['message' => 'ゲストユーザーのため変更できません。'], 403);
+        }
+
         // ユーザーを取得して、認証情報を保管
         $user = USER::find($id);
         $credentials = request(['email', 'password']);
@@ -63,6 +78,11 @@ class AccountController extends Controller
 
     public function accountRelease(Request $request, $id)
     {
+        // ゲストユーザーのアカウントは変更できない
+        if ($id == 1) {
+            return response()->json(['message' => 'ゲストユーザーのため削除できません。'], 403);
+        }
+
         // ユーザーを取得して、認証情報を保管
         $user = USER::find($id);
         $credentials = request(['email', 'password']);
