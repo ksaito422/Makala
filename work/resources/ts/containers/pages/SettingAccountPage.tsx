@@ -52,6 +52,7 @@ export const SettingAccountPage: React.FC = () => {
               accountRelease={() => {
                 history.push(`/${authUserState.name}/settings/account/release`);
               }}
+              disabled={authUserState.id === 1}
             />
           </Grid>
         </Grid>
