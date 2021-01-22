@@ -1,6 +1,5 @@
 import React, { useState, createContext, useContext } from 'react';
 import { FeedbackContext } from './FeedbackContext';
-import { AuthContext } from './AuthContext';
 import { instance } from '../../config/axios.config';
 
 export const ApiBoardsContext = createContext({});
@@ -12,7 +11,6 @@ export const ApiBoardsContextProvider: React.FC = (props) => {
    * getBoardsで取得したデータを保管
    */
   const { setProgress, setStatus } = useContext<any>(FeedbackContext);
-  const { authUserState } = useContext<any>(AuthContext);
   const [boardsState, setBoardsState] = useState([]);
 
   // ボードを取得するapiと通信
@@ -24,7 +22,7 @@ export const ApiBoardsContextProvider: React.FC = (props) => {
 
     await instance({
       method: 'GET',
-      url: `api/v1/boards/${authUserState.name}`,
+      url: `api/v1/boards`,
       headers: {
         Authorization: `Bearer ${token}`,
       },

@@ -18,21 +18,6 @@ class CardController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index($id)
-    {
-        $cards = Board::where('id', $id)
-                        ->first()
-                        ->cards;
-        return response()->json([
-            'cards' => $cards
-        ], 200, [], JSON_UNESCAPED_UNICODE);
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

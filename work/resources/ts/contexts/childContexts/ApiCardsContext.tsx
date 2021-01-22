@@ -21,7 +21,7 @@ export const ApiCardsContextProvider: React.FC = (props) => {
 
     await instance({
       method: 'GET',
-      url: `api/v1/cards/${id}`,
+      url: `api/v1/boards/${id}`,
       headers: {
         Authorization: `Bearer ${token}`,
       },
