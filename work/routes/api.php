@@ -29,18 +29,14 @@ Route::group([
 Route::group([
     'middleware' => 'api'
 ], function() {
-    Route::get('/v1/boards/{user}', 'Api\BoardController@index')
-        ->name('board.index');
-
-    Route::apiResource('/v1/boards', 'Api\BoardController', ['except' => ['index', 'show']])
+    Route::apiResource('/v1/boards', 'Api\BoardController')
         ->names([
+            'index' => 'board.index',
+            'show' => 'board.show',
             'store' => 'board.store',
             'update' => 'board.update',
             'destroy' => 'board.destroy'
         ]);
-
-    Route::get('/v1/cards/{card}', 'Api\CardController@index')
-        ->name('card.index');
 
     Route::apiResource('/v1/cards', 'Api\CardController', ['except' => ['index', 'show']])
     ->names([

@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Model\Board;
+use App\Model\Card;
 
 class BoardController extends Controller
 {
@@ -22,13 +24,33 @@ class BoardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($name)
+    public function index()
     {
+        // JWT-Authのme()メソッドと同じ仕組み
+        // BearerTokenを基にログインユーザーを特定し、ユーザー名を取得する
+        $name = response()->json(auth()->user())->original->name;
+
         $boards = User::where('name', $name)
                         ->first()
                         ->boards;
         return response()->json([
-            'boards' => $boards
+            'boards' => $boards,
+        ], 200, [], JSON_UNESCAPED_UNICODE);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $cards = Board::where('id', $id)
+                        ->first()
+                        ->cards;
+        return response()->json([
+            'cards' => $cards
         ], 200, [], JSON_UNESCAPED_UNICODE);
     }
 
