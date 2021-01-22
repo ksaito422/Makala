@@ -1,5 +1,6 @@
 import React, { useState, createContext, useContext } from 'react';
 import { FeedbackContext } from './FeedbackContext';
+import { NotFoundContext } from './NotFoundContext';
 import { instance } from '../../config/axios.config';
 
 export const ApiCardsContext = createContext({});
@@ -10,6 +11,7 @@ export const ApiCardsContextProvider: React.FC = (props) => {
    * { items: ボードアイテムで表示するデータ, numberMade: 今までにカードを作った総数 }
    */
   const { setProgress, setStatus } = useContext<any>(FeedbackContext);
+  const { setNotFound } = useContext<any>(NotFoundContext);
   const [cardsState, setCardsState] = useState([]);
 
   // カードを取得するapiと通信
@@ -31,6 +33,8 @@ export const ApiCardsContextProvider: React.FC = (props) => {
         setCardsState(res.data.cards);
       })
       .catch(() => {
+        // 存在しないデータにアクセスしたらNotFoundPageを表示するため
+        setNotFound(true);
         setStatus({
           open: true,
           type: 'error',
