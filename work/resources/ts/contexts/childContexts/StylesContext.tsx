@@ -176,6 +176,12 @@ export const StylesContextProvider: React.FC = (props) => {
     about_subtitle: {
       marginBottom: theme.spacing(2),
     },
+    about_img: {
+      width: '100%',
+      height: 'auto',
+      maxWidth: '500px',
+      maxHeight: '300px',
+    },
     about_introduction: {
       marginTop: theme.spacing(3),
       marginBottom: theme.spacing(2),

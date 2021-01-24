@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Container, CssBaseline, Grid } from '@material-ui/core';
+import { Container, CssBaseline, Grid, useMediaQuery } from '@material-ui/core';
 import { Spinner } from '../../components/molecules/Spinner';
 import { Notice } from '../../components/molecules/Notice';
 import { Header } from '../organisms/Header';
@@ -18,6 +18,7 @@ export const AccountReleasePage: React.FC = () => {
    * cssの定義
    * react-router-dom URLルーティングに使う
    * アカウント情報の読み込み
+   * スマホ( > 600px)を基準にレスポンシブ対応
    */
   const { progress, status, setStatus } = useContext<any>(FeedbackContext);
   const { useStyles } = useContext<any>(StylesContext);
@@ -25,28 +26,42 @@ export const AccountReleasePage: React.FC = () => {
   const history = useHistory();
   const { authUserState } = useContext<any>(AuthContext);
   const { accountRelease } = useContext<any>(ApiAccountContext);
+  const matches = useMediaQuery('(min-width: 601px)');
 
   return (
     <>
       <CssBaseline />
       <Header />
       <Container maxWidth='md' className={classes.main_container}>
-        <Grid container spacing={4}>
-          <Grid item xs={4}>
-            <SettingList />
+        {matches ? (
+          <Grid container spacing={4}>
+            <Grid item xs={4}>
+              <SettingList />
+            </Grid>
+            <Grid item xs={8}>
+              <Release
+                releaseOnClick={(data) => {
+                  accountRelease(authUserState.email, data, authUserState.id);
+                }}
+                cancelOnClick={() => {
+                  history.push(`/${authUserState.name}/settings/account`);
+                }}
+                disabled={authUserState.id === 1}
+              />
+            </Grid>
           </Grid>
-          <Grid item xs={8}>
-            <Release
-              releaseOnClick={(data) => {
-                accountRelease(authUserState.email, data, authUserState.id);
-              }}
-              cancelOnClick={() => {
-                history.push(`/${authUserState.name}/settings/account`);
-              }}
-              disabled={authUserState.id === 1}
-            />
-          </Grid>
-        </Grid>
+        ) : (
+          // <SettingList />を表示するハンバーガーメニューを実装したい
+          <Release
+            releaseOnClick={(data) => {
+              accountRelease(authUserState.email, data, authUserState.id);
+            }}
+            cancelOnClick={() => {
+              history.push(`/${authUserState.name}/settings/account`);
+            }}
+            disabled={authUserState.id === 1}
+          />
+        )}
       </Container>
       <Footer />
 

@@ -25,6 +25,26 @@ export const Register: React.FC<Props> = (props) => {
   const matches = useMediaQuery('(min-width: 601px)');
 
   /**
+   * タイトルのレスポンシブ対応
+   * スマホとタブレット以上の画面サイズで表示レイアウトを切り替る
+   */
+  const ResponsiveTitle: React.FC = () => {
+    return (
+      <>
+        {matches ? (
+          <Typography variant='h4' align='center'>
+            Makalaへようこそ
+          </Typography>
+        ) : (
+          <Typography variant='h5' align='center'>
+            Makalaへようこそ
+          </Typography>
+        )}
+      </>
+    );
+  };
+
+  /**
    * 共通コンポーネント化
    * CommonRegister and CommonCancelはボタンの共通化
    * classNameはuseStylesのスタイルをインポート
@@ -78,9 +98,7 @@ export const Register: React.FC<Props> = (props) => {
         <Paper elevation={2} className={classes.paper}>
           <Grid container spacing={4}>
             <Grid item xs={12}>
-              <Typography variant='h4' align='center'>
-                Makalaへようこそ
-              </Typography>
+              <ResponsiveTitle />
               <Typography variant='subtitle1' align='center'>
                 新規登録（無料）して利用を開始しましょう。
               </Typography>

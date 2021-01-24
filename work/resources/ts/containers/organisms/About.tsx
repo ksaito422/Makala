@@ -41,7 +41,7 @@ export const About: React.FC<Props> = (props) => {
               >
                 記事の作成・プレビュー
               </Typography>
-              <img src='/img/makala_01.gif' alt='' />
+              <img src='/img/makala_01.gif' alt='' className={classes.about_img} />
               <Typography
                 variant='subtitle2'
                 color='textSecondary'
@@ -60,7 +60,7 @@ export const About: React.FC<Props> = (props) => {
               >
                 文章構成の変更
               </Typography>
-              <img src='/img/makala_02.gif' alt='' />
+              <img src='/img/makala_02.gif' alt='' className={classes.about_img} />
               <Typography
                 variant='subtitle2'
                 color='textSecondary'
@@ -79,7 +79,7 @@ export const About: React.FC<Props> = (props) => {
               >
                 記事のダウンロード
               </Typography>
-              <img src='/img/makala_03.gif' alt='' />
+              <img src='/img/makala_03.gif' alt='' className={classes.about_img} />
               <Typography
                 variant='subtitle2'
                 color='textSecondary'
