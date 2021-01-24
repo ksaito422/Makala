@@ -47,9 +47,9 @@ class AccountControllerTest extends TestCase
         $this->assertAuthenticatedAs($this->guest);
 
         $response->assertStatus(403)
-                  ->assertJsonFragment(['message' => 'ゲストユーザーのため変更できません。'])
-                  ->assertJsonCount(1)
-                  ->assertHeader('Content-Type', 'application/json');
+                 ->assertJsonFragment(['message' => 'ゲストユーザーのため変更できません。'])
+                 ->assertJsonCount(1)
+                 ->assertHeader('Content-Type', 'application/json');
     }
 
     /**
@@ -75,9 +75,9 @@ class AccountControllerTest extends TestCase
         $this->assertAuthenticatedAs($this->user);
 
         $response->assertOk()
-                  ->assertJsonFragment(['message' => 'ユーザー名を変更しました。'])
-                  ->assertJsonCount(1)
-                  ->assertHeader('Content-Type', 'application/json');
+                 ->assertJsonFragment(['message' => 'ユーザー名を変更しました。'])
+                 ->assertJsonCount(1)
+                 ->assertHeader('Content-Type', 'application/json');
     }
 
     /**
@@ -107,10 +107,10 @@ class AccountControllerTest extends TestCase
 
         // ゲストユーザなのでメールアドレス変更できない時のメッセージを返す
         $response->put($url, $data)
-                  ->assertStatus(403)
-                  ->assertJsonFragment(['message' => 'ゲストユーザーのため変更できません。'])
-                  ->assertJsonCount(1)
-                  ->assertHeader('Content-Type', 'application/json');
+                 ->assertStatus(403)
+                 ->assertJsonFragment(['message' => 'ゲストユーザーのため変更できません。'])
+                 ->assertJsonCount(1)
+                 ->assertHeader('Content-Type', 'application/json');
     }
     /**
      * @test
@@ -146,14 +146,15 @@ class AccountControllerTest extends TestCase
 
         // パスワードが違うと変更できない時のメッセージを返す
         $response->put($url, $fake_data)
-                  ->assertJsonFragment(['message' => 'パスワードが違うため、メールアドレスを変更できませんでした。']);
+                 ->assertStatus(401)
+                 ->assertJsonFragment(['message' => 'パスワードが違うため、メールアドレスを変更できませんでした。']);
 
         // 正しいパスワードで変更できる
         $response->put($url, $data)
-                  ->assertOk()
-                  ->assertJsonFragment(['message' => 'メールアドレスを変更しました。'])
-                  ->assertJsonCount(1)
-                  ->assertHeader('Content-Type', 'application/json');
+                 ->assertOk()
+                 ->assertJsonFragment(['message' => 'メールアドレスを変更しました。'])
+                 ->assertJsonCount(1)
+                 ->assertHeader('Content-Type', 'application/json');
     }
 
     /**
@@ -172,8 +173,8 @@ class AccountControllerTest extends TestCase
 
         // 認証外だと500エラーを返す つまりapiを利用できない
         $this->assertGuest()
-        ->put($url, $data)
-        ->assertStatus(500);
+             ->put($url, $data)
+             ->assertStatus(500);
 
         // テストのためにログインする
         $response = $this->actingAs($this->guest);
@@ -183,10 +184,10 @@ class AccountControllerTest extends TestCase
 
         // ゲストユーザなのでパスワード変更できない時のメッセージを返す
         $response->put($url, $data)
-                  ->assertStatus(403)
-                  ->assertJsonFragment(['message' => 'ゲストユーザーのため変更できません。'])
-                  ->assertJsonCount(1)
-                  ->assertHeader('Content-Type', 'application/json');
+                 ->assertStatus(403)
+                 ->assertJsonFragment(['message' => 'ゲストユーザーのため変更できません。'])
+                 ->assertJsonCount(1)
+                 ->assertHeader('Content-Type', 'application/json');
     }
     /**
      * @test
@@ -211,8 +212,8 @@ class AccountControllerTest extends TestCase
 
         // 認証外だと500エラーを返す つまりapiを利用できない
         $this->assertGuest()
-        ->put($url, $data)
-        ->assertStatus(500);
+             ->put($url, $data)
+             ->assertStatus(500);
 
         // テストのためにログインする
         $response = $this->actingAs($this->user);
@@ -222,14 +223,15 @@ class AccountControllerTest extends TestCase
 
         // パスワードが違うと変更できない時のメッセージを返す
         $response->put($url, $fake_data)
-                  ->assertJsonFragment(['message' => 'パスワードが違うため、パスワードを変更できませんでした。']);
+                 ->assertStatus(401)
+                 ->assertJsonFragment(['message' => 'パスワードが違うため、パスワードを変更できませんでした。']);
 
         // 正しいパスワードで変更できる
         $response->put($url, $data)
-                  ->assertOk()
-                  ->assertJsonFragment(['message' => 'パスワードを変更しました。'])
-                  ->assertJsonCount(1)
-                  ->assertHeader('Content-Type', 'application/json');
+                 ->assertOk()
+                 ->assertJsonFragment(['message' => 'パスワードを変更しました。'])
+                 ->assertJsonCount(1)
+                 ->assertHeader('Content-Type', 'application/json');
     }
 
     /**
@@ -258,10 +260,10 @@ class AccountControllerTest extends TestCase
 
         // ゲストユーザなのでアカウント削除できない時のメッセージを返す
         $response->delete($url, $data)
-                  ->assertStatus(403)
-                  ->assertJsonFragment(['message' => 'ゲストユーザーのため削除できません。'])
-                  ->assertJsonCount(1)
-                  ->assertHeader('Content-Type', 'application/json');
+                 ->assertStatus(403)
+                 ->assertJsonFragment(['message' => 'ゲストユーザーのため削除できません。'])
+                 ->assertJsonCount(1)
+                 ->assertHeader('Content-Type', 'application/json');
     }
     /**
      * @test
@@ -299,9 +301,9 @@ class AccountControllerTest extends TestCase
 
         // アカウント削除できる時のメッセージを返す
         $response->delete($url, $data)
-                  ->assertOk()
-                  ->assertJsonFragment(['message' => '退会しました。'])
-                  ->assertJsonCount(1)
-                  ->assertHeader('Content-Type', 'application/json');
+                 ->assertOk()
+                 ->assertJsonFragment(['message' => '退会しました。'])
+                 ->assertJsonCount(1)
+                 ->assertHeader('Content-Type', 'application/json');
     }
 }
