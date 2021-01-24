@@ -231,4 +231,77 @@ class AccountControllerTest extends TestCase
                   ->assertJsonCount(1)
                   ->assertHeader('Content-Type', 'application/json');
     }
+
+    /**
+     * @test
+     */
+    public function ゲストユーザーのアカウントは削除できない()
+    {
+        $url = route('accountRelease', ['user' => $this->guest->id]);
+
+        // 正しいパスワード
+        $data = [
+            'email' => 'guest@example.com',
+            'password' => 'guest1234',
+        ];
+
+        // 認証外だと500エラーを返す つまりapiを利用できない
+        $this->assertGuest()
+             ->delete($url, $data)
+             ->assertStatus(500);
+
+        // テストのためにログインする
+        $response = $this->actingAs($this->guest);
+
+        // 指定したユーザーが認証されていることを確認
+        $this->assertAuthenticatedAs($this->guest);
+
+        // ゲストユーザなのでアカウント削除できない時のメッセージを返す
+        $response->delete($url, $data)
+                  ->assertStatus(403)
+                  ->assertJsonFragment(['message' => 'ゲストユーザーのため削除できません。'])
+                  ->assertJsonCount(1)
+                  ->assertHeader('Content-Type', 'application/json');
+    }
+    /**
+     * @test
+     */
+    public function 通常ユーザーのアカウントを削除できる()
+    {
+        $url = route('accountRelease', ['user' => $this->user->id]);
+
+        // 正しいパスワード
+        $data = [
+            'email' => 'test@example.com',
+            'password' => 'test1234',
+        ];
+        // 間違ったパスワード
+        $fake_data = [
+            'email' => 'test@example.com',
+            'password' => 'testtest',
+        ];
+
+        // 認証外だと500エラーを返す つまりapiを利用できない
+        $this->assertGuest()
+             ->delete($url, $data)
+             ->assertStatus(500);
+
+        // テストのためにログインする
+        $response = $this->actingAs($this->user);
+
+        // 指定したユーザーが認証されていることを確認
+        $this->assertAuthenticatedAs($this->user);
+
+        // パスワードが違うと削除できない時のメッセージを返す
+        $response->delete($url, $fake_data)
+                 ->assertStatus(401)
+                 ->assertJsonFragment(['message' => 'パスワードが違うため、退会できませんでした。']);
+
+        // アカウント削除できる時のメッセージを返す
+        $response->delete($url, $data)
+                  ->assertOk()
+                  ->assertJsonFragment(['message' => '退会しました。'])
+                  ->assertJsonCount(1)
+                  ->assertHeader('Content-Type', 'application/json');
+    }
 }
