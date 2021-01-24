@@ -105,12 +105,12 @@ export const AuthContextProvider: React.FC = (props) => {
           message: 'ユーザー登録が完了しました。',
         });
       })
-      .catch(() => {
+      .catch((err) => {
         // 通信結果の通知内容
         setStatus({
           open: true,
           type: 'error',
-          message: 'ユーザー登録に失敗しました。',
+          message: err.response.data.error,
         });
       })
       .finally(() => {
