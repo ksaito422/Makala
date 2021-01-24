@@ -83,46 +83,78 @@ class AccountControllerTest extends TestCase
     /**
      * @test
      */
-    // public function メールアドレスを変更できる()
-    // {
-    //     $url = route('changeEmail', ['user' => $this->user->id]);
+    public function ゲストユーザーならメールアドレスを変更できない()
+    {
+        $url = route('changeEmail', ['user' => $this->guest->id]);
 
-    //     // 正しいパスワード
-    //     $data = [
-    //         'email' => 'test@example.com',
-    //         'password' => 'test1234',
-    //         'newEmail' => 'api_test@example.com'
-    //     ];
+        // 正しいパスワード
+        $data = [
+            'email' => 'guest@example.com',
+            'password' => 'guest1234',
+            'newEmail' => 'api_test@example.com'
+        ];
 
-    //     // 間違ったパスワード
-    //     $fake_data = [
-    //         'email' => 'test@example.com',
-    //         'password' => 'fake_test1234',
-    //         'newEmail' => 'api_test@example.com'
-    //     ];
+        // 認証外だと500エラーを返す つまりapiを利用できない
+        $this->assertGuest()
+             ->put($url, $data)
+             ->assertStatus(500);
 
-    //     // 認証外だと500エラーを返す つまりapiを利用できない
-    //     $this->assertGuest()
-    //          ->put($url, $data)
-    //          ->assertStatus(500);
+        // テストのためにログインする
+        $response = $this->actingAs($this->guest);
 
-    //     // テストのためにログインする
-    //     $response = $this->actingAs($this->user);
+        // 指定したユーザーが認証されていることを確認
+        $this->assertAuthenticatedAs($this->guest);
 
-    //     // 指定したユーザーが認証されていることを確認
-    //     $this->assertAuthenticatedAs($this->user);
+        // 正しいパスワードで変更できる
+        $response->put($url, $data)
+                  ->assertStatus(403)
+                  ->assertJsonFragment(['message' => 'ゲストユーザーのため変更できません。'])
+                  ->assertJsonCount(1)
+                  ->assertHeader('Content-Type', 'application/json');
+    }
+    /**
+     * @test
+     */
+    public function 通常ユーザーならメールアドレスを変更できる()
+    {
+        $url = route('changeEmail', ['user' => $this->user->id]);
 
-    //     // パスワードが違うと変更できない時のメッセージを返す
-    //     $response->put($url, $fake_data)
-    //               ->assertJsonFragment(['message' => 'パスワードが違うため、メールアドレスを変更できませんでした。']);
+        // 正しいパスワード
+        $data = [
+            'email' => 'test@example.com',
+            'password' => 'test1234',
+            'newEmail' => 'api_test@example.com'
+        ];
 
-    //     // 正しいパスワードで変更できる
-    //     $response->put($url, $data)
-    //               ->assertOk()
-    //               ->assertJsonFragment(['message' => 'メールアドレスを変更しました。'])
-    //               ->assertJsonCount(1)
-    //               ->assertHeader('Content-Type', 'application/json');
-    // }
+        // 間違ったパスワード
+        $fake_data = [
+            'email' => 'test@example.com',
+            'password' => 'fake_test1234',
+            'newEmail' => 'api_test@example.com'
+        ];
+
+        // 認証外だと500エラーを返す つまりapiを利用できない
+        $this->assertGuest()
+             ->put($url, $data)
+             ->assertStatus(500);
+
+        // テストのためにログインする
+        $response = $this->actingAs($this->user);
+
+        // 指定したユーザーが認証されていることを確認
+        $this->assertAuthenticatedAs($this->user);
+
+        // パスワードが違うと変更できない時のメッセージを返す
+        $response->put($url, $fake_data)
+                  ->assertJsonFragment(['message' => 'パスワードが違うため、メールアドレスを変更できませんでした。']);
+
+        // 正しいパスワードで変更できる
+        $response->put($url, $data)
+                  ->assertOk()
+                  ->assertJsonFragment(['message' => 'メールアドレスを変更しました。'])
+                  ->assertJsonCount(1)
+                  ->assertHeader('Content-Type', 'application/json');
+    }
 
     /**
      * @test
