@@ -67,7 +67,7 @@ export const Header: React.FC = () => {
                 ) : (
                   <Button
                     variant='outlined'
-                    size='medium'
+                    size='small'
                     onClick={() => {
                       history.push('/login');
                     }}
