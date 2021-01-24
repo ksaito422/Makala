@@ -28,6 +28,13 @@ class AuthController extends Controller
         $user_information = request(['name', 'email', 'password']);
         $credentials = request(['email', 'password']);
 
+        if (User::where('name', $user_information['name'])->first()) {
+            return response()->json(['error' => 'ユーザー名は既に存在しています。別のユーザー名を指定してください'], 500);
+        }
+        if (User::where('email', $user_information['email'])->first()) {
+            return response()->json(['error' => 'メールアドレスは既に使用されています。'], 500);
+        }
+
         $user = new User;
         $user->name = $user_information['name'];
         $user->email = $user_information['email'];
@@ -35,7 +42,7 @@ class AuthController extends Controller
         $user->save();
 
         if (! $token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return response()->json(['error' => 'ユーザー登録に失敗しました。'], 401);
         }
 
         return $this->respondWithToken($token);
