@@ -87,4 +87,25 @@ class AuthControllerTest extends TestCase
             ->assertJsonCount(1)
             ->assertHeader('Content-Type', 'application/json');
     }
+
+    /**
+     * @test
+     */
+    public function メールアドレスが重複するためユーザー登録できない()
+    {
+        $url = route('auth.register');
+
+        $user = [
+            'name' => 'test1234',
+            'email' => 'test@example.com',
+            'password' => 'test1234'
+        ];
+
+        // メールアドレスが重複している時のメッセージを返す
+        $this->post($url, $user)
+            ->assertStatus(500)
+            ->assertJson(['error' => 'メールアドレスは既に使用されています。'])
+            ->assertJsonCount(1)
+            ->assertHeader('Content-Type', 'application/json');
+    }
 }
