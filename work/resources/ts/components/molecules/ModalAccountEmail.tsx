@@ -4,7 +4,7 @@ import { Grid, Typography } from '@material-ui/core';
 import { TextForm } from '../atoms/TextForm';
 import { PasswordForm } from '../atoms/PasswordForm';
 import { CloseIcon } from '../atoms/CloseIcon';
-import { SubmitIcon } from '../atoms/SubmitIcon';
+import { Button } from '../atoms/Button';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 
 type Props = {
@@ -69,7 +69,7 @@ export const ModalAccountEmail: React.FC<Props> = (props) => {
               />
             </Grid>
             <Grid item xs={12} className={classes.centerPlacement}>
-              <SubmitIcon />
+              <Button type='submit'>SAVE</Button>
             </Grid>
           </Grid>
         </form>
