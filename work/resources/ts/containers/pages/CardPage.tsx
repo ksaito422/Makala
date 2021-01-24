@@ -8,9 +8,11 @@ import { Header } from '../organisms/Header';
 import { Footer } from '../organisms/Footer';
 import { Cards } from '../organisms/Cards';
 import { Preview } from '../organisms/Preview';
+import { NotFound } from '../organisms/NotFound';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 import { ApiCardsContext } from '../../contexts/childContexts/ApiCardsContext';
 import { FeedbackContext } from '../../contexts/childContexts/FeedbackContext';
+import { NotFoundContext } from '../../contexts/childContexts/NotFoundContext';
 
 type ItemType = {
   id: string;
@@ -34,6 +36,7 @@ export const CardPage = React.memo(() => {
    * ボード名をURLパラメータから取得
    */
   const { progress, status, setStatus } = useContext<any>(FeedbackContext);
+  const { notFound } = useContext<any>(NotFoundContext);
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
   const { cardsState, getCards, setCardsState, createCard, updateCard, deleteCard } = useContext<
@@ -72,7 +75,11 @@ export const CardPage = React.memo(() => {
       <CssBaseline />
       <Header />
       <Container maxWidth='xl' className={classes.main_container}>
-        {matches ? (
+        {/* eslint-disable */}
+        {/* notFoundStateがtrueならNotFoundPageを表示する */}
+        {notFound ? (
+          <NotFound />
+        ) : matches ? (
           // PCレイアウト width >= 1025px
           <Grid container spacing={2}>
             <Grid item xs={6}>
@@ -152,6 +159,7 @@ export const CardPage = React.memo(() => {
             </Grid>
           </Container>
         )}
+        {/* eslint-disable */}
       </Container>
       <Footer />
 
