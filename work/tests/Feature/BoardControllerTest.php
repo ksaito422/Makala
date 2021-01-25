@@ -58,7 +58,30 @@ class BoardControllerTest extends TestCase
         $response->assertOk()
                  ->assertSeeText('boards')
                  ->assertJsonMissing(['user_id' => $this->other_user->id])
-                 ->assertHeader('Content-Type', 'application/json');;
+                 ->assertHeader('Content-Type', 'application/json');
+    }
+
+    /**
+     * @test
+     */
+    public function showメソッドでボードに関連あるカードを取得する()
+    {
+        $url = route('board.show', ['board' => $this->board->id]);
+
+        // 認証外だと500エラーを返す つまりapiを利用できない
+        $this->assertGuest()
+             ->get($url)
+             ->assertStatus(500);
+
+        $response = $this->actingAs($this->user)
+                         ->get($url);
+
+        // 指定したユーザーが認証されていることを確認
+        $this->assertAuthenticatedAs($this->user);
+
+        $response->assertOk()
+                 ->assertSeeText('cards')
+                 ->assertHeader('Content-Type', 'application/json');
     }
 
     /**
