@@ -55,7 +55,7 @@ class BoardController extends Controller
         // 他のユーザーのBoardを取得したら404を返す
         if ($user_id !== $board->user_id) {
             return response()->json([
-                'messsage' => '404 Not Found'
+                'message' => '404 Not Found'
             ], 404, [], JSON_UNESCAPED_UNICODE);
         }
 
