@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { List, ListItem, ListItemText } from '@material-ui/core';
 
 type Props = {
@@ -6,11 +6,22 @@ type Props = {
 };
 
 export const SettingListItem: React.FC<Props> = (props) => {
+  const [selectedIndax, setSelectedIndex] = useState(0);
+
+  const ListItemOnClick = (index: number) => {
+    setSelectedIndex(index);
+  };
+
   return (
     <>
       <List>
         {props.items.map((item, index) => (
-          <ListItem button key={index}>
+          <ListItem
+            selected={selectedIndax === index}
+            button
+            key={index}
+            onClick={() => ListItemOnClick(index)}
+          >
             <ListItemText primary={item} />
           </ListItem>
         ))}
