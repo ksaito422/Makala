@@ -87,6 +87,21 @@ class BoardControllerTest extends TestCase
     /**
      * @test
      */
+    public function showメソッドで他人のカードは取得できない()
+    {
+        $url = route('board.show', ['board' => $this->board->id]);
+
+        $response = $this->actingAs($this->other_user)
+                         ->get($url);
+
+        $response->assertStatus(404)
+                 ->assertJsonFragment(['message' => '404 Not Found'])
+                 ->assertHeader('Content-Type', 'application/json');
+    }
+
+    /**
+     * @test
+     */
     public function storeメソッドで投稿を保存する()
     {
         $url = route('board.store');
