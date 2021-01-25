@@ -46,9 +46,20 @@ class BoardController extends Controller
      */
     public function show($id)
     {
-        $cards = Board::where('id', $id)
-                        ->first()
-                        ->cards;
+        // JWT-Authのme()メソッドと同じ仕組み
+        // BearerTokenを基にログインユーザーを特定し、ユーザーidを取得する
+        $user_id = response()->json(auth()->user())->original->id;
+        $board = Board::where('id', $id)
+                        ->first();
+
+        // 他のユーザーのBoardを取得したら404を返す
+        if ($user_id !== $board->user_id) {
+            return response()->json([
+                'message' => '404 Not Found'
+            ], 404, [], JSON_UNESCAPED_UNICODE);
+        }
+
+        $cards = $board->cards;
         return response()->json([
             'cards' => $cards
         ], 200, [], JSON_UNESCAPED_UNICODE);

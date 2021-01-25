@@ -18,6 +18,7 @@ class BoardControllerTest extends TestCase
         parent::setUp();
         $this->artisan('migrate:fresh --seed --env=testing');
         $this->user = User::first();
+        $this->other_user = User::find(2);
         $this->board = Board::first();
     }
 
@@ -26,7 +27,7 @@ class BoardControllerTest extends TestCase
      */
     public function indexメソッドで自分の投稿だけ取得できる()
     {
-        $url = route('board.index', ['user' => $this->user->name]);
+        $url = route('board.index');
 
         // 認証外だと500エラーを返す つまりapiを利用できない
         $this->assertGuest()
@@ -43,6 +44,59 @@ class BoardControllerTest extends TestCase
                  ->assertSeeText('boards')
                  ->assertJsonFragment(['user_id' => $this->user->id])
                  ->assertHeader('Content-Type', 'application/json');;
+    }
+    /**
+     * @test
+     */
+    public function indexメソッドで他人の投稿は取得できない()
+    {
+        $url = route('board.index');
+
+        $response = $this->actingAs($this->user)
+                         ->get($url);
+
+        $response->assertOk()
+                 ->assertSeeText('boards')
+                 ->assertJsonMissing(['user_id' => $this->other_user->id])
+                 ->assertHeader('Content-Type', 'application/json');
+    }
+
+    /**
+     * @test
+     */
+    public function showメソッドでボードに関連あるカードを取得する()
+    {
+        $url = route('board.show', ['board' => $this->board->id]);
+
+        // 認証外だと500エラーを返す つまりapiを利用できない
+        $this->assertGuest()
+             ->get($url)
+             ->assertStatus(500);
+
+        $response = $this->actingAs($this->user)
+                         ->get($url);
+
+        // 指定したユーザーが認証されていることを確認
+        $this->assertAuthenticatedAs($this->user);
+
+        $response->assertOk()
+                 ->assertSeeText('cards')
+                 ->assertHeader('Content-Type', 'application/json');
+    }
+
+    /**
+     * @test
+     */
+    public function showメソッドで他人のカードは取得できない()
+    {
+        $url = route('board.show', ['board' => $this->board->id]);
+
+        $response = $this->actingAs($this->other_user)
+                         ->get($url);
+
+        $response->assertStatus(404)
+                 ->assertJsonFragment(['message' => '404 Not Found'])
+                 ->assertHeader('Content-Type', 'application/json');
     }
 
     /**
