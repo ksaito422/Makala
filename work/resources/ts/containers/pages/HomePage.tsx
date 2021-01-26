@@ -45,9 +45,8 @@ export const HomePage: React.FC = () => {
         <Boards
           boards={boardsState}
           // 新しいボードの作成メソッド
-          createOnClick={(data, user_id) => {
+          createOnClick={(data) => {
             const postData = {
-              user_id,
               board_name: data.board_name,
             };
             createBoard(postData);

@@ -45,7 +45,7 @@ export const ApiBoardsContextProvider: React.FC = (props) => {
   };
 
   // ボードを作成するapiと通信
-  const createBoard = async (data: { user_id: number; board_name: string }) => {
+  const createBoard = async (data: { board_name: string }) => {
     // スピナーon
     // トークン取得
     await setProgress(true);
