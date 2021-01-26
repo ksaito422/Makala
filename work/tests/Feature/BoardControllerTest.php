@@ -107,7 +107,6 @@ class BoardControllerTest extends TestCase
         $url = route('board.store');
 
         $data = [
-            'user_id' => $this->user->id,
             'board_name' => 'test'
         ];
 
@@ -131,7 +130,7 @@ class BoardControllerTest extends TestCase
     /**
      * @test
      */
-    public function updateメソッドでボード名を更新できる()
+    public function updateメソッドで自分のボード名を更新できる()
     {
         $url = route('board.update', ['board' => $this->board->id]);
 
@@ -159,7 +158,30 @@ class BoardControllerTest extends TestCase
     /**
      * @test
      */
-    public function destroyメソッドでボードを削除できる()
+    public function updateメソッドで他人のボード名は更新できない()
+    {
+        $url = route('board.update', ['board' => $this->board->id]);
+
+        $data = [
+            'board_name' => 'test update'
+        ];
+
+        $response = $this->actingAs($this->other_user)
+                         ->put($url, $data);
+
+        // 指定したユーザーが認証されていることを確認
+        $this->assertAuthenticatedAs($this->other_user);
+
+        $response->assertStatus(404)
+                 ->assertJsonFragment(['message' => '404 Not Found'])
+                 ->assertJsonCount(1)
+                 ->assertHeader('Content-Type', 'application/json');
+    }
+
+    /**
+     * @test
+     */
+    public function destroyメソッドで自分のボードを削除できる()
     {
         $url = route('board.destroy', ['board' => $this->board->id]);
 
@@ -176,6 +198,25 @@ class BoardControllerTest extends TestCase
 
         $response->assertOk()
                  ->assertJsonFragment(['message' => 'ボードを削除しました。'])
+                 ->assertJsonCount(1)
+                 ->assertHeader('Content-Type', 'application/json');
+    }
+
+    /**
+     * @test
+     */
+    public function destroyメソッドで他人のボードは削除できない()
+    {
+        $url = route('board.destroy', ['board' => $this->board->id]);
+
+        $response = $this->actingAs($this->other_user)
+                         ->delete($url);
+
+        // 指定したユーザーが認証されていることを確認
+        $this->assertAuthenticatedAs($this->other_user);
+
+        $response->assertStatus(404)
+                 ->assertJsonFragment(['message' => '404 Not Found'])
                  ->assertJsonCount(1)
                  ->assertHeader('Content-Type', 'application/json');
     }
