@@ -107,7 +107,6 @@ class BoardControllerTest extends TestCase
         $url = route('board.store');
 
         $data = [
-            'user_id' => $this->user->id,
             'board_name' => 'test'
         ];
 
