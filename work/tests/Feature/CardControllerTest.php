@@ -23,30 +23,6 @@ class CardControllerTest extends TestCase
     /**
      * @test
      */
-    public function indexメソッドでカードを取得表示できる()
-    {
-        $url = route('card.index', ['card' => $this->board->board_name]);
-
-        // 認証外だと500エラーを返す つまりapiを利用できない
-        $this->assertGuest()
-             ->get($url)
-             ->assertStatus(500);
-
-        $response = $this->actingAs($this->user)
-                         ->get($url);
-
-        // 指定したユーザーが認証されていることを確認
-        $this->assertAuthenticatedAs($this->user);
-
-        $response->assertOk()
-                 ->assertSeeText('cards')
-                 ->assertJsonFragment(['board_id' => $this->board->id])
-                 ->assertHeader('Content-Type', 'application/json');
-    }
-
-    /**
-     * @test
-     */
     public function storeメソッドでカードを保存できる()
     {
         $url = route('card.store');
