@@ -14,7 +14,7 @@ type Props = {
     }
   ];
   index: number;
-  createOnClick: (data: { [x: string]: any }, user: number) => void;
+  createOnClick: (data: { [x: string]: any }) => void;
   updateOnClick: (data: { [x: string]: any }, user: number) => void;
   deleteOnClick: (id: number, index: number) => void;
   showOnClick: (id: number) => void;

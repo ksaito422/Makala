@@ -21,7 +21,7 @@ import { StylesContext } from '../../contexts/childContexts/StylesContext';
 
 type Props = {
   boards: any;
-  createOnClick: (data: { [x: string]: any }, user: number) => void;
+  createOnClick: (data: { [x: string]: any }) => void;
   updateOnClick: (data: { [x: string]: any }, user: number) => void;
   deleteOnClick: (id: number, index: number) => void;
   showOnClick: (id: number) => void;
@@ -111,10 +111,10 @@ export const Boards: React.FC<Props> = (props) => {
       <ModalWindow modalOpen={modalOpenState} modalOnClose={modalClose}>
         <ModalBoard
           defaultValueTitle={modalValueState.board_name}
-          postOnClick={(data, user_id) => {
+          postOnClick={(data) => {
             // 新規作成か更新を判断してメソッドを使い分ける
             createState
-              ? (modalClose(), props.createOnClick(data, user_id))
+              ? (modalClose(), props.createOnClick(data))
               : (modalClose(), props.updateOnClick(data, modalValueState.id));
           }}
           modalOnClose={modalClose}
