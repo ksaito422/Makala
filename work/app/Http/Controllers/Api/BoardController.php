@@ -73,8 +73,12 @@ class BoardController extends Controller
      */
     public function store(Request $request)
     {
+        // JWT-Authのme()メソッドと同じ仕組み
+        // BearerTokenを基にログインユーザーを特定し、ユーザーidを取得する
+        $user_id = response()->json(auth()->user())->original->id;
+
         $board = new Board();
-        $board->user_id = $request->user_id;
+        $board->user_id = $user_id;
         $board->board_name = $request->board_name;
         $board->save();
         return response()->json(['message' => '新しいボードを作成しました。']);
