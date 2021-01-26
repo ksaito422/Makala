@@ -128,7 +128,7 @@ class CardControllerTest extends TestCase
     /**
      * @test
      */
-    public function destroyメソッドでカードを削除できる()
+    public function destroyメソッドで自分が所有するボードのカードを削除できる()
     {
         $url = route('card.destroy', ['card' => $this->card->id]);
 
@@ -145,6 +145,25 @@ class CardControllerTest extends TestCase
 
         $response->assertOk()
                  ->assertJsonFragment(['message' => 'カードを削除しました。'])
+                 ->assertJsonCount(1)
+                 ->assertHeader('Content-Type', 'application/json');
+    }
+
+    /**
+     * @test
+     */
+    public function destroyメソッドで他人が所有するボードのカードは削除できない()
+    {
+        $url = route('card.destroy', ['card' => $this->card->id]);
+
+        $response = $this->actingAs($this->other_user)
+                            ->delete($url);
+
+        // 指定したユーザーが認証されていることを確認
+        $this->assertAuthenticatedAs($this->other_user);
+
+        $response->assertStatus(404)
+                 ->assertJsonFragment(['message' => '404 Not Found'])
                  ->assertJsonCount(1)
                  ->assertHeader('Content-Type', 'application/json');
     }
