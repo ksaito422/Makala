@@ -16,6 +16,7 @@ class CardControllerTest extends TestCase
         parent::setUp();
         $this->artisan('migrate:fresh --seed --env=testing');
         $this->user = User::first();
+        $this->other_user = User::find(2);
         $this->board = Board::first();
         $this->card = Card::first();
     }
@@ -23,38 +24,13 @@ class CardControllerTest extends TestCase
     /**
      * @test
      */
-    public function indexメソッドでカードを取得表示できる()
-    {
-        $url = route('card.index', ['card' => $this->board->board_name]);
-
-        // 認証外だと500エラーを返す つまりapiを利用できない
-        $this->assertGuest()
-             ->get($url)
-             ->assertStatus(500);
-
-        $response = $this->actingAs($this->user)
-                         ->get($url);
-
-        // 指定したユーザーが認証されていることを確認
-        $this->assertAuthenticatedAs($this->user);
-
-        $response->assertOk()
-                 ->assertSeeText('cards')
-                 ->assertJsonFragment(['board_id' => $this->board->id])
-                 ->assertHeader('Content-Type', 'application/json');
-    }
-
-    /**
-     * @test
-     */
-    public function storeメソッドでカードを保存できる()
+    public function storeメソッドで自分のボードにカードを保存できる()
     {
         $url = route('card.store');
 
         $data = [
-            'board_name' => $this->board->board_name,
-            'card_name' => 'test',
-            'card_content' => 'test'
+            'boardId' => $this->board->id,
+            'cardContent' => 'test'
         ];
 
         // 認証外だと500エラーを返す つまりapiを利用できない
@@ -77,13 +53,36 @@ class CardControllerTest extends TestCase
     /**
      * @test
      */
-    public function updateメソッドでカードを更新できる()
+    public function storeメソッドで他人のボードにカードは保存できない()
+    {
+        $url = route('card.store');
+
+        $data = [
+            'boardId' => $this->board->id,
+            'cardContent' => 'test'
+        ];
+
+        $response = $this->actingAs($this->other_user)
+                         ->post($url, $data);
+
+        // 指定したユーザーが認証されていることを確認
+        $this->assertAuthenticatedAs($this->other_user);
+
+        $response->assertStatus(404)
+                 ->assertJsonFragment(['message' => '404 Not Found'])
+                 ->assertJsonCount(1)
+                 ->assertHeader('Content-Type', 'application/json');
+    }
+
+    /**
+     * @test
+     */
+    public function updateメソッドで自分が所有するボードのカードを更新できる()
     {
         $url = route('card.update', ['card' => $this->card->id]);
 
         $data = [
-            'card_name' => 'title',
-            'card_content' => 'content'
+            'cardContent' => 'content'
         ];
 
         // 認証外だと500エラーを返す つまりapiを利用できない
@@ -106,7 +105,30 @@ class CardControllerTest extends TestCase
     /**
      * @test
      */
-    public function destroyメソッドでカードを削除できる()
+    public function updateメソッドで他人が所有するボードのカードは更新できない()
+    {
+        $url = route('card.update', ['card' => $this->card->id]);
+
+        $data = [
+            'cardContent' => 'content'
+        ];
+
+        $response = $this->actingAs($this->other_user)
+                            ->put($url, $data);
+
+        // 指定したユーザーが認証されていることを確認
+        $this->assertAuthenticatedAs($this->other_user);
+
+        $response->assertStatus(404)
+                 ->assertJsonFragment(['message' => '404 Not Found'])
+                 ->assertJsonCount(1)
+                 ->assertHeader('Content-Type', 'application/json');
+    }
+
+    /**
+     * @test
+     */
+    public function destroyメソッドで自分が所有するボードのカードを削除できる()
     {
         $url = route('card.destroy', ['card' => $this->card->id]);
 
@@ -123,6 +145,25 @@ class CardControllerTest extends TestCase
 
         $response->assertOk()
                  ->assertJsonFragment(['message' => 'カードを削除しました。'])
+                 ->assertJsonCount(1)
+                 ->assertHeader('Content-Type', 'application/json');
+    }
+
+    /**
+     * @test
+     */
+    public function destroyメソッドで他人が所有するボードのカードは削除できない()
+    {
+        $url = route('card.destroy', ['card' => $this->card->id]);
+
+        $response = $this->actingAs($this->other_user)
+                            ->delete($url);
+
+        // 指定したユーザーが認証されていることを確認
+        $this->assertAuthenticatedAs($this->other_user);
+
+        $response->assertStatus(404)
+                 ->assertJsonFragment(['message' => '404 Not Found'])
                  ->assertJsonCount(1)
                  ->assertHeader('Content-Type', 'application/json');
     }
