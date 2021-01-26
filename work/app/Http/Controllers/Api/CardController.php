@@ -58,7 +58,20 @@ class CardController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // JWT-Authのme()メソッドと同じ仕組み
+        // BearerTokenを基にログインユーザーを特定し、ユーザーidを取得する
+        $user_id = response()->json(auth()->user())->original->id;
+
         $card = Card::find($id);
+
+        // 他ユーザーが所有するボードのカードを更新するのを防ぐ
+        $board_user_id = $card->board->user_id;
+        if ($user_id !== $board_user_id) {
+            return response()->json([
+                'message' => '404 Not Found'
+            ], 404, [], JSON_UNESCAPED_UNICODE);
+        }
+
         $card->content = $request->cardContent;
         $card->save();
         return response()->json([
