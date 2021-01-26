@@ -118,8 +118,19 @@ class BoardController extends Controller
      */
     public function destroy($id)
     {
-        $board = Board::find($id)
-                        ->delete();
+        // JWT-Authのme()メソッドと同じ仕組み
+        // BearerTokenを基にログインユーザーを特定し、ユーザーidを取得する
+        $user_id = response()->json(auth()->user())->original->id;
+        $board = Board::find($id);
+
+        // 他のユーザーのBoardを削除したら404を返す
+        if ($user_id !== $board->user_id) {
+            return response()->json([
+                'message' => '404 Not Found'
+            ], 404, [], JSON_UNESCAPED_UNICODE);
+        }
+
+        $board->delete();
         return response()->json(['message' => 'ボードを削除しました。']);
     }
 }
