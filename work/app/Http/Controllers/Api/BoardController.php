@@ -93,7 +93,18 @@ class BoardController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // JWT-Authのme()メソッドと同じ仕組み
+        // BearerTokenを基にログインユーザーを特定し、ユーザーidを取得する
+        $user_id = response()->json(auth()->user())->original->id;
         $board = Board::find($id);
+
+        // 他のユーザーのBoardを更新したら404を返す
+        if ($user_id !== $board->user_id) {
+            return response()->json([
+                'message' => '404 Not Found'
+            ], 404, [], JSON_UNESCAPED_UNICODE);
+        }
+
         $board->board_name = $request->board_name;
         $board->save();
         return response()->json(['message' => 'ボード名を変更しました。']);
