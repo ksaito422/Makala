@@ -77,7 +77,7 @@ class CardControllerTest extends TestCase
     /**
      * @test
      */
-    public function updateメソッドでカードを更新できる()
+    public function updateメソッドで自分が所有するボードのカードを更新できる()
     {
         $url = route('card.update', ['card' => $this->card->id]);
 
@@ -98,6 +98,29 @@ class CardControllerTest extends TestCase
 
         $response->assertOk()
                  ->assertJsonFragment(['message' => 'カードの内容を変更しました。'])
+                 ->assertJsonCount(1)
+                 ->assertHeader('Content-Type', 'application/json');
+    }
+
+    /**
+     * @test
+     */
+    public function updateメソッドで他人が所有するボードのカードは更新できない()
+    {
+        $url = route('card.update', ['card' => $this->card->id]);
+
+        $data = [
+            'cardContent' => 'content'
+        ];
+
+        $response = $this->actingAs($this->other_user)
+                            ->put($url, $data);
+
+        // 指定したユーザーが認証されていることを確認
+        $this->assertAuthenticatedAs($this->other_user);
+
+        $response->assertStatus(404)
+                 ->assertJsonFragment(['message' => '404 Not Found'])
                  ->assertJsonCount(1)
                  ->assertHeader('Content-Type', 'application/json');
     }
