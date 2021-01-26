@@ -16,6 +16,7 @@ class CardControllerTest extends TestCase
         parent::setUp();
         $this->artisan('migrate:fresh --seed --env=testing');
         $this->user = User::first();
+        $this->other_user = User::find(2);
         $this->board = Board::first();
         $this->card = Card::first();
     }
@@ -23,7 +24,7 @@ class CardControllerTest extends TestCase
     /**
      * @test
      */
-    public function storeメソッドでカードを保存できる()
+    public function storeメソッドで自分のボードにカードを保存できる()
     {
         $url = route('card.store');
 
@@ -45,6 +46,30 @@ class CardControllerTest extends TestCase
 
         $response->assertStatus(201)
                  ->assertJsonFragment(['message' => '新しいカードを作成しました。'])
+                 ->assertJsonCount(1)
+                 ->assertHeader('Content-Type', 'application/json');
+    }
+
+    /**
+     * @test
+     */
+    public function storeメソッドで他人のボードにカードは保存できない()
+    {
+        $url = route('card.store');
+
+        $data = [
+            'boardId' => $this->board->id,
+            'cardContent' => 'test'
+        ];
+
+        $response = $this->actingAs($this->other_user)
+                         ->post($url, $data);
+
+        // 指定したユーザーが認証されていることを確認
+        $this->assertAuthenticatedAs($this->other_user);
+
+        $response->assertStatus(404)
+                 ->assertJsonFragment(['message' => '404 Not Found'])
                  ->assertJsonCount(1)
                  ->assertHeader('Content-Type', 'application/json');
     }
