@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import React, { useState, useContext } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { Grid } from '@material-ui/core';
@@ -38,7 +39,7 @@ export const Cards = React.memo<Props>((props) => {
     setCreateState(false);
     setModalValueState({
       id: null,
-      card_content: '',
+      cardContent: '',
     });
   };
 
@@ -102,6 +103,7 @@ export const Cards = React.memo<Props>((props) => {
           // 押したボタンの番号によって、表示内容を変える
           defaultValue={modalValueState.cardContent}
           postOnSubmit={(value) => {
+            // eslint-disable-next-line no-unused-expressions
             createState
               ? (modalClose(), props.createOnSubmit(value))
               : (modalClose(), props.updateOnSubmit(value, modalValueState.id));

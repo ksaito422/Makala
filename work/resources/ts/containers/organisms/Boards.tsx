@@ -58,7 +58,7 @@ export const Boards: React.FC<Props> = (props) => {
           <Grid item xs={12}>
             <Paper elevation={2}>
               <List>
-                {props.boards.map((board: { id: number; boardName: string }, index: number) => (
+                {props.boards.map((board: { id: number; board_name: string }, index: number) => (
                   <ListItem key={index}>
                     <ListItemIcon>
                       <IconButton
@@ -67,7 +67,7 @@ export const Boards: React.FC<Props> = (props) => {
                           setModalValueState({
                             ...modalValueState,
                             id: board.id,
-                            boardName: board.boardName,
+                            boardName: board.board_name,
                             index,
                           });
                         }}
@@ -84,7 +84,7 @@ export const Boards: React.FC<Props> = (props) => {
                         props.showOnClick(board.id);
                       }}
                     >
-                      <ListItemText primary={board.boardName} />
+                      <ListItemText primary={board.board_name} />
                     </Button>
                     <ListItemSecondaryAction>
                       <CloseIcon
