@@ -46,7 +46,7 @@ export const Boards: React.FC<Props> = (props) => {
     setCreateState(false);
     setModalValueState({
       id: null,
-      board_name: null,
+      boardName: null,
       index: null,
     });
   };
@@ -58,7 +58,7 @@ export const Boards: React.FC<Props> = (props) => {
           <Grid item xs={12}>
             <Paper elevation={2}>
               <List>
-                {props.boards.map((board: { id: number; board_name: string }, index: number) => (
+                {props.boards.map((board: { id: number; boardName: string }, index: number) => (
                   <ListItem key={index}>
                     <ListItemIcon>
                       <IconButton
@@ -67,7 +67,7 @@ export const Boards: React.FC<Props> = (props) => {
                           setModalValueState({
                             ...modalValueState,
                             id: board.id,
-                            board_name: board.board_name,
+                            boardName: board.boardName,
                             index,
                           });
                         }}
@@ -84,12 +84,12 @@ export const Boards: React.FC<Props> = (props) => {
                         props.showOnClick(board.id);
                       }}
                     >
-                      <ListItemText primary={board.board_name} />
+                      <ListItemText primary={board.boardName} />
                     </Button>
                     <ListItemSecondaryAction>
                       <CloseIcon
                         onClick={() => {
-                          modalClose(), props.deleteOnClick(board.id, index);
+                          props.deleteOnClick(board.id, index);
                         }}
                       />
                     </ListItemSecondaryAction>
@@ -113,6 +113,7 @@ export const Boards: React.FC<Props> = (props) => {
           defaultValueTitle={modalValueState.board_name}
           postOnClick={(data) => {
             // 新規作成か更新を判断してメソッドを使い分ける
+            // eslint-disable-next-line no-unused-expressions
             createState
               ? (modalClose(), props.createOnClick(data))
               : (modalClose(), props.updateOnClick(data, modalValueState.id));

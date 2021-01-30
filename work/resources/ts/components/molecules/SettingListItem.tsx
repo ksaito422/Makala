@@ -6,8 +6,8 @@ type Props = {
 };
 
 export const SettingListItem: React.FC<Props> = (props) => {
+  // 現在表示している設定メニューリストをマーキングする
   const [selectedIndax, setSelectedIndex] = useState(0);
-
   const ListItemOnClick = (index: number) => {
     setSelectedIndex(index);
   };

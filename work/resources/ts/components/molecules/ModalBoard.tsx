@@ -23,7 +23,7 @@ export const ModalBoard: React.FC<Props> = (props) => {
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
   const { authUserState } = useContext<any>(AuthContext);
-  const user_id = authUserState.id;
+  const userId = authUserState.id;
   const { register, handleSubmit, errors } = useForm();
 
   // モーダルに表示する内容の定義
@@ -36,7 +36,7 @@ export const ModalBoard: React.FC<Props> = (props) => {
         <form
           className={classes.form_board}
           onSubmit={handleSubmit((data) => {
-            props.postOnClick(data, user_id);
+            props.postOnClick(data, userId);
           })}
         >
           <Grid container spacing={4}>
