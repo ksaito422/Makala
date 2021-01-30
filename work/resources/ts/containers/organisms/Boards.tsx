@@ -89,7 +89,7 @@ export const Boards: React.FC<Props> = (props) => {
                     <ListItemSecondaryAction>
                       <CloseIcon
                         onClick={() => {
-                          modalClose(), props.deleteOnClick(board.id, index);
+                          props.deleteOnClick(board.id, index);
                         }}
                       />
                     </ListItemSecondaryAction>
