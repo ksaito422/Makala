@@ -2,13 +2,8 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Grid, Typography } from '@material-ui/core';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
-import {} from '@material-ui/icons';
 
-type Props = {
-  // Defines the type of props.
-};
-
-export const Footer: React.FC<Props> = (props) => {
+export const Footer: React.FC = () => {
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
 
