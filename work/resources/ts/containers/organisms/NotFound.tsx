@@ -4,9 +4,7 @@ import { Container, Paper, Typography } from '@material-ui/core';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 
 export const NotFound: React.FC = () => {
-  /**
-   * cssの定義
-   */
+  // cssの定義
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
 

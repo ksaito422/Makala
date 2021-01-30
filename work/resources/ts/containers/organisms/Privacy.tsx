@@ -3,6 +3,7 @@ import { Box, Container, Paper, Typography } from '@material-ui/core';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 
 export const Privacy: React.FC = () => {
+  // cssの定義
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
 
