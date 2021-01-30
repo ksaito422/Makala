@@ -23,8 +23,7 @@ export const Release: React.FC<Props> = (props) => {
   const matches = useMediaQuery('(min-width: 601px)');
 
   /**
-   * 共通コンポーネント化
-   * CommonRelease and CommonCancelはボタンの共通化
+   * ボタン群のレスポンシブ対応
    * classNameはuseStylesのスタイルをインポート
    * スマホとタブレット以上の画面サイズで表示レイアウトを切り替えている
    */
@@ -48,6 +47,7 @@ export const Release: React.FC<Props> = (props) => {
     return (
       <>
         {matches ? (
+          // PC・タブレットレイアウト width >= 601px
           <Grid container spacing={4} className={className}>
             <Grid item xs={6}>
               <CommonRelease />
@@ -57,6 +57,7 @@ export const Release: React.FC<Props> = (props) => {
             </Grid>
           </Grid>
         ) : (
+          // スマホレイアウト width <= 600px
           <Grid container spacing={4} className={className}>
             <Grid item xs={12}>
               <CommonRelease />
