@@ -27,15 +27,16 @@ export const Login: React.FC<Props> = (props) => {
    * スマホとタブレット以上の画面サイズで表示レイアウトを切り替る
    */
   const ResponsiveTitle: React.FC = () => {
+    const title = 'Makalaにログイン';
     return (
       <>
         {matches ? (
           <Typography variant='h4' align='center'>
-            Makalaにログイン
+            {title}
           </Typography>
         ) : (
           <Typography variant='h5' align='center'>
-            Makalaにログイン
+            {title}
           </Typography>
         )}
       </>
@@ -43,12 +44,11 @@ export const Login: React.FC<Props> = (props) => {
   };
 
   /**
-   * 共通コンポーネント化
-   * CommonLogin and CommonCancelはボタンの共通化
+   * ボタン群のレスポンシブ対応
    * classNameはuseStylesのスタイルをインポート
    * returnはスマホとタブレット以上の画面サイズで表示レイアウトを切り替えている
    */
-  const ResponsiveComponent: React.FC = () => {
+  const ResponsiveButton: React.FC = () => {
     const CommonLogin = () => {
       return (
         <Button type='submit' fullWidth>
@@ -68,6 +68,7 @@ export const Login: React.FC<Props> = (props) => {
     return (
       <>
         {matches ? (
+          // PC・タブレットレイアウト width >= 601px
           <Grid container spacing={4} className={className}>
             <Grid item xs={6}>
               <CommonLogin />
@@ -77,6 +78,7 @@ export const Login: React.FC<Props> = (props) => {
             </Grid>
           </Grid>
         ) : (
+          // スマホレイアウト width <= 600px
           <Grid container spacing={4} className={className}>
             <Grid item xs={12}>
               <CommonLogin />
@@ -134,7 +136,7 @@ export const Login: React.FC<Props> = (props) => {
               helperText={errors.password && errors.password.message}
             />
             <Container maxWidth='sm'>
-              <ResponsiveComponent />
+              <ResponsiveButton />
             </Container>
           </form>
         </Paper>
