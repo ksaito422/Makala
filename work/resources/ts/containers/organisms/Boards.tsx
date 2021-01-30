@@ -113,6 +113,7 @@ export const Boards: React.FC<Props> = (props) => {
           defaultValueTitle={modalValueState.board_name}
           postOnClick={(data) => {
             // 新規作成か更新を判断してメソッドを使い分ける
+            // eslint-disable-next-line no-unused-expressions
             createState
               ? (modalClose(), props.createOnClick(data))
               : (modalClose(), props.updateOnClick(data, modalValueState.id));
