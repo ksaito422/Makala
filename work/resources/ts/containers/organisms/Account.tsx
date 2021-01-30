@@ -24,6 +24,7 @@ export const Account: React.FC<Props> = (props) => {
   /**
    * cssの定義
    * API import of react-hook-form
+   * モーダルの表示状態の管理をインポート
    */
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
@@ -37,6 +38,7 @@ export const Account: React.FC<Props> = (props) => {
     setModalChangeEmail,
   } = useContext<any>(ModalPropsContext);
 
+  // モーダル閉じるときの全部のモーダル種類を一括で閉じる
   const modalClose = () => {
     setModalOpenState(false);
     setModalChangeName(false);
