@@ -28,39 +28,43 @@ export const AccountReleasePage: React.FC = () => {
   const { accountRelease } = useContext<any>(ApiAccountContext);
   const matches = useMediaQuery('(min-width: 601px)');
 
+  /**
+   * Release componentを共通化
+   */
+  const CommonRelease = () => {
+    return (
+      <Release
+        releaseOnClick={(data) => {
+          accountRelease(authUserState.email, data, authUserState.id);
+        }}
+        cancelOnClick={() => {
+          history.push(`/${authUserState.name}/settings/account`);
+        }}
+        // ゲストログインなら非表示にする
+        disabled={authUserState.id === 1}
+      />
+    );
+  };
+
   return (
     <>
       <CssBaseline />
       <Header />
       <Container maxWidth='md' className={classes.main_container}>
         {matches ? (
+          // PC・タブレットレイアウト width >= 601px
           <Grid container spacing={4}>
             <Grid item xs={4}>
               <SettingList />
             </Grid>
             <Grid item xs={8}>
-              <Release
-                releaseOnClick={(data) => {
-                  accountRelease(authUserState.email, data, authUserState.id);
-                }}
-                cancelOnClick={() => {
-                  history.push(`/${authUserState.name}/settings/account`);
-                }}
-                disabled={authUserState.id === 1}
-              />
+              <CommonRelease />
             </Grid>
           </Grid>
         ) : (
+          // スマホレイアウト width <= 600px
           // <SettingList />を表示するハンバーガーメニューを実装したい
-          <Release
-            releaseOnClick={(data) => {
-              accountRelease(authUserState.email, data, authUserState.id);
-            }}
-            cancelOnClick={() => {
-              history.push(`/${authUserState.name}/settings/account`);
-            }}
-            disabled={authUserState.id === 1}
-          />
+          <CommonRelease />
         )}
       </Container>
       <Footer />
