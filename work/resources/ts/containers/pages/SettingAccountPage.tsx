@@ -29,55 +29,51 @@ export const SettingAccountPage: React.FC = () => {
   const { changeName, changeEmail, changePassword } = useContext<any>(ApiAccountContext);
   const matches = useMediaQuery('(min-width: 601px)');
 
+  /**
+   * Account componentを共通化
+   */
+  const CommonAccount = () => {
+    return (
+      <Account
+        name={authUserState.name}
+        email={authUserState.email}
+        nameChangeOnClick={(name) => {
+          changeName(name, authUserState.id);
+        }}
+        emailChangeOnClick={(newEmail, password) => {
+          changeEmail(newEmail, authUserState.email, password, authUserState.id);
+        }}
+        passwordChangeOnClick={(password, newPassword) => {
+          changePassword(password, newPassword, authUserState.email, authUserState.id);
+        }}
+        accountRelease={() => {
+          history.push(`/${authUserState.name}/settings/account/release`);
+        }}
+        // ゲストログインなら非表示にする
+        disabled={authUserState.id === 1}
+      />
+    );
+  };
+
   return (
     <>
       <CssBaseline />
       <Header />
       <Container maxWidth='md' className={classes.main_container}>
         {matches ? (
+          // PC・タブレットレイアウト width >= 601px
           <Grid container spacing={4}>
             <Grid item xs={4}>
               <SettingList />
             </Grid>
             <Grid item xs={8}>
-              <Account
-                name={authUserState.name}
-                email={authUserState.email}
-                nameChangeOnClick={(name) => {
-                  changeName(name, authUserState.id);
-                }}
-                emailChangeOnClick={(newEmail, password) => {
-                  changeEmail(newEmail, authUserState.email, password, authUserState.id);
-                }}
-                passwordChangeOnClick={(password, newPassword) => {
-                  changePassword(password, newPassword, authUserState.email, authUserState.id);
-                }}
-                accountRelease={() => {
-                  history.push(`/${authUserState.name}/settings/account/release`);
-                }}
-                disabled={authUserState.id === 1}
-              />
+              <CommonAccount />
             </Grid>
           </Grid>
         ) : (
+          // スマホレイアウト width <= 600px
           // <SettingList />を表示するハンバーガーメニューを実装したい
-          <Account
-            name={authUserState.name}
-            email={authUserState.email}
-            nameChangeOnClick={(name) => {
-              changeName(name, authUserState.id);
-            }}
-            emailChangeOnClick={(newEmail, password) => {
-              changeEmail(newEmail, authUserState.email, password, authUserState.id);
-            }}
-            passwordChangeOnClick={(password, newPassword) => {
-              changePassword(password, newPassword, authUserState.email, authUserState.id);
-            }}
-            accountRelease={() => {
-              history.push(`/${authUserState.name}/settings/account/release`);
-            }}
-            disabled={authUserState.id === 1}
-          />
+          <CommonAccount />
         )}
       </Container>
       <Footer />
