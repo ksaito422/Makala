@@ -6,9 +6,7 @@ import { Privacy } from '../organisms/Privacy';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 
 export const PrivacyPage: React.FC = () => {
-  /**
-   * cssの定義
-   */
+  // cssの定義
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
 

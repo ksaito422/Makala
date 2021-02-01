@@ -6,6 +6,7 @@ import { Footer } from '../organisms/Footer';
 import { StylesContext } from '../../contexts/childContexts/StylesContext';
 
 export const NotFoundPage: React.FC = () => {
+  // cssの定義
   const { useStyles } = useContext<any>(StylesContext);
   const classes = useStyles();
 
